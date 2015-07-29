@@ -13,6 +13,12 @@ group :development do
   gem 'sass-globbing', '~> 1.0.0'
   gem 'rb-fsevent', '~> 0.9'
   gem 'stringex', '~> 1.4.0'
+
 end
 
 gem 'sinatra', '~> 1.4.2'
+
+# Make your codeblocks look better with CodeRay! Add these gems to your gemfile.
+
+gem 'kramdown'
+gem 'coderay'

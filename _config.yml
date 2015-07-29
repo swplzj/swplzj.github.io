@@ -2,11 +2,11 @@
 #      Main Configs       #
 # ----------------------- #
 
-url: http://yoursite.com
-title: My Octopress Blog
-subtitle: A blogging framework for hackers.
-author: Your Name
-simple_search: https://www.google.com/search
+url: http://swplzj.github.io
+title: 李振杰
+subtitle: An iOS developer‘s blog about programming and growing.
+author: Leo Lee
+simple_search: https://wen.lu/search 
 description:
 
 # Default date format is "ordinal" (resulting in "July 22nd 2007")
@@ -17,9 +17,9 @@ date_format: "ordinal"
 
 # RSS / Email (optional) subscription links (change if using something like Feedburner)
 subscribe_rss: /atom.xml
-subscribe_email:
+subscribe_email: swplzj@163.com
 # RSS feeds can list your email address if you like
-email:
+email: swplzj@126.com
 
 # ----------------------- #
 #    Jekyll & Plugins     #
@@ -39,6 +39,7 @@ rdiscount:
     - autolink
     - footnotes
     - smart
+
 highlighter: pygments # default python pygments have been replaced by pygments.rb
 
 paginate: 10          # Posts per page on the blog index
@@ -48,10 +49,12 @@ excerpt_link: "Read on &rarr;"  # "Continue reading" link text at the bottom of 
 excerpt_separator: "<!--more-->"
 
 titlecase: true       # Converts page and post titles to titlecase
+sidebar: collapse		# 更换主题 增加的
+portrait: true
 
 # list each of the sidebar modules you want to include, in the order you want them to appear.
 # To add custom asides, create files in /source/_includes/custom/asides/ and add them to the list like 'custom/asides/custom_aside_name.html'
-default_asides: [asides/recent_posts.html, asides/github.html, asides/delicious.html, asides/pinboard.html, asides/googleplus.html]
+default_asides: []
 
 # Each layout uses the default asides, but they can have their own asides instead. Simply uncomment the lines below
 # and add an array with the asides you want to use.
@@ -64,31 +67,31 @@ default_asides: [asides/recent_posts.html, asides/github.html, asides/delicious.
 # ----------------------- #
 
 # Github repositories
-github_user:
+github_user: swplzj
 github_repo_count: 0
 github_show_profile_link: true
-github_skip_forks: true
+github_skip_forks: false
 
 # Twitter
-twitter_user:
-twitter_tweet_button: true
+# twitter_user:
+# twitter_tweet_button: true
 
 # Google +1
-google_plus_one: false
-google_plus_one_size: medium
+# google_plus_one: false
+# google_plus_one_size: medium
 
 # Google Plus Profile
 # Hidden: No visible button, just add author information to search results
-googleplus_user:
-googleplus_hidden: false
+# googleplus_user:
+# googleplus_hidden: false
 
 # Pinboard
-pinboard_user:
-pinboard_count: 3
+# pinboard_user:
+# pinboard_count: 3
 
 # Delicious
-delicious_user:
-delicious_count: 3
+# delicious_user:
+# delicious_count: 3
 
 # Disqus Comments
 disqus_short_name:
@@ -98,4 +101,18 @@ disqus_show_comment_count: false
 google_analytics_tracking_id:
 
 # Facebook Like
-facebook_like: false
+# facebook_like: false
+
+# Sina weibo
+weibo_user: 1813008885 #注：新浪微博自定义网址中用户名部分或数字 ID，不是昵称
+dribbble_user: 
+weibo_share: true # 是否开启微博分享按钮
+
+# 为博客增加原文链接
+# original_url_pre: "原文地址"
+
+
+# duoshuo comments 
+duoshuo_comments: true
+duoshuo_short_name: swplzj #多说二级域名 swplzj.duoshuo.com
+

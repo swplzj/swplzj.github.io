@@ -1,0 +1,43 @@
+---
+layout: default
+---
+
+<div class="blog-index">
+  {% assign index = true %}
+  {% for post in paginator.posts %}
+  {% assign content = post.content %}
+    <article>
+      {% include article.html %}
+    </article>
+  {% endfor %}
+
+  <div class="pagination">
+    <nav id="pagenavi">
+
+    {% if paginator.next_page == 3 %}
+        <a href="{{ root_url }}/index.html" class="prev">Home</a>
+      {% endif %}
+
+       {% if paginator.previous_page > 1 %}
+        <a href="{{ root_url }}/posts/{{paginator.previous_page}}" class="prev">Newer</a>
+      {% endif %}
+      
+      {% if paginator.next_page %}
+        <a href="{{ root_url }}/posts/{{paginator.next_page}}" class="next">Older</a>
+    {% endif %}
+  </div>
+</div>
+<!-- <aside class="sidebar">
+  {% if site.blog_index_asides.size %}
+    {% include_array blog_index_asides %}
+  {% else %}
+    {% include_array default_asides %}
+  {% endif %}
+</aside> -->
+
+<!-- <footer role="contentinfo">
+<p style="text-align:center">
+  Copyright &copy; 2015 - Leo Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+</footer> -->
