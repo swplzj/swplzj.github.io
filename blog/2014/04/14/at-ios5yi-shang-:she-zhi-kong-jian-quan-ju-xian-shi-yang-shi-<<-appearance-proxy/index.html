@@ -1,0 +1,274 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>iOS5以上：设置控件全局显示样式《APPEARANCE PROXY》 - 李振杰</title>
+  <meta name="author" content="Leo Lee">
+
+  
+  <meta name="description" content="Appearance是Apple在iOS5.0上加的一个协议，它让程序员可以很轻松地改变某控件的全局样式（背景） @selector(appearance) 支持UIAppearance协议的类可以访问appearance selector ,它为receiver返回appearance &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://swplzj.github.io/blog/2014/04/14/at-ios5yi-shang-:she-zhi-kong-jian-quan-ju-xian-shi-yang-shi-%3C%3C-appearance-proxy">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="李振杰" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+ <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+<!--   
+
+ --></head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <nav id="main-nav" role="navigation">
+<ul class="main-navigation">
+  <li><a href="/" class="nav-link">首页 | Blog</a></li>
+  <li><a href="/blog/archives" class="nav-link">归档 | Archives</a></li>
+  <li><a href="/atom.xml" class="nav-link">订阅 | RSS</a></li>
+  <li><a href="/about" class="nav-link">关于我 | About</a></li>
+</ul>
+
+</nav>
+  
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">iOS5以上：设置控件全局显示样式《APPEARANCE PROXY》</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-14T23:34:41+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Appearance是Apple在iOS5.0上加的一个协议，它让程序员可以很轻松地改变某控件的全局样式（背景）</p>
+
+<pre><code> @selector(appearance)
+</code></pre>
+
+<p>支持UIAppearance协议的类可以访问appearance selector ,它为receiver返回appearance proxy，我们可以给proxy发一些消息，诸如setTintColor:等</p>
+
+<p>但是它并不是支持所有的UI类。下面列出它支持的类</p>
+
+<!--more-->
+
+
+<p>   1.UIActivitiIndicatorView
+　　 <br/>
+　　2.UIBarButtonItem</p>
+
+<p>　　3.UIBarItem</p>
+
+<p>　　4.UINavgationBar</p>
+
+<p>　　5.UIPopoverControll</p>
+
+<p>　　6.UIProgressView</p>
+
+<p>　　7.UISearchBar</p>
+
+<p>　　8.UISegmentControll</p>
+
+<p>　　9.UISlider</p>
+
+<p>　　10.UISwitch</p>
+
+<p>　　11.UITabBar</p>
+
+<p>　　12.UITabBarItem</p>
+
+<p>　　13.UIToolBar</p>
+
+<p>　　14.UIView</p>
+
+<p>　　15.UIViewController</p>
+
+<p>例如：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> [[UINavigationBar appearance] setTintColor：[UIColor blackColor]];
+</span><span class='line'>
+</span><span class='line'> [[UISearchBar appearance] setTintColor: [UIColor blackr]];
+</span><span class='line'> ```
+</span><span class='line'> 
+</span><span class='line'>注意：
+</span><span class='line'>
+</span><span class='line'>初学者肯定会任意调用方法，大部分方法时无效的，如果调用时会抛出unknown selector 异常
+</span><span class='line'>
+</span><span class='line'>那么如何查看你调用的方法时有效的呢，我们可以在此类的头文件中查看包含“UI_APPEARANCE_SELECTOR”常量的方法。
+</span><span class='line'>
+</span><span class='line'>例如UIToolBar
+</span><span class='line'>
+</span><span class='line'>它支持下列方法
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>@property(nonatomic,retain) UIColor   *tintColor  UI_APPEARANCE_SELECTOR;</p>
+
+<ul>
+<li><p>(void)setBackgroundImage:(UIImage *)backgroundImage forToolbarPosition:(UIToolbarPosition)topOrBottom barMetrics:(UIBarMetrics)barMetrics NS_AVAILABLE_IOS(5_0) UI_APPEARANCE_SELECTOR;</p></li>
+<li><p>(UIImage *)backgroundImageForToolbarPosition:(UIToolbarPosition)topOrBottom barMetrics:(UIBarMetrics)barMetrics NS_AVAILABLE_IOS(5_0) UI_APPEARANCE_SELECTOR;</p></li>
+<li><p>(void)setShadowImage:(UIImage *)shadowImage forToolbarPosition:(UIToolbarPosition)topOrBottom NS_AVAILABLE_IOS(6_0) UI_APPEARANCE_SELECTOR;</p></li>
+<li><p>(UIImage *)shadowImageForToolbarPosition:(UIToolbarPosition)topOrBottom NS_AVAILABLE_IOS(6_0) UI_APPEARANCE_SELECTOR;</p></li>
+</ul>
+
+
+<p>```</p>
+
+<p><a href="http://developer.apple.com/library/ios/#documentation/uikit/reference/UIAppearance_Protocol/Reference/Reference.html">了解更多请点击访问</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Leo Lee</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-14T23:34:41+08:00" pubdate data-updated="true"></time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/03/18/ios-nsinvocationde-xue-xi/" title="Previous Post: iOS NSInvocation的学习">&laquo; iOS NSInvocation的学习</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/04/22/ios-coretextlei-ku-de-xiang-xi-jie-shao/" title="Next Post: iOS CoreText类库的详细介绍">iOS CoreText类库的详细介绍 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+
+<!-- 添加多说 -->
+
+
+  <section>
+    <h1>Comments</h1>
+    <div id="comments" aria-live="polite">
+<!-- Duoshuo Comment BEGIN -->
+<div class="ds-thread"></div>
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"swplzj"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<!-- Duoshuo Comment END -->
+</div>
+  </section>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo">
+<!-- <p>
+	Copyright &copy; 2015 - Leo Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p> -->
+
+
+<p style="text-align:center">
+  <!-- Copyright &copy; 2015 - Leo Lee - -->
+  	Copyright &copy; 2015 - Leo Lee -
+
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

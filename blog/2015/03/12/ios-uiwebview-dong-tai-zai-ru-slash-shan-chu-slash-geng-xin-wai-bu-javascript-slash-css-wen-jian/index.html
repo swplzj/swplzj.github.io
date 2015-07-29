@@ -1,0 +1,404 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>iOS - UIWebView 动态载入/删除/更新外部 JavaScript/CSS 文件 - 李振杰</title>
+  <meta name="author" content="Leo Lee">
+
+  
+  <meta name="description" content="动态载入 JavaScript/CSS 文件 传统加载外部 JavaScript(*.js) 或者 CSS(*.css) 文件的方法是直接在 &lt;head&gt; 标签里面进行添加: 1
+2
+3
+4
+&lt;head&gt; &lt;script type="text/javascript" &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://swplzj.github.io/blog/2015/03/12/ios-uiwebview-dong-tai-zai-ru-slash-shan-chu-slash-geng-xin-wai-bu-javascript-slash-css-wen-jian">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="李振杰" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+ <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+<!--   
+
+ --></head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <nav id="main-nav" role="navigation">
+<ul class="main-navigation">
+  <li><a href="/" class="nav-link">首页 | Blog</a></li>
+  <li><a href="/blog/archives" class="nav-link">归档 | Archives</a></li>
+  <li><a href="/atom.xml" class="nav-link">订阅 | RSS</a></li>
+  <li><a href="/about" class="nav-link">关于我 | About</a></li>
+</ul>
+
+</nav>
+  
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">iOS - UIWebView 动态载入/删除/更新外部 JavaScript/CSS 文件</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-03-12T19:59:54+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h5>动态载入 JavaScript/CSS 文件</h5>
+
+<p>传统加载外部 <code>JavaScript(*.js)</code> 或者 <code>CSS(*.css)</code> 文件的方法是直接在 <code>&lt;head&gt;</code> 标签里面进行添加:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;head&gt; 
+</span><span class='line'>&lt;script type="text/javascript" src="myscript.js"&gt;&lt;/script&gt; 
+</span><span class='line'>&lt;link rel="stylesheet" type="text/css" href="main.css" /&gt; 
+</span><span class='line'>&lt;/head&gt; </span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!--more-->
+
+
+<p>这些文件用这种方式会同步加载到当前这个页面。</p>
+
+<h5>用动态的方式载入 JavaScript/CSS 文件：</h5>
+
+<p>用 DOM createElement 方法创建一个 “script” 或者 ”link” 元素
+设置相应的属性
+使用 appendChild 方法, 把创建的元素插入到 head 标签的末尾</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>function loadjscssfile(filename, filetype){ 
+</span><span class='line'>//如果文件类型为 .js ,则创建 script 标签，并设置相应属性 
+</span><span class='line'>if (filetype=="js"){ 
+</span><span class='line'>var fileref=document.createElement('script'); 
+</span><span class='line'>fileref.setAttribute("type","text/javascript"); 
+</span><span class='line'>fileref.setAttribute("src", filename); 
+</span><span class='line'>} 
+</span><span class='line'>//如果文件类型为 .css ,则创建 script 标签，并设置相应属性 
+</span><span class='line'>else if (filetype=="css"){ 
+</span><span class='line'>var fileref=document.createElement("link"); 
+</span><span class='line'>fileref.setAttribute("rel", "stylesheet"); 
+</span><span class='line'>fileref.setAttribute("type", "text/css"); 
+</span><span class='line'>fileref.setAttribute("href", filename); 
+</span><span class='line'>} 
+</span><span class='line'>if (typeof fileref!="undefined") 
+</span><span class='line'>document.getElementsByTagName("head")[0].appendChild(fileref); 
+</span><span class='line'>} 
+</span><span class='line'>//动态添加一个.js 文件 
+</span><span class='line'>loadjscssfile("myscript.js", "js"); 
+</span><span class='line'>//像添加.js文件一样，动态添加一个.php文件 
+</span><span class='line'>loadjscssfile("javascript.php", "js"); 
+</span><span class='line'>//动态一个.css文件 
+</span><span class='line'>loadjscssfile("mystyle.css", "css"); </span></code></pre></td></tr></table></div></figure>
+
+
+<h5>为了防止多次载入同一个js/css文件， 添加以下判断（这只是粗略检测）</h5>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>//临时载入的文件名 
+</span><span class='line'>var filesadded=""; 
+</span><span class='line'>function checkloadjscssfile(filename, filetype){ 
+</span><span class='line'>if (filesadded.indexOf("["+filename+"]")==-1){ 
+</span><span class='line'>loadjscssfile(filename, filetype); 
+</span><span class='line'>//把 [filename] 存入 filesadded 
+</span><span class='line'>filesadded+="["+filename+"]"; 
+</span><span class='line'>} 
+</span><span class='line'>else{ 
+</span><span class='line'>alert("file already added!"); 
+</span><span class='line'>} 
+</span><span class='line'>//第一次载入 
+</span><span class='line'>checkloadjscssfile("myscript.js", "js"); 
+</span><span class='line'>//重复载入同一个文件， 失败 
+</span><span class='line'>checkloadjscssfile("myscript.js", "js"); </span></code></pre></td></tr></table></div></figure>
+
+
+<h5>动态删除 JavaScript/Csss 文件</h5>
+
+<p>注意：ie6/7 下动态删除样式时有bug. 2种解决方案：1.样式表里不要有import的样式表 2.把link的type属性设置为空值， 然后再修改 href 的地， 或者直接设置href为空， 最后再把type值设置成”text/css” 强制让ie解释新的样式表。</p>
+
+<p>取得相应的 DOM 元素
+根据 文件名&amp;文件类型 定位元素
+用 DOM removeChild 删除一个 “script” 或者 ”link” 元素</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>function removejscssfile(filename, filetype){ 
+</span><span class='line'>//判断文件类型 
+</span><span class='line'>var targetelement=(filetype=="js")? "script" : (filetype=="css")? "link" : "none"; 
+</span><span class='line'>//判断文件名 
+</span><span class='line'>var targetattr=(filetype=="js")? "src" : (filetype=="css")? "href" : "none"; 
+</span><span class='line'>var allsuspects=document.getElementsByTagName(targetelement); 
+</span><span class='line'>//遍历元素， 并删除匹配的元素 
+</span><span class='line'>for (var i=allsuspects.length; i&gt;=0; i--){ 
+</span><span class='line'>if (allsuspects[i] && allsuspects[i].getAttribute(targetattr)!=null && allsuspects[i].getAttribute(targetattr).indexOf(filename)!=-1) 
+</span><span class='line'>allsuspects[i].parentNode.removeChild(allsuspects[i]); 
+</span><span class='line'>} 
+</span><span class='line'>} 
+</span><span class='line'>removejscssfile("somescript.js", "js"); 
+</span><span class='line'>removejscssfile("somestyle.css", "css"); </span></code></pre></td></tr></table></div></figure>
+
+
+<h5>动态更新 JavaScript/Csss 文件</h5>
+
+<p>使用 createElement 创建 要更新的 JavaScript/Css 元素
+查找要被替换的元素
+用 replaceChild 替换元素</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>function createjscssfile(filename, filetype){ 
+</span><span class='line'>if (filetype=="js"){ //if filename is a external JavaScript file 
+</span><span class='line'>var fileref=document.createElement('script') 
+</span><span class='line'>fileref.setAttribute("type","text/javascript") 
+</span><span class='line'>fileref.setAttribute("src", filename) 
+</span><span class='line'>} 
+</span><span class='line'>else if (filetype=="css"){ //if filename is an external CSS file 
+</span><span class='line'>var fileref=document.createElement("link") 
+</span><span class='line'>fileref.setAttribute("rel", "stylesheet") 
+</span><span class='line'>fileref.setAttribute("type", "text/css") 
+</span><span class='line'>fileref.setAttribute("href", filename) 
+</span><span class='line'>} 
+</span><span class='line'>return fileref 
+</span><span class='line'>} 
+</span><span class='line'>
+</span><span class='line'>function replacejscssfile(oldfilename, newfilename, filetype){ 
+</span><span class='line'>var targetelement=(filetype=="js")? "script" : (filetype=="css")? "link" : "none"; 
+</span><span class='line'>var targetattr=(filetype=="js")? "src" : (filetype=="css")? "href" : "none"; 
+</span><span class='line'>var allsuspects=document.getElementsByTagName(targetelement); 
+</span><span class='line'>for (var i=allsuspects.length; i&gt;=0; i--){ 
+</span><span class='line'>if (allsuspects[i] && allsuspects[i].getAttribute(targetattr)!=null && allsuspects[i].getAttribute(targetattr).indexOf(oldfilename)!=-1){ 
+</span><span class='line'>var newelement=createjscssfile(newfilename, filetype); 
+</span><span class='line'>allsuspects[i].parentNode.replaceChild(newelement, allsuspects[i]); 
+</span><span class='line'>} 
+</span><span class='line'>} 
+</span><span class='line'>} 
+</span><span class='line'>//用 "newscript.js" 替换 "oldscript.js" 
+</span><span class='line'>replacejscssfile("oldscript.js", "newscript.js", "js")； 
+</span><span class='line'>//用 "newscript.css" 替换 "oldscript.css" 
+</span><span class='line'>replacejscssfile("oldstyle.css", "newscript.css","css"); </span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Leo Lee</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-03-12T19:59:54+08:00" pubdate data-updated="true"></time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/03/08/macfan-qiang-ji-qiao/" title="Previous Post: Mac翻墙技巧">&laquo; Mac翻墙技巧</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2015/07/29/demo/" title="Next Post: demo">demo &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+
+<!-- 添加多说 -->
+
+
+  <section>
+    <h1>Comments</h1>
+    <div id="comments" aria-live="polite">
+<!-- Duoshuo Comment BEGIN -->
+<div class="ds-thread"></div>
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"swplzj"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<!-- Duoshuo Comment END -->
+</div>
+  </section>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo">
+<!-- <p>
+	Copyright &copy; 2015 - Leo Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p> -->
+
+
+<p style="text-align:center">
+  <!-- Copyright &copy; 2015 - Leo Lee - -->
+  	Copyright &copy; 2015 - Leo Lee -
+
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

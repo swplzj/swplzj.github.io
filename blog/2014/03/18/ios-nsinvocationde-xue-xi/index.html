@@ -1,0 +1,608 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>iOS NSInvocation的学习 - 李振杰</title>
+  <meta name="author" content="Leo Lee">
+
+  
+  <meta name="description" content="用途： NSInvocation的作用和performSelector:withObject:的作用是一样的：用于iOS编程中调用某个对象的消息。 performSelector:withObject:调用一些参数较少的消息是比较方便的，但是对于参数个数大于2的消息， &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://swplzj.github.io/blog/2014/03/18/ios-nsinvocationde-xue-xi">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="李振杰" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+ <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+<!--   
+
+ --></head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <nav id="main-nav" role="navigation">
+<ul class="main-navigation">
+  <li><a href="/" class="nav-link">首页 | Blog</a></li>
+  <li><a href="/blog/archives" class="nav-link">归档 | Archives</a></li>
+  <li><a href="/atom.xml" class="nav-link">订阅 | RSS</a></li>
+  <li><a href="/about" class="nav-link">关于我 | About</a></li>
+</ul>
+
+</nav>
+  
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">iOS NSInvocation的学习</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-18T20:58:21+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h4>用途：</h4>
+
+<p>NSInvocation的作用和performSelector:withObject:的作用是一样的：用于iOS编程中调用某个对象的消息。</p>
+
+<p>performSelector:withObject:调用一些参数较少的消息是比较方便的，但是对于参数个数大于2的消息，使用NSInvocation还是比较方便的。</p>
+
+<p>因为NSInvocation是静态的呈现Objective-C的消息，也就是说，它把一个行动变成了一个对象。NSInvocation对象用于对象之间和应用程序之间存储和转发消息，主要通过NSTimer对象和分布式对象系统来完成。</p>
+
+<!--more-->
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>//  
+</span><span class='line'>//  NSInvocation+Improved.h  
+</span><span class='line'>//  InvocationDemo  
+</span><span class='line'>//  
+</span><span class='line'>//  Created by 李振杰 on 13-12-11.  
+</span><span class='line'>//  Copyright (c) 2013年 swplzj. All rights reserved.  
+</span><span class='line'>//  
+</span><span class='line'>  
+</span><span class='line'>#import &lt;Foundation/Foundation.h&gt;  
+</span><span class='line'>  
+</span><span class='line'>@interface NSInvocation (Improved)  
+</span><span class='line'>  
+</span><span class='line'>+ (NSInvocation *)invocationWithTarget:(id)_target andSelector:(SEL)_selector;  
+</span><span class='line'>+ (NSInvocation *)invocationWithTarget:(id)_target andSelector:(SEL)_selector andArguments:(voidvoid *)_addressOfFirstArgument, ...;  
+</span><span class='line'>- (void)invokeOnMainThreadWaitUntilDone:(BOOL)wait;  
+</span><span class='line'>  
+</span><span class='line'>@end  </span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>//  
+</span><span class='line'>//  NSInvocation+Improved.m  
+</span><span class='line'>//  InvocationDemo  
+</span><span class='line'>//  
+</span><span class='line'>//  Created by 李振杰 on 13-12-11.  
+</span><span class='line'>//  Copyright (c) 2013年 swplzj. All rights reserved.  
+</span><span class='line'>//  
+</span><span class='line'>  
+</span><span class='line'>#import "NSInvocation+Improved.h"  
+</span><span class='line'>  
+</span><span class='line'>@implementation NSInvocation (Improved)  
+</span><span class='line'>  
+</span><span class='line'>+ (NSInvocation *)invocationWithTarget:(id)_target andSelector:(SEL)_selector  
+</span><span class='line'>{  
+</span><span class='line'>    //方法签名类  
+</span><span class='line'>    //需要给定一个方法，用于必须创建一个NSInvocation对象的情况下，例如在消息的转发。  
+</span><span class='line'>    NSMethodSignature *methodSig = [_target methodSignatureForSelector:_selector];  
+</span><span class='line'>    //根据方法签名类来创建一个NSInvocation  
+</span><span class='line'>    /* 
+</span><span class='line'>     一个NSInvocation是静态的呈现Objective-C的消息，也就是说，它是一个行动变成了一个对象。 NSInvocation对象用于对象之间和在应用程序之间存储和转发消息，主要通过NSTimer对象和分布式对象系统来完成。 
+</span><span class='line'>    */  
+</span><span class='line'>    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSig];  
+</span><span class='line'>    [invocation setTarget:_target];  
+</span><span class='line'>    [invocation setSelector:_selector];  
+</span><span class='line'>    return invocation;  
+</span><span class='line'>}  
+</span><span class='line'>  
+</span><span class='line'>+ (NSInvocation *)invocationWithTarget:(id)_target andSelector:(SEL)_selector andArguments:(voidvoid *)_addressOfFirstArgument, ...  
+</span><span class='line'>{  
+</span><span class='line'>    NSMethodSignature *methodSig = [_target methodSignatureForSelector:_selector];  
+</span><span class='line'>    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSig];  
+</span><span class='line'>    [invocation setTarget:_target];  
+</span><span class='line'>    [invocation setSelector:_selector];  
+</span><span class='line'>    //获得签名类对象的参数个数  
+</span><span class='line'>    unsigned int numArgs = [methodSig numberOfArguments];  
+</span><span class='line'>    //PS:atIndex的下标必须从2开始。原因：0 1 两个参数已经被target 和selector占用  
+</span><span class='line'>    if (2 &lt; numArgs) {  
+</span><span class='line'>        /* 
+</span><span class='line'>         VA_LIST 是在C语言中解决变参问题的一组宏，所在头文件：#include &lt;stdarg.h&gt; 
+</span><span class='line'>         VA_START宏，获取可变参数列表的第一个参数的地址（ap是类型为va_list的指针，v是可变参数最左边的参数） 
+</span><span class='line'>         VA_ARG宏，获取可变参数的当前参数，返回指定类型并将指针指向下一参数（t参数描述了当前参数的类型） 
+</span><span class='line'>         VA_END宏，清空va_list可变参数列表 
+</span><span class='line'>         */  
+</span><span class='line'>          
+</span><span class='line'>        /* 
+</span><span class='line'>         用法： 
+</span><span class='line'>         （1）首先在函数里定义一具VA_LIST型的变量，这个变量是指向参数的指针； 
+</span><span class='line'>         （2）然后用VA_START宏初始化刚定义的VA_LIST变量； 
+</span><span class='line'>         （3）然后用VA_ARG返回可变的参数，VA_ARG的第二个参数是你要返回的参数的类型（如果函数有多个可变参数的，依次调用VA_ARG获取各个参数）； 
+</span><span class='line'>         （4）最后用VA_END宏结束可变参数的获取。 
+</span><span class='line'>         */  
+</span><span class='line'>        va_list varargs;  
+</span><span class='line'>          
+</span><span class='line'>        va_start(varargs, _addressOfFirstArgument);  
+</span><span class='line'>        [invocation setArgument:_addressOfFirstArgument atIndex:2];  
+</span><span class='line'>          
+</span><span class='line'>        for (int argIndex = 3; argIndex &lt; numArgs; argIndex++) {  
+</span><span class='line'>            voidvoid *argp = va_arg(varargs, voidvoid *);  
+</span><span class='line'>            [invocation setArgument:argp atIndex:argIndex];  
+</span><span class='line'>        }  
+</span><span class='line'>          
+</span><span class='line'>        va_end(varargs);  
+</span><span class='line'>    }  
+</span><span class='line'>    return invocation;  
+</span><span class='line'>}  
+</span><span class='line'>  
+</span><span class='line'>- (void)invokeOnMainThreadWaitUntilDone:(BOOL)wait  
+</span><span class='line'>{  
+</span><span class='line'>    [self performSelectorOnMainThread:@selector(invoke) withObject:nil waitUntilDone:wait];  
+</span><span class='line'>}  
+</span><span class='line'>  
+</span><span class='line'>@end  </span></code></pre></td></tr></table></div></figure>
+
+
+<h4>自定义类：</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>//  
+</span><span class='line'>//  SomeClass.h  
+</span><span class='line'>//  InvocationDemo  
+</span><span class='line'>//  
+</span><span class='line'>//  Created by 李振杰 on 13-12-11.  
+</span><span class='line'>//  Copyright (c) 2013年 swplzj. All rights reserved.  
+</span><span class='line'>//  
+</span><span class='line'>  
+</span><span class='line'>#import &lt;Foundation/Foundation.h&gt;  
+</span><span class='line'>  
+</span><span class='line'>@interface SomeClass : NSObject  
+</span><span class='line'>  
+</span><span class='line'>- (void)commonOperation;  
+</span><span class='line'>- (void)improvedOperation;  
+</span><span class='line'>- (void)fireTimer:(NSDictionary *)user andDate:(NSDate *)startTime;  
+</span><span class='line'>  
+</span><span class='line'>@end  </span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>//  
+</span><span class='line'>//  SomeClass.m  
+</span><span class='line'>//  InvocationDemo  
+</span><span class='line'>//  
+</span><span class='line'>//  Created by 李振杰 on 13-12-11.  
+</span><span class='line'>//  Copyright (c) 2013年 swplzj. All rights reserved.  
+</span><span class='line'>//  
+</span><span class='line'>  
+</span><span class='line'>#import "SomeClass.h"  
+</span><span class='line'>#import "NSInvocation+Improved.h"  
+</span><span class='line'>  
+</span><span class='line'>@implementation SomeClass  
+</span><span class='line'>  
+</span><span class='line'>- (void)commonOperation  
+</span><span class='line'>{  
+</span><span class='line'>    NSDate *date = [NSDate date];  
+</span><span class='line'>    NSDictionary *user = [NSDictionary dictionaryWithObjectsAndKeys:@"value1", @"key1", nil nil];  
+</span><span class='line'>    SEL method = @selector(fireTimer:andDate:);  
+</span><span class='line'>    NSMethodSignature *signature = [[self class] instanceMethodSignatureForSelector:method];  
+</span><span class='line'>    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];  
+</span><span class='line'>    [invocation setTarget:self];  
+</span><span class='line'>    [invocation setSelector:method];  
+</span><span class='line'>    [invocation setArgument:&user atIndex:2];  
+</span><span class='line'>    [invocation setArgument:&date atIndex:3];  
+</span><span class='line'>//    [NSTimer scheduledTimerWithTimeInterval:0.1 invocation:invocation repeats:YES];  
+</span><span class='line'>    [invocation invoke];  
+</span><span class='line'>}  
+</span><span class='line'>  
+</span><span class='line'>- (void)improvedOperation  
+</span><span class='line'>{  
+</span><span class='line'>    //1.创建一个没有参数的NSInvocation  
+</span><span class='line'>//    SEL selector = @selector(fireTimer:andDate:);  
+</span><span class='line'>//    NSInvocation *invocation = [NSInvocation invocationWithTarget:self andSelector:selector];  
+</span><span class='line'>      
+</span><span class='line'>    //2.创建带有两个参数的NSInvocation  
+</span><span class='line'>    NSDate *date = [NSDate date];  
+</span><span class='line'>    NSDictionary *user = [NSDictionary dictionaryWithObjectsAndKeys:@"value1", @"key1", nil nil];  
+</span><span class='line'>    NSInvocation *invocation = [NSInvocation invocationWithTarget:self andSelector:@selector(fireTimer:andDate:) andArguments:&user, &date];  
+</span><span class='line'>    [invocation invoke];  
+</span><span class='line'>}  
+</span><span class='line'>  
+</span><span class='line'>- (void)fireTimer:(NSDictionary *)user andDate:(NSDate *)startTime  
+</span><span class='line'>{  
+</span><span class='line'>    /* 
+</span><span class='line'>     sleep 与 sleepForTimeInterval的区别 
+</span><span class='line'>     sleep直接让线程停掉，sleepForTimeInterval是让runLoop停掉。比如说，你有2个APP，分别是A和B，A启动B，然后去取B的进程号，如果你用sleep等B启动再去取，你会发现取不到，因为你只是把代码加到runloop里面去，而runloop并没有执行到这句，sleep就直接让系统停在那里，所以取不到，而后者就没问题，因为它是让runloop执行到这句的时候停1s 
+</span><span class='line'>     */  
+</span><span class='line'>      
+</span><span class='line'>    [NSThread sleepForTimeInterval:2];  
+</span><span class='line'>    NSTimeInterval timeInterval = -11 * [startTime timeIntervalSinceNow];  
+</span><span class='line'>    NSString *timeStr = [NSString stringWithFormat:@"%.2f", timeInterval];  
+</span><span class='line'>    NSLog(@"fireTime: %@", timeStr);  
+</span><span class='line'>}  
+</span><span class='line'>  
+</span><span class='line'>@end  </span></code></pre></td></tr></table></div></figure>
+
+
+<h4>调用SomeClass：</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>//  
+</span><span class='line'>//  AppDelegate.m  
+</span><span class='line'>//  InvocationDemo  
+</span><span class='line'>//  
+</span><span class='line'>//  Created by 李振杰 on 13-12-11.  
+</span><span class='line'>//  Copyright (c) 2013年 swplzj. All rights reserved.  
+</span><span class='line'>//  
+</span><span class='line'>  
+</span><span class='line'>#import "AppDelegate.h"  
+</span><span class='line'>#import "SomeClass.h"  
+</span><span class='line'>  
+</span><span class='line'>@implementation AppDelegate  
+</span><span class='line'>  
+</span><span class='line'>- (void)dealloc  
+</span><span class='line'>{  
+</span><span class='line'>    [_window release];  
+</span><span class='line'>    [super dealloc];  
+</span><span class='line'>}  
+</span><span class='line'>  
+</span><span class='line'>- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions  
+</span><span class='line'>{  
+</span><span class='line'>    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];  
+</span><span class='line'>    // Override point for customization after application launch.  
+</span><span class='line'>      
+</span><span class='line'>    SomeClass *some = [[SomeClass alloc] init];  
+</span><span class='line'>    [some commonOperation];  
+</span><span class='line'>    [some improvedOperation];  
+</span><span class='line'>    [some release];  
+</span><span class='line'>      
+</span><span class='line'>    self.window.backgroundColor = [UIColor whiteColor];  
+</span><span class='line'>    [self.window makeKeyAndVisible];  
+</span><span class='line'>    return YES;  
+</span><span class='line'>}  
+</span><span class='line'>  
+</span><span class='line'>@end  </span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Leo Lee</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-18T20:58:21+08:00" pubdate data-updated="true"></time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/03/13/ios-ying-yong-cheng-xu-mu-lu-jie-gou/" title="Previous Post: iOS 应用程序目录结构">&laquo; iOS 应用程序目录结构</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/04/14/at-ios5yi-shang-:she-zhi-kong-jian-quan-ju-xian-shi-yang-shi-%3C%3C-appearance-proxy/" title="Next Post: iOS5以上：设置控件全局显示样式《APPEARANCE PROXY》">iOS5以上：设置控件全局显示样式《APPEARANCE PROXY》 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+
+<!-- 添加多说 -->
+
+
+  <section>
+    <h1>Comments</h1>
+    <div id="comments" aria-live="polite">
+<!-- Duoshuo Comment BEGIN -->
+<div class="ds-thread"></div>
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"swplzj"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<!-- Duoshuo Comment END -->
+</div>
+  </section>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo">
+<!-- <p>
+	Copyright &copy; 2015 - Leo Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p> -->
+
+
+<p style="text-align:center">
+  <!-- Copyright &copy; 2015 - Leo Lee - -->
+  	Copyright &copy; 2015 - Leo Lee -
+
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

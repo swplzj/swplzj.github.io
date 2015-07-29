@@ -1,0 +1,346 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>优秀开源项目：FACEBOOK PAPER动画引擎 – POP - 李振杰</title>
+  <meta name="author" content="Leo Lee">
+
+  
+  <meta name="description" content="Pop是一个适用于iOS和OS X平台的可扩展动画引擎，是一个成熟的经过多重测试的，可实现Facebook Paper中的所有动画和过渡效果。除了基本的静态动画，Pop还支持spring和decay动画，有助于打造一个逼真的，基于物理的交互。 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://swplzj.github.io/blog/2014/11/14/you-xiu-kai-yuan-xiang-mu-facebook-paper-dong-hua-yin-qing-pop">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="李振杰" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+ <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+<!--   
+
+ --></head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <nav id="main-nav" role="navigation">
+<ul class="main-navigation">
+  <li><a href="/" class="nav-link">首页 | Blog</a></li>
+  <li><a href="/blog/archives" class="nav-link">归档 | Archives</a></li>
+  <li><a href="/atom.xml" class="nav-link">订阅 | RSS</a></li>
+  <li><a href="/about" class="nav-link">关于我 | About</a></li>
+</ul>
+
+</nav>
+  
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">优秀开源项目：FACEBOOK PAPER动画引擎 – POP</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-11-14T19:02:27+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><img src="http://cc.cocimg.com/cms/uploads/allimg/140429/4196_140429142234_1.gif" alt="id1" /></p>
+
+<p>Pop是一个适用于iOS和OS X平台的可扩展动画引擎，是一个成熟的经过多重测试的，可实现Facebook Paper中的所有动画和过渡效果。除了基本的静态动画，Pop还支持spring和decay动画，有助于打造一个逼真的，基于物理的交互。你可以通过Pop的API把Pop快速集成到现有的Objective-C代码库中，并在任何对象上实现动画的任何属性。</p>
+
+<!--more-->
+
+
+<p></p>
+
+<h5>开始，停止以及更新</h5>
+
+<p>开始动画–把它添加到你想要动画的对象上：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>POPSpringAnimation *anim = [POPSpringAnimation animation]; 
+</span><span class='line'>… 
+</span><span class='line'>[layer pop_addAnimation:anim forKey:@"myKey"]; </span></code></pre></td></tr></table></div></figure>
+
+
+<p>停止动画–把它从key在刚开始时指定的对象引用中移除。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[layer pop_removeAnimationForKey:@"myKey"]; 
+</span><span class='line'>key可以用来查询现有的动画。更新运行中动画的toValue，为改变进程提供了很好的方式：
+</span><span class='line'>anim = [layer pop_animationForKey:@"myKey"]; 
+</span><span class='line'>if (anim) { 
+</span><span class='line'>  /* update to value to new destination */ 
+</span><span class='line'>  anim.toValue = @(42.0); 
+</span><span class='line'>} else { 
+</span><span class='line'>  /* create and start a new animation */ 
+</span><span class='line'>  …. 
+</span><span class='line'>} </span></code></pre></td></tr></table></div></figure>
+
+
+<p>虽然上述代码中使用了layer，但是Pop接口作为一个NSObject上附加类别执行。任何NSObject或者子类可以被动画。</p>
+
+<h5>类型</h5>
+
+<p>Pop有四个具体的动画类型：spring, decay, basic和custom
+Spring动画可以用来给对象一个令人愉悦的弹跳效果。在这个例子中，我们用spring动画来动画一个层次的弹跳效果，从现有的值设定为(0, 0, 400, 400)。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>POPSpringAnimation *anim = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerBounds]; 
+</span><span class='line'>anim.toValue = [NSValue valueWithCGRec 
+</span><span class='line'>t:CGRectMake(0, 0, 400, 400)]; 
+</span><span class='line'>[layer pop_addAnimation:anim forKey:@"size"]; </span></code></pre></td></tr></table></div></figure>
+
+
+<p>Decay动画能用于逐渐减慢一个对象直至停止。在这个例子中，我们将layer的速率减小为每秒钟1000pts。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>POPDecayAnimation *anim = [POPDecayAnimation animationWithPropertyNamed:kPOPLayerPositionX]; 
+</span><span class='line'>anim.velocity = @(1000.); 
+</span><span class='line'>[layer pop_addAnimation:anim forKey:@"slide"]; </span></code></pre></td></tr></table></div></figure>
+
+
+<p>基本动画能用于在指定的时间段插入值。使用一个淡入淡出动画在默认时间段将视图的透明度从0.0设置为1.0。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>POPBasicAnimation *anim = [POPBasicAnimation animationWithPropertyNamed:kPOPViewAlpha]; 
+</span><span class='line'>anim.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]; 
+</span><span class='line'>anim.fromValue = @(0.0); 
+</span><span class='line'>anim.toValue = @(1.0); 
+</span><span class='line'>[view pop_addAnimation:anim forKey:@"slide"]; </span></code></pre></td></tr></table></div></figure>
+
+
+<p>通过处理CADisplayLink和相关的time-step管理，POPCustomAnimation使创建自定义动画和过渡变得更加容易。更多详情请查看header。</p>
+
+<h5>属性</h5>
+
+<p>属性由POPAnimatableProperty类指定动画。在这个例子中，我们创建一个spring动画，明确地设置与-[CALayer bounds]一致的动画属性：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>POPSpringAnimation *anim = [POPSpringAnimation animation]; 
+</span><span class='line'>anim.property = [POPAnimatableProperty propertyWithName:kPOPLayerBounds]; </span></code></pre></td></tr></table></div></figure>
+
+
+<p>这个框架提供了很多常见的层以及额外的视图动画属性。你可以通过创建类的新实例来动画一个自定义属性。在这个例子中，我声明了一个自定义音量属性：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>prop = [POPAnimatableProperty propertyWithName:@"com.foo.radio.vo 
+</span><span class='line'>lume" initializer:^(POPMutableAnimatableProperty *prop) { 
+</span><span class='line'>  // read value 
+</span><span class='line'>  prop.readBlock = ^(id obj, CGFloat values[]) { 
+</span><span class='line'>    values[0] = [obj volume]; 
+</span><span class='line'>  }; 
+</span><span class='line'>  // write value 
+</span><span class='line'>  prop.writeBlock = ^(id obj, const CGFloat values[]) { 
+</span><span class='line'>    [obj setVolume:values[0]]; 
+</span><span class='line'>  }; 
+</span><span class='line'>  // dynamics threshold 
+</span><span class='line'>  prop.threshold = 0.01; 
+</span><span class='line'>}]; 
+</span><span class='line'>anim.property = prop; </span></code></pre></td></tr></table></div></figure>
+
+
+<p>关于动画属性的完整列表以及声明自定义属性的更多信息，请看POPAnimatableProperty.h。</p>
+
+<h5>调试</h5>
+
+<p>这里有一些关于调试的技巧。Pop遵循模拟器的Toggle Slow Animations设置。试着用它放慢动画，将能更容易查看交互。
+考虑给你的动画命名。当你通过日志查看动画或者调试动画时，这将使你更容易识别它们。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>anim.name = @“springOpen”; </span></code></pre></td></tr></table></div></figure>
+
+
+<p>每个动画都有一个关联的tracer，它以一种快速高效的方式允许你记录所有的动画相关事件，还允许你在动画完成后对其进行查询和分析。下边的例子展示启动和配置tracer，以记录所有动画事件。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>POPAnimationTracer *tracer = anim.tracer; 
+</span><span class='line'>tracer.shouldLogAndResetOnCompletion = YES; 
+</span><span class='line'>[tracer start]; </span></code></pre></td></tr></table></div></figure>
+
+
+<p>更多详情，请查看POPAnimationTracer.h。
+假设已经安装了CocoaPods，这将在单元测试目标中包含必要的OCMock依赖。</p>
+
+<h5>相关资源</h5>
+
+<p><a href="https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CoreAnimation_guide/Introduction/Introduction.html">Core Animation Programming Guide</a>
+<a href="http://tapity.com/tutorial-getting-started-with-pop/">Tapity Tutorial – Getting Started with Pop</a>
+<a href="https://github.com/facebook/tweaks">Tweaks – Easily adjust parameters for iOS apps in development</a>
+<a href="http://facebook.github.io/rebound/">Rebound – Springs Animations for Android</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Leo Lee</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-11-14T19:02:27+08:00" pubdate data-updated="true"></time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/11/11/li-jie-objective-c-runtime/" title="Previous Post: 理解 OBJECTIVE-C RUNTIME">&laquo; 理解 OBJECTIVE-C RUNTIME</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/12/07/shi-yong-viper-chuang-jian-kuang-jia/" title="Next Post: 使用VIPER构建iOS应用">使用VIPER构建iOS应用 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+
+<!-- 添加多说 -->
+
+
+  <section>
+    <h1>Comments</h1>
+    <div id="comments" aria-live="polite">
+<!-- Duoshuo Comment BEGIN -->
+<div class="ds-thread"></div>
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"swplzj"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<!-- Duoshuo Comment END -->
+</div>
+  </section>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo">
+<!-- <p>
+	Copyright &copy; 2015 - Leo Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p> -->
+
+
+<p style="text-align:center">
+  <!-- Copyright &copy; 2015 - Leo Lee - -->
+  	Copyright &copy; 2015 - Leo Lee -
+
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

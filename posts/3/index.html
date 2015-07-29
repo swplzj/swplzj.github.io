@@ -1,0 +1,551 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>李振杰</title>
+  <meta name="author" content="Leo Lee">
+
+  
+  <meta name="description" content="iOS中有五种持久化数据的方式：属性列表、对象归档、NSUserDefaults、SQLite3和Core Data。
+本文介绍对象归档来持久化数据。归档的作用就是将对象以文件的形式保存到磁盘中，以使得数据序列化和持久化。 ">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://swplzj.github.io/posts/3">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="李振杰" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+ <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+<!--   
+
+ --></head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <nav id="main-nav" role="navigation">
+<ul class="main-navigation">
+  <li><a href="/" class="nav-link">首页 | Blog</a></li>
+  <li><a href="/blog/archives" class="nav-link">归档 | Archives</a></li>
+  <li><a href="/atom.xml" class="nav-link">订阅 | RSS</a></li>
+  <li><a href="/about" class="nav-link">关于我 | About</a></li>
+</ul>
+
+</nav>
+  <header role="banner"><hgroup>
+	
+		<img src="/images/portrait.jpg" class="portrait" height=250px width=250px />
+	
+  <h1><a href="/">李振杰</a></h1>
+  
+    <h2>An iOS developer‘s blog about programming and growing.</h2>
+  
+</hgroup>
+
+</header> 
+  
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/08/12/ios-shu-ju-chi-jiu-hua-(er-)/">iOS 数据持久化（二）</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-08-12T22:59:06+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>iOS中有五种持久化数据的方式：属性列表、对象归档、NSUserDefaults、SQLite3和Core Data。
+本文介绍对象归档来持久化数据。归档的作用就是将对象以文件的形式保存到磁盘中，以使得数据序列化和持久化。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/08/12/ios-shu-ju-chi-jiu-hua-(er-)/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/08/09/ios-shu-ju-chi-jiu-hua-%5B%3F%5D/">iOS 数据持久化(一)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-08-09T21:46:33+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>iOS中有五种持久化数据的方式：属性列表、对象归档、NSUserDefault、SQLite3和Core Data
+本文章讲述通过属性列表的方式持久化数据，这个方法也是我们平时最经常用到的方式。比如应用程序的配置和个性化的设置，一般都是通过属性列表（properties list） plist文件来存储和读取的。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/08/09/ios-shu-ju-chi-jiu-hua-%5B%3F%5D/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/07/21/xcode-lldb-ming-ling-jian-dan-shi-yong/">XCODE LLDB命令的简单实用说明</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-21T16:47:01+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>po（print object）是LLDB的一个命令，其主要功能是输出objective-c中对象（objects）的信息，与之相似的另外一个命令是 p（print），其主要功能是输出原生类型（boolean、integer、float、etc）的信息。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/07/21/xcode-lldb-ming-ling-jian-dan-shi-yong/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/07/09/xcode-5zhong-de-interface-buildergeng-you-li-yu-tuan-dui-xie-zuo-kai-fa/">Xcode 5中的Interface Builder更有利于团队协作开发</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-09T21:30:59+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h4>小引</h4>
+
+<p>在iOS开发中，开发者有各种理由选择用代码来构建界面，其中最多的理由就是Interface Builder绘制的代码不利于团队间协作(代码的可读性和合并)。虽然Interface Builder来绘制界面有诸多优势，但是由于致命的缺陷，许多开发团队不得不远离它，当然也有一些开发团队为了在协同开发时也使用IB来绘制界面，他们尽量确保同一时期只由一个人来操作某个xib文件，以此避免提交代码的时候需要合并xib文件。然而，在Xcode 5中，苹果的开发团队已经对xib文件格式做了大量的简化工作。本文就来简要的看看相关内容。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/07/09/xcode-5zhong-de-interface-buildergeng-you-li-yu-tuan-dui-xie-zuo-kai-fa/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/06/16/ios-7-jiao-cheng-:qian-xi-text-kit/">iOS 7 教程：浅析Text Kit</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-16T23:00:06+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Text Kit是iOS 7中引入的一个新功能，非常值得开发者使用，下面先看看本文的目录结构：</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/06/16/ios-7-jiao-cheng-:qian-xi-text-kit/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/06/10/nstimerde-yong-fa-xia-zai-jin-du-xian-shi/">NSTimer的用法-下载进度显示</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-10T22:51:16+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>NSTimer的作用就是以一定的时间间隔向目标对象发送特殊的消息。最常见的是用来控制下载进度条的显示。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/06/10/nstimerde-yong-fa-xia-zai-jin-du-xian-shi/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/05/11/os-xchang-yong-ming-ling-xing-ji-qiao/">OS X常用命令行技巧</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-11T23:08:13+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h4>用“caffeinate”来停用屏幕保护和休眠</h4>
+
+<p>山狮（Mac OS X 10.8）引入的新功能caffeinate，它完全就是命令行版本的咖啡因（Caffeine），可以让你电脑保持精神。运行方法：</p>
+
+<p>caffeinate -t 3600</p>
+
+<p>其中， -t用来指定时间，单位是秒，所以上面的例子就是一个小时。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/05/11/os-xchang-yong-ming-ling-xing-ji-qiao/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/05/04/appzai-itunes-connectli-mian-de-ji-chong-zhuang-tai/">App在iTunes Connect里面的几种状态</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-04T20:20:41+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h4>Waiting for Upload (Yellow)</h4>
+
+<p>Appears when you’ve completed entering your metadata, however, you have not finished uploading your binary or have chosen to upload your binary at a later time. Your app must be in the Waiting For Upload state before you can deliver your binary through Application Loader.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/05/04/appzai-itunes-connectli-mian-de-ji-chong-zhuang-tai/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/04/22/ios-coretextlei-ku-de-xiang-xi-jie-shao/">iOS CoreText类库的详细介绍</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-22T21:50:08+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>iOS 编程中如何使用CoreText类库</p>
+
+<p><img src="http://img.blog.csdn.net/20131104171422968?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc3dwbHpq/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="id2" /></p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/04/22/ios-coretextlei-ku-de-xiang-xi-jie-shao/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/04/14/at-ios5yi-shang-:she-zhi-kong-jian-quan-ju-xian-shi-yang-shi-%3C%3C-appearance-proxy/">iOS5以上：设置控件全局显示样式《APPEARANCE PROXY》</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-14T23:34:41+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Appearance是Apple在iOS5.0上加的一个协议，它让程序员可以很轻松地改变某控件的全局样式（背景）</p>
+
+<pre><code> @selector(appearance)
+</code></pre>
+
+<p>支持UIAppearance协议的类可以访问appearance selector ,它为receiver返回appearance proxy，我们可以给proxy发一些消息，诸如setTintColor:等</p>
+
+<p>但是它并不是支持所有的UI类。下面列出它支持的类</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/04/14/at-ios5yi-shang-:she-zhi-kong-jian-quan-ju-xian-shi-yang-shi-%3C%3C-appearance-proxy/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+
+  <div class="pagination">
+    <nav id="pagenavi">
+
+    
+
+       
+        <a href="/posts/2" class="prev">Newer</a>
+      
+      
+      
+        <a href="/posts/4" class="next">Older</a>
+    
+  </div>
+</div>
+<!-- <aside class="sidebar">
+  
+    
+  
+</aside> -->
+
+<!-- <footer role="contentinfo">
+<p style="text-align:center">
+  Copyright &copy; 2015 - Leo Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+</footer> -->
+    </div>
+  </div>
+  <footer role="contentinfo">
+<!-- <p>
+	Copyright &copy; 2015 - Leo Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p> -->
+
+
+<p style="text-align:center">
+  <!-- Copyright &copy; 2015 - Leo Lee - -->
+  	Copyright &copy; 2015 - Leo Lee -
+
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,216 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>面向 iOS 开发的优秀 XCode 插件 - 李振杰</title>
+  <meta name="author" content="Leo Lee">
+
+  
+  <meta name="description" content="一套理想的插件架构几乎能够决定整个集成开发环境的差异与特性。Sublime Text与TextMate就是很好的实例。但大家可能不了解的是，Xcode也支持插件。哈哈，如果各位真的前所未闻，我也不会感到惊讶，毕竟苹果并没有把太多精力用在Xcode的宣传之上。事实上， &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://swplzj.github.io/blog/2015/02/13/mian-xiang-ios-kai-fa-de-you-xiu-xcode-cha-jian">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="李振杰" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+ <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+<!--   
+
+ --></head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <nav id="main-nav" role="navigation">
+<ul class="main-navigation">
+  <li><a href="/" class="nav-link">首页 | Blog</a></li>
+  <li><a href="/blog/archives" class="nav-link">归档 | Archives</a></li>
+  <li><a href="/atom.xml" class="nav-link">订阅 | RSS</a></li>
+  <li><a href="/about" class="nav-link">关于我 | About</a></li>
+</ul>
+
+</nav>
+  
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">面向 iOS 开发的优秀 XCode 插件</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-02-13T21:05:50+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>一套理想的插件架构几乎能够决定整个集成开发环境的差异与特性。Sublime Text与TextMate就是很好的实例。但大家可能不了解的是，Xcode也支持插件。哈哈，如果各位真的前所未闻，我也不会感到惊讶，毕竟苹果并没有把太多精力用在Xcode的宣传之上。事实上，我们几乎找不到多少用于指导Xcode创建的说明文档。</p>
+
+<p>幸运的是，这并没有妨碍开发人员在Xcode这片土地上耕耘并构建自己的插件果实。目前市面上存在大量插件，能够让我们的Xcode使用之旅更加平坦也更富乐趣，甚至足以弥合苹果在其中留下的所有沟壑。在今天的文章中，我将向大家展示自己在日常工作中频繁用到的几款优秀插件。</p>
+
+<!--more-->
+
+
+<h5>Alcatraz</h5>
+
+<p>过去，安装Xcode插件往往令人抓狂不已，但Alcatraz的出现彻底改写了这一历史。今年早些时候，Alcatraz迎来了发展道路上的里程碑——1.0版本，现在如今已经可以与Xcode 5相兼容。如果大家还没有安装Alcatraz，我建议大家首先完成这项工作。</p>
+
+<p>官方网站：<a href="http://alcatraz.io/">http://alcatraz.io/</a></p>
+
+<h5>XToDo</h5>
+
+<p>这款插件不仅能够着力强调TODO、FIXME、？？？以及！！！注释，同时可以按住 control + T 可以快速查看专用列表，并且可以自定义一些标签。</p>
+
+<p><img src="http://s9.51cto.com/wyfs02/M00/46/84/wKioL1Pyvc2iUbyMAABLbcwVzmM494.jpg" alt="id1" /></p>
+
+<p>官方网站：<a href="https://github.com/trawor/XToDo">https://github.com/trawor/XToDo</a></p>
+
+<h5>Dash for Xcode</h5>
+
+<p>Dash是一款用于浏览文档的优秀软件，我每天都会反复加以运用。更让人喜出望外的是，它现在已经与Xcode相集成，这要归功于其Xcode插件。大家可能知道，我们可以在Xcode编辑器中按住Option键同时点击以直接前往对应文档。不过我对于Xcode自带来的文档浏览器评价不高，在这种情况下Dash插件就成了最理想的解决方案。</p>
+
+<p><img src="http://s2.51cto.com/wyfs02/M00/46/83/wKiom1PyvYOBTuZFAACLZqMVukQ768.jpg" alt="id2" /></p>
+
+<p>该插件能够在我们按住Option并点击对应文档后利用Dash而非Xcode自带文档浏览器将其打开。Dash不仅运行速度极快，同时还能与CocoaDocs相集成。举例来说，如果大家用这种方式点击AFNetworking库中的一个方法，那么Dash将显示出该方法的说明文档。我超爱这项功能。</p>
+
+<p>官方网站：<a href="http://kapeli.com/dash">http://kapeli.com/dash</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Leo Lee</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-02-13T21:05:50+08:00" pubdate data-updated="true"></time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/02/06/ji-shi-tong-xun-lei-yi-dong-appkai-fa-yao-dian/" title="Previous Post: 即时通讯类移动APP开发要点">&laquo; 即时通讯类移动APP开发要点</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2015/03/08/macfan-qiang-ji-qiao/" title="Next Post: Mac翻墙技巧">Mac翻墙技巧 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+
+<!-- 添加多说 -->
+
+
+  <section>
+    <h1>Comments</h1>
+    <div id="comments" aria-live="polite">
+<!-- Duoshuo Comment BEGIN -->
+<div class="ds-thread"></div>
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"swplzj"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<!-- Duoshuo Comment END -->
+</div>
+  </section>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo">
+<!-- <p>
+	Copyright &copy; 2015 - Leo Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p> -->
+
+
+<p style="text-align:center">
+  <!-- Copyright &copy; 2015 - Leo Lee - -->
+  	Copyright &copy; 2015 - Leo Lee -
+
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
