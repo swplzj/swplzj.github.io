@@ -156,14 +156,14 @@ git安装之后，利用git命令将octopress从github上clone到本机，如下
 
 <p>Github的<code>Page service</code>可以免费托管博客，并且还可以自定义域名。
 首先需要在<a href="https://github.com/new">GitHub上创建一个仓库</a>，并将仓库名称按照这样的方式进行命名：<code>username.github.com</code>或<code>organization.github.com</code>。等后面配置完毕之后，我们就可以在浏览器中使用页面地址<code>http://username.github.com</code>来访问我们的博客。一般来说，我们希望在将博客的源码放到source分支下，并把生成的内容提交到master分支。
-创建好仓库之后，我们需要利用octopress的一个<code>配置rake</code>任务来自动配置上面创建的仓库：可以让我们方便的部署GitHub page。在终端输入如下命令：</p>
+创建好仓库之后，我们需要利用octopress的一个<code>配置rake</code>任务来自动配置上面创建的仓库：可以让我们方便的部署GitHub page。在octopress根目录进入终端输入如下命令：</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>$ rake setup_github_pages</span></code></pre></td></tr></table></div></figure>
 
 
 <p>上面的命令会做一些事情(详细介绍看下面给出的参考链接)。其中最主要的就是创建一个<code>_deploy</code>目录，目录用来存放部署到master分支的内容。期间会要求你输入仓库的url，根据提示，进行输入即可。
-完成上面的命令之后，我们就可以生成博客并真正的部署到仓库中了。执行如下命令：</p>
+完成上面的命令之后，这个会push到仓库的 <code>master</code> 分支，也就是访问博客的文件。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -172,8 +172,38 @@ git安装之后，利用git命令将octopress从github上clone到本机，如下
 
 
 <p>上面的命令首先生成博客文件，并将生成的博客文件拷贝到<code>_deploy/</code>目录下，然后将这些内容添加到git中，并commit和push到仓库的master分支。
-现在可以访问<a href="http://username.github.com%E4%BA%86%E3%80%82%E6%B3%A8%E6%84%8F%EF%BC%9A%E6%9C%89%E6%97%B6%E5%80%99%E5%8F%AF%E8%83%BD%E4%BC%9A%E6%9C%89%E5%BB%B6%E6%97%B6%EF%BC%8C%E8%A6%81%E7%AD%89%E5%87%A0%E5%88%86%E9%92%9F%E6%89%8D%E8%83%BD%E6%89%93%E5%BC%80%E3%80%82">http://username.github.com%E4%BA%86%E3%80%82%E6%B3%A8%E6%84%8F%EF%BC%9A%E6%9C%89%E6%97%B6%E5%80%99%E5%8F%AF%E8%83%BD%E4%BC%9A%E6%9C%89%E5%BB%B6%E6%97%B6%EF%BC%8C%E8%A6%81%E7%AD%89%E5%87%A0%E5%88%86%E9%92%9F%E6%89%8D%E8%83%BD%E6%89%93%E5%BC%80%E3%80%82</a>
-至此，我们的博客已经完成基本的部署，不过博客的source需要单独提交，执行如下命令就可以将source提交到仓库的source分支下。</p>
+现在可以访问<a href="http://username.github.com%E4%BA%86%E3%80%82">http://username.github.com%E4%BA%86%E3%80%82</a></p>
+
+<p><code>注意：</code></p>
+
+<pre><code>1. 有时候可能会有延时，要等几分钟才能打开。
+
+
+2. 第一次执行 rake deploy 的时候会报错如下：
+
+! [rejected]        master -&gt; master (non-fast-forward)
+error: failed to push some refs to 'https://github.com/yeesterbunny/yeesterbunny.github.com.git'
+hint: Updates were rejected because the tip of your current branch is behind
+hint: its remote counterpart. Merge the remote changes (e.g. 'git pull')
+hint: before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+</code></pre>
+
+<p><code>解决方法:</code></p>
+
+<p>手动进入_deploy目录手动强制push一次。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd octopress/_deploy
+</span><span class='line'>git pull origin +master
+</span><span class='line'>cd ..
+</span><span class='line'>rake deploy</span></code></pre></td></tr></table></div></figure>
+
+
+<p>至此，我们的博客已经完成基本的部署，不过博客的 <code>source</code> 需要单独提交，执行如下命令就可以将 <code>source</code> 提交到仓库的 <code>source</code> 分支下。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -182,6 +212,8 @@ git安装之后，利用git命令将octopress从github上clone到本机，如下
 </span><span class='line'>$ git commit -m 'Initial source commit'
 </span><span class='line'>$ git push origin source</span></code></pre></td></tr></table></div></figure>
 
+
+<p>前面提到的deploy只是部署博客代码到github上面，整个octopress并没有提交，为了保证在任何地方随时发布博客，而无需再次详细配置以保证跟github上的最新代码一致，可以将当前octopress的源码存放到github的source分支下：</p>
 
 <p>如果在部署到仓库之前，需要先预览一下博客，可以在终端输入<code>rake preview</code>命令，然后就能在浏览器中进行本地预览访问了：<code>http://127.0.0.1:4000/</code>或<code>http://localhost:4000/</code>，效果跟仓库中的一样。</p>
 
