@@ -152,6 +152,54 @@ git安装之后，利用git命令将octopress从github上clone到本机，如下
 关于<em>config.yml文件中的更多内容，请看这里的内容：<a href="http://octopress.org/docs/configuring/">Configuring Octopress</a>
 建议：最好把里面的twitter相关的信息全部删掉，否则由于GFW的原因，将会造成页面load很慢。同理，修改定制文件/source/</em>includes/custom/head.html 把google的自定义字体去掉。from<a href="http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/">唐巧的博文中—配置。</a></p>
 
+<p>梳理一下 octopress 的目录结构，是为了更清晰的了解各个文件是做什么用的，修改网站样式添加侧栏等等需要修改那些文件。目录结构如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>├─ config.rb  #指定额外的compass插件
+</span><span class='line'>├─ config.ru  
+</span><span class='line'>├─ Rakefile   #rake的配置文件,类似于makefile
+</span><span class='line'>├─ Gemfile    #bundle要下载需要的gem依赖关系的指定文件
+</span><span class='line'>├─ Gemfile.lock  #这些gem依赖的对应关系,比如A的x本依赖于B的y版本
+</span><span class='line'>├─ _config.yml   #站点的配置文件
+</span><span class='line'>├─ public/    #在静态编译完成后的目录,网站只需要这个目录下的文件树
+</span><span class='line'>├─ _deploy/   #deploy时候生成的缓存文件夹,和public目录一样
+</span><span class='line'>├─ sass/      #css文件的源文件,过程中会compass成css
+</span><span class='line'>├─ plugins/   #放置自带以及第三方插件的目录,ruby程序
+</span><span class='line'>│  └── xxx.rb
+</span><span class='line'>└─ source/    #站点的源文件目录,public目录就是根据这个目录下数据生成的
+</span><span class='line'>   ├─ _includes/
+</span><span class='line'>   │  ├─ custom/      #自定义的模板目录,被相应上级html include
+</span><span class='line'>   │  │  └─ asides/   #边栏模板自定义模板目录
+</span><span class='line'>   │  ├─ asides/      #边栏模板目录
+</span><span class='line'>   │  └─ post/        #文章页面相应模板目录
+</span><span class='line'>   ├─ _layouts/       #默认网站html相关文件,最底层
+</span><span class='line'>   ├─ _posts/         #新增以及从其它程序迁移过来的数据都存在这里
+</span><span class='line'>   ├─ stylesheets/    #css文件目录
+</span><span class='line'>   ├─ javascripts/    #js文件目录
+</span><span class='line'>   └─ images/         #图片目录</span></code></pre></td></tr></table></div></figure>
+
+
 <h5>4. 将博客部署到GitHub上</h5>
 
 <p>Github的<code>Page service</code>可以免费托管博客，并且还可以自定义域名。
@@ -487,6 +535,8 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.
   	Copyright &copy; 2015 - Leo Lee -
 
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255930196'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1255930196%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
 </p>
 
 
