@@ -4,7 +4,7 @@
     <title><![CDATA[李振杰]]></title>
     <link href="http://swplzj.github.io/atom.xml" rel="self"/>
     <link href="http://swplzj.github.io/"/>
-    <updated>2015-07-31T17:00:55+08:00</updated>
+    <updated>2015-07-31T17:02:05+08:00</updated>
     <id>http://swplzj.github.io/</id>
     <author>
         <name><![CDATA[Leo Lee]]></name>
@@ -18,14 +18,14 @@
         <link href="http://swplzj.github.io/blog/2015/07/30/test/"/>
         <updated>2015-07-30T10:28:49+08:00</updated>
         <id>http://swplzj.github.io/blog/2015/07/30/test</id>
-        <content type="html"><![CDATA[<p><img src="http://swplzj.github.io/rss.png" alt="fdfdsafdsaf" />
+        <content type="html"><![CDATA[<p><img src="" alt="fdfdsafdsaf" />
 <img src="http://25.io/mou/Mou_128.png" alt="Mou icon" /></p>
 
 <!--<img src="http://swplzj.github.io/images/rss.png" />
 -->
 
 
-<p><img class="right" src="http://swplzj.github.io/images/rss.png" width="350" height="350" title="image" alt="images"></p>
+<p><img class="center" src="http://swplzj.github.io/images/rss.png" width="350" height="350" title="image" alt="images"></p>
 
 <!--<img class="[class names]" src="http://swplzj.github.io/path/to/image" title="[width] [height] [title text [alt text]]" >
 
