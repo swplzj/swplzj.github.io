@@ -4,7 +4,7 @@
     <title><![CDATA[李振杰]]></title>
     <link href="http://swplzj.github.io/atom.xml" rel="self"/>
     <link href="http://swplzj.github.io/"/>
-    <updated>2015-07-30T13:58:11+08:00</updated>
+    <updated>2015-07-31T12:21:38+08:00</updated>
     <id>http://swplzj.github.io/</id>
     <author>
         <name><![CDATA[Leo Lee]]></name>
@@ -18,7 +18,8 @@
         <link href="http://swplzj.github.io/blog/2015/07/30/test/"/>
         <updated>2015-07-30T10:28:49+08:00</updated>
         <id>http://swplzj.github.io/blog/2015/07/30/test</id>
-        <content type="html"><![CDATA[
+        <content type="html"><![CDATA[<p><img src="http://swplzj.github.io/rss.png" alt="fdfdsafdsaf" />
+<img src="http://25.io/mou/Mou_128.png" alt="Mou icon" /></p>
 ]]></content>
     </entry>
     
