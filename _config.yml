@@ -3,7 +3,7 @@
 # ----------------------- #
 
 url: http://swplzj.github.io
-title: 李振杰
+title: Leo Lee
 subtitle: An iOS developer‘s blog about programming and growing.
 author: Leo Lee
 simple_search: https://wen.lu/search 
@@ -116,3 +116,5 @@ weibo_share: true # 是否开启微博分享按钮
 duoshuo_comments: true
 duoshuo_short_name: swplzj #多说二级域名 swplzj.duoshuo.com
 
+# 自动为Octopress中的图片增加七牛云存储url前缀
+static_file_prefix: http://7xkrxl.com1.z0.glb.clouddn.com

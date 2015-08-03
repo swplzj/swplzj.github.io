@@ -33,6 +33,9 @@ module Jekyll
           @img['alt']    = @img['title'].gsub!(/"/, '&#34;') if @img['title']
         end
         @img['class'].gsub!(/"/, '') if @img['class']
+        #自动为Octopress中的图片增加url前缀
+        @img['src'] = Jekyll.configuration({})['static_file_prefix'] + @img['src'] if @img['src'][0] == '/'
+
       end
       super
     end
