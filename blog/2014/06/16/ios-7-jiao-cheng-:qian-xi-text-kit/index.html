@@ -1,0 +1,451 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>iOS 7 教程：浅析Text Kit - Leo Lee</title>
+  <meta name="author" content="Leo Lee">
+
+  
+  <meta name="description" content="Text Kit是iOS 7中引入的一个新功能，非常值得开发者使用，下面先看看本文的目录结构： 1. 什么是Text Kit &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2. Text Kit架构 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://swplzj.github.io/blog/2014/06/16/ios-7-jiao-cheng-:qian-xi-text-kit">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Leo Lee" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+ <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+<!--   
+
+ --></head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <nav id="main-nav" role="navigation">
+<ul class="main-navigation">
+  <li><a href="/" class="nav-link">首页 | Blog</a></li>
+  <li><a href="/blog/archives" class="nav-link">归档 | Archives</a></li>
+  <li><a href="/atom.xml" class="nav-link">订阅 | RSS</a></li>
+  <li><a href="/about" class="nav-link">关于我 | About</a></li>
+</ul>
+
+</nav>
+  
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">iOS 7 教程：浅析Text Kit</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-16T23:00:06+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Text Kit是iOS 7中引入的一个新功能，非常值得开发者使用，下面先看看本文的目录结构：</p>
+
+<!--more-->
+
+
+<p><a href="#08">      1. 什么是Text Kit    </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+
+<p><a href="#01">      2. Text Kit架构   </a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+
+<p><a href="#02">      3. Text Kit特点   </a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+
+<p><a href="#03">      4. Text Kit功能概述 </a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+
+<p><a href="#04">      5. Text Kit中重要的一些对象 </a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+
+<p><a href="#05">      6. Text Kit示例   </a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+
+<p><a href="#06">      7. 小结   </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+
+<p><a href="#07">      8. 推荐Text Kit学习资源   </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+
+<p><a name="Text Kit架构" id="08""></a></p>
+
+<h4>什么是Text Kit</h4>
+
+<p>在iOS7中，苹果引入了<code>Text Kit</code>——Text Kit是一个快速而又现代化的文字排版和渲染引擎。Text Kit在UIKit framework中的定义了一些类和相关协议，它最主要的作用就是为程序提供文字排版和渲染的功能。在程序中，通过Text Kit可以对文字进行存储(store)、布局(lay out)，以及用最精细的排版方式(例如文字间距、换行和对齐等)来显示文本内容。
+苹果引入Text Kit的目的并非要取代已有的Core Text，Core Text的主要作用也是用于文字的排版和渲染中，它是一种先进而又处于底层技术，如果我们需要将文本内容直接渲染到图形上下文(Graphics context)时，从性能和易用性来考虑，最佳方案就是使用Core Text。而如果我们直接利用苹果提供的一些控件(例如UITextView、UILabel和UITextField等)对文字进行排版，无疑就是借助于UIkit framework中Text Kit提供的API。</p>
+
+<p><a name="Text Kit架构" id="01""></a></p>
+
+<h4>Text Kit架构</h4>
+
+<p>下面，我们通过图1(此图来自WWDC2013 Session 210)来了解一下Text Kit的架构。图1是基于iOS 7绘制的，从图中，我们可以看到Text Kit是基于Core Text构建的，它通过Core Text与Core Graphics进行交互。而UI控件(UILabel、UITextField和UITextView)则构建于Text Kit之上，可见这些文本控件可以利用Text Kit提供的API来对文字进行排版和渲染处理。
+从图中我们也可以看到SDK提供的UIWebView是基于WebKit的，它不能使用Text Kit提供的功能。</p>
+
+<p><img src="http://beyondvincent.com/images/2013/11/23.jpg" title="图1 Text Kit在iOS 7 SDK中的位置" alt="id1" /></p>
+
+<p>我们再来看看图1中的相关组件在iOS6里面是如何对应的，如图2所示，可以看出在iOS 6中是没有Text Kit，并且UILabel、UIText和UITextView是基于String Drawing和WebKit构建的。其中String Drawing是与Core Graphics直接通讯。</p>
+
+<p><img src="http://beyondvincent.com/images/2013/11/24.jpg" title="图2 在iOS 6中并没有Text Kit" alt="id2" /></p>
+
+<p><a name="Text Kit特点" id="02"></a></p>
+
+<h4>Text Kit特点</h4>
+
+<p>从上面的介绍中，我们可以了解到Text Kit在UIKit中的作用非常重要。Text Kit在实际开发中具有如下特点：
+在UI控件中Text Kit完全掌控着文字的排版和渲染
+UITextView、UITextField和UILabel是构建于Text Kit之上的
+能够与动画、UICollectionView和UITableView做到无缝集成
+Text Kit具有这样一些能力：Subclassing、Delegation和Notifcation。</p>
+
+<p><a name="Text Kit功能概述" id="03"></a></p>
+
+<h4>Text Kit功能概述</h4>
+
+<p>下面我们看看通过Text Kit，都能实现那些功能(这里列出了是一些常用和重要功能)：
+对文字进行分页或多列排版
+支持文字的换行、折叠和着色等处理
+可以调整字与字之间的距离、行间距、文字大小、指定特定的字体
+支持富文本编辑，可以自定义文字截断
+支持凸版印刷效果(letterpress)
+支持数据类型的检测(例如链接、附件等)
+如图3，是利用Text Kit对文字做的分页排版</p>
+
+<p><img src="http://beyondvincent.com/images/2013/11/25.jpg" title="图3 利用Text Kit做的分页排版效果" alt="id3" /></p>
+
+<p>再看图4，是利用Text Kit做的换行处理，其中对某个路径范围做了排除。</p>
+
+<p><img src="http://beyondvincent.com/images/2013/11/26.jpg" title="图4 利用Text Kit做的换行处理效果" alt="id4" /></p>
+
+<p>再来看看利用Text Kit做的凸版印刷效果，如图5所示</p>
+
+<p><img src="http://beyondvincent.com/images/2013/11/27.jpg" title="图5 利用Text Kit做的凸版印刷效果" alt="id5" /></p>
+
+<p><a name="Text Kit中重要的一些对象" id="04"></a></p>
+
+<h4>Text Kit中重要的一些对象</h4>
+
+<p>下面我们来看看Text Kit中重要的几个对象。</p>
+
+<p><img src="http://beyondvincent.com/images/2013/11/28.jpg" title="图6 Text Kit中重要的几个对象" alt="id6" /></p>
+
+<p>如图6所示，Text Kit中主要有4个重要的对象。
+Text View是用来显示文本内容的控件，主要包括UILabel、UITextView和UITextField。
+Text containers对应着NSTextContainer类。NSTextContainer定义了文本可以排版的区域。一般来说，都是矩形区域，当然，也可以根据需求，通过子类化NSTextContainer来创建别的一些形状，例如圆形、不规则的形状等。NSTextContainer不仅可以创建文本可以填充的区域，它还维护着一个数组——该数组定义了一个区域，排版的时候文字不会填充该区域，因此，我们可以在排版文字的时候，填充非文本元素(例如图片，如图4所示)。
+Layout manager对应着NSLayoutManager类。该类负责对文字进行编辑排版处理——通过将存储在NSTextStorage中的数据转换为可以在视图控件中显示的文本内容，并把统一的字符编码映射到对应的字形(glyphs)上，然后将字形排版到NSTextContainer定义的区域中。
+Text storage对应着NSTextStorage类。该类定义了Text Kit扩展文本处理系统中的基本存储机制。NSTextStorage继承自NSmutableAttributedString，主要用来存储文本的字符和相关属性。另外，当NSTextStorage中的字符或属性发生了改变，会通知NSLayoutManager，进而做到文本内容的显示更新。
+通常情况下，NSTextStorage、NSLayoutManager和NSTextContainer是一一对应的。如图7所示关系：</p>
+
+<p><img src="http://beyondvincent.com/images/2013/11/29.jpg" title="图7 普通排版" alt="id7" /></p>
+
+<p>当然，如果需要将文字显示为多列，或多页，可以按照如图8所示关系——使用多个NSTextContainer。</p>
+
+<p><img src="http://beyondvincent.com/images/2013/11/30.jpg" title="图8 多页或者多列排版" alt="id8" /></p>
+
+<p>如果针对不同的排版方式，则可以使用多个NSLayoutManager，如图9所示</p>
+
+<p><img src="http://beyondvincent.com/images/2013/11/31.jpg" title="图9 不同的排版方式" alt="id9" /></p>
+
+<p>如图10所示，通过形象的方式，对UITextView的组成做了分解。通常，我们在设备上只能看到最右边的文本显示界面，而内部的NSTextStorage、NSLayoutManager和NSTextContainer是看不出来的。通常由NSLayoutManager从NSTextStorage中读取出文本数据，然后根据一定的排版方式，将文本排版到NSTextContainer中，再由NSTextContainer结合UITextView将最终效果显示出来。</p>
+
+<p><img src="http://beyondvincent.com/images/2013/11/32.jpg" title="图10 UITextView的分解" alt="id10" /></p>
+
+<p><a name="Text Kit示例", id="05"></a></p>
+
+<h4>Text Kit示例</h4>
+
+<p>前面对Text Kit做了一些介绍，下面我们配合一个例子(图文排版)，来进一步加深对Text Kit的认识。具体实现步骤如下</p>
+
+<ol>
+<li>打开Xcode 5，新建一个Single View Application模板的程序，将工程命名为ExclusionPath。</li>
+<li>打开Main.storyboard文件，然后再默认View Controller的View里面分别添加一个UITextView和UIImageView。并将这两个控件连接到ViewController.h中(名称分别为textView何imageView)。然后给textView设置一些字符串，imageView设置一个图片。</li>
+<li>打开ViewController.m文件，找到viewDidLoad方法，用如下代码替换该方法：</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>- (void)viewDidLoad
+</span><span class='line'>{
+</span><span class='line'>    [super viewDidLoad];
+</span><span class='line'>    
+</span><span class='line'>    //创建一个平移手势对象，该对象可以调用imagePanned：方法
+</span><span class='line'>    UIPanGestureRecognizer *panGes = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(imagePanned:)];
+</span><span class='line'>    [self.imageView addGestureRecognizer:panGes];
+</span><span class='line'>    
+</span><span class='line'>    self.textView.textContainer.exclusionPaths = @[[self translatedBezierPath]];
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在上面的代码中，给imageView添加了一个平移手势。另外通过调用translatedBezierPath方法，给textView的textContainer设置exclusionPaths属性值。表示需要排除的区域（也就是图片在排版中显示的位置）。</p>
+
+<p>下面来看一下translatedBezierPath方法的实现，如下代码所示</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>- (UIBezierPath *)translatedBezierPath
+</span><span class='line'>{
+</span><span class='line'>    CGRect butterflyImageRect = [self.textView convertRect:self.imageView.frame fromView:self.view];
+</span><span class='line'>    UIBezierPath *newButterflyPath = [UIBezierPath bezierPathWithRect:butterflyImageRect];
+</span><span class='line'>    
+</span><span class='line'>    return newButterflyPath;
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在上面的代码中，利用imageView的frame属性创建了一个UIBezierPath，然后将该值返回。
+还记得第3步中创建的平移手势吗。里面有一个action需要实现imagePanned:，下面来看看这个方法的实现：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>- (void)imagePanned:(id)sender
+</span><span class='line'>{
+</span><span class='line'>    if ([sender isKindOfClass:[UIPanGestureRecognizer class]]) {
+</span><span class='line'>        UIPanGestureRecognizer *localSender = sender;
+</span><span class='line'>        
+</span><span class='line'>        if (localSender.state == UIGestureRecognizerStateBegan) {
+</span><span class='line'>            self.gestureStartingPoint = [localSender translationInView:self.textView];
+</span><span class='line'>            self.gestureStartingCenter = self.imageView.center;
+</span><span class='line'>        } else if (localSender.state == UIGestureRecognizerStateChanged) {
+</span><span class='line'>            CGPoint currentPoint = [localSender translationInView:self.textView];
+</span><span class='line'>            
+</span><span class='line'>            CGFloat distanceX = currentPoint.x - self.gestureStartingPoint.x;
+</span><span class='line'>            CGFloat distanceY = currentPoint.y - self.gestureStartingPoint.y;
+</span><span class='line'>            
+</span><span class='line'>            CGPoint newCenter = self.gestureStartingCenter;
+</span><span class='line'>            
+</span><span class='line'>            newCenter.x += distanceX;
+</span><span class='line'>            newCenter.y += distanceY;
+</span><span class='line'>            
+</span><span class='line'>            self.imageView.center = newCenter;
+</span><span class='line'>            
+</span><span class='line'>            self.textView.textContainer.exclusionPaths = @[[self translatedBezierPath]];
+</span><span class='line'>        } else if (localSender.state == UIGestureRecognizerStateEnded) {
+</span><span class='line'>            self.gestureStartingPoint = CGPointZero;
+</span><span class='line'>            self.gestureStartingCenter = CGPointZero;
+</span><span class='line'>        }
+</span><span class='line'>    }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在上面的代码中首先根据平移的距离来设置imageView的位置，然后利用translatedBezierPath方法重新计算了一下排除区域。</p>
+
+<p>至此代码编写完毕，下面来运行程序，看看实际效果。如图11所示：</p>
+
+<p><img src="http://beyondvincent.com/images/2013/11/33.gif" title="图11 运行效果" alt="id11" /></p>
+
+<p><a name="小结" id="06"></a></p>
+
+<h4>小结</h4>
+
+<p>实际上，上面的示例，只是揭秘了Text Kit功能的冰山一角。从iOS7及以后的版本中，Text Kit在UIKit framework里面占据重要的地位，Text Kit在文字处理方面，具有非常强大的功能，并且开发者可以对Text Kit进行定制和扩展。据悉，苹果利用了2年的时间来开发Text Kit，相信这对许多开发者来说都是福音。</p>
+
+<p><a name="推荐Text Kit学习资源" id="07"></a></p>
+
+<h4>推荐Text Kit学习资源</h4>
+
+<p>更多关于Text Kit的学习资料，请参考下面的内容：
+wwdc视频:</p>
+
+<ul>
+<li><a href="https://developer.apple.com/videos/wwdc/2013/?include=210">Introducing Text Kit</a></li>
+<li><a href="https://developer.apple.com/videos/wwdc/2013/?include=220">Advanced Text Layouts and Effects with Text Kit</a></li>
+<li><a href="https://developer.apple.com/videos/wwdc/2013/?include=223">Using Fonts with Text Kit</a></li>
+</ul>
+
+
+<p>苹果官方参考文档：</p>
+
+<ul>
+<li><a href="https://developer.apple.com/library/ios/documentation/StringsTextFonts/Conceptual/TextAndWebiPhoneOS/TextAndWebiPhoneOS.pdf">Text Programming Guide for iOS.pdf</a></li>
+<li>NSLayoutManager Class Reference for iOS.pdf</li>
+<li>NSLayoutManagerDelegate Protocol Reference for iOS.pdf</li>
+<li>NSTextContainer Class Reference for iOS.pdf</li>
+<li>NSTextStorage Class Reference for iOS.pdf</li>
+<li>NSTextStorageDelegate Protocol Reference for iOS.pdf</li>
+</ul>
+
+
+<p>苹果官方示例：</p>
+
+<ul>
+<li>IntroToTextKit</li>
+</ul>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Leo Lee</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-16T23:00:06+08:00" pubdate data-updated="true"></time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/06/10/nstimerde-yong-fa-xia-zai-jin-du-xian-shi/" title="Previous Post: NSTimer的用法-下载进度显示">&laquo; NSTimer的用法-下载进度显示</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/07/09/xcode-5zhong-de-interface-buildergeng-you-li-yu-tuan-dui-xie-zuo-kai-fa/" title="Next Post: Xcode 5中的Interface Builder更有利于团队协作开发">Xcode 5中的Interface Builder更有利于团队协作开发 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+
+<!-- 添加多说 -->
+
+
+  <section>
+    <h1>Comments</h1>
+    <div id="comments" aria-live="polite">
+<!-- Duoshuo Comment BEGIN -->
+<div class="ds-thread"></div>
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"swplzj"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<!-- Duoshuo Comment END -->
+</div>
+  </section>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo">
+<!-- <p>
+	Copyright &copy; 2015 - Leo Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p> -->
+
+
+<p style="text-align:center">
+  <!-- Copyright &copy; 2015 - Leo Lee - -->
+  	Copyright &copy; 2015 - Leo Lee -
+
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255930196'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1255930196%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
+</p>
+
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

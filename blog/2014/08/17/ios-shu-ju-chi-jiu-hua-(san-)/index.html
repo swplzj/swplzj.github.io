@@ -1,0 +1,631 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>iOS 数据持久化（三） - Leo Lee</title>
+  <meta name="author" content="Leo Lee">
+
+  
+  <meta name="description" content="iOS中有五种持久化数据的方式：属性列表、对象归档、NSUserDefaults、SQLite3和Core Data。 NSUserDefaults官方文档介绍： NSUserDefaults类为和默认系统类交互提供了一种编程接口。默认系统允许应用程序去定制其行为，为了符合用户的喜好。举例来说， &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://swplzj.github.io/blog/2014/08/17/ios-shu-ju-chi-jiu-hua-(san-)">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Leo Lee" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+ <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+<!--   
+
+ --></head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <nav id="main-nav" role="navigation">
+<ul class="main-navigation">
+  <li><a href="/" class="nav-link">首页 | Blog</a></li>
+  <li><a href="/blog/archives" class="nav-link">归档 | Archives</a></li>
+  <li><a href="/atom.xml" class="nav-link">订阅 | RSS</a></li>
+  <li><a href="/about" class="nav-link">关于我 | About</a></li>
+</ul>
+
+</nav>
+  
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">iOS 数据持久化（三）</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-08-17T22:03:35+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>iOS中有五种持久化数据的方式：属性列表、对象归档、NSUserDefaults、SQLite3和Core Data。</p>
+
+<h4>NSUserDefaults官方文档介绍：</h4>
+
+<p>NSUserDefaults类为和默认系统类交互提供了一种编程接口。默认系统允许应用程序去定制其行为，为了符合用户的喜好。举例来说，你可以允许用户去决定在应用程序中显示的计量单位或者文档多久会自动保存。应用程序在用户默认数据库中，通过给一系列参数赋值来记录类似的喜好。这些参数被称为默认值，因为它们通常被用于一个程序在启动时或默认状态下的默认工作状态。</p>
+
+<!--more-->
+
+
+<p>在运行时，你可以使用NSUserDefaults对象读取你的应用程序的从一个用户默认数据库使用的默认数据。NSUerDefaults缓存信息，以避免每次获取一个默认值都需要打开用户默认的数据库。同步方法，他会每隔一段时间自动调用，使内存中缓存的信息与用户默认数据库中的信息同步。</p>
+
+<h4>NSUserDefaults</h4>
+
+<p>NSUserDefaults适合存储轻量级的本地数据，比如要保存一个登录界面用户名、密码之类的，NSUserDefaults是比较合适。下次再登录的时候就可以直接从NSUserDefaults里面读取上次登录的信息，</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>//  
+</span><span class='line'>//  AppDelegate.m  
+</span><span class='line'>//  UserDefaultsDemo  
+</span><span class='line'>//  
+</span><span class='line'>//  Created by 李振杰 on 13-11-20.  
+</span><span class='line'>//  Copyright (c) 2013年 swplzj. All rights reserved.  
+</span><span class='line'>//  
+</span><span class='line'>  
+</span><span class='line'>#import "AppDelegate.h"  
+</span><span class='line'>#import "WelcomeViewController.h"  
+</span><span class='line'>#import "RootViewController.h"  
+</span><span class='line'>  
+</span><span class='line'>@implementation AppDelegate  
+</span><span class='line'>  
+</span><span class='line'>- (void)dealloc  
+</span><span class='line'>{  
+</span><span class='line'>    [_window release];  
+</span><span class='line'>    [super dealloc];  
+</span><span class='line'>}  
+</span><span class='line'>  
+</span><span class='line'>- (void)isFirstLaunch  
+</span><span class='line'>{  
+</span><span class='line'>    //还未登录过  
+</span><span class='line'>    if(![[NSUserDefaults standardUserDefaults] boolForKey:@"everLaunched"]){  
+</span><span class='line'>        //设置第二次使用的value值为yes  
+</span><span class='line'>        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"everLaunched"];  
+</span><span class='line'>        //设置第一次使用的value值为yes  
+</span><span class='line'>        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunch"];  
+</span><span class='line'>    }else{  
+</span><span class='line'>        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"firstLaunch"];  
+</span><span class='line'>    }  
+</span><span class='line'>      
+</span><span class='line'>    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]) {  
+</span><span class='line'>        WelcomeViewController *welcomeVC = [[WelcomeViewController alloc] init];  
+</span><span class='line'>        [self.window setRootViewController:welcomeVC];  
+</span><span class='line'>        [welcomeVC release];  
+</span><span class='line'>    }else{  
+</span><span class='line'>        RootViewController *rootVC = [[RootViewController alloc] init];  
+</span><span class='line'>        [self.window setRootViewController:rootVC];  
+</span><span class='line'>        [rootVC release];  
+</span><span class='line'>    }  
+</span><span class='line'>}  
+</span><span class='line'>  
+</span><span class='line'>- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions  
+</span><span class='line'>{  
+</span><span class='line'>    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];  
+</span><span class='line'>    // Override point for customization after application launch.  
+</span><span class='line'>      
+</span><span class='line'>    [self isFirstLaunch];  
+</span><span class='line'>    self.window.backgroundColor = [UIColor whiteColor];  
+</span><span class='line'>    [self.window makeKeyAndVisible];  
+</span><span class='line'>    return YES;  
+</span><span class='line'>}  
+</span><span class='line'>  
+</span><span class='line'>@end  </span></code></pre></td></tr></table></div></figure>
+
+
+<p>NSUserDefaults类为访问普通类型的变量提供便利的方法，这些类型有floats,doubles,integers,booleans和URLs。一个默认的对象必须是一个属性列表，是NSData,NSString,NSNumber,NSDate,NSArray或者NSDictionary的实例。如果你想存储其它类型的对象，你应当将其转换成一个NSData的实例。</p>
+
+<p>下面举例说明保存自定义对象Student到NSUserDefaults中，然后从NSUserDefaults中再读取出数据。</p>
+
+<p>这里面包含了存取一个自定义对象和存取多个自定义对象这两种情况。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
+<span class='line-number'>107</span>
+<span class='line-number'>108</span>
+<span class='line-number'>109</span>
+<span class='line-number'>110</span>
+<span class='line-number'>111</span>
+<span class='line-number'>112</span>
+<span class='line-number'>113</span>
+<span class='line-number'>114</span>
+<span class='line-number'>115</span>
+<span class='line-number'>116</span>
+<span class='line-number'>117</span>
+<span class='line-number'>118</span>
+<span class='line-number'>119</span>
+<span class='line-number'>120</span>
+<span class='line-number'>121</span>
+<span class='line-number'>122</span>
+<span class='line-number'>123</span>
+<span class='line-number'>124</span>
+<span class='line-number'>125</span>
+<span class='line-number'>126</span>
+<span class='line-number'>127</span>
+<span class='line-number'>128</span>
+<span class='line-number'>129</span>
+<span class='line-number'>130</span>
+<span class='line-number'>131</span>
+<span class='line-number'>132</span>
+<span class='line-number'>133</span>
+<span class='line-number'>134</span>
+<span class='line-number'>135</span>
+<span class='line-number'>136</span>
+<span class='line-number'>137</span>
+<span class='line-number'>138</span>
+<span class='line-number'>139</span>
+<span class='line-number'>140</span>
+<span class='line-number'>141</span>
+<span class='line-number'>142</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>//  
+</span><span class='line'>//  AppDelegate.m  
+</span><span class='line'>//  UserDefaultsDemo  
+</span><span class='line'>//  
+</span><span class='line'>//  Created by 李振杰 on 13-11-20.  
+</span><span class='line'>//  Copyright (c) 2013年 swplzj. All rights reserved.  
+</span><span class='line'>//  
+</span><span class='line'>  
+</span><span class='line'>#import "AppDelegate.h"  
+</span><span class='line'>#import "WelcomeViewController.h"  
+</span><span class='line'>#import "RootViewController.h"  
+</span><span class='line'>#import "Student.h"  
+</span><span class='line'>  
+</span><span class='line'>@implementation AppDelegate  
+</span><span class='line'>  
+</span><span class='line'>- (void)dealloc  
+</span><span class='line'>{  
+</span><span class='line'>    [_window release];  
+</span><span class='line'>    [super dealloc];  
+</span><span class='line'>}  
+</span><span class='line'>  
+</span><span class='line'>- (void)isFirstLaunch  
+</span><span class='line'>{  
+</span><span class='line'>    //还未登录过  
+</span><span class='line'>    if(![[NSUserDefaults standardUserDefaults] boolForKey:@"everLaunched"]){  
+</span><span class='line'>        //设置第二次使用的value值为yes  
+</span><span class='line'>        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"everLaunched"];  
+</span><span class='line'>        //设置第一次使用的value值为yes  
+</span><span class='line'>        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunch"];  
+</span><span class='line'>        Student *stu = [[Student alloc] init];  
+</span><span class='line'>        NSLog(@"stu.name = %@\nstu.age = %d\nstu.height = %f\n", stu.name, [stu.age integerValue], [stu.height floatValue]);  
+</span><span class='line'>  
+</span><span class='line'>        [self saveCustomObjectToUerDefaults:stu];  
+</span><span class='line'>        [stu release];  
+</span><span class='line'>    }else{  
+</span><span class='line'>        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"firstLaunch"];  
+</span><span class='line'>        [self saveManyStudentInfo];  
+</span><span class='line'>    }  
+</span><span class='line'>      
+</span><span class='line'>    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]) {  
+</span><span class='line'>        WelcomeViewController *welcomeVC = [[WelcomeViewController alloc] init];  
+</span><span class='line'>        [self.window setRootViewController:welcomeVC];  
+</span><span class='line'>        [welcomeVC release];  
+</span><span class='line'>    }else{  
+</span><span class='line'>        RootViewController *rootVC = [[RootViewController alloc] init];  
+</span><span class='line'>        [self.window setRootViewController:rootVC];  
+</span><span class='line'>        [rootVC release];  
+</span><span class='line'>    }  
+</span><span class='line'>}  
+</span><span class='line'>  
+</span><span class='line'>//保存多个自定义对象Student到NSUserDefaults中  
+</span><span class='line'>- (void)saveManyStudentInfo  
+</span><span class='line'>{  
+</span><span class='line'>    NSMutableArray *stuArray = [[NSMutableArray alloc] init];  
+</span><span class='line'>    for (int i = 0; i &lt; 10; i++) {  
+</span><span class='line'>        Student *stu = [[Student alloc] init];  
+</span><span class='line'>        stu.name = [NSString stringWithFormat:@"Stu%d", i+1];  
+</span><span class='line'>        stu.age = [NSNumber numberWithInteger:i+1];  
+</span><span class='line'>        stu.height = [NSNumber numberWithFloat:170.3 + i];  
+</span><span class='line'>        [stuArray addObject:stu];  
+</span><span class='line'>        [stu release];  
+</span><span class='line'>    }  
+</span><span class='line'>    [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:stuArray] forKey:@"students"];  
+</span><span class='line'>}  
+</span><span class='line'>  
+</span><span class='line'>//从nsuserDefaults加载多个自定义对象Student  
+</span><span class='line'>- (NSArray *)loadManyStudentWithKey:(NSString *)key  
+</span><span class='line'>{  
+</span><span class='line'>      
+</span><span class='line'>    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"students"];  
+</span><span class='line'>    NSArray *stuArray = [NSKeyedUnarchiver unarchiveObjectWithData:data];  
+</span><span class='line'>    return [stuArray retain];  
+</span><span class='line'>}  
+</span><span class='line'>  
+</span><span class='line'>//保存自定义的对象到NSUserDefaults中  
+</span><span class='line'>- (void)saveCustomObjectToUerDefaults:(Student *)student  
+</span><span class='line'>{  
+</span><span class='line'>    NSData *encodedCustomObject = [NSKeyedArchiver archivedDataWithRootObject:student];  
+</span><span class='line'>    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];  
+</span><span class='line'>    [userDefaults setObject:encodedCustomObject forKey:@"student"];  
+</span><span class='line'>    [userDefaults synchronize];  
+</span><span class='line'>}  
+</span><span class='line'>  
+</span><span class='line'>//从NSuserDefaults中加载自定义的对象  
+</span><span class='line'>- (Student *)loadCustomObjectWithKey:(NSString *)key  
+</span><span class='line'>{  
+</span><span class='line'>    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];  
+</span><span class='line'>    NSData *stuData = [userDefaults objectForKey:key];  
+</span><span class='line'>    Student *student = [NSKeyedUnarchiver unarchiveObjectWithData:stuData];  
+</span><span class='line'>      
+</span><span class='line'>    return student;  
+</span><span class='line'>}  
+</span><span class='line'>  
+</span><span class='line'>- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions  
+</span><span class='line'>{  
+</span><span class='line'>    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];  
+</span><span class='line'>    // Override point for customization after application launch.  
+</span><span class='line'>  
+</span><span class='line'>    [self isFirstLaunch];  
+</span><span class='line'>      
+</span><span class='line'>    Student *stu = [self loadCustomObjectWithKey:@"student"];  
+</span><span class='line'>    NSLog(@"stu.name = %@\nstu.age = %d\nstu.height = %f\n", stu.name, [stu.age integerValue], [stu.height floatValue]);  
+</span><span class='line'>      
+</span><span class='line'>    NSArray *arr = [self loadManyStudentWithKey:@"students"];  
+</span><span class='line'>      
+</span><span class='line'>    for (Student *student in arr) {  
+</span><span class='line'>        NSLog(@"stu.name = %@\nstu.age = %d\nstu.height = %f\n", student.name, [student.age integerValue], [student.height floatValue]);  
+</span><span class='line'>    }  
+</span><span class='line'>      
+</span><span class='line'>    self.window.backgroundColor = [UIColor whiteColor];  
+</span><span class='line'>    [self.window makeKeyAndVisible];  
+</span><span class='line'>    return YES;  
+</span><span class='line'>}  
+</span><span class='line'>  
+</span><span class='line'>- (void)applicationWillResignActive:(UIApplication *)application  
+</span><span class='line'>{  
+</span><span class='line'>    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.  
+</span><span class='line'>    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.  
+</span><span class='line'>}  
+</span><span class='line'>  
+</span><span class='line'>- (void)applicationDidEnterBackground:(UIApplication *)application  
+</span><span class='line'>{  
+</span><span class='line'>    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.   
+</span><span class='line'>    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.  
+</span><span class='line'>}  
+</span><span class='line'>  
+</span><span class='line'>- (void)applicationWillEnterForeground:(UIApplication *)application  
+</span><span class='line'>{  
+</span><span class='line'>    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.  
+</span><span class='line'>}  
+</span><span class='line'>  
+</span><span class='line'>- (void)applicationDidBecomeActive:(UIApplication *)application  
+</span><span class='line'>{  
+</span><span class='line'>    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.  
+</span><span class='line'>}  
+</span><span class='line'>  
+</span><span class='line'>- (void)applicationWillTerminate:(UIApplication *)application  
+</span><span class='line'>{  
+</span><span class='line'>    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.  
+</span><span class='line'>}  
+</span><span class='line'>  
+</span><span class='line'>@end  </span></code></pre></td></tr></table></div></figure>
+
+
+<p>从NSUserDefaults返回的值都是不可变的。即使你设置了一个可变的值。例如，你设置了一个可变的字符串作为“MyStringDefault”的值，你用stringForKey:获取到的字符串将是不可变的。</p>
+
+<p>默认数据库是为用户自动创建的。NSUserDefaults目前不支持per-host的偏好(设置)。要做到这一点，你必须使用CFPreferences API.然而，NSUserDefaults正确的读取per-host的偏好，所以你可以安全地混合CFPreferences与NSUserDefaults的代码。</p>
+
+<p>如果你的应用程序支持管理的环境，你可以使用一个NSUserDefaults对象去决定哪些对用户有利的喜好是由管理员管理的。受管理的环境中对应的计算机实验室或教室管理员或教师肯能需要以一种特定的方式配置系统。在这种情况下，教师会建立一组默认的偏好设置并且强制对用户使用。如果以这种方式管理偏好设置，应用程序应该防止用户编辑，禁用任何适当的控制。</p>
+
+<p>NSUserDefaults类是线程安全的。</p>
+
+<h4>NSURL的持久性和文件引用的URLs</h4>
+
+<p>当使用NSURL实例参考文件内的过程中，重要的是要基于位置的跟踪与文件系统的身份跟踪之间的区别。当坚持一个NSURL，你应该考虑采取这种行为。如果你的应用程序跟踪位于其身份的资源，那么当用户移动文件的时候你可以发觉到，那么你应该明确的解NSURL的书签数据或者对文件引用的URL进行编码。</p>
+
+<p>如果你想通过文件的引用跟踪文件，但是当解析时你需要显式控制，你需要关心的把书签数据写到NSUserDefaults中，而不是依靠[NSUserDefaults setURL:forKey:]，当你知道你的应用程序将能够处理潜在的I/O所需的用户界面交互时允许你调用</p>
+
+<pre><code>[NSURL URLByResolvingBookmarkData:options:relativeToURL:bookmarkDataIsStale:error:]
+</code></pre>
+
+<h4>沙盒注意事项</h4>
+
+<p>一个沙盒应用不能访问和修改其他应用的偏好设置。例如，如果你使用addSuiteNamed:方法添加另一个应用程序，但是你不会获得该应用程序的偏好设置。</p>
+
+<p>尝试去访问或者修改另一个应用的偏好设置不会导致错误，但是当你你做的时候，世纪上OS X读取和写入位于应用程序容器内的文件，而不是其他应用程序的偏好设置文件。</p>
+
+<p>这就是使用NsuserDefaults来是数据持久化的，你可以<a href="http://download.csdn.net/detail/swplzj/6587287">点击这里来下载NSUserDefaultsDemo</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Leo Lee</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-08-17T22:03:35+08:00" pubdate data-updated="true"></time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/08/12/ios-shu-ju-chi-jiu-hua-(er-)/" title="Previous Post: iOS 数据持久化（二）">&laquo; iOS 数据持久化（二）</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/08/29/ios-shu-ju-chi-jiu-hua-si/" title="Next Post: iOS 数据持久化(四)">iOS 数据持久化(四) &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+
+<!-- 添加多说 -->
+
+
+  <section>
+    <h1>Comments</h1>
+    <div id="comments" aria-live="polite">
+<!-- Duoshuo Comment BEGIN -->
+<div class="ds-thread"></div>
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"swplzj"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<!-- Duoshuo Comment END -->
+</div>
+  </section>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo">
+<!-- <p>
+	Copyright &copy; 2015 - Leo Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p> -->
+
+
+<p style="text-align:center">
+  <!-- Copyright &copy; 2015 - Leo Lee - -->
+  	Copyright &copy; 2015 - Leo Lee -
+
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255930196'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1255930196%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
+</p>
+
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

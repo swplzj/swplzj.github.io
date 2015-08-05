@@ -1,0 +1,390 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Objective-C中的Selector和SEL - Leo Lee</title>
+  <meta name="author" content="Leo Lee">
+
+  
+  <meta name="description" content="Objective-C中Selector基本概念和操作 简而言之，你可以理解 @selector()就是取类方法的编号,他的行为基本可以等同C语言的中函数指针,只不过C语言中，可以把函数名直接赋给一个函数指针，而Objective-C的类不能直接应用函数指针，这样只能做一个@ &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://swplzj.github.io/blog/2015/01/07/objective-czhong-de-selectorhe-sel">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Leo Lee" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+ <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+<!--   
+
+ --></head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <nav id="main-nav" role="navigation">
+<ul class="main-navigation">
+  <li><a href="/" class="nav-link">首页 | Blog</a></li>
+  <li><a href="/blog/archives" class="nav-link">归档 | Archives</a></li>
+  <li><a href="/atom.xml" class="nav-link">订阅 | RSS</a></li>
+  <li><a href="/about" class="nav-link">关于我 | About</a></li>
+</ul>
+
+</nav>
+  
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Objective-C中的Selector和SEL</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-01-07T10:32:05+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h4>Objective-C中Selector基本概念和操作</h4>
+
+<p>简而言之，你可以理解 @selector()就是取类方法的编号,他的行为基本可以等同C语言的中函数指针,只不过C语言中，可以把函数名直接赋给一个函数指针，而Objective-C的类不能直接应用函数指针，这样只能做一个@selector语法来取.</p>
+
+<!--more-->
+
+
+<p></p>
+
+<p>它的结果是一个SEL类型。这个类型本质是类方法的编号(函数地址)?因此我们有如下代码。</p>
+
+<h5>一、取得selector值.</h5>
+
+<p>C函数指针</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>int add(int val)  
+</span><span class='line'>{  
+</span><span class='line'>  return val+1;  
+</span><span class='line'>}  
+</span><span class='line'>int (* c_func)(int val); //定义一个函数指针变量  
+</span><span class='line'>_func = add ;  //把函数addr地址直接赋给c_func </span></code></pre></td></tr></table></div></figure>
+
+
+<p>Objective-C的选择器,</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>@interface foo  
+</span><span class='line'>-(int)add:int val;  
+</span><span class='line'>@end  
+</span><span class='line'> 
+</span><span class='line'>SEL class_func ; //定义一个类方法指针  
+</span><span class='line'>class_func = @selector(add:int); </span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>注意:</code></p>
+
+<ol>
+<li>@selector是查找当前类的方法，而[object @selector(方法名:方法参数..) ] ;是取object对应类的相庆方法;</li>
+<li>查找类方法时，除了方法名,方法参数也查询条件之一.</li>
+<li>可以用字符串来找方法 SEL　变量名　=　NSSelectorFromString(方法名字的字符串);</li>
+<li>可以运行中用SEL变量反向查出方法名字字符串</li>
+</ol>
+
+
+<p>NSString　*变量名　=　NSStringFromSelector(SEL参数);</p>
+
+<h5>二、执行selector值.</h5>
+
+<p>取得相庆值后，怎么处理SEL值呢，这一点仍然与函数指针一样，就是执行它</p>
+
+<p>函数指针执行，（以下有几种等效形式）</p>
+
+<ul>
+<li>*c_func(10);</li>
+<li>c_func(10);</li>
+<li>SEL变量的执行.用performSelecor方法来执行.</li>
+<li>[对象　performSelector:SEL变量　withObject:参数1　withObject:参数2];</li>
+</ul>
+
+
+<h5>三.selector的应用场合</h5>
+
+<p>selector本质是跟C的回调函数一样。主要用于两个对象之间进行松耦合的通讯.这种方法很多开发环境用到。比如GTK，Delphi.基本上整个Cocoa库之间对象，控制之间通讯都是在这个基础构建的。</p>
+
+<h4>SEL</h4>
+
+<p>在Objective-C中，SEL是选择器（selector）的一个类型。选择器就是指向方法的一个指针，读者可以简单理解为程序运行到这里就会执行指定的方法，可以这样定义一个选择器：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>SEL action = [button action]; </span></code></pre></td></tr></table></div></figure>
+
+
+<p>我们这样使用一个选择器，下面的选择器都叫做action：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[Foo action]  
+</span><span class='line'>[Bar action] </span></code></pre></td></tr></table></div></figure>
+
+
+<p>在Target-Action 模式（Cocoa 程序中的一种常用模式）中：Target 指定了一个类，Action指定一个方法。在一个对象上设置Action就是通过选择器完成的：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>-（void）setTarget:（id）target;  
+</span><span class='line'>-（void）setAction:（SEL）action; </span></code></pre></td></tr></table></div></figure>
+
+
+<p>下述语句设置了一个button对象上的Action为“@selector（start:）”，即它调用start方法：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[button setAction:@selector（start:）]; </span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果你的方法上有两个参数，比如：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>-（void）setName:（NSString *）name age:（int）age; </span></code></pre></td></tr></table></div></figure>
+
+
+<p>那么，你的选择器应该这样书写：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>SEL sel = @selector（setName:age:）; </span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果方法不存在的话，调用该方法的应用可能会异常中止。所以，需要使用respondsToSelector 方法来判断该对象是否存在对应的方法，使用performSelector:withObject:方法来调用选择器：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>SEL sel = @selector (start:) ; // 指定action  
+</span><span class='line'>if ([obj respondsToSelector:sel]) { //判断该对象是否有相应的方法  
+</span><span class='line'>[obj performSelector:sel withObject:self]; //调用选择器方法  
+</span><span class='line'>} </span></code></pre></td></tr></table></div></figure>
+
+
+<p>下面来看一个应用选择器的实例。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#import &lt;Foundation/Foundation.h&gt; 
+</span><span class='line'>@interface ClassA : NSObject {  
+</span><span class='line'>}  
+</span><span class='line'>- (void) print;  
+</span><span class='line'>@end  
+</span><span class='line'>@implementation ClassA  
+</span><span class='line'>- (void) print{  
+</span><span class='line'>NSLog (@"I'm ClassA.") ;  
+</span><span class='line'>}  
+</span><span class='line'>@end  
+</span><span class='line'>int main (int argc, const char * argv[]) {  
+</span><span class='line'>NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];  
+</span><span class='line'>SEL sel = @selector (print) ;  
+</span><span class='line'>ClassA *classA = [[ClassA alloc]init];  
+</span><span class='line'>[classA performSelector:sel withObject:nil]; //调用选择器指定的方法  
+</span><span class='line'>[pool drain];  
+</span><span class='line'>return 0;  
+</span><span class='line'>} </span></code></pre></td></tr></table></div></figure>
+
+
+<p>【程序结果】</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>I'm ClassA. </span></code></pre></td></tr></table></div></figure>
+
+
+<p>下面解释一下这段代码，读者有可能看不明白，因为到目前为止并没有讲述类相关的知识。读者只需要了解上述例子中选择器的用法即可，关于类的知识，会在后面的章节详细阐述。</p>
+
+<p>代码首先创建了一个名字叫ClassA 的类，它只包含一个方法print。在随后的实现文件中，我们实现了这个方法：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>- (void) print{  
+</span><span class='line'>NSLog (@"I'm ClassA.") ;  
+</span><span class='line'>} </span></code></pre></td></tr></table></div></figure>
+
+
+<p>读者不难看出，这个方法仅仅是打印到控制台上一句话。在接下来的main方法中，定义了一个选择器sel，它指向的是一个名叫print 的方法。我们并不知道这个方法是哪个类的，因为具体的信息是在运行期间系统自动帮我们判断的。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>SEL sel = @selector (print) ; </span></code></pre></td></tr></table></div></figure>
+
+
+<p>随后构建了一个对象（读者不用拘泥于语法，我们会在后面的章节详细阐述），并调用这个对象performSelector:withObject:的方法。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ClassA *classA = [[ClassA alloc]init];  
+</span><span class='line'>[classA performSelector:sel withObject:nil]; </span></code></pre></td></tr></table></div></figure>
+
+
+<p>这时候，系统就会自动调用classA对象的print方法，最终得到程序运行结果。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Leo Lee</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-01-07T10:32:05+08:00" pubdate data-updated="true"></time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/12/14/shi-yong-shen-qi-de-ponydebugger-tiao-shi-ios-ying-yong/" title="Previous Post: 使用神奇的PONYDEBUGGER调试iOS应用">&laquo; 使用神奇的PONYDEBUGGER调试iOS应用</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2015/01/16/valueforkeypathde-shi-yong-zong-jie/" title="Next Post: valueForKeyPath的使用总结">valueForKeyPath的使用总结 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+
+<!-- 添加多说 -->
+
+
+  <section>
+    <h1>Comments</h1>
+    <div id="comments" aria-live="polite">
+<!-- Duoshuo Comment BEGIN -->
+<div class="ds-thread"></div>
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"swplzj"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<!-- Duoshuo Comment END -->
+</div>
+  </section>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo">
+<!-- <p>
+	Copyright &copy; 2015 - Leo Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p> -->
+
+
+<p style="text-align:center">
+  <!-- Copyright &copy; 2015 - Leo Lee - -->
+  	Copyright &copy; 2015 - Leo Lee -
+
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255930196'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1255930196%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
+</p>
+
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

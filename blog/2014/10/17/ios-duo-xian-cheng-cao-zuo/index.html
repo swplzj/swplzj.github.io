@@ -1,0 +1,313 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>iOS多线程操作：锁 互斥 同步 - Leo Lee</title>
+  <meta name="author" content="Leo Lee">
+
+  
+  <meta name="description" content="在iOS中有几种方法来解决多线程访问同一个内存地址的互斥同步问题，本文简单介绍： 方法一，@synchronized(id anObject),(最简单的方法) 会自动对参数对象加锁，保证临界区内的代码线程安全 1
+2
+3
+4
+5
+@synchronized(self) { // 这段代码对其他 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://swplzj.github.io/blog/2014/10/17/ios-duo-xian-cheng-cao-zuo">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Leo Lee" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+ <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+<!--   
+
+ --></head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <nav id="main-nav" role="navigation">
+<ul class="main-navigation">
+  <li><a href="/" class="nav-link">首页 | Blog</a></li>
+  <li><a href="/blog/archives" class="nav-link">归档 | Archives</a></li>
+  <li><a href="/atom.xml" class="nav-link">订阅 | RSS</a></li>
+  <li><a href="/about" class="nav-link">关于我 | About</a></li>
+</ul>
+
+</nav>
+  
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">iOS多线程操作：锁 互斥 同步</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-10-17T23:03:45+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>在iOS中有几种方法来解决多线程访问同一个内存地址的互斥同步问题，本文简单介绍：</p>
+
+<h5>方法一，@synchronized(id anObject),(最简单的方法)</h5>
+
+<p>会自动对参数对象加锁，保证临界区内的代码线程安全</p>
+
+<!--more-->
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>@synchronized(self)  
+</span><span class='line'>{  
+</span><span class='line'>     // 这段代码对其他 @synchronized(self) 都是互斥的         
+</span><span class='line'>     // self 指向同一个对象  
+</span><span class='line'>}   </span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<h5>方法二，NSLock</h5>
+
+<p>NSLock对象实现了NSLocking protocol，包含几个方法：
+lock，加锁
+unlock，解锁
+tryLock，尝试加锁，如果失败了，并不会阻塞线程，只是立即返回NO
+lockBeforeDate:，在指定的date之前暂时阻塞线程（如果没有获取锁的话），如果到期还没有获取锁，则线程被唤醒，函数立即返回NO
+比如：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>NSLock *theLock = [[NSLock alloc] init];   
+</span><span class='line'>if ([thelock lock])   
+</span><span class='line'>{  
+</span><span class='line'>   //do something here  
+</span><span class='line'>   [theLock unlock];   
+</span><span class='line'>}   </span></code></pre></td></tr></table></div></figure>
+
+
+<h5>方法三，NSRecursiveLock，递归锁</h5>
+
+<p>NSRecursiveLock，多次调用不会阻塞已获取该锁的线程。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> NSRecursiveLock *theLock = [[NSRecursiveLock alloc] init];   
+</span><span class='line'> void MyRecursiveFunction(int value)   
+</span><span class='line'>{   
+</span><span class='line'>  [theLock lock];   
+</span><span class='line'>  if (value != 0)   
+</span><span class='line'>  &lt;span style=“font-size:14px;”&gt; &lt;/span&gt;{   
+</span><span class='line'>    –value;   
+</span><span class='line'>    MyRecursiveFunction(value);   
+</span><span class='line'> }  
+</span><span class='line'>   [theLock unlock];   
+</span><span class='line'>}   
+</span><span class='line'> MyRecursiveFunction(5);  </span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<h5>方法四，NSConditionLock，条件锁</h5>
+
+<p>NSConditionLock，条件锁，可以设置条件</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>//公共部分  
+</span><span class='line'>id condLock = [[NSConditionLock alloc] initWithCondition:NO_DATA];       
+</span><span class='line'> //线程一，生产者  
+</span><span class='line'> while(true) {   
+</span><span class='line'>        [condLock lockWhenCondition:NO_DATA];   
+</span><span class='line'>        //生产数据  
+</span><span class='line'>        [condLock unlockWithCondition:HAS_DATA];   
+</span><span class='line'>}     
+</span><span class='line'> //线程二，消费者  
+</span><span class='line'> while (true) {   
+</span><span class='line'>        [condLock lockWhenCondition:HAS_DATA];   
+</span><span class='line'>        //消费  
+</span><span class='line'>        [condLock unlockWithCondition:NO_DATA];   
+</span><span class='line'>}  </span></code></pre></td></tr></table></div></figure>
+
+
+<h5>方法五，NSDistributedLock，分布锁</h5>
+
+<p>NSDistributedLock，分布锁，文件方式实现，可以跨进程
+用tryLock方法获取锁。
+用unlock方法释放锁。
+如果一个获取锁的进程在释放锁之前挂了，那么锁就一直得不到释放了，此时可以通过breakLock强行获取锁。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Leo Lee</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-10-17T23:03:45+08:00" pubdate data-updated="true"></time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/09/24/xcodezhong-xi-tong-ku-wen-jian-libz-dot-dylibde-zuo-yong/" title="Previous Post: Xcode中系统库文件libz.dylib的作用">&laquo; Xcode中系统库文件libz.dylib的作用</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/10/25/yi-dong-app-jia-gou-she-ji/" title="Next Post: 移动App架构设计">移动App架构设计 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+
+<!-- 添加多说 -->
+
+
+  <section>
+    <h1>Comments</h1>
+    <div id="comments" aria-live="polite">
+<!-- Duoshuo Comment BEGIN -->
+<div class="ds-thread"></div>
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"swplzj"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<!-- Duoshuo Comment END -->
+</div>
+  </section>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo">
+<!-- <p>
+	Copyright &copy; 2015 - Leo Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p> -->
+
+
+<p style="text-align:center">
+  <!-- Copyright &copy; 2015 - Leo Lee - -->
+  	Copyright &copy; 2015 - Leo Lee -
+
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255930196'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1255930196%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
+</p>
+
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
