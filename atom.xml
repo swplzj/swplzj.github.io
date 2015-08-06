@@ -4,7 +4,7 @@
     <title><![CDATA[Leo Lee]]></title>
     <link href="http://swplzj.github.io/atom.xml" rel="self"/>
     <link href="http://swplzj.github.io/"/>
-    <updated>2015-08-06T16:48:27+08:00</updated>
+    <updated>2015-08-06T16:51:45+08:00</updated>
     <id>http://swplzj.github.io/</id>
     <author>
         <name><![CDATA[Leo Lee]]></name>
@@ -14,7 +14,7 @@
     
     
     <entry>
-        <title type="html"><![CDATA[Mac Navicat Premium 11.0.16 破解记录]]></title>
+        <title type="html"><![CDATA[Mac - Navicat Premium 11.0.16 破解记录]]></title>
         <link href="http://swplzj.github.io/blog/2015/08/06/mac-navicat-premium-11-dot-0-16-po-jie-ji-lu/"/>
         <updated>2015-08-06T16:13:08+08:00</updated>
         <id>http://swplzj.github.io/blog/2015/08/06/mac-navicat-premium-11-dot-0-16-po-jie-ji-lu</id>
@@ -75,11 +75,7 @@
         <link href="http://swplzj.github.io/blog/2015/08/06/objective-c-gui-fan-zheng-li/"/>
         <updated>2015-08-06T09:54:19+08:00</updated>
         <id>http://swplzj.github.io/blog/2015/08/06/objective-c-gui-fan-zheng-li</id>
-        <content type="html"><![CDATA[<h1>移动团队 Objective-C 规范指南</h1>
-
-<hr />
-
-<p>这份规范参考了一些主流公司的代码规范，也结合自己实战中的操作整理而成，也是我们 iOS 团队的代码约定，为了减少项目维护成本，大家可以参照。</p>
+        <content type="html"><![CDATA[<p>这份规范参考了一些主流公司的代码规范，也结合自己实战中的操作整理而成，也是我们 iOS 团队的代码约定，为了减少项目维护成本，大家可以参照。</p>
 
 <h2>目录</h2>
 
