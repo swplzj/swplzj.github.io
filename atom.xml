@@ -4,7 +4,7 @@
     <title><![CDATA[Leo Lee]]></title>
     <link href="http://swplzj.github.io/atom.xml" rel="self"/>
     <link href="http://swplzj.github.io/"/>
-    <updated>2015-08-13T12:26:22+08:00</updated>
+    <updated>2015-08-14T15:54:45+08:00</updated>
     <id>http://swplzj.github.io/</id>
     <author>
         <name><![CDATA[Leo Lee]]></name>
@@ -12,6 +12,442 @@
     </author>
     <generator uri="http://octopress.org/">Octopress</generator>
     
+    
+    <entry>
+        <title type="html"><![CDATA[Bash - 趣味Shell]]></title>
+        <link href="http://swplzj.github.io/blog/2015/08/14/bash-qu-wei-shell/"/>
+        <updated>2015-08-14T11:27:23+08:00</updated>
+        <id>http://swplzj.github.io/blog/2015/08/14/bash-qu-wei-shell</id>
+        <content type="html"><![CDATA[<p>进来抽闲玩了一下<code>Shell</code>，发现几个比较有意思的，记录一下。</p>
+
+<ul>
+<li>终端彩虹字：<code>lolcat</code></li>
+<li>图形化文字：<code>figlet</code></li>
+<li>幸运人生格言：<code>fortune</code></li>
+<li><code>ASCII</code>牛说：<code>Cowsay</code></li>
+<li>黑客帝国中瀑布流文字：<code>cmatrix</code></li>
+<li>写在最后</li>
+</ul>
+
+
+<p>很有趣的 <code>Shell</code>， 值得一试；</p>
+
+<!--more-->
+
+
+<h3>lolcat</h3>
+
+<p> <strong>安装</strong></p>
+
+<p>由于 <code>Lolcat</code> 是一个 <code>ruby gem</code> 程序，所以在你的系统中必须安装有最新版本的 <code>ruby</code>。安装<code>ruby</code>过程不再详述；</p>
+
+<p>使用下面命令进行安装<code>lolcat</code></p>
+
+<pre><code>gem install lolcat
+</code></pre>
+
+<p><img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2015_08_14_lolcat.png"></p>
+
+<p><strong>使用</strong></p>
+
+<p><code>lolcat</code>作用是在终端中为文本添加彩虹般的色彩。安装完成之后就可以使用了。</p>
+
+<p>首先看一下<code>lolcat</code>的帮助文档</p>
+
+<pre><code>lolcat --help
+</code></pre>
+
+<p><img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2015_08_14_lolcat_help.png"></p>
+
+<p>接着查看日历</p>
+
+<pre><code>cal | lolcat
+</code></pre>
+
+<p><img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2015_08_14_lolcat_cal.png"></p>
+
+<p><strong>高级技巧</strong></p>
+
+<p>我们还可以给文本赋予彩虹颜色的动画:</p>
+
+<pre><code>echo Hello World | lolcat -a -d 500
+</code></pre>
+
+<p><img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2015_08_14_lolcat_echo.gif"></p>
+
+<p><strong>别名技巧:<code>alias</code></strong></p>
+
+<p>我们发现，假如一个经常使用的打印命令，比如<code>ls</code>，想打印彩虹色彩，我们每次都需要在敲完<code>ls</code>之后再加上<code>lolcat</code>，也就是<code>ls | lolcat</code>，这样很不方便，这时我们就可以想到别名，<code>alias</code>。我们可以设定一些别名：</p>
+
+<pre><code>alias ls="ls | lolcat"
+</code></pre>
+
+<p>但是，有一个问题来了，只要把终端这个标签关闭掉或者重启终端，我们设置的别名就失效了，也就是说别名只针对当前标签页有效。所以，接下来我们要设置<code>alias</code>永久有效，我们输入命令<code>cd ~</code>到用户主目录，找到<code>.bash_profile</code>文件，如果没有，我们创建一个</p>
+
+<pre><code>touch .bash_profile
+</code></pre>
+
+<p>然后在<code>.bash_profile</code>中加入我们的别名</p>
+
+<pre><code>alias ls="ls | lolcat"  
+</code></pre>
+
+<p>保存，关闭，重启<code>Terminal</code>，看一下效果：</p>
+
+<p><img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2015_08_14_lolcat_ls.png"></p>
+
+<p><strong>BTW</strong></p>
+
+<p>假如你的终端没有设置配色方案，可以选择自带的主题：<code>Silver Aerogel</code>，设置方法:找到<code>.bash_profile</code>文件，添加如下代码：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># for color
+</span><span class='line'>export CLICOLOR=1
+</span><span class='line'># \h:\W \u\$
+</span><span class='line'>export PS1='\[\033[01;33m\]\u@\h\[\033[01;31m\] \W\$\[\033[00m\] '</span></code></pre></td></tr></table></div></figure>
+
+
+<p>保存，重启终端，就可以看到漂亮的配色方案了。</p>
+
+<h3>figlet</h3>
+
+<p><strong>安装</strong></p>
+
+<p>我们使用 <code>Homebrew</code>来安装此插件，</p>
+
+<pre><code>brew install figlet
+</code></pre>
+
+<p><img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2015_08_14_figlet_install.png"></p>
+
+<p><strong>使用</strong></p>
+
+<ul>
+<li>figlet</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>lizhenjie@localhost ~$ figlet Leo Lee
+</span><span class='line'> _                 _              
+</span><span class='line'>| |    ___  ___   | |    ___  ___ 
+</span><span class='line'>| |   / _ \/ _ \  | |   / _ \/ _ \
+</span><span class='line'>| |__|  __/ (_) | | |__|  __/  __/
+</span><span class='line'>|_____\___|\___/  |_____\___|\___|</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>figlist：列出所有字体名称</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>lizhenjie@localhost ~$ figlist
+</span><span class='line'>Default font: standard
+</span><span class='line'>Font directory: /usr/local/Cellar/figlet/2.2.5/share/figlet/fonts
+</span><span class='line'>Figlet fonts in this directory:
+</span><span class='line'>3-d
+</span><span class='line'>3x5
+</span><span class='line'>5lineoblique
+</span><span class='line'>acrobatic
+</span><span class='line'>alligator
+</span><span class='line'>alligator2
+</span><span class='line'>alphabet
+</span><span class='line'>...</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>showfigfonts：展示每个字体效果！</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>lizhenjie@localhost ~$ showfigfonts
+</span><span class='line'>3-d :
+</span><span class='line'>  ****             **
+</span><span class='line'> */// *           /**
+</span><span class='line'>/    /*           /**
+</span><span class='line'>   ***  *****  ******
+</span><span class='line'>  /// */////  **///**
+</span><span class='line'> *   /*      /**  /**
+</span><span class='line'>/ ****       //******
+</span><span class='line'> ////         ////// 
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>3x5 :
+</span><span class='line'>            
+</span><span class='line'>###     ### 
+</span><span class='line'>  # # # #   
+</span><span class='line'> ##  #  ### 
+</span><span class='line'>  # # #   # 
+</span><span class='line'>###     ### 
+</span><span class='line'>...</span></code></pre></td></tr></table></div></figure>
+
+
+<p>只能列两种字体了，太多了。</p>
+
+<p>当然，可以结合上面的 <code>lolcat</code>使用更炫哦。</p>
+
+<p><img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2015_08_14_figlet_lolcat.png"></p>
+
+<p><strong>Dashboard Figlet</strong></p>
+
+<p>安装过程中，意外发现<code>Figlet</code>也有<code>Dashboard</code>中的插件，可以到<a href="http://www.apple.com/downloads/dashboard/email_messaging/figletwidget.html">苹果官网下载</a>，使用起来也是非常方便的。</p>
+
+<p><img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2015_08_14_lolcat_dashboard.png"></p>
+
+<h3>fortune</h3>
+
+<p><strong>安装</strong></p>
+
+<pre><code>brew install fortune
+</code></pre>
+
+<p><strong>用法</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>lizhenjie@localhost ~$ fortune
+</span><span class='line'>"To take a significant step forward, you must make a series of finite 
+</span><span class='line'>improvements."
+</span><span class='line'>-- Donald J. Atwood, General Motors</span></code></pre></td></tr></table></div></figure>
+
+
+<p>结合<code>lolcat</code>使用：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>lizhenjie@localhost ~$ fortune | lolcat</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2015_08_14_fortune_lolcat.png"></p>
+
+<h3>Cowsay</h3>
+
+<p><strong>安装</strong></p>
+
+<pre><code>brew install cowsay
+</code></pre>
+
+<p><strong>用法</strong></p>
+
+<ul>
+<li><code>cowsay</code>可以输出一个在终端用ASCII码组成的小牛，这个小牛会说出你想要它说的话。</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>lizhenjie@localhost ~$ cowsay God help them who help themselves!
+</span><span class='line'> ____________________________________ 
+</span><span class='line'>&lt; God help them who help themselves! &gt;
+</span><span class='line'> ------------------------------------ 
+</span><span class='line'>        \   ^__^
+</span><span class='line'>         \  (oo)\_______
+</span><span class='line'>            (__)\       )\/\
+</span><span class='line'>                ||----w |
+</span><span class='line'>                ||     ||
+</span><span class='line'>lizhenjie@localhost ~$ 
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>罗列出所有可以画出的动物形状</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>lizhenjie@localhost ~$ cowsay -l
+</span><span class='line'>Cow files in /usr/local/Cellar/cowsay/3.03/share/cows:
+</span><span class='line'>beavis.zen bong bud-frogs bunny cheese cower daemon default dragon
+</span><span class='line'>dragon-and-cow elephant elephant-in-snake eyes flaming-sheep ghostbusters
+</span><span class='line'>head-in hellokitty kiss kitty koala kosh luke-koala meow milk moofasa moose
+</span><span class='line'>mutilated ren satanic sheep skeleton small sodomized stegosaurus stimpy
+</span><span class='line'>supermilker surgery telebears three-eyes turkey turtle tux udder vader
+</span><span class='line'>vader-koala www</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>使用其他动物形状</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>lizhenjie@localhost ~$ cowsay -f dragon LEO
+</span><span class='line'> _____ 
+</span><span class='line'>&lt; LEO &gt;
+</span><span class='line'> ----- 
+</span><span class='line'>      \                    / \  //\
+</span><span class='line'>       \    |\___/|      /   \//  \\
+</span><span class='line'>            /0  0  \__  /    //  | \ \    
+</span><span class='line'>           /     /  \/_/    //   |  \  \  
+</span><span class='line'>           @_^_@'/   \/_   //    |   \   \ 
+</span><span class='line'>           //_^_/     \/_ //     |    \    \
+</span><span class='line'>        ( //) |        \///      |     \     \
+</span><span class='line'>      ( / /) _|_ /   )  //       |      \     _\
+</span><span class='line'>    ( // /) '/,_ _ _/  ( ; -.    |    _ _\.-~        .-~~~^-.
+</span><span class='line'>  (( / / )) ,-{        _      `-.|.-~-.           .~         `.
+</span><span class='line'> (( // / ))  '/\      /                 ~-. _ .-~      .-~^-.  \
+</span><span class='line'> (( /// ))      `.   {            }                   /      \  \
+</span><span class='line'>  (( / ))     .----~-.\        \-'                 .~         \  `. \^-.
+</span><span class='line'>             ///.----..&gt;        \             _ -~             `.  ^-`  ^-_
+</span><span class='line'>               ///-._ _ _ _ _ _ _}^ - - - - ~                     ~-- ,.-~
+</span><span class='line'>                                                                  /.-~
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>结合<code>fortune</code>使用</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>lizhenjie@localhost ~$ fortune | cowsay
+</span><span class='line'> _________________________________________ 
+</span><span class='line'>/ We are all worms. But I do believe I am \
+</span><span class='line'>| a glowworm.                             |
+</span><span class='line'>|                                         |
+</span><span class='line'>\ -- Winston Churchill                    /
+</span><span class='line'> ----------------------------------------- 
+</span><span class='line'>        \   ^__^
+</span><span class='line'>         \  (oo)\_______
+</span><span class='line'>            (__)\       )\/\
+</span><span class='line'>                ||----w |
+</span><span class='line'>                ||     ||</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>结合<code>lolcat</code>使用：</li>
+</ul>
+
+
+<p><img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2015_08_14_cowsay_lolcat.png"></p>
+
+<ul>
+<li>结合<code>lolcat + fortune + cowsay</code></li>
+</ul>
+
+
+<p><img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2015_08_14_cowsay_lolcat_forturn.png"></p>
+
+<p>是不是很神奇！！！</p>
+
+<h3>cmatrix</h3>
+
+<p><strong>安装</strong></p>
+
+<p>黑客帝国‘Hacker’风格的桌面的生动画面</p>
+
+<pre><code>brew install cmatrix
+</code></pre>
+
+<p><strong>用法</strong></p>
+
+<pre><code>cmatrix 
+</code></pre>
+
+<p><img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2015_08_14_cmatrix.png"></p>
+
+<p>其他用法可以使用 <code>man</code>查看。</p>
+
+<h3>写在最后</h3>
+
+<p>上面的命令可能在实际中对自己没有多大用途，但是，在配置的过程中，学到了不少东西，还增加了对 <code>Shell</code>的了解和兴趣，我们对自己的定位不能只局限与写代码，而是让自己多去了解自己不了解的，时常去走出自己的舒适区，找一些有趣有挑战性的东西去做，总之，保证自己一直在进步，加油！</p>
+]]></content>
+    </entry>
+    
+    <entry>
+        <title type="html"><![CDATA[DANGEROUS - 学会精深学习]]></title>
+        <link href="http://swplzj.github.io/blog/2015/08/13/dangerous-xue-hui-jing-shen-xue-xi/"/>
+        <updated>2015-08-13T18:00:05+08:00</updated>
+        <id>http://swplzj.github.io/blog/2015/08/13/dangerous-xue-hui-jing-shen-xue-xi</id>
+        <content type="html"><![CDATA[<p>这几天项目测试接近尾声，开发任务相对减少，这几天自己像是脱缰的野马，饥渴的孩子，重新看了<code>《MacTalk》</code>，升级了自己博客，重新学习了 <code>Html</code>，<code>CSS</code>，自己又学习了一门新语言 <code>JavaScript</code>及相应的<code>jQuery</code>框架，接着恶补了 <code>命令行</code>，收获颇丰，感觉学习了很多东西，但是我认为这是一种危险的信号，一下子给自己挖了这么多坑，贪多嚼不烂，只怕这是一时兴起，</p>
+]]></content>
+    </entry>
     
     <entry>
         <title type="html"><![CDATA[Mac - Navicat Premium 11.0.16 破解记录]]></title>
@@ -4213,94 +4649,6 @@ A file ending in the extension .dylib is a dynamic library: it&rsquo;s a library
 <li><p>库的接口请#import &ldquo;zlib.h&rdquo;</p></li>
 </ol>
 
-]]></content>
-    </entry>
-    
-    <entry>
-        <title type="html"><![CDATA[INSTANCETYPE 与 ID 的区别。]]></title>
-        <link href="http://swplzj.github.io/blog/2014/09/21/instancetype-yu-id-de-qu-bie/"/>
-        <updated>2014-09-21T18:31:05+08:00</updated>
-        <id>http://swplzj.github.io/blog/2014/09/21/instancetype-yu-id-de-qu-bie</id>
-        <content type="html"><![CDATA[<p>新的LLVM编译器为我们带来了ARC, Object Literal and Scripting, Auto Synthesis等特性，同时也引入了instancetype关键字。instancetype用来表示Related Result Types(相关返回类型)，那么它与id有什么不同呢？</p>
-
-<p>根据Cocoa的命名惯例，init, alloc这类的方法，如果以id作为返回类型，会返回类本身的类型。</p>
-
-<!--more-->
-
-
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>@interface Person
-</span><span class='line'>- (id)initWithName:(NSString *)name;
-</span><span class='line'>+ (id)personWithName:(NSString *)name;</span></code></pre></td></tr></table></div></figure>
-
-
-<p>但类方法的返回类型，LLVM(或者说Clang)却无法判断，我们来看一段代码：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>// You may get two warnings if you're using MRC rather than ARC
-</span><span class='line'>
-</span><span class='line'>[[[NSArray alloc] init] mediaPlaybackAllowsAirPlay]; //  "No visible @interface for `NSArray` declares the selector `mediaPlaybackAllowsAirPlay`"
-</span><span class='line'>[[NSArray array] mediaPlaybackAllowsAirPlay]; // It's OK. But You'll get a runtime error instead of a compile time one</span></code></pre></td></tr></table></div></figure>
-
-
-<p>[NSArray array]除非显式转换为(NSArray *)，否则编译器不会有错误提示。如果使用instancetype就不会有这样的问题：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>@interface Person
-</span><span class='line'>- (instancetype)initWithName:(NSString *)name;
-</span><span class='line'>+ (instancetype)personWithName:(NSString *)name;</span></code></pre></td></tr></table></div></figure>
-
-
-<p>简单来说，instancetype关键字，保证了编译器能够正确推断方法返回值的类型。这种技术基本从iOS 5的UINavigationController里就开始应用了。</p>
-
-<p>Clang的文档里提到 instancetype
-is a contextual keyword that is only permitted in the result type of an Objective-C method. 也就是说，instancetype只能作为返回值，不能像id那样作为参数。</p>
-
-<ul>
-<li><a href="http://clang.llvm.org/docs/LanguageExtensions.html#objective-c-features">ClangClang Language Extensions</a></li>
-<li><a href="http://nshipster.com/instancetype/">NSHipster</a></li>
-<li><a href="http://www.jonmsterling.com/posts/2012-02-05-typed-collections-with-self-types-in-objective-c.html">Typed Collections With Self Types in Objective-C</a></li>
-</ul>
-
-]]></content>
-    </entry>
-    
-    <entry>
-        <title type="html"><![CDATA[《抬起头吧》]]></title>
-        <link href="http://swplzj.github.io/blog/2014/09/17/look-up/"/>
-        <updated>2014-09-17T18:54:32+08:00</updated>
-        <id>http://swplzj.github.io/blog/2014/09/17/look-up</id>
-        <content type="html"><![CDATA[<h4>《Look up》-《抬起头吧》很有感触</h4>
-
-<p>我有好几百位手机好友，但我仍然常常感到孤独；我每天跟他们聊天，但是好像他们并不了解真正的我。我的疑问来自于人与人之间的相处方式，我究竟是想看着他们的眼睛，还是手机上的昵称？直到有一天我发现，所谓的社交网络，并不完全是我们看到的那样。当我们打开电脑或者手机，其实也就关上了彼此心灵沟通的大门。</p>
-
-<!--more-->
-
-
-<p>假如有一天，你离开了网络，你就会发现，我们生活在一个令人困惑的世界中，一个我们本该主宰却被其掌控的世界，一个只顾自身利益、自身形象和自我推销的世界。在这个世界里，商人兜售着我们的个人信息。我们只会分享自己最好的一面，却不带任何真实感情。人生最快乐的事就是和别人共享生活的美好，但如果其他人都不在现场，我们还会一样快乐吗？</p>
-
-<p>我们经常转发一些经过修饰和夸大的信息，只是为了得到别人的赞美。我们不停地刷新朋友圈。那些流行的文字和图片，让生活看起来似乎很精彩，好像就发生在你我身边，只是不知道是否有人真正用心去看。</p>
-
-<p>远离网络吧，好好利用你的时间去看一本书，去陪一陪父母或者去旅行。活在当下，留心你身边的每一件事，把宝贵的时光放在真实和有意义的事情上，与亲朋好友在一起，和他们聊聊天说说话，不要再一直盯着你的手机和电脑。你需要的只是开始与人交谈。我无法忍受朋友聚餐的时候，每个人都在低头看手机。我们开始变得不合群，不再满足于和他人进行言语上的交流。</p>
-
-<p>我们身边的孩子们，自从出生的那一刻开始，就看着我们活着像被操控的机器人。当我们还是个孩子时，我们不会和现在的孩子一样宅在家里，我们会与小伙伴们到户外尽情地去玩耍，即使鞋子穿破了，膝盖也受了伤，我们依然会尽情享受那些真正属于我们的欢乐时光。而现在，这一切变得少之又少，我们这代人都是只愿玩手机的低头一族。
-抬起头吧，放下手机。看看你身边的人和事，让他们成为你今天的焦点，也让自己成为他们的焦点。我们需要真实的交谈。即使身在那里，改变已经发生。你不需要去告诉几百人你刚才做了些什么。</p>
-
-<p>当你有了家庭，当你第一次抱起你的宝贝孩子，你想休息，他却让你整夜都无法入睡的时候，那是幸福和甜蜜的烦恼。当他长大成人并有了自己的家室，当有一天你抱起你的孙辈，他用稚嫩的声音叫你一声爷爷的时候，你会觉得时光飞逝人生苦短。当你回顾此生，你庆幸自己没有碌碌无为虚度光阴。</p>
-
-<p>我们的生命有限，请不要将你的时光浪费在虚拟的网络上。</p>
-
-<p>此刻，我们仍在不停地发送和接收无用的讯息。我们花上一整天的时间，却没有跟亲朋好友有任何真实的联系，没有什么比这更糟糕。别让你的生活追随浮华的网络。给人们你的爱，不要给他们你的赞，不要再为没有人关注而烦恼。
-抬起头吧，放下手机。走出门去面对真实的世界，放下令你分心的一切。</p>
 ]]></content>
     </entry>
     
