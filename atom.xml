@@ -4,7 +4,7 @@
     <title><![CDATA[Leo Lee]]></title>
     <link href="http://swplzj.github.io/atom.xml" rel="self"/>
     <link href="http://swplzj.github.io/"/>
-    <updated>2015-08-19T18:48:40+08:00</updated>
+    <updated>2015-08-19T19:25:57+08:00</updated>
     <id>http://swplzj.github.io/</id>
     <author>
         <name><![CDATA[Leo Lee]]></name>
@@ -12,6 +12,71 @@
     </author>
     <generator uri="http://octopress.org/">Octopress</generator>
     
+    
+    <entry>
+        <title type="html"><![CDATA[iOS - VPN强烈推荐]]></title>
+        <link href="http://swplzj.github.io/blog/2015/08/19/ios-vpnqiang-lie-tui-jian/"/>
+        <updated>2015-08-19T18:58:02+08:00</updated>
+        <id>http://swplzj.github.io/blog/2015/08/19/ios-vpnqiang-lie-tui-jian</id>
+        <content type="html"><![CDATA[<p>之前推荐过 Mac 上的 VPN 使用，今天推荐两款 iOS 端比价好用的 VPN 应用，真的用起来很方便。无需注册，轻松翻墙。</p>
+
+<ol>
+<li><code>ArkVPN</code>：优点：方便，速度快，免费，不限流量。缺点：不订阅的话需要每天领取时长，不过免费时长够用了。</li>
+<li><code>Shadowsocks</code>：优点：方便，免费，开源，不限流量，不限时长。缺点：有些慢，有广告。</li>
+</ol>
+
+
+<!--more-->
+
+
+<h3>ArkVPN</h3>
+
+<ul>
+<li><p>安装</p>
+
+<p> <a href="https://itunes.apple.com/cn/app/arkvpn-wu-xian-liu-liang-mian/id909977824?mt=8">ArkVPN 下载地址</a></p></li>
+<li><p>每天领取免费时长</p>
+
+<p>  <img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2015_08_14_vpn_id1.PNG" title="\" ></p></li>
+<li><p>只要一次点击，连接整个世界</p>
+
+<p>  <img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2015_08_14_vpn_id2.PNG" title="\" ></p>
+
+<p>  <img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2015_08_14_vpn_id3.PNG" title="\" ></p>
+
+<p>  <img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2015_08_14_vpn_id4.PNG" title="\" ></p></li>
+<li><p>国外服务器列表</p>
+
+<p>  <img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2015_08_14_vpn_id5.PNG" title="\" ></p></li>
+</ul>
+
+
+<h3>Shadowsocks</h3>
+
+<ul>
+<li><p>简介
+Shadowsocks 是一个开源项目，同时提供多个平台使用，你也可<a href="https://github.com/shadowsocks/shadowsocks">下载源码</a>进行研究。iOS客户端类似于一个封闭的浏览器，这这里可以翻墙浏览任何你想浏览的页面了。</p></li>
+<li><p>安装</p></li>
+</ul>
+
+
+<p><a href="https://github.com/shadowsocks/shadowsocks-csharp">Windows</a> / <a href="https://github.com/shadowsocks/shadowsocks-iOS/wiki/Shadowsocks-for-OSX-Help">OS X</a></p>
+
+<p><a href="https://github.com/shadowsocks/shadowsocks-android">Android</a> / <a href="https://github.com/shadowsocks/shadowsocks-iOS/wiki/Help">iOS</a></p>
+
+<p><a href="https://github.com/shadowsocks/openwrt-shadowsocks">OpenWRT</a></p>
+
+<ul>
+<li><p>使用</p>
+
+<p>  <img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2015_08_14_vpn_id6.PNG" title="\" ><br/>
+  <img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2015_08_14_vpn_id7.PNG" title="\" ></p></li>
+</ul>
+
+
+<p>Have a fun！</p>
+]]></content>
+    </entry>
     
     <entry>
         <title type="html"><![CDATA[正则表达式学习]]></title>
@@ -4955,36 +5020,6 @@ lockBeforeDate:，在指定的date之前暂时阻塞线程（如果没有获取�
 用tryLock方法获取锁。
 用unlock方法释放锁。
 如果一个获取锁的进程在释放锁之前挂了，那么锁就一直得不到释放了，此时可以通过breakLock强行获取锁。</p>
-]]></content>
-    </entry>
-    
-    <entry>
-        <title type="html"><![CDATA[Xcode中系统库文件libz.dylib的作用]]></title>
-        <link href="http://swplzj.github.io/blog/2014/09/24/xcodezhong-xi-tong-ku-wen-jian-libz-dot-dylibde-zuo-yong/"/>
-        <updated>2014-09-24T22:08:21+08:00</updated>
-        <id>http://swplzj.github.io/blog/2014/09/24/xcodezhong-xi-tong-ku-wen-jian-libz-dot-dylibde-zuo-yong</id>
-        <content type="html"><![CDATA[<p>libz.dylib这个Xcode系统库文件经常用到。这个其实是个动态链接库。</p>
-
-<p>后缀名为.dylib的文件是一个动态库，这个库是运行时加载而不是编译时加载。这个也说明了obj-C是运行时语言，也就是数据的类型不是在编译时确定的，而是在运行时确定的。</p>
-
-<p>libz.dylib也是zip压缩解压缩的库，开发中经常用到的压缩库，PDF可以使用这个库文件来压缩。</p>
-
-<!--more-->
-
-
-<p>在Finder中查看，你会发现libz.dylib,libz.1.dylib,libz.1.1.3.dylib其实只是一个“替身”，实际上还是指向libz.1.2.5.dylib(Xcode 4.5)
-A file ending in the extension .dylib is a dynamic library: it&rsquo;s a library that&rsquo;s loaded at runtime instead of at compile time. If you&rsquo;re familiar with DLLs from Windows or DSOs, it&rsquo;s more or less the same type of thing with a few twists. <a href="https://developer.apple.com/library/mac/#documentation/DeveloperTools/Conceptual/DynamicLibraries/000-Introduction/Introduction.html#//apple_ref/doc/uid/TP40001908-SW1">The Dynamic Library Programming Topics</a> section of the Mac OS X Developer Library covers all the details about the format and what you should be aware of.</p>
-
-<p>libz.dylib is the dynamic library for Zlib, a general compression library. PDFs can (and usually do) use zlib to compress different aspects of the data contained within them, but accessing the PDF data at that level is pretty low-level, and higher-level libraries would abstract most of that type of stuff.</p>
-
-<p>总结：</p>
-
-<ol>
-<li><p>.dylib意味着这是一个动态链接库.</p></li>
-<li><p>libz.dylib是提供zip压缩解压缩的库</p></li>
-<li><p>库的接口请#import &ldquo;zlib.h&rdquo;</p></li>
-</ol>
-
 ]]></content>
     </entry>
     
