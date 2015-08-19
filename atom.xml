@@ -4,7 +4,7 @@
     <title><![CDATA[Leo Lee]]></title>
     <link href="http://swplzj.github.io/atom.xml" rel="self"/>
     <link href="http://swplzj.github.io/"/>
-    <updated>2015-08-14T16:00:15+08:00</updated>
+    <updated>2015-08-19T18:48:40+08:00</updated>
     <id>http://swplzj.github.io/</id>
     <author>
         <name><![CDATA[Leo Lee]]></name>
@@ -14,11 +14,356 @@
     
     
     <entry>
+        <title type="html"><![CDATA[正则表达式学习]]></title>
+        <link href="http://swplzj.github.io/blog/2015/08/19/zheng-ze-biao-da-shi-xue-xi/"/>
+        <updated>2015-08-19T11:45:54+08:00</updated>
+        <id>http://swplzj.github.io/blog/2015/08/19/zheng-ze-biao-da-shi-xue-xi</id>
+        <content type="html"><![CDATA[<p>项目中经常使用到一些校验，比如有效手机号，身份证号码，邮箱，银行卡号码&hellip;假如说都是简单的使用位数来做校验，容易造成特殊字符输入乱码，还有可能在数据库中写入脏数据，所以使用正则表达式来进行校验匹配是很有必要的，当然，我们学习它就要知道它有哪些作用，正则表达式的用途基本有以下三种：</p>
+
+<ul>
+<li>校验数据</li>
+<li>查询数据</li>
+<li>替换数据</li>
+</ul>
+
+
+<p>学习正则表达式的最好方法是从例子开始，理解例子之后再自己对例子进行修改。下面开始学习之旅：</p>
+
+<!--more-->
+
+
+<h3>语法</h3>
+
+<p><code>.</code> 是元字符，匹配除了换行符以外的任意字符。</p>
+
+<p><code>*</code> 是元字符，不过它代表的不是字符，也不是位置，而是数量——它指定 <code>*</code> 前边的内容可以连续重复使用任意次以使整个表达式得到匹配。</p>
+
+<p><code>.*</code> 连在一起就意味着任意数量的不包含换行的字符。</p>
+
+<p><code>+</code> 重复一次或更多次</p>
+
+<p><code>?</code> 重复零次或一次</p>
+
+<p><code>{n}</code> 重复n次</p>
+
+<p><code>{n,}</code>  重复n次或更多次</p>
+
+<p><code>{n,m}</code> 重复n到m次</p>
+
+<p><code>[]</code> 指定一个字符范围，比如，<strong>[aeiou]</strong>就匹配任何一个英文元音字母，<code>[0-9]</code>代表的含意与\d就是完全一致的。
+<code>()</code> 小括号来指定子表达式(也叫做分组),比如：<strong>(\d{1,3}.){3}\d{1,3}</strong> 是一个简单的IP地址匹配表达式。</p>
+
+<p><code>\b</code> 是正则表达式规定的一个特殊代码（也叫它元字符，metacharacter），代表着单词的开头或结尾，也就是单词的分界处。虽然通常英文的单词是由空格，标点符号或者换行来分隔的，但是<code>\b</code>并不匹配这些单词分隔字符中的任何一个，它只匹配一个位置。比如:在一段文本中查询<code>Leo</code>，就可以这样写：<strong>\bLeo\b</strong> 。</p>
+
+<p><code>\B</code>    匹配不是单词开头或结束的位置</p>
+
+<p><code>\d</code> 匹配一位数字，比如匹配大陆手机号码： <strong>1\d{10}</strong> ，{10} 意思是重复匹配10次。</p>
+
+<p><code>\D</code>    匹配任意非数字的字符</p>
+
+<p><code>\s</code> 匹配任意的空白符，包括空格，制表符(Tab)，换行符，中文全角空格等。</p>
+
+<p><code>\S</code>    匹配任意不是空白符的字符</p>
+
+<p><code>\w</code> 匹配字母或数字或下划线或汉字等。</p>
+
+<p><code>\W</code>    匹配任意不是字母，数字，下划线，汉字的字符</p>
+
+<p><code>[^x]</code>  匹配除了x以外的任意字符</p>
+
+<p><code>[^aeiou]</code>  匹配除了aeiou这几个字母以外的任意字符</p>
+
+<p><code>^</code> 匹配字符串的开始，或者是行的开始处</p>
+
+<p><code>$</code> 匹配字符串的结束，或者是行的结束处</p>
+
+<p><code>|</code> 分枝条件指的是有几种规则，如果满足其中任意一种规则都应该当成匹配。</p>
+
+<p><code>\</code> 为转义字符，比如匹配网址：使用 <code>swplzj\.github\.io</code> 来匹配 <code>swplzj.github.io</code> 。</p>
+
+<h3>后向引用</h3>
+
+<h4>捕获</h4>
+
+<p>(exp):  匹配exp,并捕获文本到自动命名的组里</p>
+
+<p>(?<name>exp):   匹配exp,并捕获文本到名称为name的组里，也可以写成(?&lsquo;name'exp)</p>
+
+<p>(?:exp):    匹配exp,不捕获匹配的文本，也不给此分组分配组号</p>
+
+<h4>零宽断言</h4>
+
+<p>(?=exp):    匹配exp前面的位置</p>
+
+<p>(?&lt;=exp):   匹配exp后面的位置</p>
+
+<p>(?!exp):    匹配后面跟的不是exp的位置</p>
+
+<h4>注释</h4>
+
+<p>(?#comment):    这种类型的分组不对正则表达式的处理产生任何影响，用于提供注释让人阅读</p>
+
+<h3>实例</h3>
+
+<p>从下面文本中查询出以<code>[]</code>包含的内容，包括<code>[]</code></p>
+
+<pre><code>The Tasmanian tiger, also known as the Thylacine, has been announced extinct many years ago. Now many geneticists assert that they are capable of recreating a [sid=13_1] from DNA extracted from its bone specimen. \n\nTasmanian tigers belong to marsupials that have a [sid=13_2] in common. They looked like big dogs with over 15 dark stripes on the body. When chasing their preys, these animals primarily depended on [sid=13_3] to prevail. Their stomach could inflate so they could eat large amount of food each time to [sid=13_4] a period lack of food.  
+</code></pre>
+
+<p>我们发现要查询的内容是以<code>[</code>开头，以 <code>]</code> 结束的，所以首先可以肯定的是  <code>\[\]</code>，注意需要转义字符<code>\</code>，然后<code>[]</code>之前包含的可能是 数字、空格、大小写字母、符号，但是不能包含<code>]</code>,所以我们可以写出 <code>\[[^\]]+\]</code></p>
+
+<p><img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2015_08_14_regular_express_id1.png" title="/" ></p>
+
+<p>再增加点难度，要检索出<code>[]</code>里面的数据，我们可以先观察规律，因为正则表达式 - Regular Express 本身就是有规律的表达式，所以现发现规律，再写出所对应的正则。</p>
+
+<p><strong>解答</strong></p>
+
+<ul>
+<li>以 <code>[</code> 开头，作为规律，可以写出 <code>(?&lt;=\[)([^\]])+</code></li>
+</ul>
+
+
+<p><img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2015_08_14_regular_express_id2.png" title="/" ></p>
+
+<ul>
+<li>以<code>]</code> 结束，可以写出<code>[^\[]+(?=\])</code></li>
+</ul>
+
+
+<p><img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2015_08_14_regular_express_id3.png" title="/" ></p>
+
+<h3>iOS中应用</h3>
+
+<p>我们在开发iOS项目过程中，使用到正则表达式的主要场景有两种：</p>
+
+<p><strong>第一</strong> 在应用中用户输入数据时，做正则匹配校验，这类比较常见，这里就不做详述，但是给出一个比较好的建议，就是把需要校验的项，单独创建一个 XML 文件，然后再自定义标签，属性，来进行统一存放项目中所有校验项，如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+</span><span class='line'>&lt;rules&gt;
+</span><span class='line'>    &lt;rule type="mobile" pattern="^1\d{10}$" tip="请输入正确的手机号" /&gt;
+</span><span class='line'>&lt;/rules&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>上面是简单校验手机号码位数的正则表达式，这样做的好处：方便维护管理；代码更为规范。</p>
+
+<p><strong>第二</strong> 在使用 <code>UIWebView</code> 来加载文章类的页面时，使用正则表达式可以很好的提升用户体验。那使用正则我们可以做到那些呢？</p>
+
+<ul>
+<li><p>使用正则表达式来加载本地 <code>CSS</code> 样式表来自定义 <code>HTML</code> 中的样式；</p>
+
+<ul>
+<li>替换 <code>CSS</code> 样式表，这个可以实现 <code>HTML</code> 字体大小的动态调整；</li>
+<li>可以实现类似白天、黑夜主题色的更换；</li>
+<li>可以对文本进行标注、突出等处理；</li>
+</ul>
+</li>
+<li><p>使用正则表达式获取 <code>HTML</code> 中的图片、视频，以便更友好的操作图片、视频资源；</p>
+
+<ul>
+<li>可以更改图片的大小展示；</li>
+<li>通过正则匹配获取到图片的属性，比如id，然后进行本地操作，如，对图片添加点击事件，点击之后，进入本地图片浏览器，在图片浏览器中，就可以对图片进行放大、缩小、查看图片备注等操作了。</li>
+</ul>
+</li>
+<li>使用正则表达式来为 <code>HTML</code> 添加元素；
+
+<ul>
+<li>可以为添加文章标题、发布时间等操作</li>
+</ul>
+</li>
+</ul>
+
+
+<p>使用场景已经描述完了，但是怎么样实现呢，下面直接上代码：</p>
+
+<p><strong>加载本地 CSS </strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>NSRegularExpression *regularexpression = [[NSRegularExpression alloc]
+</span><span class='line'>                                              initWithPattern:@"(?i)&lt;\\s*link\\s*href=\"[^\"]+\\.css\""
+</span><span class='line'>                                              options:NSRegularExpressionCaseInsensitive
+</span><span class='line'>                                              error:nil];
+</span><span class='line'>    NSArray *matches = [regularexpression matchesInString:htmlContent options:0 range:NSMakeRange(0, [htmlContent length])];
+</span><span class='line'>    NSString *content = htmlContent;
+</span><span class='line'>    NSString *replaceStr = [NSString stringWithFormat:@"&lt;link href=\"%@\"",cssFilePath];
+</span><span class='line'>    for (NSTextCheckingResult *match in matches){
+</span><span class='line'>        NSRange matchRange = [match range];
+</span><span class='line'>        content=[regularexpression stringByReplacingMatchesInString:content options:0 range:matchRange withTemplate:replaceStr];
+</span><span class='line'>    }</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>获取图片资源</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> NSMutableArray *imageIds = [NSMutableArray array];
+</span><span class='line'>    NSString *str = @"(?i)&lt;div\\s*class\\s*=\\s*\"[^\"]*img\"&gt;\\s*&lt;img\\s*[^&gt;]*id=\\s*\"[^&gt;]*&gt;";
+</span><span class='line'> NSRegularExpression *regularexpression = [[NSRegularExpression alloc]
+</span><span class='line'>                                              initWithPattern:str
+</span><span class='line'>                                              options:NSRegularExpressionCaseInsensitive
+</span><span class='line'>                                              error:nil];
+</span><span class='line'> NSArray *matches = [regularexpression matchesInString:htmlContent
+</span><span class='line'>                                                  options:0
+</span><span class='line'>                                                    range:NSMakeRange(0, [htmlContent length])];
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>对图片进行操作</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> NSString *str = @"(?i)&lt;div\\s*class=\"[^\"]*img\"&gt;\\s*&lt;img\\s*[^&gt;]*id=\\s*\"";
+</span><span class='line'>
+</span><span class='line'> str = [str stringByAppendingString:imageInfo.image_id];
+</span><span class='line'> str = [str stringByAppendingString:@"\"\\s*src=\\s*\"[^\"]*\"[^&gt;]*&gt;"];
+</span><span class='line'>
+</span><span class='line'> NSString *replacejs = [NSString stringWithFormat:@"&lt;div class=\"img\" id=\"%@\" onclick=\"location.href='picid'+this.id\" style=\"background-color:#999999;width:%fpx;height:%fpx;\" /&gt;",imageInfo.image_id,width,height];
+</span><span class='line'>
+</span><span class='line'> replacejs = [replacejs stringByAppendingString:[NSString stringWithFormat:@"&lt;img src=\"%@\"  width=\"%fpx\" height=\"%fpx\"/&gt;",imagePath,width,0.0]];
+</span><span class='line'> 
+</span><span class='line'> replacejs = [replacejs stringByAppendingString:[NSString stringWithFormat:@"&lt;img src=\"%@\" width=\"180px\" height=\"36px\" style=\"margin-left:%fpx;margin-top:%fpx\"/&gt;",logoImagePath,(width / 2 - 90),(height/2 - 34)]];
+</span><span class='line'>
+</span><span class='line'> NSRegularExpression *regularexpression = [[NSRegularExpression alloc]
+</span><span class='line'>                                          initWithPattern:str
+</span><span class='line'>                                          options:NSRegularExpressionCaseInsensitive
+</span><span class='line'>                                          error:nil];
+</span><span class='line'> NSArray *matches = [regularexpression matchesInString:content options:0 range:NSMakeRange(0,  [content length])];
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'> for (NSTextCheckingResult *match in matches){
+</span><span class='line'>    NSRange matchRange = [match range];
+</span><span class='line'>    content=[regularexpression stringByReplacingMatchesInString:content options:0 range:matchRange withTemplate:replacejs];
+</span><span class='line'> }
+</span><span class='line'>            </span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>放大缩小页面中的文本</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> NSString *jsString = [[NSString alloc] initWithFormat:@"document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '%@'",textFontScale];
+</span><span class='line'>    
+</span><span class='line'>[_webView stringByEvaluatingJavaScriptFromString:jsString];</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>扩展 - 在本地HTML中加入JS</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>NSString *js = @"&lt;script language=\"javascript\" type=\"text/javascript\"&gt;";
+</span><span class='line'> //替换css文件
+</span><span class='line'>js = [js stringByAppendingString:@"function replacejscssfile(oldfilename, newfilename, filetype){ var targetelement=(filetype==\"js\")? \"script\" : (filetype==\"css\")? \"link\" : \"none\"; var targetattr=(filetype==\"js\")? \"src\" : (filetype==\"css\")? \"href\" : \"none\"; var allsuspects=document.getElementsByTagName(targetelement); for (var i=allsuspects.length; i&gt;=0; i--){ if (allsuspects[i] && allsuspects[i].getAttribute(targetattr)!=null && allsuspects[i].getAttribute(targetattr).indexOf(oldfilename)!=-1){ var newelement=createjscssfile(newfilename, filetype); allsuspects[i].parentNode.replaceChild(newelement, allsuspects[i]);} } return \"sdasds\";}"];
+</span><span class='line'>
+</span><span class='line'>js = [js stringByAppendingString:@"&lt;/script&gt;&lt;/head&gt;"];
+</span><span class='line'>
+</span><span class='line'>   NSString *content = [htmlContent stringByReplacingOccurrencesOfString:@"&lt;/head&gt;" withString:js];</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>常用正则表达式</h3>
+
+<p>网址（URL）：  [a-zA-z]+://[^\s]*</p>
+
+<p>IP地址(IP Address)： ((2[0-4]\d|25[0-5]|[01]?\d\d?).){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)</p>
+
+<p>电子邮件(Email)：  \w+([-+.]\w+)<em>@\w+([-.]\w+)</em>.\w+([-.]\w+)*</p>
+
+<p>QQ号码： [1-9]\d{4,}</p>
+
+<p>HTML标记(包含内容或自闭合)： &lt;(.<em>)(.</em>)>.<em>&lt;\/\1>|&lt;(.</em>) \/></p>
+
+<p>密码(由数字/大写字母/小写字母/标点符号组成，四种都必有，8位以上)：    (?=^.{8,}$)(?=.<em>\d)(?=.</em>\W+)(?=.<em>[A-Z])(?=.</em>[a-z])(?!.<em>\n).</em>$</p>
+
+<p>日期(年-月-日)：  (\d{4}|\d{2})-((1[0-2])|(0?[1-9]))-(([12][0-9])|(3[01])|(0?[1-9]))</p>
+
+<p>日期(月/日/年)：  ((1[0-2])|(0?[1-9]))/(([12][0-9])|(3[01])|(0?[1-9]))/(\d{4}|\d{2})</p>
+
+<p>时间(小时:分钟, 24小时制)：   ((1|0?)[0-9]|2[0-3]):([0-5][0-9])</p>
+
+<p>汉字(字符)：   [\u4e00-\u9fa5]</p>
+
+<p>中文及全角标点符号(字符)：  [\u3000-\u301e\ufe10-\ufe19\ufe30-\ufe44\ufe50-\ufe6b\uff01-\uffee]</p>
+
+<p>中国大陆固定电话号码：   (\d{4}-|\d{3}-)?(\d{8}|\d{7})</p>
+
+<p>中国大陆手机号码： 1\d{10}</p>
+
+<p>中国大陆邮政编码： [1-9]\d{5}</p>
+
+<p>中国大陆身份证号(15位或18位)：  \d{15}(\d\d[0-9xX])?</p>
+
+<p>非负整数(正整数或零)：    \d+</p>
+
+<p>正整数：    [0-9]<em>[1-9][0-9]</em></p>
+
+<p>负整数：    -[0-9]<em>[1-9][0-9]</em></p>
+
+<p>整数：   -?\d+</p>
+
+<p>小数：   (-?\d+)(.\d+)?</p>
+
+<p>不包含abc的单词：    \b((?!abc)\w)+\b</p>
+
+<h3>后记</h3>
+
+<p>整理这篇博文的过程中，当然涉及到的知识不仅仅是正则表达式，还有后面通过 webview 和 JavaScript 进行交互，这是另一方面的知识了，就不在这里介绍了。马上七夕情人节了，大家快乐。就写到这里啦，还没有准备礼物，赶紧准备，不然&hellip;</p>
+
+<p>参考博文：<a href="http://deerchao.net/tutorials/regex/regex.htm">正则表达式30分钟入门教程</a></p>
+]]></content>
+    </entry>
+    
+    <entry>
         <title type="html"><![CDATA[Bash - 趣味Shell]]></title>
         <link href="http://swplzj.github.io/blog/2015/08/14/bash-qu-wei-shell/"/>
         <updated>2015-08-14T11:27:23+08:00</updated>
         <id>http://swplzj.github.io/blog/2015/08/14/bash-qu-wei-shell</id>
-        <content type="html"><![CDATA[<p>进来抽闲玩了一下<code>Shell</code>，发现几个比较有意思的，记录一下。</p>
+        <content type="html"><![CDATA[<p>今天抽闲玩了一下<code>Shell</code>，发现几个比较有意思的，记录一下。</p>
 
 <ul>
 <li>终端彩虹字：<code>lolcat</code></li>
@@ -4639,64 +4984,6 @@ A file ending in the extension .dylib is a dynamic library: it&rsquo;s a library
 <li><p>libz.dylib是提供zip压缩解压缩的库</p></li>
 <li><p>库的接口请#import &ldquo;zlib.h&rdquo;</p></li>
 </ol>
-
-]]></content>
-    </entry>
-    
-    <entry>
-        <title type="html"><![CDATA[INSTANCETYPE 与 ID 的区别。]]></title>
-        <link href="http://swplzj.github.io/blog/2014/09/21/instancetype-yu-id-de-qu-bie/"/>
-        <updated>2014-09-21T18:31:05+08:00</updated>
-        <id>http://swplzj.github.io/blog/2014/09/21/instancetype-yu-id-de-qu-bie</id>
-        <content type="html"><![CDATA[<p>新的LLVM编译器为我们带来了ARC, Object Literal and Scripting, Auto Synthesis等特性，同时也引入了instancetype关键字。instancetype用来表示Related Result Types(相关返回类型)，那么它与id有什么不同呢？</p>
-
-<p>根据Cocoa的命名惯例，init, alloc这类的方法，如果以id作为返回类型，会返回类本身的类型。</p>
-
-<!--more-->
-
-
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>@interface Person
-</span><span class='line'>- (id)initWithName:(NSString *)name;
-</span><span class='line'>+ (id)personWithName:(NSString *)name;</span></code></pre></td></tr></table></div></figure>
-
-
-<p>但类方法的返回类型，LLVM(或者说Clang)却无法判断，我们来看一段代码：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>// You may get two warnings if you're using MRC rather than ARC
-</span><span class='line'>
-</span><span class='line'>[[[NSArray alloc] init] mediaPlaybackAllowsAirPlay]; //  "No visible @interface for `NSArray` declares the selector `mediaPlaybackAllowsAirPlay`"
-</span><span class='line'>[[NSArray array] mediaPlaybackAllowsAirPlay]; // It's OK. But You'll get a runtime error instead of a compile time one</span></code></pre></td></tr></table></div></figure>
-
-
-<p>[NSArray array]除非显式转换为(NSArray *)，否则编译器不会有错误提示。如果使用instancetype就不会有这样的问题：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>@interface Person
-</span><span class='line'>- (instancetype)initWithName:(NSString *)name;
-</span><span class='line'>+ (instancetype)personWithName:(NSString *)name;</span></code></pre></td></tr></table></div></figure>
-
-
-<p>简单来说，instancetype关键字，保证了编译器能够正确推断方法返回值的类型。这种技术基本从iOS 5的UINavigationController里就开始应用了。</p>
-
-<p>Clang的文档里提到 instancetype
-is a contextual keyword that is only permitted in the result type of an Objective-C method. 也就是说，instancetype只能作为返回值，不能像id那样作为参数。</p>
-
-<ul>
-<li><a href="http://clang.llvm.org/docs/LanguageExtensions.html#objective-c-features">ClangClang Language Extensions</a></li>
-<li><a href="http://nshipster.com/instancetype/">NSHipster</a></li>
-<li><a href="http://www.jonmsterling.com/posts/2012-02-05-typed-collections-with-self-types-in-objective-c.html">Typed Collections With Self Types in Objective-C</a></li>
-</ul>
 
 ]]></content>
     </entry>
