@@ -1,0 +1,7 @@
+
+{
+  "debug_level" : 1,
+  "deletable" : 0,
+  "dest" : "qiniu:access_key=3yRdEIShZMx_t1vsHpzD6Ul8gEcNXY940XBgl7cu&secret_key=k4MEa9OIsRsFsbW-r9wLx1PpQYPf3C8cs3r9_BaP&bucket=blogimages",
+  "src" : "/Users/lizhenjie/octopress/source/images"
+}

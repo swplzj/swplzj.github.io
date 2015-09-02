@@ -115,7 +115,6 @@ Octopress默认自带了 `DISQUS` ，但是对于国内不是很好用，于是�
 5.创建一个配置文件（[JSON格式](http://json.org/json-zh.html)）,可以命名为 `qrsync.json`,输入以下配置
 
 ```
-
 {
   "debug_level" : 1,
   "deletable" : 0,
