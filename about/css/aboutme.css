@@ -259,7 +259,7 @@ a:focus {
 
 
 #me.present .now_me {
-    font-size: 90px;
+    font-size: 80px;
     -webkit-transform: translateY(-10px);
     -moz-transform:    translateY(-10px);
     -ms-transform:     translateY(-10px);
@@ -325,7 +325,7 @@ a:focus {
 
 #world .come-from {
     font-size: 55px;
-    color: yellow;
+    color: green;
 }
 
 #world .eighty-eight {
