@@ -12,7 +12,7 @@
   <meta name="author" content="Leo Lee">
 
   
-  <meta name="description" content="二维码又称QR Code，QR全称Quick Response，是一个近几年来移动设备上超流行的一种编码方式，它比传统的Bar Code条形码能存更多的信息，也能表示更多的数据类型：比如：字符，数字，日文，中文等等。这两天学习了一下二维码图片生成的相关细节，觉得这个玩意就是一个密码算法， &hellip;">
+  <meta name="description" content="iOS编程给用户视觉反馈其实都是通过 Quartz Core 框架来进行的，说白了，所有用户最终看到的显示界面都是图层合成的结果，而图层即是 Quartz Core 中的 CALayer 。 通常我们所说的视图即 UIView ，并不是直接显示在屏幕上， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -60,6 +60,49 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/03/12/quartz-core-kuang-jia-xue-xi/">Quartz Core 框架学习</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-12T15:32:06+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>iOS编程给用户视觉反馈其实都是通过 <code>Quartz Core</code> 框架来进行的，说白了，所有用户最终看到的显示界面都是图层合成的结果，而图层即是 <code>Quartz Core</code> 中的 <code>CALayer</code> 。</p>
+
+<p>通常我们所说的视图即 <code>UIView</code> ，并不是直接显示在屏幕上，而是在创建视图对象的时候视图对象会自动创建一个层，而视图对象把要显示的东西绘制在层上，待到需要显示时硬件将所有的层拷贝，然后按Z轴的高低合成最终的显示结果。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/03/12/quartz-core-kuang-jia-xue-xi/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -444,54 +487,6 @@ PS：实际上各开发平台的build过程都比较相似，如果你熟悉了
     <footer>
       <a rel="full-article" href="/blog/2013/11/23/macban-ben-cornerstonede-wu-xian-qi-po-jie-fang-fa/">Read on &rarr;</a>
     </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/11/19/mac-ji-suan-dai-ma-de-zong-xing-shu/">Mac 计算代码的总行数</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-11-19T21:41:37+08:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>计算代码的行数</p>
-
-<p>在终端上的命令，作用：找到项目的根目录，可以计算出代码的行数</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>find . -name "*.m" -or -name "*.h" |xargs grep -v "^$"|wc -l
-</span><span class='line'>grep -v "^$"是去掉空行
-</span><span class='line'>find . "(" -name "*.m" -or -name "*.strings" -or -name "*.h" ")" -print | xargs wc -l</span></code></pre></td></tr></table></div></figure>
-
-
-<p>赶快试一试吧，看看你的代码量是多少！</p>
-</div>
-  
   
 
 
