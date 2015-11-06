@@ -4,7 +4,7 @@
     <title><![CDATA[Leo Lee]]></title>
     <link href="http://swplzj.github.io/atom.xml" rel="self"/>
     <link href="http://swplzj.github.io/"/>
-    <updated>2015-09-03T00:23:57+08:00</updated>
+    <updated>2015-11-06T17:16:47+08:00</updated>
     <id>http://swplzj.github.io/</id>
     <author>
         <name><![CDATA[Leo Lee]]></name>
@@ -12,6 +12,44 @@
     </author>
     <generator uri="http://octopress.org/">Octopress</generator>
     
+    
+    <entry>
+        <title type="html"><![CDATA[最近情况]]></title>
+        <link href="http://swplzj.github.io/blog/2015/11/05/zui-jin-qing-kuang/"/>
+        <updated>2015-11-05T18:44:27+08:00</updated>
+        <id>http://swplzj.github.io/blog/2015/11/05/zui-jin-qing-kuang</id>
+        <content type="html"><![CDATA[<p>最近的情况是：忙 - 盲 - 茫，一言难尽啊，这些经历都是有必要记录下来，以便回顾自己走过的路，方便总结自己的成长得失。</p>
+
+<!--more-->
+
+
+<p>今年3月份辞职，有了一次重新选择公司的机会，这次较以前还是比较慎重的，总后拿到了几个 Offer，权衡之后来到了选择这家公司，当时几个公司的情形是这样的：</p>
+
+<ul>
+<li>墨迹天气面试通过了，但是，进入之后感觉公司没有一个很好的公司氛围（其实是和798旁边的视界核心比较的了），没有然后了；</li>
+<li>视界核心，这是一个令我很向往的公司，一个极客的天堂，各方面都很满意，也过了初试、复试，但到最后的时候，公司还是没有要我，真残忍啊。印象：团队小而精悍，产品都具有互联网思维，融入了极客精神，产品设计和用到的技术都是一流的，很赞；</li>
+<li>魔漫相机：其实，我在那里呆了一天，团队虽只有五六十人，但其产品用户足有两亿多，可见其产品设计之成功，不符合自己的职业价值观，拒绝了；</li>
+<li>租车公司：忘记了名字了，离家近，最后工资没有达成一致，公司方向也不是我想从事的，放弃；</li>
+<li>纷享销客：这是我最难做出取舍的公司，团队特别棒，一路面试，总裁是微软出身的，最后，还是咬牙舍弃，人生的选择没有对与错，路是自己走出来的；</li>
+<li>现公司：互联网金融，我很看好这个方向，因为自己也算是这个需求的用户，之前做过农行的e购天街，建行的微银行，算是金融产品出身；</li>
+</ul>
+
+
+<p>这些就是我今年年初的经历，说这些也算是回顾一下，因为这些也是反思，不知道自己的路选择的正确与否。目前来到公司做了三个项目，项目之间也有复用模块，做这项目也都倾注了自己所有的努力，结果是残忍的：</p>
+
+<ul>
+<li>项目一，因为公司战略问题，不了了之，已经到了上线的阶段，不理解。</li>
+<li>项目二，复用了一些模块，添加了一些新功能，紧急上线了，也用到了实际门店，算是欣慰；</li>
+<li>项目三，到了冒烟测试阶段，接到上级通知，战略调整，暂时放弃&hellip;</li>
+</ul>
+
+
+<p>这也是我为什么回顾今年历程的原因了，反思自己在这里成长得失，寻找接下来努力和选择的方向，对自己的要求，尽自己最大的努力去做好眼前的事情，我不想到年底总结的时候，自己回顾一年的努力，都是徒劳，于公：没有为公司带来实际效益，于私：技术没有大幅提升，也没有人力管理、时间管理等方面的实践和成长，这样的工作是很失败的，个人认为只有做到对自己负责的人，才有资格为他人负责，为公司负责，才有机会担当更重的责任。</p>
+
+<p>唠叨了这么多，接下来还是要有目标的去提升自己，规划自己的职业道路。
+分享今天看到的一句话：要想成为牛逼的人，就要去吃成为牛逼人所要吃的苦。</p>
+]]></content>
+    </entry>
     
     <entry>
         <title type="html"><![CDATA[iOS - VPN强烈推荐]]></title>
@@ -4820,253 +4858,6 @@ IMP 是指向方法实现的函数指针，由编译器为你生成。如果你�
 
 
 <p>背后的思想是，runtime 尝试在这个 vtable 中存储最近被调用的 selectors，这样就可以提升你的应用的速度，因为它使用了比 objc_msgSend 更少的指令（fewer instructions）。vtable 中保存 16 个全局最经常调用的 selectors，事实上顺着代码往下看你可以发现垃圾回收和非垃圾回收类型程序的默认 selectors …</p>
-]]></content>
-    </entry>
-    
-    <entry>
-        <title type="html"><![CDATA[移动App架构设计]]></title>
-        <link href="http://swplzj.github.io/blog/2014/10/25/yi-dong-app-jia-gou-she-ji/"/>
-        <updated>2014-10-25T21:47:01+08:00</updated>
-        <id>http://swplzj.github.io/blog/2014/10/25/yi-dong-app-jia-gou-she-ji</id>
-        <content type="html"><![CDATA[<p>Native app的开发相比传统的项目迭代周期要短很多, 需求的变化也频繁一些, 在开发的不同生命周期里采用不同的架构模式可以有效的节约开发时间, 提高开发效率, 这篇文章介绍几种常用的架构模式:</p>
-
-<!--more-->
-
-
-<h4>表现层</h4>
-
-<h5>基本的MVC</h5>
-
-<p>移动app一般都是采用经典的mvc架构</p>
-
-<table>
-<thead>
-<tr>
-<th>层次      </th>
-<th> 作用     </th>
-<th> 设计原则</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>模型层(model)</td>
-<td>   封装了应用的一系列数据, 并定义了操作, 处理这些数据的逻辑和计算规则。</td>
-<td>通过Notification,KVO对控制器进行反馈</td>
-</tr>
-<tr>
-<td>视图层(view) </td>
-<td>视图对象是一个应用中, 用户可以看到的对象. 视图对象知道如何绘制自己, 也能够响应用户的操作. 视图对象的主要目的之一是将应用模型对象中的数据显示出来, 并允许用户编辑该数据 </td>
-<td>视图通过不能直接操作模型层, 通过target-action, delegate, dataSource和控制器进行反馈</td>
-</tr>
-<tr>
-<td>控制器层(controller)    </td>
-<td>控制器层是在视图层和若干个模型层的中间人</td>
-<td> c可以直接操作模型层和视图层</td>
-</tr>
-</tbody>
-</table>
-
-
-<p><img src="https://github.com/uxyheaven/NativeAppFrameworkDesign/raw/master/image/mvc.png" alt="id1" /></p>
-
-<h5>总结:</h5>
-
-<ul>
-<li>C对M：API</li>
-<li>C对V：Outlet</li>
-<li>V对C：Target-action， Delegate，Datasource</li>
-<li>M对C：Notification，KVO</li>
-</ul>
-
-
-<h5>MVC的改进版 MVVM</h5>
-
-<p>MVVM是在MVC的基础上多了一个View Model: 表示逻辑, 将 model 的数据转换为 view 可以呈现的东西. 适合大量展示类的App.</p>
-
-<p><img src="https://github.com/uxyheaven/NativeAppFrameworkDesign/raw/master/image/mvvm.png" alt="id2" /></p>
-
-<h5>HMVC</h5>
-
-<p>Hierarchical MVC, 把客户端应用程序分解为有层次的父子关系的MVC, 反复应用这个模式, 形成结构化的客户端架构. 适合重型B/S架构的WebApp.</p>
-
-<p>一个MVC模块由应用程序的一个模块抽象而成. 其中很重要的一个概念就是 Parent MVC , 它可以对应界面上的实体, 也可以是一个抽象的对象. 设想一个app 有标签栏, 工具栏, 导航栏, 主工作区, 对应到HMVC上就是这个app最底部的标签栏 是 Layer1, Layer2 导航栏,主要工作区, 工具栏. 如果觉得 Layer2 太复杂可以吧主要工作区放到 Layer3, 依次类推.</p>
-
-<p>Controller 是功能模块的总控室, 它负责和子Controller或父Controller通信，并通知它的 View 处理改变界面显示, Model 处理一些业务逻辑或数据库访问操作. 如才的例子里, 点击了工具栏里的一个按钮, 工具栏的Controller 响应这个event, 发现是要切换主工作区, 工具栏做不了,就传递他的父Controller处理(如果父Controller也处理不了, 就继续往上传递)然后标签栏的Controller处理切换主工作区.</p>
-
-<p>优点:</p>
-
-<p>把程序分成了几个部分, 降低了依赖性
-支持鼓励重用代码, 组件或者模块。
-在今后的维护中, 提高了可扩展性。</p>
-
-<p><img src="https://github.com/uxyheaven/NativeAppFrameworkDesign/raw/master/image/hmvc.png" alt="id3" /></p>
-
-<h4>分层设计</h4>
-
-<h5>三层架构</h5>
-
-<p>我们在来看一下经典的三层架构</p>
-
-<p>从上至下为</p>
-
-<ul>
-<li>表现层(UI)</li>
-<li>业务逻辑层或称为领域层(BLL)</li>
-<li>数据访问层(DAL)</li>
-</ul>
-
-
-<table>
-<thead>
-<tr>
-<th>层次  </th>
-<th> 作用    </th>
-<th>设计原则</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>表现层(UI) </td>
-<td> 向用户展现特定业务数据，采集用户的输入信息和操 </td>
-<td>用户至上，兼顾简洁；不包含任何业务相关的逻辑处理</td>
-</tr>
-<tr>
-<td>业务逻辑层(BLL)    </td>
-<td>从ＤＡＬ中获取数据, 在ＵＩ显示; 从ＵＩ中获取用户指令和数据, 执行业务逻辑或通过ＤＡＬ写入数据源 </td>
-<td> 作为U层与Ｄ层的桥梁,目的在于展现清晰的函数结构, 只负责数据处理传递, 不涉及ＳＱＬ语句和ＡＤＯ.ＮＥＴ</td>
-</tr>
-<tr>
-<td>数据访问层(DAL)    </td>
-<td> 直接操作数据库，针对数据的增添 删除 修改 查找; 具体为业务逻辑层或表示层提供数据服务。</td>
-<td> 专门操作数据库, 不考虑数据合法性. 数据库错误返回－1, 逻辑错误返回0, 并告知错误原因, 成功返回1</td>
-</tr>
-</tbody>
-</table>
-
-
-<p><img src="https://github.com/uxyheaven/NativeAppFrameworkDesign/raw/master/image/mvc_vs_3.png" alt="id4" /></p>
-
-<p>然后呢,我们现在的架构则是
-<img src="https://github.com/uxyheaven/NativeAppFrameworkDesign/raw/master/image/3.png" alt="id5" /></p>
-
-<h5>四层架构</h5>
-
-<p>在三层架构的基础上多了业务规则层, 通常的三层是把业务逻辑和业务规则合并为一个层，统称为业务层. 业务规则层的提出,既可以及时处理用户输入的不合法信息, 又可以及时处理数据库错误, 增大了业务逻辑层的结构清晰度, 让业务逻辑人员专心致志做逻辑.</p>
-
-<p>从上至下为</p>
-
-<ul>
-<li>表现层</li>
-<li>业务规则层</li>
-<li>业务逻辑层或称为领域层</li>
-<li>数据访问层</li>
-</ul>
-
-
-<table>
-<thead>
-<tr>
-<th>层次  </th>
-<th>作用</th>
-<th>    设计原则</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>业务规则层(ECL)</td>
-<td>   对于UI层传下来的参数来说，检查合法性。</td>
-<td>用户至上，兼顾简洁；不包含任何业务相关的逻辑处理</td>
-</tr>
-</tbody>
-</table>
-
-
-<h5>五层架构</h5>
-
-<p>一般情况下, 我们的业务逻辑放在中间层, 那么对内部的这些大量种类繁多，使用方法也各异的不同的类的调用任务，就完全落到了表示层. 这样势必会增加表示层的代码量, 将表示层的任务复杂化, 和表示层只负责接受用户的输入并返回结果的任务不太相称, 并增加了层与层之间的耦合程度. 因此呢,我们需要增加接口去去统一的管理这些业务, 是设计模式中Facade模式的思想.</p>
-
-<p>从上至下为</p>
-
-<ul>
-<li>表现层</li>
-<li>业务外观层</li>
-<li>业务规则层</li>
-<li>业务逻辑层或称为领域层</li>
-<li>数据访问层</li>
-</ul>
-
-
-<table>
-<thead>
-<tr>
-<th>层次</th>
-<th> 作用</th>
-<th>     设计原则</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>业务外观层 </td>
-<td>为负责子系统中的一组接口提供一个一致而且简单的接口。</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-
-
-<h5>引入service层</h5>
-
-<p>引入service层的架构和普通的分层架构的不同是: service层内部有数据, 可以单独运行.</p>
-
-<p>service</p>
-
-<p>从上至下为</p>
-
-<ul>
-<li>表现层</li>
-<li>服务层(service)</li>
-<li>数据访问层</li>
-<li>业务逻辑层</li>
-</ul>
-
-
-<table>
-<thead>
-<tr>
-<th>层次</th>
-<th> 作用  </th>
-<th> 设计原则</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>表现层   </td>
-<td>显示与用户的互交   </td>
-<td></td>
-</tr>
-<tr>
-<td>服务层   </td>
-<td>service层提供表现层的业务逻辑入口,通过定义接口服务的形式,通过接口调用来完成.</td>
-<td></td>
-</tr>
-<tr>
-<td>业务逻辑层 </td>
-<td>1接收服务层传来的DTO, 然后根据业务规则, 对传入的DTO进行加工, 返回加工后的信息 2 需要为每个对象提供业务行为, 并且这些对象之间是独立的 3 业务对象之间的交互流程通过服务层来组织</td>
-<td></td>
-</tr>
-<tr>
-<td>数据访问层 </td>
-<td>本地数据远程数据的访问接口    </td>
-<td></td>
-</tr>
-</tbody>
-</table>
-
-
-<h5>新秀VIPER</h5>
-
-<p>viper这里不多说了,请想了解的自行搜索
-<img src="https://github.com/uxyheaven/NativeAppFrameworkDesign/raw/master/image/viper.png" alt="id6" /></p>
 ]]></content>
     </entry>
     
