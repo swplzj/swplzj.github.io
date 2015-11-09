@@ -12,7 +12,7 @@
   <meta name="author" content="Leo Lee">
 
   
-  <meta name="description" content="Native app的开发相比传统的项目迭代周期要短很多, 需求的变化也频繁一些, 在开发的不同生命周期里采用不同的架构模式可以有效的节约开发时间, 提高开发效率, 这篇文章介绍几种常用的架构模式: ">
+  <meta name="description" content="当人们初学 Cocoa/Objective-C 时，Objective-C Runtime 是被忽略的特性之一。原因是 Objective-C（这门语言）很容易在几小时内就熟悉，新学 Cocoa 的人花费他们大部分的时间学习 Cocoa 框架和适应它是如何工作的。然而每个人至少应该知道一些 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -60,6 +60,47 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/11/11/li-jie-objective-c-runtime/">理解 OBJECTIVE-C RUNTIME</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-11-11T21:34:12+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>当人们初学 Cocoa/Objective-C 时，Objective-C Runtime 是被忽略的特性之一。原因是 Objective-C（这门语言）很容易在几小时内就熟悉，新学 Cocoa 的人花费他们大部分的时间学习 Cocoa 框架和适应它是如何工作的。然而每个人至少应该知道一些 runtime 的工作细节，需要比知道编译器会把 [target doMethodWith:var1]; 转换为 objc_msgSend(target,@selector(doMethodWith:),var1); 更深入一些。知道 Objective-C 正在做的会让你更深入的理解 Objective-C 和你正在运行的 app。我认为 Mac/iPhone 的开发者不管你现在是什么水平，都会有收获的。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/11/11/li-jie-objective-c-runtime/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -450,48 +491,6 @@
   
     <footer>
       <a rel="full-article" href="/blog/2014/08/17/ios-shu-ju-chi-jiu-hua-(san-)/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/08/12/ios-shu-ju-chi-jiu-hua-(er-)/">iOS 数据持久化（二）</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-08-12T22:59:06+08:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>iOS中有五种持久化数据的方式：属性列表、对象归档、NSUserDefaults、SQLite3和Core Data。
-本文介绍对象归档来持久化数据。归档的作用就是将对象以文件的形式保存到磁盘中，以使得数据序列化和持久化。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/08/12/ios-shu-ju-chi-jiu-hua-(er-)/">Read on &rarr;</a>
     </footer>
   
 
