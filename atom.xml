@@ -4,7 +4,7 @@
     <title><![CDATA[Leo Lee]]></title>
     <link href="http://swplzj.github.io/atom.xml" rel="self"/>
     <link href="http://swplzj.github.io/"/>
-    <updated>2015-11-09T12:01:55+08:00</updated>
+    <updated>2015-11-09T16:17:28+08:00</updated>
     <id>http://swplzj.github.io/</id>
     <author>
         <name><![CDATA[Leo Lee]]></name>
@@ -12,6 +12,177 @@
     </author>
     <generator uri="http://octopress.org/">Octopress</generator>
     
+    
+    <entry>
+        <title type="html"><![CDATA[Git-问题记录]]></title>
+        <link href="http://swplzj.github.io/blog/2015/11/09/git-wen-ti-ji-lu/"/>
+        <updated>2015-11-09T15:39:22+08:00</updated>
+        <id>http://swplzj.github.io/blog/2015/11/09/git-wen-ti-ji-lu</id>
+        <content type="html"><![CDATA[<p>在做项目的过程中，遇到很多关于Git相关的问题，记录下来与大家分享，也便于自己回顾。</p>
+
+<h4>介绍一个成功的 Git 分支模型</h4>
+
+<p>当自己从 SVN 转到 Git 后，首先面临的就是创建Git项目，参照网上给出的Git 模型，来创建合理的分支，实际项目也是参照于下面这篇文章，创建了 master 和 develop 本地分支和远程分支，然后每个开发者都有自己的本地分支。</p>
+
+<!--more-->
+
+
+<p><a href="http://www.oschina.net/translate/a-successful-git-branching-model">参照Git模型</a></p>
+
+<h4>搜索已执行的命令</h4>
+
+<p> terminal 下, <code>control + r</code> 可以搜索已执行的命令，然后按 <code>ESC</code> ，回车</p>
+
+<h4>配置用户名和邮箱</h4>
+
+<p>全局的通过vim ~/.gitconfig来查看</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git config --global user.name "Your Name"
+</span><span class='line'>gigit config --global user.email you@example.com</span></code></pre></td></tr></table></div></figure>
+
+
+<p>局部的通过当前路径下的 .git/config文件来查看</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git config user.name "Your Name"
+</span><span class='line'>git config user.email you@example.com</span></code></pre></td></tr></table></div></figure>
+
+
+<p>修改最后一次提交的用户名和邮箱地址</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git commit --amend --author='Your Name &lt;you@example.com&gt;'
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Git使用gitignore建立项目过滤规则</h4>
+
+<p> git中提供两种过滤机制，一种是全局过滤机制，即对所有的git都适用；另一种是针对某个项目使用的过滤规则。</p>
+
+<p><code>问题:</code>
+<code>.gitignore</code> 只适用于尚未添加到 <code>git</code> 库的文件。如果已经添加了，则需用 <code>git rm</code> 移除后再重新 <code>commit</code>。</p>
+
+<h4>删除文件</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git rm -r .
+</span><span class='line'>rm -rf HIFramework
+</span><span class='line'>git rm HIFramework
+</span><span class='line'>rm 'HIFramework'
+</span><span class='line'>git commit -m 'delete'</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>远程仓库相关命令</h4>
+
+<pre><code>检出仓库：$ git clone git://github.com/jquery/jquery.git
+
+查看远程仓库：$ git remote -v
+
+添加远程仓库：$ git remote add [name] [url]
+
+删除远程仓库：$ git remote rm [name]
+
+修改远程仓库：$ git remote set-url --push [name] [newUrl]
+
+拉取远程仓库：$ git pull [remoteName] [localBranchName]
+
+推送远程仓库：$ git push [remoteName] [localBranchName]
+
+强制推送更改：$ git push --force origin master
+</code></pre>
+
+<p>如果想把本地的某个分支test提交到远程仓库，并作为远程仓库的master分支，或者作为另外一个名叫test的分支，如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git push origin test:master         // 提交本地test分支作为远程的master分支
+</span><span class='line'>$ git push origin test:test              // 提交本地test分支作为远程的test分支</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>分支(branch)操作相关命令</h4>
+
+<pre><code>查看本地分支：$ git branch -av
+查看远程分支：$ git branch -r （如果还是看不到就先 git fetch origin 先）
+创建本地分支：$ git branch [name] ----注意新分支创建后不会自动切换为当前分支
+切换分支：$ git checkout [name]
+创建新分支并立即切换到新分支：$ git checkout -b [name]
+直接检出远程分支：$ git checkout -b [name] [remoteName] (如：git checkout -b myNewBranch origin/dragon)
+删除分支：$ git branch -d [name] ---- -d选项只能删除已经参与了合并的分支，对于未有合并的分支是无法删除的。如果想强制删除一个分支，可以使用-D选项
+合并分支：$ git merge [name] ----将名称为[name]的分支与当前分支合并
+合并最后的2个提交：$ git rebase -i HEAD~2 ---- 数字2按需修改即可（如果需提交到远端$ git push -f origin master 慎用！）
+创建远程分支(本地分支push到远程)：$ git push origin [name]
+删除远程分支：$ git push origin :heads/[name] 或 $ git push origin :[name] 
+修改分支名称：git branch -m &lt;old_branch_name&gt; &lt;new_branch_name&gt;  
+</code></pre>
+
+<p>创建空的分支：(执行命令之前记得先提交你当前分支的修改，否则会被强制删干净没得后悔)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git symbolic-ref HEAD refs/heads/[name]
+</span><span class='line'>$ rm .git/index
+</span><span class='line'>$ git clean -fdx</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>版本(tag)操作相关命令</h4>
+
+<pre><code>查看版本：$ git tag
+
+创建版本：$ git tag [name]
+
+删除版本：$ git tag -d [name]
+
+查看远程版本：$ git tag -r
+
+创建远程版本(本地版本push到远程)：$ git push origin [name]
+
+删除远程版本：$ git push origin :refs/tags/[name]
+
+合并远程仓库的tag到本地：$ git pull origin --tags
+
+上传本地tag到远程仓库：$ git push origin --tags
+
+创建带注释的tag：$ git tag -a [name] -m 'yourMessage'
+</code></pre>
+
+<h4>删除和回退</h4>
+
+<pre><code>删除当前仓库内未受版本管理的文件：$ git clean -f
+
+恢复仓库到上一次的提交状态：$ git reset --hard
+
+回退所有内容到上一个版本：$ git reset HEAD^
+
+回退a.py这个文件的版本到上一个版本：$ git reset HEAD^ a.py
+
+回退到某个版本：$ git reset 057d 
+
+将本地的状态回退到和远程的一样：$ git reset –hard origin/master  
+
+向前回退到第3个版本：$ git reset –-soft HEAD~3
+
+修改最后的提交日志：$ git commit --amend
+
+也可以修改提交的用户名和Email：
+
+git commit --amend --author='Your Name &lt;you@example.com&gt;'
+</code></pre>
+
+<h4>查看提交日志</h4>
+
+<p>使用 $ git log &ndash;oneline &ndash;graph &ndash;name-status 既可以看到简介的日志信息，也可以看到改了哪些文件，一举两得：</p>
+
+<p>暂时就是这么多了，持续更新中，待续。。。</p>
+]]></content>
+    </entry>
     
     <entry>
         <title type="html"><![CDATA[Git 在项目中的基本使用]]></title>
@@ -5129,174 +5300,6 @@ rake deploy
 <p><a href="http://objccn.io/issue-1-3/">测试 View Controllers</a></p>
 
 <p><a href="http://inessential.com/2014/03/16/smaller_please">Bunnies</a></p>
-]]></content>
-    </entry>
-    
-    <entry>
-        <title type="html"><![CDATA[优秀开源项目：FACEBOOK PAPER动画引擎 – POP]]></title>
-        <link href="http://swplzj.github.io/blog/2014/11/14/you-xiu-kai-yuan-xiang-mu-facebook-paper-dong-hua-yin-qing-pop/"/>
-        <updated>2014-11-14T19:02:27+08:00</updated>
-        <id>http://swplzj.github.io/blog/2014/11/14/you-xiu-kai-yuan-xiang-mu-facebook-paper-dong-hua-yin-qing-pop</id>
-        <content type="html"><![CDATA[<p><img src="http://cc.cocimg.com/cms/uploads/allimg/140429/4196_140429142234_1.gif" alt="id1" /></p>
-
-<p>Pop是一个适用于iOS和OS X平台的可扩展动画引擎，是一个成熟的经过多重测试的，可实现Facebook Paper中的所有动画和过渡效果。除了基本的静态动画，Pop还支持spring和decay动画，有助于打造一个逼真的，基于物理的交互。你可以通过Pop的API把Pop快速集成到现有的Objective-C代码库中，并在任何对象上实现动画的任何属性。</p>
-
-<!--more-->
-
-
-<p></p>
-
-<h5>开始，停止以及更新</h5>
-
-<p>开始动画–把它添加到你想要动画的对象上：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>POPSpringAnimation *anim = [POPSpringAnimation animation]; 
-</span><span class='line'>… 
-</span><span class='line'>[layer pop_addAnimation:anim forKey:@"myKey"]; </span></code></pre></td></tr></table></div></figure>
-
-
-<p>停止动画–把它从key在刚开始时指定的对象引用中移除。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>[layer pop_removeAnimationForKey:@"myKey"]; 
-</span><span class='line'>key可以用来查询现有的动画。更新运行中动画的toValue，为改变进程提供了很好的方式：
-</span><span class='line'>anim = [layer pop_animationForKey:@"myKey"]; 
-</span><span class='line'>if (anim) { 
-</span><span class='line'>  /* update to value to new destination */ 
-</span><span class='line'>  anim.toValue = @(42.0); 
-</span><span class='line'>} else { 
-</span><span class='line'>  /* create and start a new animation */ 
-</span><span class='line'>  …. 
-</span><span class='line'>} </span></code></pre></td></tr></table></div></figure>
-
-
-<p>虽然上述代码中使用了layer，但是Pop接口作为一个NSObject上附加类别执行。任何NSObject或者子类可以被动画。</p>
-
-<h5>类型</h5>
-
-<p>Pop有四个具体的动画类型：spring, decay, basic和custom
-Spring动画可以用来给对象一个令人愉悦的弹跳效果。在这个例子中，我们用spring动画来动画一个层次的弹跳效果，从现有的值设定为(0, 0, 400, 400)。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>POPSpringAnimation *anim = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerBounds]; 
-</span><span class='line'>anim.toValue = [NSValue valueWithCGRec 
-</span><span class='line'>t:CGRectMake(0, 0, 400, 400)]; 
-</span><span class='line'>[layer pop_addAnimation:anim forKey:@"size"]; </span></code></pre></td></tr></table></div></figure>
-
-
-<p>Decay动画能用于逐渐减慢一个对象直至停止。在这个例子中，我们将layer的速率减小为每秒钟1000pts。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>POPDecayAnimation *anim = [POPDecayAnimation animationWithPropertyNamed:kPOPLayerPositionX]; 
-</span><span class='line'>anim.velocity = @(1000.); 
-</span><span class='line'>[layer pop_addAnimation:anim forKey:@"slide"]; </span></code></pre></td></tr></table></div></figure>
-
-
-<p>基本动画能用于在指定的时间段插入值。使用一个淡入淡出动画在默认时间段将视图的透明度从0.0设置为1.0。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>POPBasicAnimation *anim = [POPBasicAnimation animationWithPropertyNamed:kPOPViewAlpha]; 
-</span><span class='line'>anim.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]; 
-</span><span class='line'>anim.fromValue = @(0.0); 
-</span><span class='line'>anim.toValue = @(1.0); 
-</span><span class='line'>[view pop_addAnimation:anim forKey:@"slide"]; </span></code></pre></td></tr></table></div></figure>
-
-
-<p>通过处理CADisplayLink和相关的time-step管理，POPCustomAnimation使创建自定义动画和过渡变得更加容易。更多详情请查看header。</p>
-
-<h5>属性</h5>
-
-<p>属性由POPAnimatableProperty类指定动画。在这个例子中，我们创建一个spring动画，明确地设置与-[CALayer bounds]一致的动画属性：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>POPSpringAnimation *anim = [POPSpringAnimation animation]; 
-</span><span class='line'>anim.property = [POPAnimatableProperty propertyWithName:kPOPLayerBounds]; </span></code></pre></td></tr></table></div></figure>
-
-
-<p>这个框架提供了很多常见的层以及额外的视图动画属性。你可以通过创建类的新实例来动画一个自定义属性。在这个例子中，我声明了一个自定义音量属性：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>prop = [POPAnimatableProperty propertyWithName:@"com.foo.radio.vo 
-</span><span class='line'>lume" initializer:^(POPMutableAnimatableProperty *prop) { 
-</span><span class='line'>  // read value 
-</span><span class='line'>  prop.readBlock = ^(id obj, CGFloat values[]) { 
-</span><span class='line'>    values[0] = [obj volume]; 
-</span><span class='line'>  }; 
-</span><span class='line'>  // write value 
-</span><span class='line'>  prop.writeBlock = ^(id obj, const CGFloat values[]) { 
-</span><span class='line'>    [obj setVolume:values[0]]; 
-</span><span class='line'>  }; 
-</span><span class='line'>  // dynamics threshold 
-</span><span class='line'>  prop.threshold = 0.01; 
-</span><span class='line'>}]; 
-</span><span class='line'>anim.property = prop; </span></code></pre></td></tr></table></div></figure>
-
-
-<p>关于动画属性的完整列表以及声明自定义属性的更多信息，请看POPAnimatableProperty.h。</p>
-
-<h5>调试</h5>
-
-<p>这里有一些关于调试的技巧。Pop遵循模拟器的Toggle Slow Animations设置。试着用它放慢动画，将能更容易查看交互。
-考虑给你的动画命名。当你通过日志查看动画或者调试动画时，这将使你更容易识别它们。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>anim.name = @“springOpen”; </span></code></pre></td></tr></table></div></figure>
-
-
-<p>每个动画都有一个关联的tracer，它以一种快速高效的方式允许你记录所有的动画相关事件，还允许你在动画完成后对其进行查询和分析。下边的例子展示启动和配置tracer，以记录所有动画事件。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>POPAnimationTracer *tracer = anim.tracer; 
-</span><span class='line'>tracer.shouldLogAndResetOnCompletion = YES; 
-</span><span class='line'>[tracer start]; </span></code></pre></td></tr></table></div></figure>
-
-
-<p>更多详情，请查看POPAnimationTracer.h。
-假设已经安装了CocoaPods，这将在单元测试目标中包含必要的OCMock依赖。</p>
-
-<h5>相关资源</h5>
-
-<p><a href="https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CoreAnimation_guide/Introduction/Introduction.html">Core Animation Programming Guide</a>
-<a href="http://tapity.com/tutorial-getting-started-with-pop/">Tapity Tutorial – Getting Started with Pop</a>
-<a href="https://github.com/facebook/tweaks">Tweaks – Easily adjust parameters for iOS apps in development</a>
-<a href="http://facebook.github.io/rebound/">Rebound – Springs Animations for Android</a></p>
 ]]></content>
     </entry>
     

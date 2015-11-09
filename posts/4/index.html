@@ -12,8 +12,7 @@
   <meta name="author" content="Leo Lee">
 
   
-  <meta name="description" content="iOS中有五种持久化数据的方式：属性列表、对象归档、NSUserDefaults、SQLite3和Core Data。
-本文介绍对象归档来持久化数据。归档的作用就是将对象以文件的形式保存到磁盘中，以使得数据序列化和持久化。 ">
+  <meta name="description" content="iOS中有五种持久化数据的方式：属性列表、对象归档、NSUserDefaults、SQLite3和Core Data。 NSUserDefaults官方文档介绍： NSUserDefaults类为和默认系统类交互提供了一种编程接口。默认系统允许应用程序去定制其行为，为了符合用户的喜好。举例来说， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -61,6 +60,51 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/08/17/ios-shu-ju-chi-jiu-hua-(san-)/">iOS 数据持久化（三）</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-08-17T22:03:35+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>iOS中有五种持久化数据的方式：属性列表、对象归档、NSUserDefaults、SQLite3和Core Data。</p>
+
+<h4>NSUserDefaults官方文档介绍：</h4>
+
+<p>NSUserDefaults类为和默认系统类交互提供了一种编程接口。默认系统允许应用程序去定制其行为，为了符合用户的喜好。举例来说，你可以允许用户去决定在应用程序中显示的计量单位或者文档多久会自动保存。应用程序在用户默认数据库中，通过给一系列参数赋值来记录类似的喜好。这些参数被称为默认值，因为它们通常被用于一个程序在启动时或默认状态下的默认工作状态。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/08/17/ios-shu-ju-chi-jiu-hua-(san-)/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -439,54 +483,6 @@
   
     <footer>
       <a rel="full-article" href="/blog/2014/04/22/ios-coretextlei-ku-de-xiang-xi-jie-shao/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/04/14/at-ios5yi-shang-:she-zhi-kong-jian-quan-ju-xian-shi-yang-shi-%3C%3C-appearance-proxy/">iOS5以上：设置控件全局显示样式《APPEARANCE PROXY》</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-04-14T23:34:41+08:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Appearance是Apple在iOS5.0上加的一个协议，它让程序员可以很轻松地改变某控件的全局样式（背景）</p>
-
-<pre><code> @selector(appearance)
-</code></pre>
-
-<p>支持UIAppearance协议的类可以访问appearance selector ,它为receiver返回appearance proxy，我们可以给proxy发一些消息，诸如setTintColor:等</p>
-
-<p>但是它并不是支持所有的UI类。下面列出它支持的类</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/04/14/at-ios5yi-shang-:she-zhi-kong-jian-quan-ju-xian-shi-yang-shi-%3C%3C-appearance-proxy/">Read on &rarr;</a>
     </footer>
   
 
