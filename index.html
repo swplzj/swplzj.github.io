@@ -12,7 +12,8 @@
   <meta name="author" content="Leo Lee">
 
   
-  <meta name="description" content="在做iOS项目的过程中，到了了一些值得记录下来的问题，以便回顾和帮助他人，跳过他人跌过的坑。 ">
+  <meta name="description" content="相信大家都有过这样的经历：想实现共享 Mac 和 iPhone 上的文件，下面我粗略的总结了集中方式，和大家一起分享。
+通过共享介质的不同可以分为：网络共享、蓝牙无线方式文件传输、数据线连接同步。 ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -60,6 +61,48 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/11/18/ios-she-bei-he-mac-wen-jian-gong-xiang-chuan-shu-de-ji-chong-fang-shi/">iOS 设备和 Mac 文件共享传输的几种方式</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-11-18T11:15:18+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>相信大家都有过这样的经历：想实现共享 Mac 和 iPhone 上的文件，下面我粗略的总结了集中方式，和大家一起分享。
+通过共享介质的不同可以分为：网络共享、蓝牙无线方式文件传输、数据线连接同步。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2015/11/18/ios-she-bei-he-mac-wen-jian-gong-xiang-chuan-shu-de-ji-chong-fang-shi/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -473,79 +516,6 @@
   
     <footer>
       <a rel="full-article" href="/blog/2015/08/06/mac-navicat-premium-11-dot-0-16-po-jie-ji-lu/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/08/06/objective-c-gui-fan-zheng-li/">Objective-C 规范整理</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-08-06T09:54:19+08:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>这份规范参考了一些主流公司的代码规范，也结合自己实战中的操作整理而成，也是我们 iOS 团队的代码约定，为了减少项目维护成本，大家可以参照。</p>
-
-<h2>目录</h2>
-
-<ul>
-<li><a href="#%E5%85%B3%E4%BA%8EView%E7%9A%84%E5%B8%83%E5%B1%80">关于View的布局</a></li>
-<li><a href="#%E7%82%B9%E8%AF%AD%E6%B3%95">点语法</a></li>
-<li><a href="#%E9%97%B4%E8%B7%9D">间距</a></li>
-<li><a href="#%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD">条件判断</a>
-
-<ul>
-<li><a href="#%E4%B8%89%E7%9B%AE%E8%BF%90%E7%AE%97%E7%AC%A6">三目运算符</a></li>
-</ul>
-</li>
-<li><a href="#%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86">错误处理</a></li>
-<li><a href="#%E6%96%B9%E6%B3%95">方法</a></li>
-<li><a href="#%E5%8F%98%E9%87%8F">变量</a></li>
-<li><a href="#%E5%91%BD%E5%90%8D">命名</a></li>
-<li><a href="#%E6%B3%A8%E9%87%8A">注释</a></li>
-<li><a href="#init-%E5%92%8C-dealloc">Init 和 Dealloc</a></li>
-<li><a href="#%E5%AD%97%E9%9D%A2%E9%87%8F">字面量</a></li>
-<li><a href="#CGRect-%E5%87%BD%E6%95%B0">CGRect 函数</a></li>
-<li><a href="#%E5%B8%B8%E9%87%8F">常量</a></li>
-<li><a href="#%E6%9E%9A%E4%B8%BE%E7%B1%BB%E5%9E%8B">枚举类型</a></li>
-<li><a href="#%E4%BD%8D%E6%8E%A9%E7%A0%81">位掩码</a></li>
-<li><a href="#%E7%A7%81%E6%9C%89%E5%B1%9E%E6%80%A7">私有属性</a></li>
-<li><a href="#%E5%9B%BE%E7%89%87%E5%91%BD%E5%90%8D">图片命名</a></li>
-<li><a href="#%E5%B8%83%E5%B0%94">布尔</a></li>
-<li><a href="#%E5%8D%95%E4%BE%8B">单例</a></li>
-<li><a href="#%E5%AF%BC%E5%85%A5">导入</a></li>
-<li><a href="#Xcode-%E5%B7%A5%E7%A8%8B">Xcode 工程</a></li>
-</ul>
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2015/08/06/objective-c-gui-fan-zheng-li/">Read on &rarr;</a>
     </footer>
   
 
