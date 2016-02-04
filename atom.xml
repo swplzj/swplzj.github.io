@@ -4,7 +4,7 @@
     <title><![CDATA[Leo Lee]]></title>
     <link href="http://swplzj.github.io/atom.xml" rel="self"/>
     <link href="http://swplzj.github.io/"/>
-    <updated>2015-11-18T16:46:46+08:00</updated>
+    <updated>2016-02-04T14:19:46+08:00</updated>
     <id>http://swplzj.github.io/</id>
     <author>
         <name><![CDATA[Leo Lee]]></name>
@@ -1496,6 +1496,106 @@ $ git clone https://github.com/libgit2/libgit2 mylibgit
 
 <p>唠叨了这么多，接下来还是要有目标的去提升自己，规划自己的职业道路。
 分享今天看到的一句话：要想成为牛逼的人，就要去吃成为牛逼人所要吃的苦。</p>
+]]></content>
+    </entry>
+    
+    <entry>
+        <title type="html"><![CDATA[如何下载和安装CocoaPods]]></title>
+        <link href="http://swplzj.github.io/blog/2015/09/04/ru-he-xia-zai-he-an-zhuang-cocoapods/"/>
+        <updated>2015-09-04T14:16:46+08:00</updated>
+        <id>http://swplzj.github.io/blog/2015/09/04/ru-he-xia-zai-he-an-zhuang-cocoapods</id>
+        <content type="html"><![CDATA[<h3>CocoaPods安装和使用教程</h3>
+
+<hr />
+
+<h4>CocoaPods是什么？</h4>
+
+<p>CocoaPods是iOS第三方开源类库管理工具。</p>
+
+<h4>如何下载和安装CocoaPods？</h4>
+
+<pre><code>sudo gem install cocoapods
+</code></pre>
+
+<p>GFW阻挡了cocoapods.org,</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ gem sources --remove https://rubygems.org/
+</span><span class='line'>//等有反应之后再敲入以下命令
+</span><span class='line'>$ gem sources -a http://ruby.taobao.org/</span></code></pre></td></tr></table></div></figure>
+
+
+<p>验证Ruby镜像</p>
+
+<pre><code>$ gem sources -l
+</code></pre>
+
+<p>运行后出现</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>*** CURRENT SOURCES ***
+</span><span class='line'>
+</span><span class='line'>http://ruby.taobao.org/   </span></code></pre></td></tr></table></div></figure>
+
+
+<p>安装</p>
+
+<pre><code>$ sudo gem install cocoapods
+</code></pre>
+
+<h4>如何使用CocoaPods？</h4>
+
+<p>两种使用场景来具体说明如何使用CocoaPods。</p>
+
+<h5>利用CocoaPods，在项目中导入AFNetworking类库</h5>
+
+<pre><code>$ pod search AFNetworking
+</code></pre>
+
+<p>先利用Xcode创建一个名字CocoaPodsDemo的项目，
+有个文件来控制CocoaPods该下载什么。这个文件就叫做“Podfile”（注意，一定得是这个文件名，而且没有后缀）。你创建一个Podfile文件，然后在里面添加你需要下载的类库，每个项目只需要一个Podfile文件。</p>
+
+<p>在终端中进入（cd命令）你项目所在目录，然后在当前目录下，利用vim创建Podfile，运行：</p>
+
+<pre><code>$ vim Podfile
+</code></pre>
+
+<p>然后在Podfile文件中输入以下文字：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>platform :ios, '7.0'
+</span><span class='line'>pod "AFNetworking", "~&gt; 2.0"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>然后保存退出。vim环境下，保存退出命令是：</p>
+
+<pre><code>:wq
+</code></pre>
+
+<p>你会发现你的项目目录中，出现一个名字为Podfile的文件，而且文件内容就是你刚刚输入的内容。注意，Podfile文件应该和你的工程文件.xcodeproj在同一个目录下。</p>
+
+<pre><code>$ pod install 
+</code></pre>
+
+<p>注意：以后打开项目就用 CocoaPodsDemo.xcworkspace 打开，而不是之前的.xcodeproj文件。</p>
+
+<h5>如何正确编译运行一个包含CocoPods类库的项目</h5>
+
+<p>打开终端，进入UAAppReviewManagerExample所在的目录，也就是和Podfile在同一目录下，和场景1一样，输入以下命令（由于已经有Podfile，所以不需要再创建Podfile）：</p>
+
+<pre><code>$ pod update
+</code></pre>
+
+<p>这时候，再回到UAAppReviewManagerExample文件夹看一看，会看到多了一个文件UAAppReviewManagerExample.xcworkspace：</p>
+
+<p>注意，这里有个小问题，如果刚刚你不是输入$ pod update，而是输入$ pod install，会发现类库导入不成功，并且终端出现下面提示：</p>
+
+<p>$ pod install只会按照Podfile的要求来请求类库，如果类库版本号有变化，那么将获取失败。但是 $ pod update会更新所有的类库，获取最新版本的类库。而且你会发现，如果用了 $ pod update，再用 $ pod install 就成功了。</p>
 ]]></content>
     </entry>
     
@@ -4065,216 +4165,6 @@ rake deploy
 
 
 <p>要方便很多</p>
-]]></content>
-    </entry>
-    
-    <entry>
-        <title type="html"><![CDATA[Objective-C中的Selector和SEL]]></title>
-        <link href="http://swplzj.github.io/blog/2015/01/07/objective-czhong-de-selectorhe-sel/"/>
-        <updated>2015-01-07T10:32:05+08:00</updated>
-        <id>http://swplzj.github.io/blog/2015/01/07/objective-czhong-de-selectorhe-sel</id>
-        <content type="html"><![CDATA[<h4>Objective-C中Selector基本概念和操作</h4>
-
-<p>简而言之，你可以理解 @selector()就是取类方法的编号,他的行为基本可以等同C语言的中函数指针,只不过C语言中，可以把函数名直接赋给一个函数指针，而Objective-C的类不能直接应用函数指针，这样只能做一个@selector语法来取.</p>
-
-<!--more-->
-
-
-<p></p>
-
-<p>它的结果是一个SEL类型。这个类型本质是类方法的编号(函数地址)?因此我们有如下代码。</p>
-
-<h5>一、取得selector值.</h5>
-
-<p>C函数指针</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>int add(int val)  
-</span><span class='line'>{  
-</span><span class='line'>  return val+1;  
-</span><span class='line'>}  
-</span><span class='line'>int (* c_func)(int val); //定义一个函数指针变量  
-</span><span class='line'>_func = add ;  //把函数addr地址直接赋给c_func </span></code></pre></td></tr></table></div></figure>
-
-
-<p>Objective-C的选择器,</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>@interface foo  
-</span><span class='line'>-(int)add:int val;  
-</span><span class='line'>@end  
-</span><span class='line'> 
-</span><span class='line'>SEL class_func ; //定义一个类方法指针  
-</span><span class='line'>class_func = @selector(add:int); </span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>注意:</code></p>
-
-<ol>
-<li>@selector是查找当前类的方法，而[object @selector(方法名:方法参数..) ] ;是取object对应类的相庆方法;</li>
-<li>查找类方法时，除了方法名,方法参数也查询条件之一.</li>
-<li>可以用字符串来找方法 SEL　变量名　=　NSSelectorFromString(方法名字的字符串);</li>
-<li>可以运行中用SEL变量反向查出方法名字字符串</li>
-</ol>
-
-
-<p>NSString　*变量名　=　NSStringFromSelector(SEL参数);</p>
-
-<h5>二、执行selector值.</h5>
-
-<p>取得相庆值后，怎么处理SEL值呢，这一点仍然与函数指针一样，就是执行它</p>
-
-<p>函数指针执行，（以下有几种等效形式）</p>
-
-<ul>
-<li>*c_func(10);</li>
-<li>c_func(10);</li>
-<li>SEL变量的执行.用performSelecor方法来执行.</li>
-<li>[对象　performSelector:SEL变量　withObject:参数1　withObject:参数2];</li>
-</ul>
-
-
-<h5>三.selector的应用场合</h5>
-
-<p>selector本质是跟C的回调函数一样。主要用于两个对象之间进行松耦合的通讯.这种方法很多开发环境用到。比如GTK，Delphi.基本上整个Cocoa库之间对象，控制之间通讯都是在这个基础构建的。</p>
-
-<h4>SEL</h4>
-
-<p>在Objective-C中，SEL是选择器（selector）的一个类型。选择器就是指向方法的一个指针，读者可以简单理解为程序运行到这里就会执行指定的方法，可以这样定义一个选择器：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>SEL action = [button action]; </span></code></pre></td></tr></table></div></figure>
-
-
-<p>我们这样使用一个选择器，下面的选择器都叫做action：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>[Foo action]  
-</span><span class='line'>[Bar action] </span></code></pre></td></tr></table></div></figure>
-
-
-<p>在Target-Action 模式（Cocoa 程序中的一种常用模式）中：Target 指定了一个类，Action指定一个方法。在一个对象上设置Action就是通过选择器完成的：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>-（void）setTarget:（id）target;  
-</span><span class='line'>-（void）setAction:（SEL）action; </span></code></pre></td></tr></table></div></figure>
-
-
-<p>下述语句设置了一个button对象上的Action为“@selector（start:）”，即它调用start方法：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>[button setAction:@selector（start:）]; </span></code></pre></td></tr></table></div></figure>
-
-
-<p>如果你的方法上有两个参数，比如：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>-（void）setName:（NSString *）name age:（int）age; </span></code></pre></td></tr></table></div></figure>
-
-
-<p>那么，你的选择器应该这样书写：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>SEL sel = @selector（setName:age:）; </span></code></pre></td></tr></table></div></figure>
-
-
-<p>如果方法不存在的话，调用该方法的应用可能会异常中止。所以，需要使用respondsToSelector 方法来判断该对象是否存在对应的方法，使用performSelector:withObject:方法来调用选择器：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>SEL sel = @selector (start:) ; // 指定action  
-</span><span class='line'>if ([obj respondsToSelector:sel]) { //判断该对象是否有相应的方法  
-</span><span class='line'>[obj performSelector:sel withObject:self]; //调用选择器方法  
-</span><span class='line'>} </span></code></pre></td></tr></table></div></figure>
-
-
-<p>下面来看一个应用选择器的实例。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#import &lt;Foundation/Foundation.h&gt; 
-</span><span class='line'>@interface ClassA : NSObject {  
-</span><span class='line'>}  
-</span><span class='line'>- (void) print;  
-</span><span class='line'>@end  
-</span><span class='line'>@implementation ClassA  
-</span><span class='line'>- (void) print{  
-</span><span class='line'>NSLog (@"I'm ClassA.") ;  
-</span><span class='line'>}  
-</span><span class='line'>@end  
-</span><span class='line'>int main (int argc, const char * argv[]) {  
-</span><span class='line'>NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];  
-</span><span class='line'>SEL sel = @selector (print) ;  
-</span><span class='line'>ClassA *classA = [[ClassA alloc]init];  
-</span><span class='line'>[classA performSelector:sel withObject:nil]; //调用选择器指定的方法  
-</span><span class='line'>[pool drain];  
-</span><span class='line'>return 0;  
-</span><span class='line'>} </span></code></pre></td></tr></table></div></figure>
-
-
-<p>【程序结果】</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>I'm ClassA. </span></code></pre></td></tr></table></div></figure>
-
-
-<p>下面解释一下这段代码，读者有可能看不明白，因为到目前为止并没有讲述类相关的知识。读者只需要了解上述例子中选择器的用法即可，关于类的知识，会在后面的章节详细阐述。</p>
-
-<p>代码首先创建了一个名字叫ClassA 的类，它只包含一个方法print。在随后的实现文件中，我们实现了这个方法：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>- (void) print{  
-</span><span class='line'>NSLog (@"I'm ClassA.") ;  
-</span><span class='line'>} </span></code></pre></td></tr></table></div></figure>
-
-
-<p>读者不难看出，这个方法仅仅是打印到控制台上一句话。在接下来的main方法中，定义了一个选择器sel，它指向的是一个名叫print 的方法。我们并不知道这个方法是哪个类的，因为具体的信息是在运行期间系统自动帮我们判断的。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>SEL sel = @selector (print) ; </span></code></pre></td></tr></table></div></figure>
-
-
-<p>随后构建了一个对象（读者不用拘泥于语法，我们会在后面的章节详细阐述），并调用这个对象performSelector:withObject:的方法。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ClassA *classA = [[ClassA alloc]init];  
-</span><span class='line'>[classA performSelector:sel withObject:nil]; </span></code></pre></td></tr></table></div></figure>
-
-
-<p>这时候，系统就会自动调用classA对象的print方法，最终得到程序运行结果。</p>
 ]]></content>
     </entry>
     
