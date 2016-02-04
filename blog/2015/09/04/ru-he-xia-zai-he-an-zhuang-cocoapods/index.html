@@ -151,25 +151,25 @@ $ gem sources -- &hellip;">
 <pre><code>:wq
 </code></pre>
 
-<p>你会发现你的项目目录中，出现一个名字为Podfile的文件，而且文件内容就是你刚刚输入的内容。注意，Podfile文件应该和你的工程文件.xcodeproj在同一个目录下。</p>
+<p>你会发现你的项目目录中，出现一个名字为<code>Podfile</code>的文件，而且文件内容就是你刚刚输入的内容。注意，<code>Podfile</code>文件应该和你的工程文件<code>.xcodeproj</code>在同一个目录下。</p>
 
 <pre><code>$ pod install 
 </code></pre>
 
-<p>注意：以后打开项目就用 CocoaPodsDemo.xcworkspace 打开，而不是之前的.xcodeproj文件。</p>
+<p>注意：以后打开项目就用 <code>CocoaPodsDemo.xcworkspace</code> 打开，而不是之前的<code>.xcodeproj</code>文件。</p>
 
 <h5>如何正确编译运行一个包含CocoPods类库的项目</h5>
 
-<p>打开终端，进入UAAppReviewManagerExample所在的目录，也就是和Podfile在同一目录下，和场景1一样，输入以下命令（由于已经有Podfile，所以不需要再创建Podfile）：</p>
+<p>打开终端，进入<code>UAAppReviewManagerExample</code>所在的目录，也就是和<code>Podfile</code>在同一目录下，和场景1一样，输入以下命令（由于已经有<code>Podfile</code>，所以不需要再创建<code>Podfile</code>）：</p>
 
 <pre><code>$ pod update
 </code></pre>
 
 <p>这时候，再回到UAAppReviewManagerExample文件夹看一看，会看到多了一个文件UAAppReviewManagerExample.xcworkspace：</p>
 
-<p>注意，这里有个小问题，如果刚刚你不是输入$ pod update，而是输入$ pod install，会发现类库导入不成功，并且终端出现下面提示：</p>
+<p>注意，这里有个小问题，如果刚刚你不是输入<code>$ pod update</code>，而是输入<code>$ pod install</code>，会发现类库导入不成功，并且终端出现下面提示：</p>
 
-<p>$ pod install只会按照Podfile的要求来请求类库，如果类库版本号有变化，那么将获取失败。但是 $ pod update会更新所有的类库，获取最新版本的类库。而且你会发现，如果用了 $ pod update，再用 $ pod install 就成功了。</p>
+<p><code>$ pod install</code>只会按照<code>Podfile</code>的要求来请求类库，如果类库版本号有变化，那么将获取失败。但是 <code>$ pod update</code>会更新所有的类库，获取最新版本的类库。而且你会发现，如果用了 <code>$ pod update</code>，再用 <code>$ pod install</code> 就成功了。</p>
 </div>
 
 
