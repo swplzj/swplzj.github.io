@@ -1,0 +1,1078 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+ <!-- 百度站长HTML标签验证 -->
+  <meta name="baidu-site-verification" content="2UxriFj8TS" />
+
+  <title>HTML 学习笔记 - Leo Lee</title>
+  <meta name="author" content="Leo Lee">
+
+  
+  <meta name="description" content="最新项目提交到 AppStore，等待审核过程中，有空学习点 HTML 知识，顺便做了一下笔记，其实之前也学习过网页设计，但是没有系统的学习，现在，我只想说：I am back&hellip; 要重新系统的学习一遍，学以致用，再对自己的 Blog 完美升级，期待中&hellip; HTML 属性 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://swplzj.github.io/blog/2016/03/09/html-xue-xi-bi-ji">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Leo Lee" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+ <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+<!--   
+
+ --></head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <nav id="main-nav" role="navigation">
+<ul class="main-navigation">
+  <li><a href="/" class="nav-link">首页 | Blog</a></li>
+  <li><a href="/blog/archives" class="nav-link">归档 | Archives</a></li>
+  <li><a href="/atom.xml" class="nav-link">订阅 | RSS</a></li>
+  <li><a href="/about" class="nav-link">关于我 | About</a></li>
+</ul>
+
+</nav>
+  
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">HTML 学习笔记</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-03-09T13:54:31+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>最新项目提交到 AppStore，等待审核过程中，有空学习点 HTML 知识，顺便做了一下笔记，其实之前也学习过网页设计，但是没有系统的学习，现在，我只想说：I am back&hellip; 要重新系统的学习一遍，学以致用，再对自己的 Blog 完美升级，期待中&hellip;</p>
+
+<!--more-->
+
+
+<h3>HTML 属性</h3>
+
+<p>属性为 HTML 元素提供附加信息。
+属性总是以名称/值对的形式出现，比如：name=&ldquo;value"。
+属性总是在 HTML 元素的开始标签中规定。</p>
+
+<h5>lang 属性</h5>
+
+<p>文档语言可以在 <html> 标签中来声明，语言声明使用 <code>lang</code> 属性。
+声明语言对屏幕阅读器（供盲人使用的软件）和搜索引擎都是很重要的。</p>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en-US"&gt;
+&lt;body&gt;
+
+&lt;h1&gt;My First Heading&lt;/h1&gt;
+&lt;p&gt;My first paragraph.&lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<h5>标题属性</h5>
+
+<p>HTML 中段落用 <code>&lt;p&gt;</code>标签定义。
+可以给段落添加 <code>title</code> 属性，当鼠标放到段落上时，就会出现标题。</p>
+
+<pre><code>&lt;p title="About W3Schools"&gt;
+W3Schools is a web developer's site.
+It provides tutorials and references covering
+many aspects of web programming,
+including HTML, CSS, JavaScript, XML, SQL, PHP, ASP, etc.
+&lt;/p&gt;
+</code></pre>
+
+<h5>超链接属性</h5>
+
+<p>HTML 链接用 <code>&lt;a&gt;</code> 来定义，链接地址可以在 <code>href</code> 属性中具体说明。</p>
+
+<pre><code>&lt;a href="http://www.baidu.com"&gt;这是一个链接&lt;/a&gt;
+</code></pre>
+
+<h5>尺寸属性</h5>
+
+<p>图片可以使用 <code>&lt;img&gt;</code> 标签来定义。
+在图片标签中提供资源的文件名称（src）和图片的尺寸（width 和 height）等属性。</p>
+
+<pre><code>&lt;img src="demo.jpg" width="100" height="200"&gt;
+</code></pre>
+
+<h5>alt属性</h5>
+
+<p>当HTML中图片没有被显示的时候，可以使用 <code>alt</code> 属性来设置可供替换的文本。</p>
+
+<h5>align对齐方式</h5>
+
+<pre><code>&lt;h1 align="center"&gt;This is a heading 1&lt;/h1&gt;
+</code></pre>
+
+<h5>bgcolor背景颜色</h5>
+
+<pre><code>&lt;body bgcolor="yellow"&gt;
+</code></pre>
+
+<h5>border 表格边框</h5>
+
+<p><code>HTML 提示：</code>使用小写属性，始终为属性值加引号。</p>
+
+<p>属性值应该始终被包括在引号内。双引号是最常用的，不过使用单引号也没有问题。
+在某些个别的情况下，比如属性值本身就含有双引号，那么您必须使用单引号，</p>
+
+<pre><code>name='Say "HelloWorld", Tom'
+</code></pre>
+
+<h3>HTML 标题</h3>
+
+<h5>水平线</h5>
+
+<p><code>&lt;hr /&gt;</code> 标签在 HTML 页面中创建水平线。
+hr 元素可用于分隔内容。</p>
+
+<p>标题很重要。</p>
+
+<p>请确保将 HTML heading 标签只用于标题。不要仅仅是为了产生粗体或大号的文本而使用标题。</p>
+
+<p>搜索引擎使用标题为您的网页的结构和内容编制索引。</p>
+
+<p>因为用户可以通过标题来快速浏览您的网页，所以用标题来呈现文档结构是很重要的。
+应该将 h1 用作主标题（最重要的），其后是 h2（次重要的），再其次是 h3，以此类推。</p>
+
+<h5>注释</h5>
+
+<pre><code>&lt;!-- This is a comment --&gt;
+</code></pre>
+
+<h3>HTML 段落</h3>
+
+<pre><code>&lt;p&gt;This is a paragraph&lt;/p&gt;
+</code></pre>
+
+<p><code>注释</code>：浏览器会自动地在段落的前后添加空行。（<p> 是块级元素）</p>
+
+<p><code>提示</code>：使用空的段落标记 <p></p> 去插入一个空行是个坏习惯。用 <br /> 标签代替它！（但是不要用 <br /> 标签去创建列表。）</p>
+
+<p><code>提示</code>：通过结束标签来关闭 HTML 是一种经得起未来考验的 HTML 编写方法。清楚地标记某个元素在何处开始，并在何处结束，不论对您还是对浏览器来说，都会使代码更容易理解。</p>
+
+<h5>HTML 折行</h5>
+
+<pre><code>&lt;p&gt;This is&lt;br /&gt;a para&lt;br /&gt;graph with line breaks&lt;/p&gt;
+</code></pre>
+
+<p><code>&lt;br&gt; 还是 &lt;br /&gt;</code></p>
+
+<p>您也许发现 <code>&lt;br&gt;</code> 与 <code>&lt;br /&gt;</code> 很相似。
+在 XHTML、XML 以及未来的 HTML 版本中，不允许使用没有结束标签（闭合标签）的 HTML 元素。
+即使 <code>&lt;br&gt;</code> 在所有浏览器中的显示都没有问题，使用 <code>&lt;br /&gt;</code> 也是更长远的保障。</p>
+
+<h3>HTML 格式化</h3>
+
+<h4>文本格式化</h4>
+
+<pre><code>&lt;html&gt;
+
+&lt;body&gt;
+
+&lt;b&gt;This text is bold&lt;/b&gt;
+&lt;br /&gt;
+&lt;b&gt;这是一个加粗的文本 &lt;/b&gt;
+&lt;br /&gt;
+
+&lt;strong&gt;This text is strong&lt;/strong&gt;
+
+&lt;br /&gt;
+
+&lt;strong&gt;这是一个加重语气的文本&lt;/strong&gt;
+&lt;br /&gt;
+
+&lt;big&gt;This text is big&lt;/big&gt;
+
+&lt;br /&gt;
+
+&lt;big&gt;这是一个big字体&lt;/big&gt;
+&lt;br /&gt;
+
+&lt;em&gt;This text is emphasized&lt;/em&gt;
+
+&lt;br /&gt;
+
+&lt;em&gt;这是一个强调的文本&lt;/em&gt;
+&lt;br /&gt;
+
+&lt;i&gt;This text is italic&lt;/i&gt;
+
+&lt;br /&gt;
+
+&lt;i&gt;这是斜体文本&lt;/i&gt;
+
+&lt;br /&gt;
+
+&lt;small&gt;This text is small&lt;/small&gt;
+
+&lt;br /&gt;
+
+&lt;small&gt;这是small 字体&lt;/small&gt;
+
+&lt;br /&gt;
+
+This text contains
+&lt;sub&gt;subscript&lt;/sub&gt;
+
+
+&lt;sub&gt;这是下标&lt;/sub&gt;
+
+&lt;br /&gt;
+
+This text contains
+&lt;sup&gt;superscript&lt;/sup&gt;
+&lt;sup&gt;这是上标&lt;/sup&gt;
+
+&lt;br /&gt;
+
+3&lt;sup&gt;2&lt;/sup&gt;
+&lt;br /&gt;
+
+&lt;b&gt;&lt;big&gt;3&lt;/big&gt;&lt;/b&gt;&lt;sub&gt;万&lt;/sub&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<h4>预格式文本</h4>
+
+<p><code>&lt;pre&gt;</code>预格式标签，保留了空格和换行</p>
+
+<pre>这是
+预格式文本。
+它保留了 空格 和
+换行</pre>
+
+
+
+
+<p>pre 标签很适合计算机代码显示</p>
+
+
+<pre><code>&lt;pre&gt;
+for i = 1 to 10
+    print i
+next i
+&lt;/pre&gt;
+</code></pre>
+
+<h4>计算机输出标签</h4>
+
+<pre><code>&lt;code&gt; Computer code &lt;/code&gt;
+&lt;br /&gt;
+&lt;kbd&gt;Keyboard input&lt;/kbd&gt;
+&lt;br /&gt;
+&lt;tt&gt;Teletype text&lt;/tt&gt;
+&lt;br /&gt;
+&lt;samp&gt;Sample text&lt;/samp&gt;
+&lt;br /&gt;
+&lt;var&gt;Computer variable&lt;/var&gt;
+&lt;br /&gt;
+</code></pre>
+
+<h4>地址标签</h4>
+
+<pre><code>&lt;address&gt;
+Written by &lt;a href="mailto:swplzj@163.com"&gt;Leo&lt;/a&gt;
+&lt;br /&gt;
+Visit me at:
+&lt;br /&gt;
+&lt;a href="http://swplzj.github.io"&gt;swplzj.github.io&lt;/a&gt;
+&lt;br /&gt;
+ShiLiPu, ChaoYang, Beijing
+&lt;br /&gt;
+China
+&lt;/address&gt;
+</code></pre>
+
+<h4>缩写和首字母缩写</h4>
+
+<pre><code>&lt;abbr title="etcetera"&gt;etc.定义缩写&lt;/abbr&gt;
+
+&lt;br /&gt;
+&lt;acronym title="World Wide Web"&gt;WWW（定义首字母缩写）&lt;/acronym&gt;
+&lt;p&gt;在某些浏览器中，当您把鼠标移至缩略词语上时，title 可用于展示表达的完整版本。&lt;/p&gt;
+
+&lt;p&gt;仅对于 IE 5 中的 acronym 元素有效。&lt;/p&gt;
+
+&lt;p&gt;对于 Netscape 6.2 中的 abbr 和 acronym 元素都有效。&lt;/p&gt;
+</code></pre>
+
+<h4>文本方向</h4>
+
+<pre><code>&lt;p&gt;
+如果你的浏览器支持 bi-directional override (bdo), 下一行会从右向左输出&lt;rtl&gt;
+&lt;/p&gt;
+&lt;bdo dir="rtl"&gt;从右向左读&lt;/bdo&gt;
+</code></pre>
+
+<h4>块引用</h4>
+
+<pre><code>这是长的引用：
+&lt;blockquote&gt;    
+这是长的引用。这是长的引用。这是长的引用。这是长的引用。这是长的引用。这是长的引用。这是长的引用。这是长的引用。
+&lt;/blockquote&gt;
+
+这是短的引用。
+&lt;q&gt;
+这是短的引用。
+&lt;/q&gt;
+</code></pre>
+
+<p>cite 引用</p>
+
+<pre><code>&lt;cite&gt;  这是引用&lt;/cite&gt;
+
+&lt;dfn&gt;定义一个定义项目&lt;/dfn&gt;
+</code></pre>
+
+<h4>删除字效果和插入字效果</h4>
+
+<pre><code>&lt;p&gt; 
+一打有&lt;del&gt;二十&lt;/del&gt;&lt;ins&gt;十二&lt;/ins&gt;件
+&lt;/p&gt;
+</code></pre>
+
+<h3>样式</h3>
+
+<p>如何使用样式</p>
+
+<pre><code>1. 外部样式表；
+当样式需要被应用到很多页面的时候，外部样式表将是理想的选择。使用外部样式表，你就可以通过更改一个文件来改变整个站点的外观。
+2. 内部样式表；
+当单个文件需要特别样式时，就可以使用内部样式表。你可以在 head 部分通过 &lt;style&gt; 标签定义内部样式表。
+3. 内联样式；  
+当特殊的样式需要应用到个别元素时，就可以使用内联样式。 使用内联样式的方法是在相关的标签中使用样式属性。样式属性可以包含任何 CSS 属性
+</code></pre>
+
+<h4>使用添加到 <head> 部分的样式信息对 HTML 进行格式化。</h4>
+
+<pre><code>&lt;html&gt;  
+
+&lt;head&gt;
+&lt;style type="text/css"&gt;
+h1 {color: red}
+p {color: blue}
+&lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;h1&gt;标题&lt;/h1&gt;
+&lt;p&gt;段落&lt;/p&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre>
+
+<h4>使用样式属性做一个没有下划线的链接。</h4>
+
+<pre><code>&lt;a href="http://swplzj.github.io" style="text-decoration: none" &gt;这是我的网址(不带下划线的链接)&lt;/a&gt;   
+</code></pre>
+
+<h4>使用 <link> 标签链接到一个外部样式表。</h4>
+
+<pre><code>    &lt;link rel="stylesheet" type="text/css" href="csstest1.css"&gt;
+</code></pre>
+
+<h3>HTML 链接</h3>
+
+<h4>将图像作为链接</h4>
+
+<pre><code>&lt;a href="http://swplzj.github.io"&gt;
+&lt;img src="2.gif" title="Leo"&gt; &lt;/img&gt;
+&lt;/a&gt;    
+</code></pre>
+
+<p>有两种使用 <code>&lt;a&gt;</code> 标签的方式：</p>
+
+<pre><code>1. 通过使用 href 属性 - 创建指向另一个文档的链接
+2. 通过使用 name 属性 - 创建文档内的书签  
+</code></pre>
+
+<h5>target属性</h5>
+
+<p>使用 Target 属性，你可以定义被链接的文档在何处显示。</p>
+
+<pre><code>&lt;a href="http://swplzj.github.io" target="_blank"&gt;Leo's Blog”&lt;/a&gt;
+</code></pre>
+
+<h5>name属性</h5>
+
+<p>name 属性规定锚（anchor）的名称。</p>
+
+<p><a href="#tips01">锚点定义</a></p>
+
+<pre><code>&lt;a name="label"&gt;锚（显示在页面上的文本）&lt;/a&gt;
+</code></pre>
+
+<p><code>提示</code>：锚的名称可以是任何你喜欢的名字。您可以使用 id 属性来替代 name 属性，命名锚同样有效。</p>
+
+<pre><code>&lt;a href="http://www.w3school.com.cn/html/html_links.asp#tips"&gt;有用的提示&lt;/a&gt;
+</code></pre>
+
+<p>在上面的代码中，我们将 # 符号和锚名称添加到 URL 的末端，就可以直接链接到 tips 这个命名锚了。</p>
+
+<h3>图像</h3>
+
+<h4>插入图像</h4>
+
+<p><code>&lt;img&gt;</code> 是空标签，意思是说，它只包含属性，并且没有闭合标签。</p>
+
+<h5>替换文本属性（Alt）</h5>
+
+<pre><code>&lt;img src="boat.gif" alt="Big Boat"&gt;
+</code></pre>
+
+<h4>从不同的位置插入图片</h4>
+
+<pre><code>&lt;p&gt;这是插入图片&lt;img src="1.png"&gt;的段落&lt;/p&gt;
+&lt;br /&gt;
+&lt;p&gt;这是上对齐&lt;img src="1.png" align="top"&gt;插入图片&lt;/p&gt;
+&lt;br /&gt;
+&lt;p&gt;这是居中对齐的&lt;img src="1.png" align="center"&gt;插入图片&lt;/p&gt;
+&lt;br /&gt;
+&lt;p&gt;这是下对齐的&lt;img src="1.png" align="bottom"&gt;插入图片&lt;/p&gt;
+</code></pre>
+
+<h4>浮动图像</h4>
+
+<pre><code>&lt;p&gt;这是下对齐的&lt;img src="1.png" align="right"&gt;插入图片&lt;/p&gt;            
+</code></pre>
+
+<h4>把图像转换为图像映射</h4>
+
+<pre><code>&lt;p&gt;请点击图片中的星球，把它放大&lt;/p&gt;
+        &lt;img src="image/eg_planets.jpg" border="0" usemap="#planetmap" alt="Planets" /&gt;
+        &lt;map name="planetmap" id="planetmap"&gt;
+
+        &lt;area shape="circle" coords="180,139,14" href="image/venus.html" target="_blank" alt="Venus" /&gt; 
+        &lt;area shape="circle" coords="129,161,10" href="image/" /&gt;
+        &lt;area shape="rect" coords="0,0,110,260" href="image/sun.html" target="_blank" alt="Sun" /&gt;
+        &lt;/map&gt;
+</code></pre>
+
+<h3>表格</h3>
+
+<p>表格由 <code>&lt;table&gt;</code> 标签来定义。每个表格均有若干行（由 <code>&lt;tr&gt;</code> 标签定义），每行被分割为若干单元格（由 <code>&lt;td&gt;</code> 标签定义）。字母 td 指表格数据（table data），即数据单元格的内容。数据单元格可以包含文本、图片、列表、段落、表单、水平线、表格等等。</p>
+
+<h5>表格和边框属性</h5>
+
+<pre><code>&lt;table border="1"&gt;
+&lt;tr&gt;
+&lt;td&gt;Row 1, cell 1&lt;/td&gt;
+&lt;td&gt;Row 1, cell 2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+</code></pre>
+
+<h5>表格的表头</h5>
+
+<p>表格的表头使用 <code>&lt;th&gt;</code> 标签进行定义。
+大多数浏览器会把表头显示为粗体居中的文本：</p>
+
+<h5>表格中的空单元格</h5>
+
+<p><code>注意</code>：这个空的单元格的边框没有被显示出来。为了避免这种情况，在空单元格中添加一个空格占位符，就可以将边框显示出来。</p>
+
+<pre><code>&lt;table border="1"&gt;
+&lt;tr&gt;
+&lt;td&gt;row 1, cell 1&lt;/td&gt;
+&lt;td&gt;row 1, cell 2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td&gt;row 2, cell 2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+</code></pre>
+
+<h5>Cell padding 和 Cell spacing 的区别</h5>
+
+<p>使用 Cell padding 来创建单元格内容与其边框之间的空白。<br/>
+使用 Cell spacing 增加单元格之间的距离。</p>
+
+<h5>caption 标签</h5>
+
+<p>caption 元素定义表格标题。
+caption 标签必须紧随 table 标签之后。您只能对每个表格定义一个标题。通常这个标题会被居中于表格之上。</p>
+
+<pre><code>&lt;table border="1"&gt;
+  &lt;caption&gt;Monthly savings&lt;/caption&gt;
+  &lt;tr&gt;
+    &lt;th&gt;Month&lt;/th&gt;
+    &lt;th&gt;Savings&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;January&lt;/td&gt;
+    &lt;td&gt;$100&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+</code></pre>
+
+<h5>thead 元素应该与 tbody 和 tfoot 元素结合起来使用。</h5>
+
+<p><thead> 标签定义表格的表头。该标签用于组合 HTML 表格的表头内容。</p>
+
+<p>tbody 元素用于对 HTML 表格中的主体内容进行分组，而 tfoot 元素用于对 HTML 表格中的表注（页脚）内容进行分组。</p>
+
+<pre><code>&lt;table border="1"&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Month&lt;/th&gt;
+      &lt;th&gt;Savings&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+
+  &lt;tfoot&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Sum&lt;/td&gt;
+      &lt;td&gt;$180&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tfoot&gt;
+
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;January&lt;/td&gt;
+      &lt;td&gt;$100&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;February&lt;/td&gt;
+      &lt;td&gt;$80&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;    
+</code></pre>
+
+<h5>col 标签</h5>
+
+<pre><code>&lt;table width="100%" border="1"&gt;
+  &lt;col align="left" /&gt;
+  &lt;col align="left" /&gt;
+  &lt;col align="right" /&gt;
+  &lt;tr&gt;
+    &lt;th&gt;ISBN&lt;/th&gt;
+    &lt;th&gt;Title&lt;/th&gt;
+    &lt;th&gt;Price&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;3476896&lt;/td&gt;
+    &lt;td&gt;My first HTML&lt;/td&gt;
+    &lt;td&gt;$53&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+</code></pre>
+
+<h5>colgroup标签</h5>
+
+<pre><code>&lt;table width="100%" border="1"&gt;
+  &lt;colgroup span="2" align="left"&gt;&lt;/colgroup&gt;
+  &lt;colgroup align="right" style="color:#0000FF;"&gt;&lt;/colgroup&gt;
+  &lt;tr&gt;
+    &lt;th&gt;ISBN&lt;/th&gt;
+    &lt;th&gt;Title&lt;/th&gt;
+    &lt;th&gt;Price&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;3476896&lt;/td&gt;
+    &lt;td&gt;My first HTML&lt;/td&gt;
+    &lt;td&gt;$53&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+</code></pre>
+
+<h3>列表</h3>
+
+<h4>定义列表</h4>
+
+<p>自定义列表不仅仅是一列项目，而是项目及其注释的组合。
+自定义列表以 <code>&lt;dl&gt;</code> （“definition list”）标签开始。每个自定义列表项以 <code>&lt;dt&gt;</code>(“definition title”，定义标题) 开始。每个自定义列表项的定义以 <code>&lt;dd&gt;</code>(“definition description”，定义描述) 开始。</p>
+
+<pre><code>&lt;dl&gt;
+&lt;dt&gt;Coffee&lt;/dt&gt;
+&lt;dd&gt;Black hot drink&lt;/dd&gt;
+&lt;dt&gt;Milk&lt;/dt&gt;
+&lt;dd&gt;White cold drink&lt;/dd&gt;
+&lt;/dl&gt;   
+</code></pre>
+
+<h3>块</h3>
+
+<p>可以通过 <code>&lt;div&gt;</code> 和 <code>&lt;span&gt;</code> 将 HTML 元素组合起来。</p>
+
+<p>块级元素在浏览器显示时，通常会以新行来开始（和结束）。</p>
+
+<h5>HTML 内联元素</h5>
+
+<p>内联元素在显示时通常不会以新行开始。
+例子：<code>&lt;b&gt;</code>, <code>&lt;td&gt;</code>, <code>&lt;a&gt;</code>, <code>&lt;img&gt;</code></p>
+
+<h5>HTML <code>&lt;div&gt;</code> 元素</h5>
+
+<p>HTML <code>&lt;div&gt;</code> 元素是块级元素，它是可用于组合其他 HTML 元素的容器。DIV（division）   <code>&lt;div&gt;</code> 元素的另一个常见的用途是文档布局。它取代了使用表格定义布局的老式方法。使用 <code>&lt;table&gt;</code> 元素进行文档布局不是表格的正确用法。<code>&lt;table&gt;</code> 元素的作用是显示表格化的数据。</p>
+
+<h5>HTML <code>&lt;span&gt;</code> 元素</h5>
+
+<p>HTML <code>&lt;span&gt;</code> 元素是内联元素，可用作文本的容器。
+<code>&lt;span&gt;</code> 元素可用于为部分文本设置样式属性。</p>
+
+<h3>布局</h3>
+
+<p>提示：即使可以使用 HTML 表格来创建漂亮的布局，但设计表格的目的是呈现表格化数据 - 表格不是布局工具！</p>
+
+<h3>表单</h3>
+
+<h4>文本域 (Text field)</h4>
+
+<h4>密码域</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;form&gt;
+</span><span class='line'>  用户名：
+</span><span class='line'>  &lt;input type="text" name="username"&gt;&lt;/input&gt;
+</span><span class='line'>  &lt;br /&gt;
+</span><span class='line'>
+</span><span class='line'>  密码：
+</span><span class='line'>  &lt;input type="password"&gt;&lt;/input&gt;
+</span><span class='line'>  &lt;br /&gt;
+</span><span class='line'>
+</span><span class='line'>  性别：
+</span><span class='line'>  &lt;input type="radio" name="sex" checked="checked" value="male"&gt;男&lt;/input&gt;
+</span><span class='line'>  &lt;input type="radio" name="sex" value="female"&gt;女&lt;/input&gt;
+</span><span class='line'>  &lt;br /&gt;
+</span><span class='line'>
+</span><span class='line'>  &lt;fieldset&gt;
+</span><span class='line'>      &lt;legend&gt;健康信息&lt;/legend&gt;
+</span><span class='line'>      身高：&lt;input type="text"&gt;&lt;/input&gt;
+</span><span class='line'>      体重：&lt;input type="text"&gt;&lt;/input&gt;
+</span><span class='line'>  &lt;/fieldset&gt;
+</span><span class='line'>  &lt;br /&gt;
+</span><span class='line'>
+</span><span class='line'>  兴趣：
+</span><span class='line'>  &lt;input type="checkbox" value="sing"&gt;喜欢唱歌&lt;/input&gt;
+</span><span class='line'>  
+</span><span class='line'>  &lt;input type="checkbox" value="dance"&gt;喜欢跳舞&lt;/input&gt;
+</span><span class='line'>  &lt;br /&gt;
+</span><span class='line'>
+</span><span class='line'>  拥有车辆：
+</span><span class='line'>  &lt;select name="cars"&gt;
+</span><span class='line'>      &lt;optgroup label="豪车"&gt;
+</span><span class='line'>      &lt;option value="audi"&gt;Audi&lt;/option&gt;
+</span><span class='line'>      &lt;option value="bezi"&gt;Bezi&lt;/option&gt;  
+</span><span class='line'>      &lt;/optgroup&gt;
+</span><span class='line'>      &lt;optgroup label="好车"&gt;
+</span><span class='line'>      &lt;option value="bmw" selected="selected"&gt;BMW&lt;/option&gt;
+</span><span class='line'>      &lt;option value="volvo"&gt;volvo&lt;/option&gt;    
+</span><span class='line'>      &lt;/optgroup&gt;
+</span><span class='line'>      
+</span><span class='line'>  &lt;/select&gt;
+</span><span class='line'>
+</span><span class='line'>  &lt;br /&gt;
+</span><span class='line'>
+</span><span class='line'>  自我评价：
+</span><span class='line'>  &lt;br /&gt;
+</span><span class='line'>  &lt;textarea rows="10" cols="30"&gt;写下对自己最公正的评价...&lt;/textarea&gt;
+</span><span class='line'>
+</span><span class='line'>  &lt;br /&gt;
+</span><span class='line'>  &lt;input type="submit" value="提交"&gt;&lt;/input&gt;
+</span><span class='line'>
+</span><span class='line'>  &lt;hr /&gt;
+</span><span class='line'>
+</span><span class='line'>  &lt;form action="MAILTO:swplzj@163.com" method="post" enctype="text/plain"&gt;
+</span><span class='line'>      请填写相关信息，发送邮件
+</span><span class='line'>      &lt;br /&gt;
+</span><span class='line'>      姓名：
+</span><span class='line'>      &lt;br /&gt;
+</span><span class='line'>      &lt;input type="text"&gt;
+</span><span class='line'>      &lt;br /&gt;
+</span><span class='line'>      电子邮箱：
+</span><span class='line'>      &lt;br /&gt;
+</span><span class='line'>      &lt;input type="text"&gt;
+</span><span class='line'>      &lt;br /&gt;
+</span><span class='line'>      内容：
+</span><span class='line'>      &lt;br /&gt;
+</span><span class='line'>      &lt;input type="text"&gt;
+</span><span class='line'>      &lt;br /&gt;
+</span><span class='line'>      &lt;input type="submit" value="发送"&gt;
+</span><span class='line'>      &lt;input type="reset" value="重置"&gt;
+</span><span class='line'>  &lt;/form&gt;
+</span><span class='line'>&lt;/form&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>框架</h3>
+
+<h4>垂直框架</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;html&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;frameset cols="25%,50%,25%"&gt;
+</span><span class='line'>
+</span><span class='line'>  &lt;frame src="/example/html/frame_a.html"&gt;
+</span><span class='line'>  &lt;frame src="/example/html/frame_b.html"&gt;
+</span><span class='line'>  &lt;frame src="/example/html/frame_c.html"&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;/frameset&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;/html&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>水平框架 &amp; noframes</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;html&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;frameset rows="25%,50%,25%"&gt;
+</span><span class='line'>
+</span><span class='line'>  &lt;frame src="/example/html/frame_a.html"&gt;
+</span><span class='line'>  &lt;frame src="/example/html/frame_b.html"&gt;
+</span><span class='line'>  &lt;frame src="/example/html/frame_c.html"&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;noframes&gt;
+</span><span class='line'>&lt;body&gt;您的浏览器无法处理框架！&lt;/body&gt;
+</span><span class='line'>&lt;/noframes&gt;
+</span><span class='line'>&lt;/frameset&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;/html&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>框架结构标签（frameset）</h4>
+
+<p>框架结构标签（frameset）定义如何将窗口分割为框架
+每个 frameset 定义了一系列行或列
+rows/columns 的值规定了每行或每列占据屏幕的面积</p>
+
+<p><code>重要提示：</code>
+不能将 <code>&lt;body&gt;&lt;/body&gt;</code> 标签与 <code>&lt;frameset&gt;&lt;/frameset&gt;</code> 标签同时使用！不过，假如你添加包含一段文本的 <code>&lt;noframes&gt;</code> 标签，就必须将这段文字嵌套于 <code>&lt;body&gt;&lt;/body&gt;</code> 标签内。（在下面的第一个实例中，可以查看它是如何实现的。）</p>
+
+<h4>混合框架</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;html&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;frameset rows="50%,50%"&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;frame src="/example/html/frame_a.html"&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;frameset cols="25%,75%"&gt;
+</span><span class='line'>&lt;frame src="/example/html/frame_b.html"&gt;
+</span><span class='line'>&lt;frame src="/example/html/frame_c.html"&gt;
+</span><span class='line'>&lt;/frameset&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;/frameset&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;/html&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;frameset rows="25%, *, 50%"&gt;
+</span><span class='line'>          &lt;frame src="div.html" noresize="noresize"&gt;
+</span><span class='line'>          &lt;frame src="table.html"&gt;
+</span><span class='line'>          &lt;frameset cols="25%, 75%"&gt;
+</span><span class='line'>              &lt;frame src="div.html"&gt;
+</span><span class='line'>              &lt;frame src="table.html"&gt;
+</span><span class='line'>          &lt;/frameset&gt;
+</span><span class='line'>      &lt;/frameset&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>内联框架 iFrame</h3>
+
+<p>iframe 用于在网页内显示网页。</p>
+
+<h5>添加 iframe 的语法</h5>
+
+<pre><code>&lt;iframe src="URL"&gt;&lt;/iframe&gt;
+</code></pre>
+
+<p>URL 指向隔离页面的位置。</p>
+
+<pre><code>&lt;iframe src="http://www.baidu.com" width="200" height="200"&gt;&lt;/iframe&gt;
+</code></pre>
+
+<h5>使用 iframe 作为链接的目标</h5>
+
+<p>iframe 可用作链接的目标（target）。</p>
+
+<p><code>注意：</code>链接的 target 属性必须引用 iframe 的 name 属性：</p>
+
+<h3>背景</h3>
+
+<h4>bgcolor</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;body bgcolor="#000000"&gt;
+</span><span class='line'>&lt;body bgcolor="rgb(0,0,0)"&gt;
+</span><span class='line'>&lt;body bgcolor="black"&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>背景（Background）</h4>
+
+<p>背景属性将背景设置为图像。属性值为图像的URL。如果图像尺寸小于浏览器窗口，那么图像将在整个浏览器窗口进行复制。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;body background="clouds.gif"&gt;
+</span><span class='line'>&lt;body background="http://www.w3school.com.cn/clouds.gif"&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a name="tips01">锚点</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Leo Lee</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-03-09T13:54:31+08:00" pubdate data-updated="true"></time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/12/24/2015nian-ge-ren-zong-jie/" title="Previous Post: 2015年个人总结">&laquo; 2015年个人总结</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+
+<!-- 添加多说 -->
+
+
+  <section>
+    <h1>Comments</h1>
+    <div id="comments" aria-live="polite">
+<!-- Duoshuo Comment BEGIN -->
+<div class="ds-thread"></div>
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"swplzj"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<!-- Duoshuo Comment END -->
+</div>
+  </section>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo">
+<!-- <p>
+	Copyright &copy; 2016 - Leo Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p> -->
+
+
+<p style="text-align:center">
+  <!-- Copyright &copy; 2015 - Leo Lee - -->
+  	Copyright &copy; 2016 - Leo Lee -
+
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255930196'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1255930196%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
+</p>
+
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
