@@ -4,7 +4,7 @@
     <title><![CDATA[Leo Lee]]></title>
     <link href="http://swplzj.github.io/atom.xml" rel="self"/>
     <link href="http://swplzj.github.io/"/>
-    <updated>2016-03-18T16:13:52+08:00</updated>
+    <updated>2016-03-18T16:15:37+08:00</updated>
     <id>http://swplzj.github.io/</id>
     <author>
         <name><![CDATA[Leo Lee]]></name>
@@ -25,12 +25,10 @@
 
 <h4>之前通过 iTunes 同步文件的步骤：</h4>
 
-<ol>
-<li>把需要的 PDF 或者 iBooks 文件添加到 iTunes 库中；</li>
-<li>选择 iTunes 中的 Books</li>
-<li>选择需要同步的图书文件，然后同步就可以了；</li>
-</ol>
-
+<pre><code>1. 把需要的 PDF 或者 iBooks 文件添加到 iTunes 库中；
+2. 选择 iTunes 中的 Books
+3. 选择需要同步的图书文件，然后同步就可以了；
+</code></pre>
 
 <h4>iTunes更新后，问题出现了</h4>
 
@@ -40,10 +38,12 @@
 
 <p>后来想到了 Apple 专门用来管理图书的 iBooks 了，果然这里有答案。</p>
 
-<p>操作步骤：
-    1. 把需要同步的图书添加到 iBooks 库中；
-    2. 在 iTunes 中选中设备中的 Books；
-    3. 选择需要同步的图书，同步；</p>
+<p>操作步骤：</p>
+
+<pre><code>1. 把需要同步的图书添加到 iBooks 库中；
+2. 在 iTunes 中选中设备中的 Books；
+3. 选择需要同步的图书，同步；
+</code></pre>
 
 <p>如此简单便捷。花了几分钟记录一下，希望能够帮助到你。:-D</p>
 ]]></content>
