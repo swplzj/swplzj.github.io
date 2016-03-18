@@ -4,7 +4,7 @@
     <title><![CDATA[Leo Lee]]></title>
     <link href="http://swplzj.github.io/atom.xml" rel="self"/>
     <link href="http://swplzj.github.io/"/>
-    <updated>2016-03-11T11:30:09+08:00</updated>
+    <updated>2016-03-18T16:13:52+08:00</updated>
     <id>http://swplzj.github.io/</id>
     <author>
         <name><![CDATA[Leo Lee]]></name>
@@ -12,6 +12,42 @@
     </author>
     <generator uri="http://octopress.org/">Octopress</generator>
     
+    
+    <entry>
+        <title type="html"><![CDATA[iPhone 上同步图书遇到的问题]]></title>
+        <link href="http://swplzj.github.io/blog/2016/03/18/iphone-shang-tong-bu-tu-shu-yu-dao-de-wen-ti/"/>
+        <updated>2016-03-18T15:59:40+08:00</updated>
+        <id>http://swplzj.github.io/blog/2016/03/18/iphone-shang-tong-bu-tu-shu-yu-dao-de-wen-ti</id>
+        <content type="html"><![CDATA[<p>前一段时间通过 iTunes 同步图书的时候，同步不成功，当时也没有在意，今天想把一些好的资料放到手机上看时，又遇到了这个问题，看来该解决了。。。</p>
+
+<!--more-->
+
+
+<h4>之前通过 iTunes 同步文件的步骤：</h4>
+
+<ol>
+<li>把需要的 PDF 或者 iBooks 文件添加到 iTunes 库中；</li>
+<li>选择 iTunes 中的 Books</li>
+<li>选择需要同步的图书文件，然后同步就可以了；</li>
+</ol>
+
+
+<h4>iTunes更新后，问题出现了</h4>
+
+<p>也不知道更新了几个 OS 版本，更记不清楚 iTunes 的版本，现在需要同步图书的时候，第一步就出现了问题，添加的图书文件没有在 Books 中显示，而是在 Music 的播放列表中显示了，起初还以为是新版 iTunes 的 bug，然后仔细看了看，在 iTunes 中竟然把 Books 的功能去掉了&hellip; 有点不知所措</p>
+
+<h4>解决方法</h4>
+
+<p>后来想到了 Apple 专门用来管理图书的 iBooks 了，果然这里有答案。</p>
+
+<p>操作步骤：
+    1. 把需要同步的图书添加到 iBooks 库中；
+    2. 在 iTunes 中选中设备中的 Books；
+    3. 选择需要同步的图书，同步；</p>
+
+<p>如此简单便捷。花了几分钟记录一下，希望能够帮助到你。:-D</p>
+]]></content>
+    </entry>
     
     <entry>
         <title type="html"><![CDATA[CSS 学习笔记]]></title>
@@ -5706,76 +5742,6 @@ rake deploy
 </span><span class='line'>//用 "newscript.css" 替换 "oldscript.css" 
 </span><span class='line'>replacejscssfile("oldstyle.css", "newscript.css","css"); </span></code></pre></td></tr></table></div></figure>
 
-]]></content>
-    </entry>
-    
-    <entry>
-        <title type="html"><![CDATA[Mac翻墙技巧]]></title>
-        <link href="http://swplzj.github.io/blog/2015/03/08/macfan-qiang-ji-qiao/"/>
-        <updated>2015-03-08T10:57:41+08:00</updated>
-        <id>http://swplzj.github.io/blog/2015/03/08/macfan-qiang-ji-qiao</id>
-        <content type="html"><![CDATA[<h4>困扰</h4>
-
-<p>自己一直在寻找Mac上的免费翻墙工具，尝试过很多，但最终都没办法实现，对自己也造成了一些影响，比如需要在国外网站查询一些资料，下载一些应用，观看Youtube视频，刷Facebook，最要命的就是最近自己的Gmail也收不到邮件了，不想购买VPN，那只能尝试找免费翻墙工具了。</p>
-
-<p>终于找到免费翻墙的工具了</p>
-
-<p>不敢独享，故贴出来和大家分享一下。</p>
-
-<!--more-->
-
-
-<h4>终于等到你，还好我没放弃</h4>
-
-<h5>这种翻墙方法的优点：</h5>
-
-<ul>
-<li>免费</li>
-<li>无需下载任何软件</li>
-<li>配置门槛低，简单</li>
-</ul>
-
-
-<h5>工具使用方法</h5>
-
-<p><code>工具网址</code></p>
-
-<p>首先打开网站：<a href="http://vcup.in/nyve">VPNCUP</a></p>
-
-<p><code>使用方法</code></p>
-
-<h6>注册账号</h6>
-
-<p>在这个网站上注册一个账号。</p>
-
-<h6>设置VPN登录密码</h6>
-
-<p>因为在配置网络的时候，都会使用到VPN的登录密码来进行验证，这个密码不是你的账号登录密码，你需要在我的账户里面来开启，并进行设置。</p>
-
-<p>1、进入<code>我的账户</code>中的<code>VPN账户</code>;</p>
-
-<p>2、将<code>VPN账户状态</code>设置为<code>开放</code>;</p>
-
-<p>3、设置<code>VPN登录密码</code>;</p>
-
-<h6>配置电脑网络设置</h6>
-
-<p>关于如何配置电脑的网络设置，在官网有详细的说明，下面给出相应的链接，大家跟着说明一步步做就好了</p>
-
-<ul>
-<li><a href="https://www.vcup136.com/config/windows-xp">Windows XP设置登录VPN服务器图文介绍</a></li>
-<li><a href="https://www.vcup136.com/config/iphone-l2tp">Apple Iphone和Apple iTouch设置登录VPN服务器图文介绍(L2TP模式)</a></li>
-<li><a href="https://www.vcup136.com/config/iphone">Apple Iphone和Apple iTouch设置登录VPN服务器图文介绍(PPTP模式)</a></li>
-<li><a href="https://www.vcup136.com/config/macosx">mac系统下的配置指南</a></li>
-<li><a href="https://www.vcup136.com/config/ubuntu">Ubuntu设置VPN</a></li>
-<li><a href="https://www.vcup136.com/config/windows">windows系统下的配置指南</a></li>
-<li><a href="https://www.vcup136.com/config/android">Android系统设置VPN</a></li>
-</ul>
-
-
-<h4>总结</h4>
-
-<p>设置完成了，大家可以享受墙外的世界了，希望能帮助到你。</p>
 ]]></content>
     </entry>
     

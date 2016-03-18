@@ -12,7 +12,7 @@
   <meta name="author" content="Leo Lee">
 
   
-  <meta name="description" content="libz.dylib这个Xcode系统库文件经常用到。这个其实是个动态链接库。 后缀名为.dylib的文件是一个动态库，这个库是运行时加载而不是编译时加载。这个也说明了obj-C是运行时语言，也就是数据的类型不是在编译时确定的，而是在运行时确定的。 libz.dylib也是zip压缩解压缩的库， &hellip;">
+  <meta name="description" content="在iOS中有几种方法来解决多线程访问同一个内存地址的互斥同步问题，本文简单介绍： 方法一，@synchronized(id anObject),(最简单的方法) 会自动对参数对象加锁，保证临界区内的代码线程安全 ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -60,6 +60,51 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/10/17/ios-duo-xian-cheng-cao-zuo/">iOS多线程操作：锁 互斥 同步</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-10-17T23:03:45+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>在iOS中有几种方法来解决多线程访问同一个内存地址的互斥同步问题，本文简单介绍：</p>
+
+<h5>方法一，@synchronized(id anObject),(最简单的方法)</h5>
+
+<p>会自动对参数对象加锁，保证临界区内的代码线程安全</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/10/17/ios-duo-xian-cheng-cao-zuo/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -448,47 +493,6 @@
   
     <footer>
       <a rel="full-article" href="/blog/2014/08/09/ios-shu-ju-chi-jiu-hua-%5B%3F%5D/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/07/21/xcode-lldb-ming-ling-jian-dan-shi-yong/">XCODE LLDB命令的简单实用说明</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-07-21T16:47:01+08:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>po（print object）是LLDB的一个命令，其主要功能是输出objective-c中对象（objects）的信息，与之相似的另外一个命令是 p（print），其主要功能是输出原生类型（boolean、integer、float、etc）的信息。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/07/21/xcode-lldb-ming-ling-jian-dan-shi-yong/">Read on &rarr;</a>
     </footer>
   
 

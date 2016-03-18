@@ -12,7 +12,7 @@
   <meta name="author" content="Leo Lee">
 
   
-  <meta name="description" content="小引 在iOS开发中，开发者有各种理由选择用代码来构建界面，其中最多的理由就是Interface Builder绘制的代码不利于团队间协作(代码的可读性和合并)。虽然Interface Builder来绘制界面有诸多优势，但是由于致命的缺陷，许多开发团队不得不远离它， &hellip;">
+  <meta name="description" content="po（print object）是LLDB的一个命令，其主要功能是输出objective-c中对象（objects）的信息，与之相似的另外一个命令是 p（print），其主要功能是输出原生类型（boolean、integer、float、etc）的信息。 ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -60,6 +60,47 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/07/21/xcode-lldb-ming-ling-jian-dan-shi-yong/">XCODE LLDB命令的简单实用说明</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-21T16:47:01+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>po（print object）是LLDB的一个命令，其主要功能是输出objective-c中对象（objects）的信息，与之相似的另外一个命令是 p（print），其主要功能是输出原生类型（boolean、integer、float、etc）的信息。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/07/21/xcode-lldb-ming-ling-jian-dan-shi-yong/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -449,49 +490,6 @@
   
     <footer>
       <a rel="full-article" href="/blog/2014/03/13/ios-ying-yong-cheng-xu-mu-lu-jie-gou/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/03/12/quartz-core-kuang-jia-xue-xi/">Quartz Core 框架学习</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-03-12T15:32:06+08:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>iOS编程给用户视觉反馈其实都是通过 <code>Quartz Core</code> 框架来进行的，说白了，所有用户最终看到的显示界面都是图层合成的结果，而图层即是 <code>Quartz Core</code> 中的 <code>CALayer</code> 。</p>
-
-<p>通常我们所说的视图即 <code>UIView</code> ，并不是直接显示在屏幕上，而是在创建视图对象的时候视图对象会自动创建一个层，而视图对象把要显示的东西绘制在层上，待到需要显示时硬件将所有的层拷贝，然后按Z轴的高低合成最终的显示结果。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/03/12/quartz-core-kuang-jia-xue-xi/">Read on &rarr;</a>
     </footer>
   
 
