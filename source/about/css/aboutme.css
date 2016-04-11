@@ -259,7 +259,7 @@ a:focus {
 
 
 #me.present .now_me {
-    font-size: 90px;
+    font-size: 80px;
     -webkit-transform: translateY(-10px);
     -moz-transform:    translateY(-10px);
     -ms-transform:     translateY(-10px);
@@ -267,7 +267,7 @@ a:focus {
     transform:         translateY(-10px);
 }
 
-#me.present .unity {
+#me.present .ios {
     -webkit-transform: translateY(10px);
     -moz-transform:    translateY(10px);
     -ms-transform:     translateY(10px);
@@ -281,7 +281,7 @@ a:focus {
     transition-delay:         0.25s;
 }
 
-#me.present .ios {
+#me.present .fitness {
     -webkit-transform: translateY(10px);
     -moz-transform:    translateY(10px);
     -ms-transform:     translateY(10px);
@@ -295,7 +295,7 @@ a:focus {
     transition-delay:         0.5s;
 }
 
-#me.present .guitar {
+#me.present .job {
     -webkit-transform: translateY(10px);
     -moz-transform:    translateY(10px);
     -ms-transform:     translateY(10px);
@@ -309,25 +309,11 @@ a:focus {
     transition-delay:         0.75s;
 }
 
-#me.present .skater {
-    -webkit-transform: translateY(10px);
-    -moz-transform:    translateY(10px);
-    -ms-transform:     translateY(10px);
-    -o-transform:      translateY(10px);
-    transform:         translateY(10px);
-
-    -webkit-transition-delay: 1.00s;
-    -moz-transition-delay:    1.00s;
-    -ms-transition-delay:     1.00s;
-    -o-transition-delay:      1.00s;
-    transition-delay:         1.00s;
-}
-
 #whereiam {
     width: 600px;
 }
 
-#whereiam .kitten {
+#whereiam .leo {
     color: darkred;
     font-size: 60px;
 }
@@ -337,8 +323,12 @@ a:focus {
     font-size: 60px;
 }
 
+#world .come-from {
+    font-size: 55px;
+    color: green;
+}
 
-#world .ninety-four{
+#world .eighty-eight {
     font-size: 65px;
     color: purple;
 }
@@ -410,14 +400,6 @@ a:focus {
     background-position:top right; 
 }
 
-#meet .zhejiang{
-    font-size: 65px;
-}
-
-#meet .shanghai{
-    font-size: 65px;
-}
-
 #comein {
     width: 1000px;
     text-align: center;
@@ -470,7 +452,7 @@ a:focus {
     transition:         0.5s;
 }
 
-#love.present .it {
+#love.present .share {
     -webkit-transform: translateY(10px);
     -moz-transform:    translateY(10px);
     -ms-transform:     translateY(10px);
@@ -484,7 +466,7 @@ a:focus {
     transition-delay:         0.25s;
 }
 
-#love.present .chuangxin {
+#love.present .jobs {
     -webkit-transform: translateY(10px);
     -moz-transform:    translateY(10px);
     -ms-transform:     translateY(10px);
@@ -498,7 +480,7 @@ a:focus {
     transition-delay:         0.5s;
 }
 
-#love.present .sixiang {
+#love.present .choice {
     -webkit-transform: translateY(10px);
     -moz-transform:    translateY(10px);
     -ms-transform:     translateY(10px);
@@ -512,7 +494,7 @@ a:focus {
     transition-delay:         0.75s;
 }
 
-#love.present .renge {
+#love.present .success {
     -webkit-transform: translateY(10px);
     -moz-transform:    translateY(10px);
     -ms-transform:     translateY(10px);
@@ -524,11 +506,6 @@ a:focus {
     -ms-transition-delay:     1.00s;
     -o-transition-delay:      1.00s;
     transition-delay:         1.00s;
-}
-
-#grow {
-    font-size: 45px;
-    text-align: center;
 }
 
 #knowme {
@@ -551,110 +528,6 @@ a:focus {
     background-position: 105% 25%;
     background-repeat: no-repeat;
 }
-
-#prizeme p {
-    -webkit-transform-style: preserve-3d;
-    -moz-transform-style:    preserve-3d; /* Y U need this Firefox?! */
-    -ms-transform-style:     preserve-3d;
-    -o-transform-style:      preserve-3d;
-    transform-style:         preserve-3d;
-}
-
-#prizeme span,
-#prizeme b {
-    display: inline-block;
-    -webkit-transform: translateZ(40px);
-    -moz-transform:    translateZ(40px);
-    -ms-transform:     translateZ(40px);
-    -o-transform:      translateZ(40px);
-     transform:        translateZ(40px);
-
-    -webkit-transition: 0.5s;
-    -moz-transition:    0.5s;
-    -ms-transition:     0.5s;
-    -o-transition:      0.5s;
-    transition:         0.5s;
-}
-
-#prizeme .horse {
-    -webkit-transform: translateZ(-40px);
-    -moz-transform:    translateZ(-40px);
-    -ms-transform:     translateZ(-40px);
-    -o-transform:      translateZ(-40px);
-    transform:         translateZ(-40px);
-
-    -webkit-transition-delay: 0.25s;
-    -moz-transition-delay:    0.25s;
-    -ms-transition-delay:     0.25s;
-    -o-transition-delay:      0.25s;
-    transition-delay:         0.25s;
-}
-
-#prizeme .moutain {
-    -webkit-transform: translateZ(20px);
-    -moz-transform:    translateZ(20px);
-    -ms-transform:     translateZ(20px);
-    -o-transform:      translateZ(20px);
-    transform:         translateZ(20px);
-
-    -webkit-transition-delay: 0.5s;
-    -moz-transition-delay:    0.5s;
-    -ms-transition-delay:     0.5s;
-    -o-transition-delay:      0.5s;
-    transition-delay:         0.5s;
-}
-
-#prizeme .hope {
-    -webkit-transform: translateZ(-40px);
-    -moz-transform:    translateZ(-40px);
-    -ms-transform:     translateZ(-40px);
-    -o-transform:      translateZ(-40px);
-    transform:         translateZ(-40px);
-
-    -webkit-transition-delay: 0.75s;
-    -moz-transition-delay:    0.75s;
-    -ms-transition-delay:     0.75s;
-    -o-transition-delay:      0.75s;
-    transition-delay:         0.75s;
-}
-
-#prizeme .youare {
-    -webkit-transform: translateZ(60px);
-    -moz-transform:    translateZ(60px);
-    -ms-transform:     translateZ(60px);
-    -o-transform:      translateZ(60px);
-    transform:         translateZ(60px);
-
-    -webkit-transition-delay: 0.1s;
-    -moz-transition-delay:    0.1s;
-    -ms-transition-delay:     0.1s;
-    -o-transition-delay:      0.1s;
-    transition-delay:         0.1s;
-}
-
-#prizeme .my {
-    -webkit-transform: translateZ(-10px);
-    -moz-transform:    translateZ(-10px);
-    -ms-transform:     translateZ(-10px);
-    -o-transform:      translateZ(-10px);
-    transform:         translateZ(-10px);
-
-    -webkit-transition-delay: 0.15s;
-    -moz-transition-delay:    0.15s;
-    -ms-transition-delay:     0.15s;
-    -o-transition-delay:      0.15s;
-    transition-delay:         0.15s;
-}
-
-#prizeme.present span,
-#prizeme.present b {
-    -webkit-transform: translateZ(0px);
-    -moz-transform:    translateZ(0px);
-    -ms-transform:     translateZ(0px);
-    -o-transform:      translateZ(0px);
-    transform:         translateZ(0px);
-}
-
 
 #subcribe .adv {
     font-size: 20px;
@@ -694,6 +567,9 @@ a:focus {
     background-image: url(KittenPortrait.png);
     background-position: 90% 45%;
     background-repeat: no-repeat;
+}
+#back .final {
+    font-size: 22px;
 }
 
 #back .backTitle{
