@@ -1,0 +1,260 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+ <!-- 百度站长HTML标签验证 -->
+  <meta name="baidu-site-verification" content="2UxriFj8TS" />
+
+  <title>App在iTunes Connect里面的几种状态 - Leo Lee</title>
+  <meta name="author" content="Leo Lee">
+
+  
+  <meta name="description" content="Waiting for Upload (Yellow) Appears when you’ve completed entering your metadata, however, you have not finished uploading your binary or have chosen &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://swplzj.github.io/blog/2014/05/04/appzai-itunes-connectli-mian-de-ji-chong-zhuang-tai">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Leo Lee" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+ <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+<!--   
+
+ --></head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <nav id="main-nav" role="navigation">
+<ul class="main-navigation">
+  <li><a href="/" class="nav-link">首页 | Blog</a></li>
+  <li><a href="/blog/archives" class="nav-link">归档 | Archives</a></li>
+  <li><a href="/books" class="nav-link">图书 | Books</a></li>
+  <li><a href="/atom.xml" class="nav-link">订阅 | RSS</a></li>
+  <li><a href="/about" class="nav-link">关于我 | About</a></li>
+</ul>
+
+</nav>
+  
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">App在iTunes Connect里面的几种状态</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-04T20:20:41+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h4>Waiting for Upload (Yellow)</h4>
+
+<p>Appears when you’ve completed entering your metadata, however, you have not finished uploading your binary or have chosen to upload your binary at a later time. Your app must be in the Waiting For Upload state before you can deliver your binary through Application Loader.</p>
+
+<!--more-->
+
+
+<h4>Prepare for Upload (Yellow)</h4>
+
+<p>Appears when you have created a new version, but you have not yet clicked the Ready to Submit Binary button. This state also indicates that you can now deliver your binary through Application Loader.</p>
+
+<h4>Upload Received (Yellow)</h4>
+
+<p>Appears when your binary has been received through Application Loader, but is still being processed by the iTunes Connect system.</p>
+
+<h4>Invalid Binary (Red)</h4>
+
+<p>Appears when a binary is received through Application Loader, has been processed, but your binary is invalid.  Examples of an invalid binary are: your binary icon does not meet our requirements, you have placed the payload directory at the wrong level in the .app wrapper, you attempted to use a non-increasing CFBundleVersion, etc.</p>
+
+<h4>Missing Screenshot (Red)</h4>
+
+<p>Appears when your app is missing a required screenshot for iPhone and iPod touch or iPad for your default language app or for your added localizations. At least one screenshot is required for both iPhone and iPod touch and for iPad if you are submitting a universal app.</p>
+
+<h4>Waiting for Review (Yellow)</h4>
+
+<p>Appears after you submit a new application or update and prior to the application being reviewed by Apple. This status means that your app has been added to the app review queue, but has not yet started the review process.</p>
+
+<h4>Waiting For Export Compliance (Yellow)</h4>
+
+<p>Appears when your CCATS is in review with Export Compliance.</p>
+
+<h4>In Review (Yellow)</h4>
+
+<p>Appears when we are reviewing your app prior to the application being approved or rejected. It takes time to review binaries so we appreciate your patience and ask that you allow sufficient time for the processing of your application.  When the status of your application is in review, you have the option to reject the binary you have submitted by clicking Reject Binary. This will remove your binary from the review queue and will allow for another update to be submitted. If you reject your binary, the status of your app will change to Developer Rejected and when your binary is re-submitted, the review process will start over from the beginning.</p>
+
+<h4>Pending Contract (Yellow)</h4>
+
+<p>Appears when your application has been reviewed and is Ready for Sale but your contracts are not yet in effect. You may check the progress of your contracts in iTunes Connect by clicking on the Contracts, Tax &amp; Banking information module.</p>
+
+<h4>Pending Developer Release (Yellow)</h4>
+
+<p>Appears when the version of your app has been approved by Apple and you have turned on the Version Release Control, but have not yet clicked Send Version Live. You should also see a pending action symbol on the version. Your version will remain in this state, and thus will not be live on the App Store until you click Send Version Live.</p>
+
+<h4>Processing for App Store (Yellow)</h4>
+
+<p>Appears when the version is being processed to go live on the App Store. Once the processing is complete, the version state will change to “Ready for Sale.” This is a temporary state (approx. 1 – 2 hours).</p>
+
+<h4>Ready for Sale (Green)</h4>
+
+<p>Appears once your application been approved and posted to the App Store. When your application is in this status, you have the option to remove it from the store by going to the Rights and Pricing page and removing all App Store territories.</p>
+
+<h4>Rejected (Red)</h4>
+
+<p>Appears when the binary has been rejected.</p>
+
+<h4>Removed from Sale (Red)</h4>
+
+<p>Appears when the binary has been removed from the App Store.</p>
+
+<h4>Developer Rejected (Red)</h4>
+
+<p>Appears when youʼve rejected the binary from the review process. Existing versions of your application on the App Store will not be affected by self-rejecting binaries in review.</p>
+
+<p>Important: When you self-reject your binary, you lose your place in the review queue. Your binary will be placed at the end of the queue when you resubmit.</p>
+
+<h4>Developer Removed from Sale (Red)</h4>
+
+<p>Appears when you’ve removed your application from the App Store.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Leo Lee</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-04T20:20:41+08:00" pubdate data-updated="true"></time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/04/22/ios-coretextlei-ku-de-xiang-xi-jie-shao/" title="Previous Post: iOS CoreText类库的详细介绍">&laquo; iOS CoreText类库的详细介绍</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/05/11/os-xchang-yong-ming-ling-xing-ji-qiao/" title="Next Post: OS X常用命令行技巧">OS X常用命令行技巧 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+
+<!-- 添加多说 -->
+
+
+  <section>
+    <h1>Comments</h1>
+    <div id="comments" aria-live="polite">
+<!-- Duoshuo Comment BEGIN -->
+<div class="ds-thread"></div>
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"swplzj"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<!-- Duoshuo Comment END -->
+</div>
+  </section>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo">
+<!-- <p>
+	Copyright &copy; 2016 - Leo Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p> -->
+
+
+<p style="text-align:center">
+  <!-- Copyright &copy; 2015 - Leo Lee - -->
+  	Copyright &copy; 2016 - Leo Lee -
+
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255930196'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1255930196%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
+</p>
+
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

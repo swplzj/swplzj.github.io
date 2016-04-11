@@ -1,0 +1,579 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+ <!-- 百度站长HTML标签验证 -->
+  <meta name="baidu-site-verification" content="2UxriFj8TS" />
+
+  <title>Leo Lee</title>
+  <meta name="author" content="Leo Lee">
+
+  
+  <meta name="description" content="动态载入 JavaScript/CSS 文件 传统加载外部 JavaScript(*.js) 或者 CSS(*.css) 文件的方法是直接在 &lt;head&gt; 标签里面进行添加: 1
+2
+3
+4
+&lt;head&gt; &lt;script type="text/javascript" &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://swplzj.github.io/posts/3">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Leo Lee" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+ <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+<!--   
+
+ --></head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <nav id="main-nav" role="navigation">
+<ul class="main-navigation">
+  <li><a href="/" class="nav-link">首页 | Blog</a></li>
+  <li><a href="/blog/archives" class="nav-link">归档 | Archives</a></li>
+  <li><a href="/books" class="nav-link">图书 | Books</a></li>
+  <li><a href="/atom.xml" class="nav-link">订阅 | RSS</a></li>
+  <li><a href="/about" class="nav-link">关于我 | About</a></li>
+</ul>
+
+</nav>
+  <header role="banner"><hgroup>
+	
+		<img src="/images/portrait.jpg" class="portrait" height=250px width=250px />
+	
+  <h1><a href="/">Leo Lee</a></h1>
+  
+    <h2>An iOS developer's blog about programming and growing.</h2>
+  
+</hgroup>
+
+</header> 
+  
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/03/12/ios-uiwebview-dong-tai-zai-ru-slash-shan-chu-slash-geng-xin-wai-bu-javascript-slash-css-wen-jian/">iOS - UIWebView 动态载入/删除/更新外部 JavaScript/CSS 文件</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-03-12T19:59:54+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h5>动态载入 JavaScript/CSS 文件</h5>
+
+<p>传统加载外部 <code>JavaScript(*.js)</code> 或者 <code>CSS(*.css)</code> 文件的方法是直接在 <code>&lt;head&gt;</code> 标签里面进行添加:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;head&gt; 
+</span><span class='line'>&lt;script type="text/javascript" src="myscript.js"&gt;&lt;/script&gt; 
+</span><span class='line'>&lt;link rel="stylesheet" type="text/css" href="main.css" /&gt; 
+</span><span class='line'>&lt;/head&gt; </span></code></pre></td></tr></table></div></figure>
+
+
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2015/03/12/ios-uiwebview-dong-tai-zai-ru-slash-shan-chu-slash-geng-xin-wai-bu-javascript-slash-css-wen-jian/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/03/08/macfan-qiang-ji-qiao/">Mac翻墙技巧</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-03-08T10:57:41+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h4>困扰</h4>
+
+<p>自己一直在寻找Mac上的免费翻墙工具，尝试过很多，但最终都没办法实现，对自己也造成了一些影响，比如需要在国外网站查询一些资料，下载一些应用，观看Youtube视频，刷Facebook，最要命的就是最近自己的Gmail也收不到邮件了，不想购买VPN，那只能尝试找免费翻墙工具了。</p>
+
+<p>终于找到免费翻墙的工具了</p>
+
+<p>不敢独享，故贴出来和大家分享一下。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2015/03/08/macfan-qiang-ji-qiao/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/02/13/mian-xiang-ios-kai-fa-de-you-xiu-xcode-cha-jian/">面向 iOS 开发的优秀 XCode 插件</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-02-13T21:05:50+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>一套理想的插件架构几乎能够决定整个集成开发环境的差异与特性。Sublime Text与TextMate就是很好的实例。但大家可能不了解的是，Xcode也支持插件。哈哈，如果各位真的前所未闻，我也不会感到惊讶，毕竟苹果并没有把太多精力用在Xcode的宣传之上。事实上，我们几乎找不到多少用于指导Xcode创建的说明文档。</p>
+
+<p>幸运的是，这并没有妨碍开发人员在Xcode这片土地上耕耘并构建自己的插件果实。目前市面上存在大量插件，能够让我们的Xcode使用之旅更加平坦也更富乐趣，甚至足以弥合苹果在其中留下的所有沟壑。在今天的文章中，我将向大家展示自己在日常工作中频繁用到的几款优秀插件。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2015/02/13/mian-xiang-ios-kai-fa-de-you-xiu-xcode-cha-jian/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/02/06/ji-shi-tong-xun-lei-yi-dong-appkai-fa-yao-dian/">即时通讯类移动APP开发要点</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-02-06T16:05:06+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>即时通讯（IM）软件作为满足人们沟通需求的工具，十几年来一直长盛不衰，并随着移动时代的到来迎来了新的增长。如在国内广泛使用的微信，在北美广泛使用的Whatsapp、Kik，在亚洲广泛使用的Line、KakaoTalk。另外还有其他一些以独特视角切入移动IM市场的APP，主打阅后即焚、私密消息等。</p>
+
+<p>试着从技术的角度来总结这一类应用的开发要点，或者说是相比桌面版的IM软件，移动IM应用开发需要注意的地方，欢迎指正和补充。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2015/02/06/ji-shi-tong-xun-lei-yi-dong-appkai-fa-yao-dian/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/01/16/valueforkeypathde-shi-yong-zong-jie/">valueForKeyPath的使用总结</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-01-16T21:10:46+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>可能大家对- (id)valueForKeyPath:(NSString *)keyPath方法不是很了解。
+其实这个方法非常的强大，具体有以下几个功能:</p>
+
+<h5>对数组中的每个元素执行成员实例方法</h5>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2015/01/16/valueforkeypathde-shi-yong-zong-jie/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/01/07/objective-czhong-de-selectorhe-sel/">Objective-C中的Selector和SEL</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-01-07T10:32:05+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h4>Objective-C中Selector基本概念和操作</h4>
+
+<p>简而言之，你可以理解 @selector()就是取类方法的编号,他的行为基本可以等同C语言的中函数指针,只不过C语言中，可以把函数名直接赋给一个函数指针，而Objective-C的类不能直接应用函数指针，这样只能做一个@selector语法来取.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2015/01/07/objective-czhong-de-selectorhe-sel/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/12/14/shi-yong-shen-qi-de-ponydebugger-tiao-shi-ios-ying-yong/">使用神奇的PONYDEBUGGER调试iOS应用</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-12-14T17:30:40+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>前言</h3>
+
+<p>Debug算是开发者的基本技能之一吧，对于iOS开发者而言，可能会遇到如下一些debug需求：</p>
+
+<p>调试网络请求问题
+调试一个层次结构复杂的用户界面
+查看应用内Core Data数据变化
+虽然你可以通过NSLog日志，打断点，抑或LLDB的调试命令等一些常见手段来解决以上问题，但这些方式始终不够直观，效率也不高，特别是对于调试UI这个需求。要提高效率，我们可以使用一些第三方的调试工具，比如本文要介绍的PonyDebugger。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/12/14/shi-yong-shen-qi-de-ponydebugger-tiao-shi-ios-ying-yong/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/12/07/shi-yong-viper-chuang-jian-kuang-jia/">使用VIPER构建iOS应用</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-12-07T22:03:17+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>建筑领域流行这样一句话，“我们虽然在营造建筑，但建筑也会重新塑造我们”。正如所有开发者最终领悟到的，这句话同样适用于构建软件。</p>
+
+<p>编写代码中至关重要的是，需要使每一部分容易被识别，赋有一个特定而明显的目的，并与其他部分在逻辑关系中完美契合。这就是我们所说的软件架构。好的架构不仅让一个产品成功投入使用，还可以让产品具有可维护性，并让人不断头脑清醒的对它进行维护！</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/12/07/shi-yong-viper-chuang-jian-kuang-jia/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/11/14/you-xiu-kai-yuan-xiang-mu-facebook-paper-dong-hua-yin-qing-pop/">优秀开源项目：FACEBOOK PAPER动画引擎 – POP</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-11-14T19:02:27+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="http://cc.cocimg.com/cms/uploads/allimg/140429/4196_140429142234_1.gif" alt="id1" /></p>
+
+<p>Pop是一个适用于iOS和OS X平台的可扩展动画引擎，是一个成熟的经过多重测试的，可实现Facebook Paper中的所有动画和过渡效果。除了基本的静态动画，Pop还支持spring和decay动画，有助于打造一个逼真的，基于物理的交互。你可以通过Pop的API把Pop快速集成到现有的Objective-C代码库中，并在任何对象上实现动画的任何属性。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/11/14/you-xiu-kai-yuan-xiang-mu-facebook-paper-dong-hua-yin-qing-pop/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/11/11/li-jie-objective-c-runtime/">理解 OBJECTIVE-C RUNTIME</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-11-11T21:34:12+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>当人们初学 Cocoa/Objective-C 时，Objective-C Runtime 是被忽略的特性之一。原因是 Objective-C（这门语言）很容易在几小时内就熟悉，新学 Cocoa 的人花费他们大部分的时间学习 Cocoa 框架和适应它是如何工作的。然而每个人至少应该知道一些 runtime 的工作细节，需要比知道编译器会把 [target doMethodWith:var1]; 转换为 objc_msgSend(target,@selector(doMethodWith:),var1); 更深入一些。知道 Objective-C 正在做的会让你更深入的理解 Objective-C 和你正在运行的 app。我认为 Mac/iPhone 的开发者不管你现在是什么水平，都会有收获的。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/11/11/li-jie-objective-c-runtime/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+
+  <div class="pagination">
+    <nav id="pagenavi">
+
+    
+
+       
+        <a href="/posts/2" class="prev">Newer</a>
+      
+      
+      
+        <a href="/posts/4" class="next">Older</a>
+    
+  </div>
+</div>
+<!-- <aside class="sidebar">
+  
+    
+  
+</aside> -->
+
+<!-- <footer role="contentinfo">
+<p style="text-align:center">
+  Copyright &copy; 2015 - Leo Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+</footer> -->
+    </div>
+  </div>
+  <footer role="contentinfo">
+<!-- <p>
+	Copyright &copy; 2016 - Leo Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p> -->
+
+
+<p style="text-align:center">
+  <!-- Copyright &copy; 2015 - Leo Lee - -->
+  	Copyright &copy; 2016 - Leo Lee -
+
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255930196'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1255930196%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
+</p>
+
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

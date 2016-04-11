@@ -1,0 +1,628 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+ <!-- 百度站长HTML标签验证 -->
+  <meta name="baidu-site-verification" content="2UxriFj8TS" />
+
+  <title>Leo Lee</title>
+  <meta name="author" content="Leo Lee">
+
+  
+  <meta name="description" content="CocoaPods安装和使用教程 CocoaPods是什么？ CocoaPods是iOS第三方开源类库管理工具。 ">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://swplzj.github.io/posts/2">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Leo Lee" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+ <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+<!--   
+
+ --></head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <nav id="main-nav" role="navigation">
+<ul class="main-navigation">
+  <li><a href="/" class="nav-link">首页 | Blog</a></li>
+  <li><a href="/blog/archives" class="nav-link">归档 | Archives</a></li>
+  <li><a href="/books" class="nav-link">图书 | Books</a></li>
+  <li><a href="/atom.xml" class="nav-link">订阅 | RSS</a></li>
+  <li><a href="/about" class="nav-link">关于我 | About</a></li>
+</ul>
+
+</nav>
+  <header role="banner"><hgroup>
+	
+		<img src="/images/portrait.jpg" class="portrait" height=250px width=250px />
+	
+  <h1><a href="/">Leo Lee</a></h1>
+  
+    <h2>An iOS developer's blog about programming and growing.</h2>
+  
+</hgroup>
+
+</header> 
+  
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/09/04/ru-he-xia-zai-he-an-zhuang-cocoapods/">如何下载和安装CocoaPods</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-09-04T14:16:46+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>CocoaPods安装和使用教程</h3>
+
+<hr />
+
+<h4>CocoaPods是什么？</h4>
+
+<p>CocoaPods是iOS第三方开源类库管理工具。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2015/09/04/ru-he-xia-zai-he-an-zhuang-cocoapods/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/08/19/ios-vpnqiang-lie-tui-jian/">iOS - VPN强烈推荐</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-08-19T18:58:02+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>之前推荐过 Mac 上的 VPN 使用，今天推荐两款 iOS 端比价好用的 VPN 应用，真的用起来很方便。无需注册，轻松翻墙。</p>
+
+<ol>
+<li><code>ArkVPN</code>：优点：方便，速度快，免费，不限流量。缺点：不订阅的话需要每天领取时长，不过免费时长够用了。</li>
+<li><code>Shadowsocks</code>：优点：方便，免费，开源，不限流量，不限时长。缺点：有些慢，有广告。</li>
+</ol>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2015/08/19/ios-vpnqiang-lie-tui-jian/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/08/19/zheng-ze-biao-da-shi-xue-xi/">正则表达式学习</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-08-19T11:45:54+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>项目中经常使用到一些校验，比如有效手机号，身份证号码，邮箱，银行卡号码&hellip;假如说都是简单的使用位数来做校验，容易造成特殊字符输入乱码，还有可能在数据库中写入脏数据，所以使用正则表达式来进行校验匹配是很有必要的，当然，我们学习它就要知道它有哪些作用，正则表达式的用途基本有以下三种：</p>
+
+<ul>
+<li>校验数据</li>
+<li>查询数据</li>
+<li>替换数据</li>
+</ul>
+
+
+<p>学习正则表达式的最好方法是从例子开始，理解例子之后再自己对例子进行修改。下面开始学习之旅：</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2015/08/19/zheng-ze-biao-da-shi-xue-xi/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/08/14/bash-qu-wei-shell/">Bash - 趣味Shell</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-08-14T11:27:23+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>今天抽闲玩了一下<code>Shell</code>，发现几个比较有意思的，记录一下。</p>
+
+<ul>
+<li>终端彩虹字：<code>lolcat</code></li>
+<li>图形化文字：<code>figlet</code></li>
+<li>幸运人生格言：<code>fortune</code></li>
+<li><code>ASCII</code>牛说：<code>Cowsay</code></li>
+<li>黑客帝国中瀑布流文字：<code>cmatrix</code></li>
+<li>写在最后</li>
+</ul>
+
+
+<p>很有趣的 <code>Shell</code>， 值得一试；</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2015/08/14/bash-qu-wei-shell/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/08/11/stay-hungry/">Stay Hungry Stay Foolish</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-08-11T22:17:40+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>今天又看了一遍乔帮主的演讲，每次观看，都能让我重新定位自己，重新审视自己，从自己身上找到答案。</p>
+
+<p>乔布斯对操场上挤的满满的毕业生、校友和家长们说：“你的时间有限，所以最好别把它浪费在模仿别人这种事上。” &ndash;同样地，如果还在学校的话，似乎不应该去模仿退学的牛人们。</p>
+
+<p>You&rsquo;ve got to find what you love,&lsquo; Jobs says
+　　</p>
+
+<p>Jobs说，你必须要找到你所爱的东西。
+　　</p>
+
+<p>This is the text of the Commencement address by Steve Jobs, CEO of Apple Computer and of Pixar Animation Studios, delivered on June 12, 2005.</p>
+
+<p>这是苹果公司和Pixar动画工作室的CEO Steve Jobs于2005年6月12号在斯坦福大学的毕业典礼上面的演讲稿。</p>
+
+<p>　　</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2015/08/11/stay-hungry/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/08/06/mac-navicat-premium-11-dot-0-16-po-jie-ji-lu/">Mac - Navicat Premium 11.0.16 破解记录</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-08-06T16:13:08+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>今天在测试聚信立相关接口时候，需要改变用户在数据库中聚信立认证状态，需要后台人员频繁帮忙修改改数据库中的值，有些麻烦。同事之前给推荐的数据库管理软件又过了试用期，只能重新安装，自己动手，丰衣足食。这是我安装 <code>Navicat Premium</code> 并破解的记录，供大家参考。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2015/08/06/mac-navicat-premium-11-dot-0-16-po-jie-ji-lu/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/08/06/objective-c-gui-fan-zheng-li/">Objective-C 规范整理</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-08-06T09:54:19+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>这份规范参考了一些主流公司的代码规范，也结合自己实战中的操作整理而成，也是我们 iOS 团队的代码约定，为了减少项目维护成本，大家可以参照。</p>
+
+<h2>目录</h2>
+
+<ul>
+<li><a href="#%E5%85%B3%E4%BA%8EView%E7%9A%84%E5%B8%83%E5%B1%80">关于View的布局</a></li>
+<li><a href="#%E7%82%B9%E8%AF%AD%E6%B3%95">点语法</a></li>
+<li><a href="#%E9%97%B4%E8%B7%9D">间距</a></li>
+<li><a href="#%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD">条件判断</a>
+
+<ul>
+<li><a href="#%E4%B8%89%E7%9B%AE%E8%BF%90%E7%AE%97%E7%AC%A6">三目运算符</a></li>
+</ul>
+</li>
+<li><a href="#%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86">错误处理</a></li>
+<li><a href="#%E6%96%B9%E6%B3%95">方法</a></li>
+<li><a href="#%E5%8F%98%E9%87%8F">变量</a></li>
+<li><a href="#%E5%91%BD%E5%90%8D">命名</a></li>
+<li><a href="#%E6%B3%A8%E9%87%8A">注释</a></li>
+<li><a href="#init-%E5%92%8C-dealloc">Init 和 Dealloc</a></li>
+<li><a href="#%E5%AD%97%E9%9D%A2%E9%87%8F">字面量</a></li>
+<li><a href="#CGRect-%E5%87%BD%E6%95%B0">CGRect 函数</a></li>
+<li><a href="#%E5%B8%B8%E9%87%8F">常量</a></li>
+<li><a href="#%E6%9E%9A%E4%B8%BE%E7%B1%BB%E5%9E%8B">枚举类型</a></li>
+<li><a href="#%E4%BD%8D%E6%8E%A9%E7%A0%81">位掩码</a></li>
+<li><a href="#%E7%A7%81%E6%9C%89%E5%B1%9E%E6%80%A7">私有属性</a></li>
+<li><a href="#%E5%9B%BE%E7%89%87%E5%91%BD%E5%90%8D">图片命名</a></li>
+<li><a href="#%E5%B8%83%E5%B0%94">布尔</a></li>
+<li><a href="#%E5%8D%95%E4%BE%8B">单例</a></li>
+<li><a href="#%E5%AF%BC%E5%85%A5">导入</a></li>
+<li><a href="#Xcode-%E5%B7%A5%E7%A8%8B">Xcode 工程</a></li>
+</ul>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2015/08/06/objective-c-gui-fan-zheng-li/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/08/04/ios-number-yin-fa-de-si-kao/">iOS - '#'引发的思考</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-08-04T18:37:45+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>在代码中使用 <code>Autolayout</code> 时，大家都会使用 <code>NSDictionaryOfVariableBindings</code> 这个宏，这个宏可以生成一个变量名到变量值映射的 <code>Dictionary</code>。比如 <code>NSDictionaryOfVariableBindings(button1, button2)</code> 将会生成一个<code>{ @"button1" = button1, @"button2 = button2 }</code> 的 <code>Dictionary</code>。它是怎么做到的呢？我们来看看这个宏的定义：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#define NSDictionaryOfVariableBindings(...) _NSDictionaryOfVariableBindings(@"" # __VA_ARGS__, __VA_ARGS__, nil)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这个宏定义中有3个参数，后两个参数不难理解，但第一个参数中间有个 <code>#</code> 符号，语法上看起来比较怪异，这个是什么呢？以前在做越狱的 <code>mobilesubstrate</code> 开发时，其中定义的一堆宏频繁使用了这个符号，下面就来揭开 <code>#</code> 这个符号在宏定义中的迷雾。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2015/08/04/ios-number-yin-fa-de-si-kao/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/08/04/mac-jie-ping-gong-neng-gao-ji-pian/">Mac - 截屏功能高级篇</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-08-04T16:29:59+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>截屏在平常应该是最常用的功能了，虽然说有一些工具可以提供截屏，比如 QQ 带的截屏功能，但是默认的快捷键可能与系统自定义冲突，或者使用鼠标不方便。其实，系统本身所提供的截屏功能，足够我们使用，你真的认为你掌握了截屏功能？那进来看看吧。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2015/08/04/mac-jie-ping-gong-neng-gao-ji-pian/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/07/31/bo-ke-sheng-ji-liao/">博客升级了</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-07-31T19:17:56+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>博客其实早就搭建了，中间发布过一些文章，可是博客一直没有升级，现在针对以下几个功能进行了添加及优化。</p>
+
+<ul>
+<li>更换主题</li>
+<li>添加站长统计</li>
+<li>添加多说评论</li>
+<li>添加七牛云图片存储服务</li>
+<li>自动为图片添加url前缀</li>
+<li>写在最后</li>
+</ul>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2015/07/31/bo-ke-sheng-ji-liao/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+
+  <div class="pagination">
+    <nav id="pagenavi">
+
+    
+        <a href="/index.html" class="prev">Home</a>
+      
+
+       
+      
+      
+        <a href="/posts/3" class="next">Older</a>
+    
+  </div>
+</div>
+<!-- <aside class="sidebar">
+  
+    
+  
+</aside> -->
+
+<!-- <footer role="contentinfo">
+<p style="text-align:center">
+  Copyright &copy; 2015 - Leo Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+</footer> -->
+    </div>
+  </div>
+  <footer role="contentinfo">
+<!-- <p>
+	Copyright &copy; 2016 - Leo Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p> -->
+
+
+<p style="text-align:center">
+  <!-- Copyright &copy; 2015 - Leo Lee - -->
+  	Copyright &copy; 2016 - Leo Lee -
+
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255930196'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1255930196%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
+</p>
+
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

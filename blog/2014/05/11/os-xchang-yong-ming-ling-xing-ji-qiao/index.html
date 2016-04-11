@@ -1,0 +1,272 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+ <!-- 百度站长HTML标签验证 -->
+  <meta name="baidu-site-verification" content="2UxriFj8TS" />
+
+  <title>OS X常用命令行技巧 - Leo Lee</title>
+  <meta name="author" content="Leo Lee">
+
+  
+  <meta name="description" content="用“caffeinate”来停用屏幕保护和休眠 山狮（Mac OS X 10.8）引入的新功能caffeinate，它完全就是命令行版本的咖啡因（Caffeine），可以让你电脑保持精神。运行方法： caffeinate -t 3600 其中， -t用来指定时间，单位是秒， &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://swplzj.github.io/blog/2014/05/11/os-xchang-yong-ming-ling-xing-ji-qiao">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Leo Lee" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+ <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+<!--   
+
+ --></head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <nav id="main-nav" role="navigation">
+<ul class="main-navigation">
+  <li><a href="/" class="nav-link">首页 | Blog</a></li>
+  <li><a href="/blog/archives" class="nav-link">归档 | Archives</a></li>
+  <li><a href="/books" class="nav-link">图书 | Books</a></li>
+  <li><a href="/atom.xml" class="nav-link">订阅 | RSS</a></li>
+  <li><a href="/about" class="nav-link">关于我 | About</a></li>
+</ul>
+
+</nav>
+  
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">OS X常用命令行技巧</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-11T23:08:13+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h4>用“caffeinate”来停用屏幕保护和休眠</h4>
+
+<p>山狮（Mac OS X 10.8）引入的新功能caffeinate，它完全就是命令行版本的咖啡因（Caffeine），可以让你电脑保持精神。运行方法：</p>
+
+<p>caffeinate -t 3600</p>
+
+<p>其中， -t用来指定时间，单位是秒，所以上面的例子就是一个小时。</p>
+
+<!--more-->
+
+
+<h4>用pkgutil来释放PKG文件</h4>
+
+<p>如果你只是想从pkg文件里面抓取一些文件出来而不想安装整个软件？那pkgutil最适合你不过了：</p>
+
+<p>pkgutil &ndash;expand sample.pkg ~/Desktop/</p>
+
+<p>当然，你需要把sample.pkg的名字改成对应你要释出的pkg包的名字，上面的例子会把整个pkg包解压到桌面。</p>
+
+<h4>用“purge”来清理内存</h4>
+
+<p>purge清理磁盘和内存的缓存，效果类似于重启电脑。虽然有人说这也就是个安慰剂，但是它的确会对那些不活动的进程的内存释放出来，当你机器的内存不够用的时候，它是可以起到加速作用的。</p>
+
+<p>purge的用法非常简单：</p>
+
+<p>purge</p>
+
+<p>执行的过程中需要等一小会儿，之后各个进程的速度就会快起来啦！</p>
+
+<p>（小编注：如果你机器内存很大，并且用不完，真的没有什么必要总执行这个命令，需要等那个时间不说，程序自己建立的一些缓存会因为这个命令重新构建，除非是你内存真的不够用了，否则得不偿失。）</p>
+
+<h4>使用“open” 来启动同一个app的多个实例</h4>
+
+<p>你可能已经知道你可以通过命令行里的open命令来启动电脑上的程序，但是你知道吗，其实可以再加上-n的选项来创建多个实例。而且这非常简单，你所需要做的只是：</p>
+
+<p>open -n /Applications/Safari.app/</p>
+
+<p>上面的例子会创建另外的Safari ，你可以根据你的需要来启动其他的程序，别忘了.app的后缀</p>
+
+<h4>不通过App Store更新系统</h4>
+
+<p>更新系统这样的事情，并不一定要麻烦App Store。你可以在命令行里直接搞定这个事情，而这也非常简单：</p>
+
+<p>sudo softwareupdate -i -a</p>
+
+<p>这个命令其实在Mac OS X系统中已经存在好多年了。所以各种版本都可以使用这种方法来更新系统。</p>
+
+<p>列出来所有下载过的东西</p>
+
+<p>我们都经历过这样的事情吧：之前下载了一个什么东西，但是忘记是从那里下载的了，或者记不清出它叫什么名字。不过还好，你很幸运，因为免疫服务（Quarantine Service）保存了一份你所有的下载内容的数据库，这样一来你就可以查询那个数据库来找到你想要的东西。可以通过sqlite3命令来实现：</p>
+
+<p>sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* &lsquo;select LSQuarantineDataURLString from LSQuarantineEvent&rsquo; |more</p>
+
+<h4>用“chflags”来隐藏文件和文件夹</h4>
+
+<p>有什么想隐藏的文件或者文件见吗？用chflags命令就可以把任何文件或者文件夹从系统里面隐藏起来。对于文件和文件夹，使用方法都一样：</p>
+
+<p>chflags hidden /path/to/file/or/folder/</p>
+
+<p>幸好（或者但是）这样隐藏过的文件和文件夹依然可以通过ls看到，不过在Finder里面还是看不到的，除非你使用了nohidden选项之前，比如：</p>
+
+<p>chflags nohidden /path/to/unhide/</p>
+
+<p>这两种改变都是立即生效的。</p>
+
+<h4>用拖拽的方式来自动写入文件</h4>
+
+<p>要是你们在命令行里面还苦逼兮兮的写很长的文件路径，就有点太对不住自己了。因为Mac OS X里面可以通过拖拽的方式输入路径：</p>
+
+<p>sudo vi (drag file here to print the full path)</p>
+
+<p>无论在命令行上还是终端程序里面，都生效。</p>
+
+<h4>创建加密的压缩包</h4>
+
+<p>如果你想加密一个压缩包，其实不需要什么其他的软件，系统自己就可以完成：</p>
+
+<p>zip -e protected.zip /file/to/protect/</p>
+
+<p>如果没有-e就会创建一个普通的，没有密码的压缩包。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Leo Lee</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-11T23:08:13+08:00" pubdate data-updated="true"></time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/05/04/appzai-itunes-connectli-mian-de-ji-chong-zhuang-tai/" title="Previous Post: App在iTunes Connect里面的几种状态">&laquo; App在iTunes Connect里面的几种状态</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/06/10/nstimerde-yong-fa-xia-zai-jin-du-xian-shi/" title="Next Post: NSTimer的用法-下载进度显示">NSTimer的用法-下载进度显示 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+
+<!-- 添加多说 -->
+
+
+  <section>
+    <h1>Comments</h1>
+    <div id="comments" aria-live="polite">
+<!-- Duoshuo Comment BEGIN -->
+<div class="ds-thread"></div>
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"swplzj"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<!-- Duoshuo Comment END -->
+</div>
+  </section>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo">
+<!-- <p>
+	Copyright &copy; 2016 - Leo Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p> -->
+
+
+<p style="text-align:center">
+  <!-- Copyright &copy; 2015 - Leo Lee - -->
+  	Copyright &copy; 2016 - Leo Lee -
+
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255930196'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1255930196%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
+</p>
+
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,556 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+ <!-- 百度站长HTML标签验证 -->
+  <meta name="baidu-site-verification" content="2UxriFj8TS" />
+
+  <title>Leo Lee</title>
+  <meta name="author" content="Leo Lee">
+
+  
+  <meta name="description" content="iOS应用程序采用的是沙盒原理设计，普及一下知识：沙盒是在受限的安全环境中运行应用程序的一种做法，这种做法是要限制授予应用程序的代码访问权限。 ">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://swplzj.github.io/posts/6">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Leo Lee" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+ <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+<!--   
+
+ --></head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <nav id="main-nav" role="navigation">
+<ul class="main-navigation">
+  <li><a href="/" class="nav-link">首页 | Blog</a></li>
+  <li><a href="/blog/archives" class="nav-link">归档 | Archives</a></li>
+  <li><a href="/books" class="nav-link">图书 | Books</a></li>
+  <li><a href="/atom.xml" class="nav-link">订阅 | RSS</a></li>
+  <li><a href="/about" class="nav-link">关于我 | About</a></li>
+</ul>
+
+</nav>
+  <header role="banner"><hgroup>
+	
+		<img src="/images/portrait.jpg" class="portrait" height=250px width=250px />
+	
+  <h1><a href="/">Leo Lee</a></h1>
+  
+    <h2>An iOS developer's blog about programming and growing.</h2>
+  
+</hgroup>
+
+</header> 
+  
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/03/13/ios-ying-yong-cheng-xu-mu-lu-jie-gou/">iOS 应用程序目录结构</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-13T21:22:19+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>iOS应用程序采用的是沙盒原理设计，普及一下知识：沙盒是在受限的安全环境中运行应用程序的一种做法，这种做法是要限制授予应用程序的代码访问权限。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/03/13/ios-ying-yong-cheng-xu-mu-lu-jie-gou/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/03/12/quartz-core-kuang-jia-xue-xi/">Quartz Core 框架学习</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-12T15:32:06+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>iOS编程给用户视觉反馈其实都是通过 <code>Quartz Core</code> 框架来进行的，说白了，所有用户最终看到的显示界面都是图层合成的结果，而图层即是 <code>Quartz Core</code> 中的 <code>CALayer</code> 。</p>
+
+<p>通常我们所说的视图即 <code>UIView</code> ，并不是直接显示在屏幕上，而是在创建视图对象的时候视图对象会自动创建一个层，而视图对象把要显示的东西绘制在层上，待到需要显示时硬件将所有的层拷贝，然后按Z轴的高低合成最终的显示结果。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/03/12/quartz-core-kuang-jia-xue-xi/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/02/27/er-wei-ma-de-sheng-cheng-xi-jie-he-yuan-li/">二维码的生成细节和原理</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-27T20:57:29+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>二维码又称QR Code，QR全称Quick Response，是一个近几年来移动设备上超流行的一种编码方式，它比传统的Bar Code条形码能存更多的信息，也能表示更多的数据类型：比如：字符，数字，日文，中文等等。这两天学习了一下二维码图片生成的相关细节，觉得这个玩意就是一个密码算法，在此写一这篇文章 ，揭露一下。供好学的人一同学习之。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/02/27/er-wei-ma-de-sheng-cheng-xi-jie-he-yuan-li/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/02/22/zai-iosshang-hui-zhi-zi-ran-de-qian-ming/">在iOS上绘制自然的签名</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-22T21:02:25+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>这里有一篇很棒的文章写如何在Android上获取流畅的签名：<a href="http://corner.squareup.com/2012/07/smoother-signatures.html">Smoother Signatures</a>，但是我没有找到一篇是写在iOS上如何实现。那么，究竟怎么做才能在iOS设备上获取用户的签名呢？</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/02/22/zai-iosshang-hui-zhi-zi-ran-de-qian-ming/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/02/13/ioszhong-xiao-xi-de-chuan-di-ji-zhi/">iOS中消息的传递机制</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-13T21:43:49+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>每个应用程序或多或少，都由一些松耦合的对象构成，这些对象彼此之间要想很好的完成任务，就需要进行消息传递。本文将介绍所有可用的消息传递机制，并通过示例来介绍这些机制在苹果的Framework中如何使用，同时，还介绍了一些最佳实践建议，告诉你什么时机该选择使用什么机制。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/02/13/ioszhong-xiao-xi-de-chuan-di-ji-zhi/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/01/18/ios-maczhong-duan-xia-de-sqlyu-ju/">iOS mac终端下的SQL语句</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-18T22:18:47+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>我们都知道数据库的创建可以借助图形化的数据库工具软件，但也可以在Mac终端下来直接使用代码创建。
+下面介绍怎样建立数据库、建立资料表、建立索引、数据的增、删、改、查以及sqlite3命令列选项等。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/01/18/ios-maczhong-duan-xia-de-sqlyu-ju/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/01/09/ioscheng-xu-de-buildguo-cheng/">iOS程序的Build过程</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-09T20:07:52+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>本文将轻度解密Xcode build日志，还原iOS程序build的过程。
+另外将介绍如何对build过程的控制，进而定制出自己希望的流程，
+例如通过Build phase的定制，给app icon打水印(包括版本号和日期)。
+通过对工程文件的解读，为你揭开工程文件(.pbxproj)与
+build settings的关系。这对于解决工程文件的merge冲突非常有帮助。
+PS：实际上各开发平台的build过程都比较相似，如果你熟悉了
+某个平台的build过程，那么同样的原理也适用于别的平台。
+可以说换汤不换药，本质是一样的。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/01/09/ioscheng-xu-de-buildguo-cheng/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/12/23/bu-yao-rang-zuo-tian-shi-bai-de-ni-ji-xu-fu-shi-jin-tian-de-zi-ji/">不要让昨天失败的你继续腐蚀今天的自己</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-23T10:35:24+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>迷迷糊糊、懵懵懂懂，你走在了二十几岁的人生路口，怀揣着一份不安的心情，独自面对着这个未知的世界。与二十几年前赤裸裸地来到这个世界不同，你无法再用“呜呜呜”的哭声去无意识地博取周围人对你的同情和帮助。而你，显然还未曾开始认识这个真实的社会，就已经被毕业后人潮涌动的趋势推进了社会的大染缸；而你，显然还没做好放下身段，融入集体的准备，更没有收起你的青涩和稚气，武装起铠甲，拿起武器，去跟你的同龄人甚至年长你的人竞争，于是，在进入大染缸后不久又迅速地被挤回到社会的边缘。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/12/23/bu-yao-rang-zuo-tian-shi-bai-de-ni-ji-xu-fu-shi-jin-tian-de-zi-ji/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/12/13/zai-%5B%3F%5D-ci-,wei-ping-fan-ren-he-cai-!/">再一次，为平凡人喝彩！</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-13T13:50:44+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>在新浪视频上看到了央视拍的一段公益广告，看了之后的确励志，自己确实有过这样的经历，可以说现在就走在“再一次”的路上。
+内容写的很好，敲出来与大家分享励志共勉。</p>
+
+<p>《再一次》</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/12/13/zai-%5B%3F%5D-ci-,wei-ping-fan-ren-he-cai-!/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/12/12/at-macshi-yong-ji-qiao/">Mac使用技巧</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-12T22:25:20+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h5>1. [技巧]终端模式下用Finder打开当前目录</h5>
+
+<p>方法如下</p>
+
+<p>open .</p>
+
+<h5>2.强制退出应用</h5>
+
+<p>如果您无法从无响应的 app 进行切换，请按住 Command-Option-Shift-Esc 键三秒钟，以强制其退出。该组合键将命令 OS X 强制退出最前面的 app。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/12/12/at-macshi-yong-ji-qiao/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+
+  <div class="pagination">
+    <nav id="pagenavi">
+
+    
+
+       
+        <a href="/posts/5" class="prev">Newer</a>
+      
+      
+      
+        <a href="/posts/7" class="next">Older</a>
+    
+  </div>
+</div>
+<!-- <aside class="sidebar">
+  
+    
+  
+</aside> -->
+
+<!-- <footer role="contentinfo">
+<p style="text-align:center">
+  Copyright &copy; 2015 - Leo Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+</footer> -->
+    </div>
+  </div>
+  <footer role="contentinfo">
+<!-- <p>
+	Copyright &copy; 2016 - Leo Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p> -->
+
+
+<p style="text-align:center">
+  <!-- Copyright &copy; 2015 - Leo Lee - -->
+  	Copyright &copy; 2016 - Leo Lee -
+
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255930196'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1255930196%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
+</p>
+
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,493 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+ <!-- 百度站长HTML标签验证 -->
+  <meta name="baidu-site-verification" content="2UxriFj8TS" />
+
+  <title>XCODE LLDB命令的简单实用说明 - Leo Lee</title>
+  <meta name="author" content="Leo Lee">
+
+  
+  <meta name="description" content="po（print object）是LLDB的一个命令，其主要功能是输出objective-c中对象（objects）的信息，与之相似的另外一个命令是 p（print），其主要功能是输出原生类型（boolean、integer、float、etc）的信息。 可以在控制台输入 1
+2
+po self. &hellip;">
+  <meta name="keywords" content="Xcode, LLDB, 命令, po">
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://swplzj.github.io/blog/2014/07/21/xcode-lldb-ming-ling-jian-dan-shi-yong">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Leo Lee" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+ <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+<!--   
+
+ --></head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <nav id="main-nav" role="navigation">
+<ul class="main-navigation">
+  <li><a href="/" class="nav-link">首页 | Blog</a></li>
+  <li><a href="/blog/archives" class="nav-link">归档 | Archives</a></li>
+  <li><a href="/books" class="nav-link">图书 | Books</a></li>
+  <li><a href="/atom.xml" class="nav-link">订阅 | RSS</a></li>
+  <li><a href="/about" class="nav-link">关于我 | About</a></li>
+</ul>
+
+</nav>
+  
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">XCODE LLDB命令的简单实用说明</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-21T16:47:01+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>po（print object）是LLDB的一个命令，其主要功能是输出objective-c中对象（objects）的信息，与之相似的另外一个命令是 p（print），其主要功能是输出原生类型（boolean、integer、float、etc）的信息。</p>
+
+<!--more-->
+
+
+<p>可以在控制台输入</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>po self.view 或者
+</span><span class='line'>p self.view.subViews.count</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>技巧一：运行时修改变量的值</h4>
+
+<p>你以前怎么验证是不是某个变量的值导致整段程序不能正常工作？修改代码中的变量的值，然后cmd+r重新启动app？现在你不需要这么做了，只需要设置一个断点，当程序在这进入调试模式后，使用expr命令即可在运行时修改变量的值。</p>
+
+<p>假如有一个loginWithUsername:方法，需要两个参数：username，password。</p>
+
+<p>首先设置好断点，如下图所示：</p>
+
+<p><img src="http://static.oschina.net/uploads/space/2013/0320/230128_xFae_724414.png" title="设置断点" alt="id1" /></p>
+
+<p>运行app，进入断点模式后，在（lldb）后输入</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>expr username = @"username"
+</span><span class='line'>expr password = @"badpassword"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>控制台会返回以下信息</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>(NSString *) $0 = 0x3d3504c4 @"username"
+</span><span class='line'>(NSString *) $1 = 0x1d18ef60 @"badpassword"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>现在跳出断点，执行断点之后的两条输出语句，控制台会有以下输出</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>(0x1c59aae0) A line for the breakpoint
+</span><span class='line'>(0x1c59aae0) Username and Password after: username:badpassword</span></code></pre></td></tr></table></div></figure>
+
+
+<p>看到看吧，我们在运行时修改了变量的值，事情还可以变的更简单一些，我们可以编辑断点，让它自动填充需要的修改的变量的值，并且可以选择在此断点处不进入断点模式，仅仅修改指定变量的值，然后自动执行后续代码。</p>
+
+<p>右击断点选择“Edit Breakpoint…”（或者按住cmd+option，单击断点），然后如下图所示设置断点</p>
+
+<p><img src="http://static.oschina.net/uploads/space/2013/0320/231442_eqyO_724414.png" title="编辑断点" alt="id2" /></p>
+
+<p>注意选中了最后一行（“Automatically continue after evaluating”）的选择框，这就保证运行到这个断点的时，填充变量的值，然后继续运行，并不在此处断点进入调试模式。</p>
+
+<p>运行app，你会得到和上述手动设置变量的值一样的输出。</p>
+
+<p>接下来单击断点，使其处于禁用状态，现在箭头的颜色应该是浅蓝色的，重新运行app，你会发现username和password的值没有在运行时被改变了。</p>
+
+<h4>技巧二：设置断点触发条件</h4>
+
+<p>断点的另外一个重要作用，是可以设置触发断点生效的条件，这样我们就可以在运行时针对特定的数据进行分析，观察app是否运行在正确的轨道上。如下图：</p>
+
+<p><img src="http://static.oschina.net/uploads/space/2013/0320/232822_rEBO_724414.png" title="触发条件" alt="id3" /></p>
+
+<p>上述截图可以看到如下语句</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>(BOOL)[(NSString*)[item valueForKey:@"ID"] isEqualToString:@"93306"]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>通过这行语句，我们告诉编译器：当item中ID等于93306时，此断点生效，进入断点调试模式。</p>
+
+<h4>技巧三：格式化输出数据</h4>
+
+<p>如果你厌倦了代码里无穷无尽的NSLog，幸运的是我们可以在编辑断点使其输出格式化字符串就像平常编码时一样。不过有一点需要注意，平常编码时可能会使用NSString‘s stringWithFormat:输出格式化字符串，不过这个方法貌似在断点中木有效果，你需要使用alloc/init形式的方法，如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>po [[NSString alloc] initWithFormat:@"Item index is: %d", index]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>运行app，就能在控制台看到想要的输出啦！</p>
+
+<p>简单！强大！这就是LLDB给你的选择，从此代码里可以不用再有NSLog满天飞的情况了，代码变得更干净了，心情变得更愉悦了！</p>
+
+<p>LLDB还有很多强大的地方，本教程只不过揭开了它的面纱，即便如此，仍让我们沉醉不已。</p>
+
+<h4>另附命令合集</h4>
+
+<p>apropos           — Find a list of debugger commands related to a particular
+                        word/subject.</p>
+
+<p>  breakpoint        — A set of commands for operating on breakpoints. Also see
+                       _regexp-break.</p>
+
+<p>  command           — A set of commands for managing or customizing the
+                       debugger commands.</p>
+
+<p>  disassemble       — Disassemble bytes in the current function, or elsewhere
+                       in the executable program as specified by the user.</p>
+
+<p>  expression        — Evaluate a C/ObjC/C++ expression in the current program
+                       context, using user defined variables and variables
+                       currently in scope.</p>
+
+<p>  frame             — A set of commands for operating on the current thread’s
+                       frames.</p>
+
+<p>  gdb-remote        — Connect to a remote GDB server.  If no hostname is
+                       provided, localhost is assumed.</p>
+
+<p>  gui               — Switch into the curses based GUI mode.</p>
+
+<p>  help              — Show a list of all debugger commands, or give details
+                       about specific commands.</p>
+
+<p>  kdp-remote        — Connect to a remote KDP server.  udp port 41139 is the
+                       default port number.</p>
+
+<p>  log               — A set of commands for operating on logs.</p>
+
+<p>  memory            — A set of commands for operating on memory.</p>
+
+<p>  platform          — A set of commands to manage and create platforms.</p>
+
+<p>  plugin            — A set of commands for managing or customizing plugin
+                       commands.</p>
+
+<p>  process           — A set of commands for operating on a process.</p>
+
+<p>  quit              — Quit out of the LLDB debugger.</p>
+
+<p>  register          — A set of commands to access thread registers.</p>
+
+<p>  script            — Pass an expression to the script interpreter for
+                       evaluation and return the results. Drop into the
+                       interactive interpreter if no expression is given.</p>
+
+<p>  settings          — A set of commands for manipulating internal settable
+                       debugger variables.</p>
+
+<p>  source            — A set of commands for accessing source file information</p>
+
+<p>  target            — A set of commands for operating on debugger targets.</p>
+
+<p>  thread            — A set of commands for operating on one or more threads
+                       within a running process.</p>
+
+<p>  type              — A set of commands for operating on the type system</p>
+
+<p>  version           — Show version of LLDB debugger.</p>
+
+<p>  watchpoint        — A set of commands for operating on watchpoints.</p>
+
+<p>Current command abbreviations (type ‘help command alias’ for more info):</p>
+
+<p>  add-dsym  — (‘target symbols add’)  Add a debug symbol file to one of the
+               target’s current modules by specifying a path to a debug symbols
+               file, or using the options to specify a module to download
+               symbols for.</p>
+
+<p>  attach    — (‘_regexp-attach’)  Attach to a process id if in decimal,
+               otherwise treat the argument as a process name to attach to.</p>
+
+<p>  b         — (‘_regexp-break’)  Set a breakpoint using a regular expression
+               to specify the location, where <linenum> is in decimal and
+               <address> is in hex.</p>
+
+<p>  bt        — (‘_regexp-bt’)  Show a backtrace.  An optional argument is
+               accepted; if that argument is a number, it specifies the number
+               of frames to display.  If that argument is ‘all’, full
+               backtraces of all threads are displayed.</p>
+
+<p>  c         — (‘process continue’)  Continue execution of all threads in the
+               current process.</p>
+
+<p>  call      — (‘expression –’)  Evaluate a C/ObjC/C++ expression in the
+               current program context, using user defined variables and
+               variables currently in scope.</p>
+
+<p>  continue  — (‘process continue’)  Continue execution of all threads in the
+               current process.</p>
+
+<p>  detach    — (‘process detach’)  Detach from the current process being
+               debugged.</p>
+
+<p>  di        — (‘disassemble’)  Disassemble bytes in the current function, or
+               elsewhere in the executable program as specified by the user.</p>
+
+<p>  dis       — (‘disassemble’)  Disassemble bytes in the current function, or
+               elsewhere in the executable program as specified by the user.</p>
+
+<p>  display   — (‘_regexp-display’)  Add an expression evaluation stop-hook.</p>
+
+<p>  down      — (‘_regexp-down’)  Go down “n” frames in the stack (1 frame by
+               default).</p>
+
+<p>  env       — (‘_regexp-env’)  Implements a shortcut to viewing and setting
+               environment variables.</p>
+
+<p>  exit      — (‘quit’)  Quit out of the LLDB debugger.</p>
+
+<p>  f         — (‘frame select’)  Select a frame by index from within the
+               current thread and make it the current frame.</p>
+
+<p>  file      — (‘target create’)  Create a target using the argument as the
+               main executable.</p>
+
+<p>  finish    — (‘thread step-out’)  Finish executing the function of the
+               currently selected frame and return to its call site in
+               specified thread (current thread, if none specified).</p>
+
+<p>  image     — (‘target modules’)  A set of commands for accessing information
+               for one or more target modules.</p>
+
+<p>  j         — (‘_regexp-jump’)  Sets the program counter to a new address.</p>
+
+<p>  jump      — (‘_regexp-jump’)  Sets the program counter to a new address.</p>
+
+<p>  kill      — (‘process kill’)  Terminate the current process being debugged.</p>
+
+<p>  l         — (‘_regexp-list’)  Implements the GDB ‘list’ command in all of
+               its forms except FILE:FUNCTION and maps them to the appropriate
+               ‘source list’ commands.</p>
+
+<p>  list      — (‘_regexp-list’)  Implements the GDB ‘list’ command in all of
+               its forms except FILE:FUNCTION and maps them to the appropriate
+               ‘source list’ commands.</p>
+
+<p>  n         — (‘thread step-over’)  Source level single step in specified
+               thread (current thread, if none specified), stepping over
+               calls.</p>
+
+<p>  next      — (‘thread step-over’)  Source level single step in specified
+               thread (current thread, if none specified), stepping over
+               calls.</p>
+
+<p>  nexti     — (‘thread step-inst-over’)  Single step one instruction in
+               specified thread (current thread, if none specified), stepping
+               over calls.</p>
+
+<p>  ni        — (‘thread step-inst-over’)  Single step one instruction in
+               specified thread (current thread, if none specified), stepping
+               over calls.</p>
+
+<p>  p         — (‘expression –’)  Evaluate a C/ObjC/C++ expression in the
+               current program context, using user defined variables and
+               variables currently in scope.</p>
+
+<p>  po        — (‘expression -O  — ‘)  Evaluate a C/ObjC/C++ expression in the
+               current program context, using user defined variables and
+               variables currently in scope.</p>
+
+<p>  print     — (‘expression –’)  Evaluate a C/ObjC/C++ expression in the
+               current program context, using user defined variables and
+               variables currently in scope.</p>
+
+<p>  q         — (‘quit’)  Quit out of the LLDB debugger.</p>
+
+<p>  r         — (‘process launch -c /bin/sh –’)  Launch the executable in the
+               debugger.</p>
+
+<p>  rbreak    — (‘breakpoint set -r %1′)  Sets a breakpoint or set of
+               breakpoints in the executable.</p>
+
+<p>  repl      — (‘expression -r  — ‘)  Evaluate a C/ObjC/C++ expression in the
+               current program context, using user defined variables and
+               variables currently in scope.</p>
+
+<p>  run       — (‘process launch -c /bin/sh –’)  Launch the executable in the
+               debugger.</p>
+
+<p>  s         — (‘thread step-in’)  Source level single step in specified thread=
+               (current thread, if none specified).</p>
+
+<p>  si        — (‘thread step-inst’)  Single step one instruction in specified
+               thread (current thread, if none specified).</p>
+
+<p>  step      — (‘thread step-in’)  Source level single step in specified thread
+               (current thread, if none specified).</p>
+
+<p>  stepi     — (‘thread step-inst’)  Single step one instruction in specified
+               thread (current thread, if none specified).</p>
+
+<p>  t         — (‘thread select’)  Select a thread as the currently active
+               thread.</p>
+
+<p>  tbreak    — (‘_regexp-tbreak’)  Set a one shot breakpoint using a regular
+               expression to specify the location, where <linenum> is in
+               decimal and <address> is in hex.</p>
+
+<p>  undisplay — (‘_regexp-undisplay’)  Remove an expression evaluation
+               stop-hook.</p>
+
+<p>  up        — (‘_regexp-up’)  Go up “n” frames in the stack (1 frame by
+               default).</p>
+
+<p>  x         — (‘memory read’)  Read from the memory of the process being
+               debug</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Leo Lee</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-21T16:47:01+08:00" pubdate data-updated="true"></time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/07/09/xcode-5zhong-de-interface-buildergeng-you-li-yu-tuan-dui-xie-zuo-kai-fa/" title="Previous Post: Xcode 5中的Interface Builder更有利于团队协作开发">&laquo; Xcode 5中的Interface Builder更有利于团队协作开发</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/08/09/ios-shu-ju-chi-jiu-hua-%5B%3F%5D/" title="Next Post: iOS 数据持久化(一)">iOS 数据持久化(一) &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+
+<!-- 添加多说 -->
+
+
+  <section>
+    <h1>Comments</h1>
+    <div id="comments" aria-live="polite">
+<!-- Duoshuo Comment BEGIN -->
+<div class="ds-thread"></div>
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"swplzj"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<!-- Duoshuo Comment END -->
+</div>
+  </section>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo">
+<!-- <p>
+	Copyright &copy; 2016 - Leo Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p> -->
+
+
+<p style="text-align:center">
+  <!-- Copyright &copy; 2015 - Leo Lee - -->
+  	Copyright &copy; 2016 - Leo Lee -
+
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255930196'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1255930196%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
+</p>
+
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

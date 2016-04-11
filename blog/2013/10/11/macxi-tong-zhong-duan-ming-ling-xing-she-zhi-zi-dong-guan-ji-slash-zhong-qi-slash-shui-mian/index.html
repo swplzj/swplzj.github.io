@@ -1,0 +1,259 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+ <!-- 百度站长HTML标签验证 -->
+  <meta name="baidu-site-verification" content="2UxriFj8TS" />
+
+  <title>Mac系统终端命令行设置自动关机/重启/睡眠 - Leo Lee</title>
+  <meta name="author" content="Leo Lee">
+
+  
+  <meta name="description" content="mac设定定时关机/重启/睡眠，可以用终端命令来解决 命令的主体主要是 Shutdown，h/r/s 分别代表关机/重启/睡眠，然后在后面加上执行时间(yymmddhhmm)即可。 设定2013年11月4日14:10分关机： sudo shutdown -h 1311041410 也可以 sudo &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://swplzj.github.io/blog/2013/10/11/macxi-tong-zhong-duan-ming-ling-xing-she-zhi-zi-dong-guan-ji-slash-zhong-qi-slash-shui-mian">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Leo Lee" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+ <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+<!--   
+
+ --></head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <nav id="main-nav" role="navigation">
+<ul class="main-navigation">
+  <li><a href="/" class="nav-link">首页 | Blog</a></li>
+  <li><a href="/blog/archives" class="nav-link">归档 | Archives</a></li>
+  <li><a href="/books" class="nav-link">图书 | Books</a></li>
+  <li><a href="/atom.xml" class="nav-link">订阅 | RSS</a></li>
+  <li><a href="/about" class="nav-link">关于我 | About</a></li>
+</ul>
+
+</nav>
+  
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Mac系统终端命令行设置自动关机/重启/睡眠</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-11T20:03:03+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h3>mac设定定时关机/重启/睡眠，可以用终端命令来解决</h3>
+
+<p>命令的主体主要是 Shutdown，h/r/s 分别代表关机/重启/睡眠，然后在后面加上执行时间(yymmddhhmm)即可。</p>
+
+<!--more-->
+
+
+<h6>设定2013年11月4日14:10分关机：</h6>
+
+<pre><code>sudo shutdown -h 1311041410
+</code></pre>
+
+<p>也可以</p>
+
+<pre><code>sudo shutdown -h 14:10
+</code></pre>
+
+<h6>设定2013年11月4日14:10分重启：</h6>
+
+<pre><code>    sudo shutdown -r 1311041410
+</code></pre>
+
+<p>也可以</p>
+
+<pre><code>sudo reboot 
+</code></pre>
+
+<p>或者</p>
+
+<pre><code>sudo shutdown -r now
+</code></pre>
+
+<h6>设定2013年11月4日14:10分睡眠：</h6>
+
+<pre><code>sudo shutdown -s 1311041410
+</code></pre>
+
+<h6>如果想要立即关机/重启/睡眠，可以执行命令：</h6>
+
+<pre><code>sudo halt
+</code></pre>
+
+<p>或者</p>
+
+<pre><code>sudo shutdown -h now
+</code></pre>
+
+<p>now也可以适用于重启和睡眠。</p>
+
+<h3>临时取消定时关机/睡眠/重启的方法也很简单</h3>
+
+<p>我们在终端中执行了关机的命令，终端中会显示如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>swplzj:~ issuser$ sudo shutdown -s 1311041410
+</span><span class='line'>Shutdown at Mon Nov  4 14:10:00 2013.
+</span><span class='line'>shutdown: [pid 6609]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>注意上面的 pid 6609，这是指当前运行的这个 shutdown 命令的进程号，如果要取消关机，只需要停止这个进程的运行就可以了。</p>
+
+<p>命令为：</p>
+
+<pre><code>sudo kill 6609
+</code></pre>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Leo Lee</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-11T20:03:03+08:00" pubdate data-updated="true"></time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/09/17/da-jian-bo-ke-cao-zuo/" title="Previous Post: 利用Octopress搭建一个Github博客">&laquo; 利用Octopress搭建一个Github博客</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/10/19/macxia-da-jian-svnhuan-jing/" title="Next Post: Mac下搭建svn环境">Mac下搭建svn环境 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+
+<!-- 添加多说 -->
+
+
+  <section>
+    <h1>Comments</h1>
+    <div id="comments" aria-live="polite">
+<!-- Duoshuo Comment BEGIN -->
+<div class="ds-thread"></div>
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"swplzj"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<!-- Duoshuo Comment END -->
+</div>
+  </section>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo">
+<!-- <p>
+	Copyright &copy; 2016 - Leo Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p> -->
+
+
+<p style="text-align:center">
+  <!-- Copyright &copy; 2015 - Leo Lee - -->
+  	Copyright &copy; 2016 - Leo Lee -
+
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255930196'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1255930196%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
+</p>
+
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

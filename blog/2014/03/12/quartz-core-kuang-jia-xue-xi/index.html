@@ -1,0 +1,434 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+ <!-- 百度站长HTML标签验证 -->
+  <meta name="baidu-site-verification" content="2UxriFj8TS" />
+
+  <title>Quartz Core 框架学习 - Leo Lee</title>
+  <meta name="author" content="Leo Lee">
+
+  
+  <meta name="description" content="iOS编程给用户视觉反馈其实都是通过 Quartz Core 框架来进行的，说白了，所有用户最终看到的显示界面都是图层合成的结果，而图层即是 Quartz Core 中的 CALayer 。 通常我们所说的视图即 UIView ，并不是直接显示在屏幕上， &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://swplzj.github.io/blog/2014/03/12/quartz-core-kuang-jia-xue-xi">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Leo Lee" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+ <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+<!--   
+
+ --></head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <nav id="main-nav" role="navigation">
+<ul class="main-navigation">
+  <li><a href="/" class="nav-link">首页 | Blog</a></li>
+  <li><a href="/blog/archives" class="nav-link">归档 | Archives</a></li>
+  <li><a href="/books" class="nav-link">图书 | Books</a></li>
+  <li><a href="/atom.xml" class="nav-link">订阅 | RSS</a></li>
+  <li><a href="/about" class="nav-link">关于我 | About</a></li>
+</ul>
+
+</nav>
+  
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Quartz Core 框架学习</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-12T15:32:06+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>iOS编程给用户视觉反馈其实都是通过 <code>Quartz Core</code> 框架来进行的，说白了，所有用户最终看到的显示界面都是图层合成的结果，而图层即是 <code>Quartz Core</code> 中的 <code>CALayer</code> 。</p>
+
+<p>通常我们所说的视图即 <code>UIView</code> ，并不是直接显示在屏幕上，而是在创建视图对象的时候视图对象会自动创建一个层，而视图对象把要显示的东西绘制在层上，待到需要显示时硬件将所有的层拷贝，然后按Z轴的高低合成最终的显示结果。</p>
+
+<!--more-->
+
+
+<h5>一、添加 Quartz Core 框架</h5>
+
+<p>要使用 Quartz Core 框架，你需要将其添加到你的工程中 。 然后</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#import &lt;Quartz Core/QuartzCore.h&gt; </span></code></pre></td></tr></table></div></figure>
+
+
+<h5>二、认识图层</h5>
+
+<p>对 PS 有所了解的人都知道图层的概念，在这里也一样。在PS中一张图片至少得有一个图层，一个或多个图层的叠加构成了一张位图。我们这里一个或多个图层的叠加的构成了<code>UIView</code>（或其派生类）对象。要访问一个图层，需要读取 <code>UIview</code> 的 <code>layer</code> 属性。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>CALayer* layer = self.view.layer;  </span></code></pre></td></tr></table></div></figure>
+
+
+<p>所有派生自 <code>UIView</code> 的对象，都会继承这一属性，这意味着你可以对导航栏、表格、文本框以及其他许多类型的视图类，进行变换、缩放、旋转、甚至加入动画。</p>
+
+<p>有人又有疑问了，上面的代码我们只读取了一个 <code>layer</code> 假如一个 <code>UIView</code> 有多个图层呢? <code>UIView</code> 确实只有一个 <code>layer</code> 属性，但是layer 是可以叠加的，layer 可以叠加在 layer 上面，所以这个layer 就相当于是一块底板，我们可以在这块地板上叠加一些透明胶片（子图层），叠加在一起之后就构成了一个组合图像。</p>
+
+<h5>三、图层的层次结构</h5>
+
+<p>图层有很多通用的方法和属性，来操作子图层和执行绘制操作。这些方法允许你将许多单个图层叠加在一起，来绘制一个组合的屏幕图像。</p>
+
+<p>一个图层可以有许多个子图层。在最终绘制屏幕时，子图层可以被排列后固定在一起。这可以参考赛车游戏中的图层。游戏可能有几个图层组成：一个绘制背景、一个绘制角色、一个绘制地图显示器。你可能会为每个图层准备一个专门的UIView类，并另外用一个UIView类来整合游戏画面：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>UIView* gameView = [[UIView alloc]initWithFrame:[[UIScreen mainScreen]applicationFrame] ];  
+</span><span class='line'>UIView* backgroundView = [[UIView alloc]initWithFrame:[[UIScreen mainScreen]applicationFrame]];  
+</span><span class='line'>UIView* roleView= [[UIView alloc]initWithFrame:CGRectMake(0.0, 0.0, 100.0, 200.0)];  
+</span><span class='line'>UIView* mapView = [[UIView alloc]initWithFrame:CGRectMake(200.0, 0.0, 100.0, 100.0)];  
+</span><span class='line'>//通过CALayer 类的addSublayer 方法，你可以将3个UIView 类的图层全都与 gameView 对象链接在一起：  
+</span><span class='line'>CALayer* gameLayer = gameView.layer;  
+</span><span class='line'>[gameLayer addSublayer:backgroundView.layer];  
+</span><span class='line'>[gameLayer addSublayer:roleView.layer];  
+</span><span class='line'>[gameLayer addSublayer:mapView.layer];  </span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>当gameView 对象显示在屏幕上的时候，3个子图层被合并在一起绘制出来。每个类单独绘制他自己的图层，但当游戏图层被显示出来的时候，3个图层就全都融合在一起了。</p>
+
+<p>gameView不是唯一能够添加子图层的图层。子图层也可以添加自己的子图层，并且可以构建一个完整的图层层次结构。例如你的游戏可能会在 mapView图层中再构加入一个图层，用来显示map的一部分内容，比如剩余里程数。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>UILabel* lastDistance = [[UILabel alloc]initWithFrame:CGRectMake(0.0, 0.0, 20.0, 20.0)];  
+</span><span class='line'>[mapView.layer addSublayer:lastDistance.layer];  </span></code></pre></td></tr></table></div></figure>
+
+
+<p>此外，通过设置图层的position属性，你还可以不用改变图层的大小就对其位置进行调整。这个属性接受一个CGPoint 结构体，来定位图层在屏幕上的偏移位置。与frame 属性不同，position 属性指定的是图层的重点，而不是左上角：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>CGPoint lastDistancePosition = CGPointMake(100.0, 100.0);  
+</span><span class='line'>lastDistance.layer.position = lastDistancePosition;  </span></code></pre></td></tr></table></div></figure>
+
+
+<h5>四、布局与显示</h5>
+
+<p>除了添加子图层之外，<code>CALayer</code> 类还提供了很多不同的方法，可以来插入、调整和移除子图层。</p>
+
+<p>当你用 <code>addSublayer</code> 来添加一个子图层时，他会被添加到图层层次结构的顶层，所以他会显示在现有所有子图层的最前面。用一组名为 <code>insertSublayer</code> 的替代方法，你可以将新视图插入现有的图层之间。</p>
+
+<p>用<code>atIndex</code> 参数，可以将一个图层插入到指定的下标位置：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[gamelayer insertSublayer:mapView.layer atIndex:1];  </span></code></pre></td></tr></table></div></figure>
+
+
+<p>要将一个图层插入到另一个图层的上面或者下面，可以加上 <code>above</code> 或 <code>below</code> 参数：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[ gamelayer insertSublayer:mapView.layer below:backgroundView.layer];  
+</span><span class='line'>[ gamelayer insertSublayer:mapView.layer above:roleView.layer];  </span></code></pre></td></tr></table></div></figure>
+
+
+<p>调用子图层的 <code>removeFromSuperlayer</code> 方法，可以将图层从他的父图层中删除：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[ mapView.layer removeFromSuperlayer];  </span></code></pre></td></tr></table></div></figure>
+
+
+<p>要用另外一个图层代替现有的一个子图层，可以用 <code>replaceSublayer</code> 方法：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[ gamelayer replaceSublayer:backgroundView.layer with:newBackgroundView.layer ];  </span></code></pre></td></tr></table></div></figure>
+
+
+<p>要将子图层保留在图层栈中，但是又想让他在显示的时候不可见，可以设置图层的 <code>hidden</code> 属性。你可以用下面的代码来切换map 显示，而不必真的把图层去掉：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>- (void) Togglemap{  
+</span><span class='line'>       mapView.layer.hidden = (mapView.layer.hidden == NO)?YES:NO;  
+</span><span class='line'>}  </span></code></pre></td></tr></table></div></figure>
+
+
+<h5>五、绘制</h5>
+
+<p>在更新一个图层时，变化不是立刻被绘制在屏幕上的。这样你就可以偷偷地对图层做很多写操作而不会被展示给用户，直到所有的操作全部结束为止。当图层准备好可以进行重画时，就调用图层的 <code>setNeedsDisplay</code>  方法：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[ gamelayer setNeedsDisplsy ];  </span></code></pre></td></tr></table></div></figure>
+
+
+<p>有些时候，可能仅仅不要重画整个图层的部分内容。重新绘制整个屏幕会令程序性能低下。用 <code>setNeedsDisplayInRect</code> 方法，可以只重画需要更新的部分屏幕，这个方法需要一个表示更新区域的<code>CGRect</code> 结构体作为参数：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>CGRect mapViewFrame  =CGRectMake(150.0,150,75.0,75.0);  
+</span><span class='line'>[ gameLayer setNeedsDisplayInRect:mapViewFrame  ];   </span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果你在使用 <code>Core Graphics</code> 框架进行绘制，可以直接在一个 <code>Core Graphics</code> 上下文中绘制。使用 <code>renderInContext</code> 方法可以做到这一点：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>CGContextRef myCGContext = UIGraphicsGetCurrentContext();  
+</span><span class='line'>[ gamelayer renderInContext:myCGContext ];  </span></code></pre></td></tr></table></div></figure>
+
+
+<h5>六、变换</h5>
+
+<p>要为图层加上一个三维变换或者仿射变换，可以分别设置图层的 <code>transform</code> 或 <code>affineTransform</code> 属性。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>roleview.layer.transform = CATransform3DMakeScale( -1.0,-1.0,1.0);  
+</span><span class='line'>CGAffineTransform transform = CGAffineTransformMakeRotation(45.0);  
+</span><span class='line'>backgroundView.layer.affineTransform =transform ;  </span></code></pre></td></tr></table></div></figure>
+
+
+<h5>七、图层动画</h5>
+
+<p><code>Quartz Core</code> 的能力远远不止一个简单的画板式图层。他可以将一个二维物体变换为一个令人瞠目结舌的三维纹理，用于创建NB的转场动画。</p>
+
+<p>你可以直接将转场动画用于图层或子图层。动画可以作为 <code>CAtransition</code> 对象创建出来。</p>
+
+<p>图层转场增强了现有的 <code>CATransition</code> 类，为其提供了一种方法，能用 <code>Quartz Core</code> 的动画引擎来添加动画。这令开发者可以利用 <code>Quartz Core</code> 提供的三维功能，而不必对代码做大的改动。当图层被动画使，一个 <code>CATransition</code> 或 <code>CAAnimation</code> 对象会被附加在图层上。然后图层会调用Quartz Core，分支出一个新线程，负责动画的全部图形处理工作。开发者秩序加入期望的动画，就可以提升一个现有图层的功能。
+用下面的例子代码，可以创建一个转场：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>CATransition* animation = [[CATransition alloc]init];  
+</span><span class='line'>animation.duration =1.0;  
+</span><span class='line'>animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];  
+</span><span class='line'>animation.type = kCATransitionPush;  
+</span><span class='line'>animation.subtype = kCATransitionFromRight;  </span></code></pre></td></tr></table></div></figure>
+
+
+<p>警告：到目前为止，恶心的的苹果允许用户创建的转场类型仍然极其有限。Quartz Core 框架内部还支持相当多的其他转场效果，例如自然翻页和缩放转场等，但是受到限制，只能有苹果自己的应用程序使用。
+通过创建一个 <code>CABasicAnimation</code> 对象，你就可以创建出一个动画。下面的例子创建了一个动画，将图层旋转了整整360度：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>CABasicAnimation *animation = [CABasicAnimation  animationWithKeyPath:@"transform"];  
+</span><span class='line'>animation.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeRotation(3.1415, 0, 0, 1.0)];  
+</span><span class='line'>animation.duration =3.0;  
+</span><span class='line'>animation.cumulative =YES;  
+</span><span class='line'>animation.repeatCount=2;  </span></code></pre></td></tr></table></div></figure>
+
+
+<p>创建好之后，你可以直接将动画或者转场应用到一个图层上：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[mapView.layer addAnimation:animation forKey:@"animation"];  </span></code></pre></td></tr></table></div></figure>
+
+
+<h5>八、图层变换</h5>
+
+<p>Quartz Core 的渲染能力可以像三维一样对二维图像进行任意操纵。一个图像可以在x-y-z 三维轴上进行任意角度旋转、缩放和扭曲。CATransform3D 函数族是苹果的 <code>Cover Flow</code> 技术 以及 iPhone 上使用的其他美观特效的幕后力量。iPhone 支持包括缩放、旋转、仿射、平移等。</p>
+
+<p>变换实在单独的图层上执行的，因此多个变换可以在一个图层表面上同时进行。Quartz Core 框架用 <code>CATransform3D</code> 对象来执行变换。这个对象作用于视图的图层，根据期望的三维设置对图层进行弯折或者其他操作。应用程序可以仍然将对象看作是二维的，但是当对象呈现给用户时，会遵从已经作用于图层之上的任何变换。下面的例子创建了一个变换，目的是对一个图层进行旋转：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>CATransform3D myTransform;  
+</span><span class='line'>myTransform = CATransform3DMakeRotation(angle,x,y,z);  </span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>CATransform3DMakeRotation</code> 函数创建了一个变换，对一个图形进行旋转，旋转角度angle 单位为弧度，轴为 x-y-z 。x-y-z 的值定义了轴上在各个方向上的度量(介于-1和+1之间)。在一个轴上赋予值，就会指示变换绕该轴进行旋转。可以把这些值看作是插在图像上的草棍。如果草棍是沿着 x 轴插进去的，那么图像将绕着草棍垂直旋转。你可以使用不同角度值作为轴，产生出更复杂的转动。不过对于大多数用途来说，用-1 和 +1 这两个值就够了。</p>
+
+<p>要将一个图层绕水平轴转动（垂直转动）45度，可以使用下面的代码：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>myTransform = CATransform3DMakeRotation(0.78,1.0,0.0,0.0);//0.78 是角度45度换成弧度得到的  </span></code></pre></td></tr></table></div></figure>
+
+
+<p>要在水平方向上转动同样的角度，可以换成 y 轴指定一个值：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>myTransform = CATransform3DMakeRotation(0.78,0.0,1.0,0.0);  </span></code></pre></td></tr></table></div></figure>
+
+
+<p>你可以自己编写一个角度转弧度的函数：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>double radians(float degrees){  
+</span><span class='line'>   return (degrees*3.14159265)/180.0;  
+</span><span class='line'>}  </span></code></pre></td></tr></table></div></figure>
+
+
+<p>当你创建的时候就调用这个函数：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>myTransform = CATransform3DMakeRotation( radians(45.0),0.0,1.0,0.0);  </span></code></pre></td></tr></table></div></figure>
+
+
+<p> 变换创建完毕之后，就要作用于你要操纵的图层了。<code>CALayer</code> 对象提供了一个 transform属性，可以用来将变换附加到图层之上。图层将会执行任何赋予这个属性的变换：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>roleView.layer.transform = myTransform;  </span></code></pre></td></tr></table></div></figure>
+
+
+<p>当这个对象被显示出来时，会按照应用在他上面的变换进行显示。在你的代码里，还是会将这个对象作为一个二维物体来引用，但是他会根据变换来进行渲染。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Leo Lee</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-12T15:32:06+08:00" pubdate data-updated="true"></time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/02/27/er-wei-ma-de-sheng-cheng-xi-jie-he-yuan-li/" title="Previous Post:  二维码的生成细节和原理">&laquo;  二维码的生成细节和原理</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/03/13/ios-ying-yong-cheng-xu-mu-lu-jie-gou/" title="Next Post: iOS 应用程序目录结构">iOS 应用程序目录结构 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+
+<!-- 添加多说 -->
+
+
+  <section>
+    <h1>Comments</h1>
+    <div id="comments" aria-live="polite">
+<!-- Duoshuo Comment BEGIN -->
+<div class="ds-thread"></div>
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"swplzj"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<!-- Duoshuo Comment END -->
+</div>
+  </section>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo">
+<!-- <p>
+	Copyright &copy; 2016 - Leo Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p> -->
+
+
+<p style="text-align:center">
+  <!-- Copyright &copy; 2015 - Leo Lee - -->
+  	Copyright &copy; 2016 - Leo Lee -
+
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255930196'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1255930196%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
+</p>
+
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

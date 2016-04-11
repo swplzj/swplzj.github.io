@@ -1,0 +1,1120 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+ <!-- 百度站长HTML标签验证 -->
+  <meta name="baidu-site-verification" content="2UxriFj8TS" />
+
+  <title>iOS 数据持久化(四) - Leo Lee</title>
+  <meta name="author" content="Leo Lee">
+
+  
+  <meta name="description" content="iOS中有五种持久化数据的方式：属性列表、对象归档、NSUserDefaults、SQLite3和Core Data SQLite3的数据类型 数据库在应用中最常用的，方便说数据的存取。
+所有存在Sqlite 3.0版本当中的数据都拥有以下之一的数据类型：
+空（NULL）：该值为空
+整型（ &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://swplzj.github.io/blog/2014/08/29/ios-shu-ju-chi-jiu-hua-si">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Leo Lee" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+ <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+<!--   
+
+ --></head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <nav id="main-nav" role="navigation">
+<ul class="main-navigation">
+  <li><a href="/" class="nav-link">首页 | Blog</a></li>
+  <li><a href="/blog/archives" class="nav-link">归档 | Archives</a></li>
+  <li><a href="/books" class="nav-link">图书 | Books</a></li>
+  <li><a href="/atom.xml" class="nav-link">订阅 | RSS</a></li>
+  <li><a href="/about" class="nav-link">关于我 | About</a></li>
+</ul>
+
+</nav>
+  
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">iOS 数据持久化(四)</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-08-29T23:11:36+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>iOS中有五种持久化数据的方式：属性列表、对象归档、NSUserDefaults、SQLite3和Core Data</p>
+
+<!--more-->
+
+
+<h4>SQLite3的数据类型</h4>
+
+<p>数据库在应用中最常用的，方便说数据的存取。
+所有存在Sqlite 3.0版本当中的数据都拥有以下之一的数据类型：
+空（NULL）：该值为空
+整型（INTEGEER）：有符号整数，按大小被存储成1,2,3,4,6或8字节。
+实数（REAL）：浮点数，以8字节指数形式存储。
+文本（TEXT）：字符串，以数据库编码方式存储（UTF-8, UTF-16BE 或者 UTF-16-LE）。
+BLOB：BLOB数据不做任何转换，以输入形式存储。</p>
+
+<p>在关系数据库中，CLOB和BLOB类型被用来存放大对象。BOLB表示二进制大对象，这种数据类型通过用来保存图片，图象，视频等。CLOB表示字符大对象，能够存放大量基于字符的数据。</p>
+
+<h4>iOS中数据库SQLite3的使用</h4>
+
+<p>具体使用方法如下:</p>
+
+<p>1.添加开发包libsqlite3.0.dylib</p>
+
+<p>首先是设置项目文件，在项目中添加iPhone版的sqlite3的数据库的开发包，在项目下的Frameworks点击右键，然后选择libsqlite3.0.dylib文件。</p>
+
+<p><img src="http://img.blog.csdn.net/20131220172258390?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc3dwbHpq/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="id1" /></p>
+
+<p>libsqlite3.0.dylib文件地址:</p>
+
+<pre><code>/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS2.2.sdk/usr/lib/libsqlite3.0.dylib
+</code></pre>
+
+<p>2.有码有真相：</p>
+
+<p>加入FMDB这个第三方库文件，项目编程开始。</p>
+
+<h4>AppDelegate.h文件</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>//  
+</span><span class='line'>//  AppDelegate.h  
+</span><span class='line'>//  SQLite3Demo  
+</span><span class='line'>//  
+</span><span class='line'>//  Created by 李振杰 on 13-11-22.  
+</span><span class='line'>//  Copyright (c) 2013年 swplzj. All rights reserved.  
+</span><span class='line'>//  
+</span><span class='line'>  
+</span><span class='line'>#import &lt;UIKit/UIKit.h&gt;  
+</span><span class='line'>  
+</span><span class='line'>@interface AppDelegate : UIResponder &lt;UIApplicationDelegate&gt;  
+</span><span class='line'>  
+</span><span class='line'>@property (strong, nonatomic) UIWindow *window;  
+</span><span class='line'>  
+</span><span class='line'>/** 
+</span><span class='line'> *  @brief  在状态栏处显示的提示框 
+</span><span class='line'> * 
+</span><span class='line'> *  @param string   显示的字符串 
+</span><span class='line'> *  @param duration 显示的时长 
+</span><span class='line'> */  
+</span><span class='line'>+ (void)showStatusWithText:(NSString *)string duration:(NSTimeInterval)duration;  
+</span><span class='line'>  
+</span><span class='line'>@end  </span></code></pre></td></tr></table></div></figure>
+
+
+<h4>AppDelegate.m文件</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>//  
+</span><span class='line'>//  AppDelegate.m  
+</span><span class='line'>//  SQLite3Demo  
+</span><span class='line'>//  
+</span><span class='line'>//  Created by 李振杰 on 13-11-22.  
+</span><span class='line'>//  Copyright (c) 2013年 swplzj. All rights reserved.  
+</span><span class='line'>//  
+</span><span class='line'>  
+</span><span class='line'>#import "AppDelegate.h"  
+</span><span class='line'>#import "RootViewController.h"  
+</span><span class='line'>  
+</span><span class='line'>@interface AppDelegate ()  
+</span><span class='line'>  
+</span><span class='line'>@property (strong, nonatomic) UIWindow *statusWindow;  
+</span><span class='line'>@property (retain, nonatomic) UILabel *statusLabel;  
+</span><span class='line'>  
+</span><span class='line'>- (void)dismissStatusLabel;  
+</span><span class='line'>  
+</span><span class='line'>@end  
+</span><span class='line'>  
+</span><span class='line'>@implementation AppDelegate  
+</span><span class='line'>  
+</span><span class='line'>- (void)dealloc  
+</span><span class='line'>{  
+</span><span class='line'>    [self.statusWindow release];  
+</span><span class='line'>    [self.statusLabel release];  
+</span><span class='line'>      
+</span><span class='line'>    [_window release];  
+</span><span class='line'>    [super dealloc];  
+</span><span class='line'>}  
+</span><span class='line'>  
+</span><span class='line'>- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions  
+</span><span class='line'>{  
+</span><span class='line'>    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];  
+</span><span class='line'>   
+</span><span class='line'>    self.statusWindow = [[UIWindow alloc] initWithFrame:CGRectZero];  
+</span><span class='line'>    self.statusWindow.backgroundColor = [UIColor clearColor];  
+</span><span class='line'>    self.statusWindow.windowLevel = UIWindowLevelStatusBar + 1;  
+</span><span class='line'>  
+</span><span class='line'>    self.statusLabel = [[UILabel alloc] initWithFrame:CGRectZero];  
+</span><span class='line'>    self.statusLabel.backgroundColor = [UIColor clearColor];  
+</span><span class='line'>    self.statusLabel.textColor = [UIColor whiteColor];  
+</span><span class='line'>    self.statusLabel.font = [UIFont systemFontOfSize:13];  
+</span><span class='line'>    [self.statusWindow addSubview:self.statusLabel];  
+</span><span class='line'>    [self.statusWindow makeKeyAndVisible];  
+</span><span class='line'>      
+</span><span class='line'>    RootViewController *rootVC = [[RootViewController alloc] initWithNibName:@"RootViewController" bundle:nil];  
+</span><span class='line'>    UINavigationController *rootNav = [[UINavigationController alloc] initWithRootViewController:rootVC];  
+</span><span class='line'>    [rootVC release];  
+</span><span class='line'>      
+</span><span class='line'>    self.window.rootViewController = rootNav;  
+</span><span class='line'>    [rootNav release];  
+</span><span class='line'>      
+</span><span class='line'>    // Override point for customization after application launch.  
+</span><span class='line'>    self.window.backgroundColor = [UIColor whiteColor];  
+</span><span class='line'>    [self.window makeKeyAndVisible];  
+</span><span class='line'>    return YES;  
+</span><span class='line'>}  
+</span><span class='line'>  
+</span><span class='line'>#pragma mark - Custom methods  
+</span><span class='line'>  
+</span><span class='line'>- (void)dismissStatusLabel  
+</span><span class='line'>{  
+</span><span class='line'>    CGRect rect = self.statusWindow.frame;  
+</span><span class='line'>    rect.origin.y -= rect.size.height;  
+</span><span class='line'>    [UIView animateWithDuration:0.8 animations:^{  
+</span><span class='line'>        self.statusWindow.frame = rect;  
+</span><span class='line'>    }];  
+</span><span class='line'>}  
+</span><span class='line'>  
+</span><span class='line'>/** 
+</span><span class='line'> *  @brief  在状态栏处显示的提示框 
+</span><span class='line'> * 
+</span><span class='line'> *  @param string   显示的字符串 
+</span><span class='line'> *  @param duration 显示的时长 
+</span><span class='line'> */  
+</span><span class='line'>+ (void)showStatusWithText:(NSString *)string duration:(NSTimeInterval)duration  
+</span><span class='line'>{  
+</span><span class='line'>    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;  
+</span><span class='line'>      
+</span><span class='line'>    delegate.statusLabel.text = string;  
+</span><span class='line'>    [delegate.statusLabel sizeToFit];  
+</span><span class='line'>    CGRect rect = [UIApplication sharedApplication].statusBarFrame;  
+</span><span class='line'>    CGFloat width = delegate.statusLabel.frame.size.width;  
+</span><span class='line'>    CGFloat height = rect.size.height;  
+</span><span class='line'>    rect.origin.x = rect.size.width = width - 5;  
+</span><span class='line'>    rect.size.width = width;  
+</span><span class='line'>    delegate.statusWindow.frame = rect;  
+</span><span class='line'>    delegate.statusLabel.backgroundColor = [UIColor blackColor];  
+</span><span class='line'>    delegate.statusLabel.frame = CGRectMake(100, 0, width, height);  
+</span><span class='line'>    duration = (duration &lt; 1.0 ? 1.0 : duration);  
+</span><span class='line'>    duration = (duration &gt; 4.0 ? 4.0 : duration);  
+</span><span class='line'>    [delegate performSelector:@selector(dismissStatusLabel)];  
+</span><span class='line'>}  
+</span><span class='line'>  
+</span><span class='line'>@end  </span></code></pre></td></tr></table></div></figure>
+
+
+<h4>使用FMDB第三方库，数据库管理文件</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>//  
+</span><span class='line'>//  DBManager.h  
+</span><span class='line'>//  SQLite3Demo  
+</span><span class='line'>//  
+</span><span class='line'>//  Created by 李振杰 on 13-11-26.  
+</span><span class='line'>//  Copyright (c) 2013年 swplzj. All rights reserved.  
+</span><span class='line'>//  
+</span><span class='line'>  
+</span><span class='line'>#import &lt;Foundation/Foundation.h&gt;  
+</span><span class='line'>  
+</span><span class='line'>#import "FMDatabaseAdditions.h"  
+</span><span class='line'>  
+</span><span class='line'>@class FMDatabase;  
+</span><span class='line'>  
+</span><span class='line'>/** 
+</span><span class='line'> *  @brief 对数据连接进行管理，包括连接，关闭连接 
+</span><span class='line'> *  可以建立长连接 
+</span><span class='line'> * 
+</span><span class='line'> */  
+</span><span class='line'>@interface DBManager : NSObject{  
+</span><span class='line'>    NSString *_dbPath;  
+</span><span class='line'>}  
+</span><span class='line'>  
+</span><span class='line'>@property (readonly, nonatomic) FMDatabase *dataBase;  
+</span><span class='line'>  
+</span><span class='line'>//单例模式  
+</span><span class='line'>+ (DBManager *)defaultDBManager;  
+</span><span class='line'>  
+</span><span class='line'>//关闭数据库  
+</span><span class='line'>- (void)close;  
+</span><span class='line'>  
+</span><span class='line'>@end  </span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>//  
+</span><span class='line'>//  DBManager.m  
+</span><span class='line'>//  SQLite3Demo  
+</span><span class='line'>//  
+</span><span class='line'>//  Created by 李振杰 on 13-11-26.  
+</span><span class='line'>//  Copyright (c) 2013年 swplzj. All rights reserved.  
+</span><span class='line'>//  
+</span><span class='line'>  
+</span><span class='line'>#import "DBManager.h"  
+</span><span class='line'>#import "FMDatabase.h"  
+</span><span class='line'>  
+</span><span class='line'>//#define kDefaultDBName @"user.sqlite"  
+</span><span class='line'>#define kDefaultDBName @"user.db"  
+</span><span class='line'>  
+</span><span class='line'>@interface DBManager ()  
+</span><span class='line'>  
+</span><span class='line'>@end  
+</span><span class='line'>  
+</span><span class='line'>static DBManager *_sharedDBManager;  
+</span><span class='line'>  
+</span><span class='line'>@implementation DBManager  
+</span><span class='line'>  
+</span><span class='line'>- (void)dealloc  
+</span><span class='line'>{  
+</span><span class='line'>    [self close];  
+</span><span class='line'>      
+</span><span class='line'>    [super dealloc];  
+</span><span class='line'>}  
+</span><span class='line'>  
+</span><span class='line'>- (id)init  
+</span><span class='line'>{  
+</span><span class='line'>    if (self = [super init]) {  
+</span><span class='line'>        int state = [self initializeDBWithName:kDefaultDBName];  
+</span><span class='line'>        if (-1 == state) {  
+</span><span class='line'>            NSLog(@"数据库初始化失败！");  
+</span><span class='line'>        }else {  
+</span><span class='line'>            NSLog(@"数据库初始化成功！");  
+</span><span class='line'>        }  
+</span><span class='line'>    }  
+</span><span class='line'>    return self;  
+</span><span class='line'>}  
+</span><span class='line'>  
+</span><span class='line'>- (int)initializeDBWithName:(NSString *)name  
+</span><span class='line'>{  
+</span><span class='line'>    if (!name) {  
+</span><span class='line'>        return -1;  //数据库创建失败  
+</span><span class='line'>    }  
+</span><span class='line'>      
+</span><span class='line'>    //沙盒Doc目录  
+</span><span class='line'>    NSString *doc = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];  
+</span><span class='line'>    _dbPath = [doc stringByAppendingString:[NSString stringWithFormat:@"/%@", name]];  
+</span><span class='line'>    NSFileManager *fileManager = [NSFileManager defaultManager];  
+</span><span class='line'>    BOOL exist = [fileManager fileExistsAtPath:_dbPath];  
+</span><span class='line'>    [self connect];  
+</span><span class='line'>    return (exist == YES ? 0 : 1);  
+</span><span class='line'>}  
+</span><span class='line'>  
+</span><span class='line'>//连接数据库  
+</span><span class='line'>- (void)connect  
+</span><span class='line'>{  
+</span><span class='line'>    if (!_dataBase) {  
+</span><span class='line'>        _dataBase = [[FMDatabase alloc] initWithPath:_dbPath];  
+</span><span class='line'>    }  
+</span><span class='line'>    if (![_dataBase open]) {  
+</span><span class='line'>        NSLog(@"不能打开数据库");  
+</span><span class='line'>    }  
+</span><span class='line'>}  
+</span><span class='line'>  
+</span><span class='line'>- (void)close  
+</span><span class='line'>{  
+</span><span class='line'>    [_dataBase close];  
+</span><span class='line'>    [_sharedDBManager release];  
+</span><span class='line'>    _sharedDBManager = nil;  
+</span><span class='line'>}  
+</span><span class='line'>  
+</span><span class='line'>+ (DBManager *)defaultDBManager  
+</span><span class='line'>{  
+</span><span class='line'>    if (!_sharedDBManager) {  
+</span><span class='line'>        _sharedDBManager = [[DBManager alloc] init];  
+</span><span class='line'>    }  
+</span><span class='line'>    return _sharedDBManager;  
+</span><span class='line'>}  
+</span><span class='line'>  
+</span><span class='line'>  
+</span><span class='line'>@end  </span></code></pre></td></tr></table></div></figure>
+
+
+<h4>向创建的数据库文件中添加数据表，对表的增删改查</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>//  
+</span><span class='line'>//  UserDB.h  
+</span><span class='line'>//  SQLite3Demo  
+</span><span class='line'>//  
+</span><span class='line'>//  Created by 李振杰 on 13-11-26.  
+</span><span class='line'>//  Copyright (c) 2013年 swplzj. All rights reserved.  
+</span><span class='line'>//  
+</span><span class='line'>  
+</span><span class='line'>#import &lt;Foundation/Foundation.h&gt;  
+</span><span class='line'>#import "DBManager.h"  
+</span><span class='line'>#import "User.h"  
+</span><span class='line'>  
+</span><span class='line'>@interface UserDB : NSObject{  
+</span><span class='line'>    FMDatabase *_db;  
+</span><span class='line'>}  
+</span><span class='line'>//创建数据表  
+</span><span class='line'>- (void)createTable;  
+</span><span class='line'>//增：添加用户  
+</span><span class='line'>- (void)updateTableWithUser:(User *)user;  
+</span><span class='line'>//删：删除用户  
+</span><span class='line'>- (void)deleteTableWithUserID:(NSString *)uid;  
+</span><span class='line'>//改：修改用户信息  
+</span><span class='line'>- (void)modifyTableWithUser:(User *)user;  
+</span><span class='line'>//查：查找用户  
+</span><span class='line'>- (NSArray *)queryTableWithUid:(NSString *)uid count:(int)userCount;  
+</span><span class='line'>  
+</span><span class='line'>@end  </span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
+<span class='line-number'>107</span>
+<span class='line-number'>108</span>
+<span class='line-number'>109</span>
+<span class='line-number'>110</span>
+<span class='line-number'>111</span>
+<span class='line-number'>112</span>
+<span class='line-number'>113</span>
+<span class='line-number'>114</span>
+<span class='line-number'>115</span>
+<span class='line-number'>116</span>
+<span class='line-number'>117</span>
+<span class='line-number'>118</span>
+<span class='line-number'>119</span>
+<span class='line-number'>120</span>
+<span class='line-number'>121</span>
+<span class='line-number'>122</span>
+<span class='line-number'>123</span>
+<span class='line-number'>124</span>
+<span class='line-number'>125</span>
+<span class='line-number'>126</span>
+<span class='line-number'>127</span>
+<span class='line-number'>128</span>
+<span class='line-number'>129</span>
+<span class='line-number'>130</span>
+<span class='line-number'>131</span>
+<span class='line-number'>132</span>
+<span class='line-number'>133</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>//  
+</span><span class='line'>//  UserDB.m  
+</span><span class='line'>//  SQLite3Demo  
+</span><span class='line'>//  
+</span><span class='line'>//  Created by 李振杰 on 13-11-26.  
+</span><span class='line'>//  Copyright (c) 2013年 swplzj. All rights reserved.  
+</span><span class='line'>//  
+</span><span class='line'>  
+</span><span class='line'>#import "UserDB.h"  
+</span><span class='line'>#import "AppDelegate.h"  
+</span><span class='line'>  
+</span><span class='line'>#define kUserTableName                             @"User"  
+</span><span class='line'>  
+</span><span class='line'>@implementation UserDB  
+</span><span class='line'>  
+</span><span class='line'>- (id)init  
+</span><span class='line'>{  
+</span><span class='line'>    self = [super init];  
+</span><span class='line'>    if (self) {  
+</span><span class='line'>        //首先查看有没有数据库文件，没有就创建  
+</span><span class='line'>        _db = [DBManager defaultDBManager].dataBase;  
+</span><span class='line'>    }  
+</span><span class='line'>    return self;  
+</span><span class='line'>}  
+</span><span class='line'>  
+</span><span class='line'>//创建数据表  
+</span><span class='line'>- (void)createTable  
+</span><span class='line'>{  
+</span><span class='line'>    FMResultSet *set = [_db executeQuery:[NSString stringWithFormat:@"select count(*) from sqlite_master where type = 'table' and name = '%@'", kUserTableName]];  
+</span><span class='line'>    [set next];  
+</span><span class='line'>      
+</span><span class='line'>    NSInteger count = [set intForColumnIndex:0];  
+</span><span class='line'>    BOOL existTable = !!count;  
+</span><span class='line'>    if (existTable) {  
+</span><span class='line'>        //更新数据库  
+</span><span class='line'>        [AppDelegate showStatusWithText:@"数据库已经存在！" duration:2];  
+</span><span class='line'>    } else {  
+</span><span class='line'>        //插入到数据库  
+</span><span class='line'>        NSString *sqlStr = @"CREATE TABLE User (uid INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name VARCHAR(50), description VARCHAR(100))";  
+</span><span class='line'>        BOOL res = [_db executeUpdate:sqlStr];  
+</span><span class='line'>        if (!res) {  
+</span><span class='line'>            [AppDelegate showStatusWithText:@"数据库创建失败！" duration:2];  
+</span><span class='line'>        } else {  
+</span><span class='line'>            [AppDelegate showStatusWithText:@"数据库创建成功！" duration:2];  
+</span><span class='line'>        }  
+</span><span class='line'>          
+</span><span class='line'>    }  
+</span><span class='line'>}  
+</span><span class='line'>  
+</span><span class='line'>//保存数据  
+</span><span class='line'>- (void)updateTableWithUser:(User *)user  
+</span><span class='line'>{  
+</span><span class='line'>    NSMutableString *query = [NSMutableString stringWithFormat:@"INSERT INTO User"];  
+</span><span class='line'>    NSMutableString *keys = [NSMutableString stringWithFormat:@" ("];  
+</span><span class='line'>    NSMutableString *values = [NSMutableString stringWithFormat:@" ( "];  
+</span><span class='line'>    NSMutableArray *arguments = [NSMutableArray arrayWithCapacity:5];  
+</span><span class='line'>    if (user.name) {  
+</span><span class='line'>        [keys appendString:@"name,"];  
+</span><span class='line'>        [values appendString:@"?,"];  
+</span><span class='line'>        [arguments addObject:user.name];  
+</span><span class='line'>    }  
+</span><span class='line'>    if (user.description) {  
+</span><span class='line'>        [keys appendString:@"description,"];  
+</span><span class='line'>        [values appendString:@"?,"];  
+</span><span class='line'>        [arguments addObject:user.description];  
+</span><span class='line'>    }  
+</span><span class='line'>      
+</span><span class='line'>    [keys appendString:@")"];  
+</span><span class='line'>    [values appendString:@")"];  
+</span><span class='line'>    [query appendFormat:@" %@ VALUES%@", [keys stringByReplacingOccurrencesOfString:@",)" withString:@")"], [values stringByReplacingOccurrencesOfString:@",)" withString:@")"]];  
+</span><span class='line'>    NSLog(@"插入一条语句：%@", query);  
+</span><span class='line'>    [AppDelegate showStatusWithText:@"插入一条数据!" duration:2];  
+</span><span class='line'>    [_db executeUpdate:query withArgumentsInArray:arguments];  
+</span><span class='line'>      
+</span><span class='line'>}  
+</span><span class='line'>  
+</span><span class='line'>//删除用户信息  
+</span><span class='line'>- (void)deleteTableWithUserID:(NSString *)uid  
+</span><span class='line'>{  
+</span><span class='line'>    NSString *query = [NSString stringWithFormat:@"DELETE FROM User WHERE uid = '%@'", uid];  
+</span><span class='line'>    [AppDelegate showStatusWithText:@"删除一条数据!" duration:2];  
+</span><span class='line'>    [_db executeUpdate:query];  
+</span><span class='line'>}  
+</span><span class='line'>  
+</span><span class='line'>//修改用户信息  
+</span><span class='line'>- (void)modifyTableWithUser:(User *)user  
+</span><span class='line'>{  
+</span><span class='line'>    if (!user.uid) {  
+</span><span class='line'>        return;  
+</span><span class='line'>    }  
+</span><span class='line'>    NSString *query = @"UPDATE User SET";  
+</span><span class='line'>    NSMutableString *temp = [NSMutableString stringWithCapacity:0];  
+</span><span class='line'>    if (user.name) {  
+</span><span class='line'>        [temp appendFormat:@"name = '%@',", user.name];  
+</span><span class='line'>    }  
+</span><span class='line'>    if (user.description) {  
+</span><span class='line'>        [temp appendFormat:@"description = '%@',", user.description];  
+</span><span class='line'>        [temp appendFormat:@")"];  
+</span><span class='line'>        query = [query stringByAppendingFormat:@"%@ WHERE uid = '%@'", [temp stringByReplacingOccurrencesOfString:@",)" withString:@""], user.uid];  
+</span><span class='line'>        NSLog(@"修改一条数据：%@", query);  
+</span><span class='line'>        [AppDelegate showStatusWithText:@"修改了一条数据!" duration:2];  
+</span><span class='line'>        [_db executeUpdate:query];  
+</span><span class='line'>    }  
+</span><span class='line'>}  
+</span><span class='line'>  
+</span><span class='line'>//查找用户  
+</span><span class='line'>- (NSArray *)queryTableWithUid:(NSString *)uid count:(int)userCount  
+</span><span class='line'>{  
+</span><span class='line'>    NSString *query = @"SELECT uid, name, description FROM User";  
+</span><span class='line'>    if (!uid) {  
+</span><span class='line'>        query = [query stringByAppendingFormat:@" ORDER BY uid DESC limit %d", userCount];  
+</span><span class='line'>    } else {  
+</span><span class='line'>        query = [query stringByAppendingFormat:@" WHERE uid &gt; %@ ORDER BY uid DESC limit %d", uid, userCount];  
+</span><span class='line'>    }  
+</span><span class='line'>    NSLog(@"query = %@", query);  
+</span><span class='line'>    FMResultSet *rs = [_db executeQuery:query];  
+</span><span class='line'>    NSMutableArray *array = [NSMutableArray arrayWithCapacity:[rs columnCount]];  
+</span><span class='line'>    while ([rs next]) {  
+</span><span class='line'>        User *user = [[User alloc] init];  
+</span><span class='line'>        user.uid = [rs stringForColumn:@"uid"];  
+</span><span class='line'>        user.name = [rs stringForColumn:@"name"];  
+</span><span class='line'>        user.description = [rs stringForColumn:@"description"];  
+</span><span class='line'>        NSLog(@"user.uid = %@\nuser.name = %@\nuser.des = %@\n", user.uid, user.name, user.description);  
+</span><span class='line'>        [array addObject:user];  
+</span><span class='line'>        [user release];  
+</span><span class='line'>    }  
+</span><span class='line'>    [rs close];  
+</span><span class='line'>    NSLog(@"array = %@\n", array);  
+</span><span class='line'>    return array;  
+</span><span class='line'>}  
+</span><span class='line'>  
+</span><span class='line'>  
+</span><span class='line'>@end  </span></code></pre></td></tr></table></div></figure>
+
+
+<h4>数据模型类</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>//  
+</span><span class='line'>//  User.h  
+</span><span class='line'>//  SQLite3Demo  
+</span><span class='line'>//  
+</span><span class='line'>//  Created by 李振杰 on 13-11-26.  
+</span><span class='line'>//  Copyright (c) 2013年 swplzj. All rights reserved.  
+</span><span class='line'>//  
+</span><span class='line'>  
+</span><span class='line'>#import &lt;Foundation/Foundation.h&gt;  
+</span><span class='line'>  
+</span><span class='line'>@interface User : NSObject  
+</span><span class='line'>  
+</span><span class='line'>@property (copy, nonatomic) NSString *uid;  
+</span><span class='line'>@property (copy, nonatomic) NSString *name;  
+</span><span class='line'>@property (copy, nonatomic) NSString *description;  
+</span><span class='line'>  
+</span><span class='line'>@end  
+</span><span class='line'>
+</span><span class='line'>[objc] view plaincopy在CODE上查看代码片派生到我的代码片
+</span><span class='line'>//  
+</span><span class='line'>//  User.m  
+</span><span class='line'>//  SQLite3Demo  
+</span><span class='line'>//  
+</span><span class='line'>//  Created by 李振杰 on 13-11-26.  
+</span><span class='line'>//  Copyright (c) 2013年 swplzj. All rights reserved.  
+</span><span class='line'>//  
+</span><span class='line'>  
+</span><span class='line'>#import "User.h"  
+</span><span class='line'>  
+</span><span class='line'>@implementation User  
+</span><span class='line'>  
+</span><span class='line'>@synthesize uid, name, description;  
+</span><span class='line'>  
+</span><span class='line'>@end  </span></code></pre></td></tr></table></div></figure>
+
+
+<p>关于数据库的操作在上面代码中基本都包含，你也可以<a href="http://download.csdn.net/detail/swplzj/6746635">点击下载SQLite3Demo源码</a>。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Leo Lee</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-08-29T23:11:36+08:00" pubdate data-updated="true"></time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/08/17/ios-shu-ju-chi-jiu-hua-(san-)/" title="Previous Post: iOS 数据持久化（三）">&laquo; iOS 数据持久化（三）</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/09/16/min-jie-kai-fa-liu-cheng-zong-jie/" title="Next Post: 敏捷开发流程总结">敏捷开发流程总结 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+
+<!-- 添加多说 -->
+
+
+  <section>
+    <h1>Comments</h1>
+    <div id="comments" aria-live="polite">
+<!-- Duoshuo Comment BEGIN -->
+<div class="ds-thread"></div>
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"swplzj"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<!-- Duoshuo Comment END -->
+</div>
+  </section>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo">
+<!-- <p>
+	Copyright &copy; 2016 - Leo Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p> -->
+
+
+<p style="text-align:center">
+  <!-- Copyright &copy; 2015 - Leo Lee - -->
+  	Copyright &copy; 2016 - Leo Lee -
+
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255930196'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1255930196%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
+</p>
+
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
