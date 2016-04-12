@@ -1,0 +1,254 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+ <!-- 百度站长HTML标签验证 -->
+  <meta name="baidu-site-verification" content="2UxriFj8TS" />
+
+  <title>在 Mac OS X 上安装 Scheme 环境 - Leo Lee</title>
+  <meta name="author" content="Leo Lee">
+
+  
+  <meta name="description" content="关于 SICP 这本书的讨论很多，该不该学就看自己决定，今天闲着无聊，就想学一下这本书，当然，首先还是配置运行环境，在折腾的过程中遇到一些问题，记录一下在 Mac OS X 上面安装 Scheme 的过程，或许其他人也会面临这样的问题，所以和大家分享一下学到的知识。 说在前面 SICP 全称 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://swplzj.github.io/blog/2016/04/12/zai-mac-os-x-shang-an-zhuang-scheme-huan-jing">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Leo Lee" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+ <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+<!--   
+
+ --></head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <nav id="main-nav" role="navigation">
+<ul class="main-navigation">
+  <li><a href="/" class="nav-link">首页 | Blog</a></li>
+  <li><a href="/blog/archives" class="nav-link">归档 | Archives</a></li>
+  <li><a href="/books" class="nav-link" target="_blank">图书 | Books</a></li>
+  <li><a href="/atom.xml" class="nav-link">订阅 | RSS</a></li>
+  <li><a href="/about" class="nav-link">关于我 | About</a></li>
+</ul>
+
+</nav>
+  
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">在 Mac OS X 上安装 Scheme 环境</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-04-12T15:24:43+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>关于 SICP 这本书的讨论很多，该不该学就看自己决定，今天闲着无聊，就想学一下这本书，当然，首先还是配置运行环境，在折腾的过程中遇到一些问题，记录一下在 Mac OS X 上面安装 Scheme 的过程，或许其他人也会面临这样的问题，所以和大家分享一下学到的知识。</p>
+
+<!--more-->
+
+
+<h3>说在前面</h3>
+
+<p>SICP 全称 Structure and Interpretation of Computer Programs，翻译过来叫《计算机程序的构造和解释》。SICP 要教你的不是那些细枝末节的东西，而是把你拉到一个极高的视角，一边分解程序，一边教你如何正确的构建和编写程序。具体来说，SCIP 教你如何熟练运用抽象以及程序如何运行。</p>
+
+<h3>安装 Scheme 过程</h3>
+
+<p>在安装过程中，遇到了其他安装不了的情况，现在就直奔主题，直接展示正确的安装方式。</p>
+
+<h4>1. 下载并安装 MIT Scheme 程序</h4>
+
+<p><a href="http://ftp.gnu.org/gnu/mit-scheme/stable.pkg/9.2/mit-scheme-9.2-i386.dmg">32-bit system</a></p>
+
+<p><a href="http://ftp.gnu.org/gnu/mit-scheme/stable.pkg/9.2/mit-scheme-9.2-x86-64.dmg">64-bit system</a></p>
+
+<p>在 Finder 中找到安装包，双击安装包就会在新窗口出现像下面的画面：</p>
+
+<p><img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2016_04_12_mit-scheme-dmg.png" title="/" ></p>
+
+<p>你只需要拖拽 MIT/GNU Scheme.app 到 Applications 文件夹中，然后就会自动安装到你的系统里面。如果你以为到此就大功告成了，那么你大错特错了。当你打开该应用时，是没有任何反应的，莫着急，还需一步步来。</p>
+
+<h4>2. 通过终端对 Scheme 来进行配置</h4>
+
+<p>打开终端，然后运行下面的命令：</p>
+
+<p><code>For 32-bit package:</code></p>
+
+<pre><code>sudo ln -s /Applications/MIT\:GNU\ Scheme.app/Contents/Resources /usr/local/lib/mit-scheme-i386
+</code></pre>
+
+<p><code>For 64-bit package:</code></p>
+
+<pre><code>sudo ln -s /Applications/MIT\:GNU\ Scheme.app/Contents/Resources /usr/local/lib/mit-scheme-x86-64
+</code></pre>
+
+<p>你需要输入你的管理员密码，然后再在终端输入下面命令：</p>
+
+<p><code>For 32-bit package:</code></p>
+
+<pre><code>sudo ln -s /usr/local/lib/mit-scheme-i386/mit-scheme /usr/bin/scheme
+</code></pre>
+
+<p><code>For 64-bit package:</code></p>
+
+<pre><code>sudo ln -s /usr/local/lib/mit-scheme-x86-64/mit-scheme /usr/bin/scheme
+</code></pre>
+
+<p><code>注意：</code>
+可能上面的命令执行不成功，不过没关系，还有替换方案，你可以将上面的 ‘/usr/bin/scheme' 修改为  ‘/usr/local/bin/scheme’，然后再试试。</p>
+
+<h4>3. 开始使用 Scheme</h4>
+
+<p>使用 Sublime Text 写了一个测试的Demo，然后跑一下：</p>
+
+<p><img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2016_04_12_use-mit-scheme.png" title="/" ></p>
+
+<h3>写在后面</h3>
+
+<p>生命在于折腾，喜欢折腾一些带给人美好的东西，无聊的时候虐一虐自己的大脑也是很有意思的，接下来要把 SICP 这本难啃的书啃完！祝福我自己。
+希望对你有帮助。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Leo Lee</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-04-12T15:24:43+08:00" pubdate data-updated="true"></time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2016/03/24/ios-app-bu-tong-ban-ben-de-bu-tong-she-zhi/" title="Previous Post: iOS App 使用 Icon 区分不同渠道版本">&laquo; iOS App 使用 Icon 区分不同渠道版本</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+
+<!-- 添加多说 -->
+
+
+  <section>
+    <h1>Comments</h1>
+    <div id="comments" aria-live="polite">
+<!-- Duoshuo Comment BEGIN -->
+<div class="ds-thread"></div>
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"swplzj"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<!-- Duoshuo Comment END -->
+</div>
+  </section>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo">
+<!-- <p>
+	Copyright &copy; 2016 - Leo Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p> -->
+
+
+<p style="text-align:center">
+  <!-- Copyright &copy; 2015 - Leo Lee - -->
+  	Copyright &copy; 2016 - Leo Lee -
+
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255930196'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1255930196%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
+</p>
+
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

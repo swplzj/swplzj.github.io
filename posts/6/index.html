@@ -12,7 +12,7 @@
   <meta name="author" content="Leo Lee">
 
   
-  <meta name="description" content="iOS应用程序采用的是沙盒原理设计，普及一下知识：沙盒是在受限的安全环境中运行应用程序的一种做法，这种做法是要限制授予应用程序的代码访问权限。 ">
+  <meta name="description" content="用途： NSInvocation的作用和performSelector:withObject:的作用是一样的：用于iOS编程中调用某个对象的消息。 performSelector:withObject:调用一些参数较少的消息是比较方便的，但是对于参数个数大于2的消息， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -61,6 +61,53 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/03/18/ios-nsinvocationde-xue-xi/">iOS NSInvocation的学习</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-18T20:58:21+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h4>用途：</h4>
+
+<p>NSInvocation的作用和performSelector:withObject:的作用是一样的：用于iOS编程中调用某个对象的消息。</p>
+
+<p>performSelector:withObject:调用一些参数较少的消息是比较方便的，但是对于参数个数大于2的消息，使用NSInvocation还是比较方便的。</p>
+
+<p>因为NSInvocation是静态的呈现Objective-C的消息，也就是说，它把一个行动变成了一个对象。NSInvocation对象用于对象之间和应用程序之间存储和转发消息，主要通过NSTimer对象和分布式对象系统来完成。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/03/18/ios-nsinvocationde-xue-xi/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -438,55 +485,6 @@ PS：实际上各开发平台的build过程都比较相似，如果你熟悉了
   
     <footer>
       <a rel="full-article" href="/blog/2013/12/13/zai-%5B%3F%5D-ci-,wei-ping-fan-ren-he-cai-!/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/12/12/at-macshi-yong-ji-qiao/">Mac使用技巧</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-12-12T22:25:20+08:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h5>1. [技巧]终端模式下用Finder打开当前目录</h5>
-
-<p>方法如下</p>
-
-<p>open .</p>
-
-<h5>2.强制退出应用</h5>
-
-<p>如果您无法从无响应的 app 进行切换，请按住 Command-Option-Shift-Esc 键三秒钟，以强制其退出。该组合键将命令 OS X 强制退出最前面的 app。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/12/12/at-macshi-yong-ji-qiao/">Read on &rarr;</a>
     </footer>
   
 

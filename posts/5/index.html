@@ -12,8 +12,8 @@
   <meta name="author" content="Leo Lee">
 
   
-  <meta name="description" content="iOS中有五种持久化数据的方式：属性列表、对象归档、NSUserDefault、SQLite3和Core Data
-本文章讲述通过属性列表的方式持久化数据，这个方法也是我们平时最经常用到的方式。比如应用程序的配置和个性化的设置，一般都是通过属性列表（properties list） &hellip;">
+  <meta name="description" content="iOS中有五种持久化数据的方式：属性列表、对象归档、NSUserDefaults、SQLite3和Core Data。
+本文介绍对象归档来持久化数据。归档的作用就是将对象以文件的形式保存到磁盘中，以使得数据序列化和持久化。 ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -62,6 +62,48 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/08/12/ios-shu-ju-chi-jiu-hua-(er-)/">iOS 数据持久化（二）</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-08-12T22:59:06+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>iOS中有五种持久化数据的方式：属性列表、对象归档、NSUserDefaults、SQLite3和Core Data。
+本文介绍对象归档来持久化数据。归档的作用就是将对象以文件的形式保存到磁盘中，以使得数据序列化和持久化。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/08/12/ios-shu-ju-chi-jiu-hua-(er-)/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -446,53 +488,6 @@
   
     <footer>
       <a rel="full-article" href="/blog/2014/04/14/at-ios5yi-shang-:she-zhi-kong-jian-quan-ju-xian-shi-yang-shi-%3C%3C-appearance-proxy/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/03/18/ios-nsinvocationde-xue-xi/">iOS NSInvocation的学习</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-03-18T20:58:21+08:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h4>用途：</h4>
-
-<p>NSInvocation的作用和performSelector:withObject:的作用是一样的：用于iOS编程中调用某个对象的消息。</p>
-
-<p>performSelector:withObject:调用一些参数较少的消息是比较方便的，但是对于参数个数大于2的消息，使用NSInvocation还是比较方便的。</p>
-
-<p>因为NSInvocation是静态的呈现Objective-C的消息，也就是说，它把一个行动变成了一个对象。NSInvocation对象用于对象之间和应用程序之间存储和转发消息，主要通过NSTimer对象和分布式对象系统来完成。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/03/18/ios-nsinvocationde-xue-xi/">Read on &rarr;</a>
     </footer>
   
 

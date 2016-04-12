@@ -4,7 +4,7 @@
     <title><![CDATA[Leo Lee]]></title>
     <link href="http://swplzj.github.io/atom.xml" rel="self"/>
     <link href="http://swplzj.github.io/"/>
-    <updated>2016-04-12T15:19:42+08:00</updated>
+    <updated>2016-04-12T18:38:50+08:00</updated>
     <id>http://swplzj.github.io/</id>
     <author>
         <name><![CDATA[Leo Lee]]></name>
@@ -12,6 +12,78 @@
     </author>
     <generator uri="http://octopress.org/">Octopress</generator>
     
+    
+    <entry>
+        <title type="html"><![CDATA[在 Mac OS X 上安装 Scheme 环境]]></title>
+        <link href="http://swplzj.github.io/blog/2016/04/12/zai-mac-os-x-shang-an-zhuang-scheme-huan-jing/"/>
+        <updated>2016-04-12T15:24:43+08:00</updated>
+        <id>http://swplzj.github.io/blog/2016/04/12/zai-mac-os-x-shang-an-zhuang-scheme-huan-jing</id>
+        <content type="html"><![CDATA[<p>关于 SICP 这本书的讨论很多，该不该学就看自己决定，今天闲着无聊，就想学一下这本书，当然，首先还是配置运行环境，在折腾的过程中遇到一些问题，记录一下在 Mac OS X 上面安装 Scheme 的过程，或许其他人也会面临这样的问题，所以和大家分享一下学到的知识。</p>
+
+<!--more-->
+
+
+<h3>说在前面</h3>
+
+<p>SICP 全称 Structure and Interpretation of Computer Programs，翻译过来叫《计算机程序的构造和解释》。SICP 要教你的不是那些细枝末节的东西，而是把你拉到一个极高的视角，一边分解程序，一边教你如何正确的构建和编写程序。具体来说，SCIP 教你如何熟练运用抽象以及程序如何运行。</p>
+
+<h3>安装 Scheme 过程</h3>
+
+<p>在安装过程中，遇到了其他安装不了的情况，现在就直奔主题，直接展示正确的安装方式。</p>
+
+<h4>1. 下载并安装 MIT Scheme 程序</h4>
+
+<p><a href="http://ftp.gnu.org/gnu/mit-scheme/stable.pkg/9.2/mit-scheme-9.2-i386.dmg">32-bit system</a></p>
+
+<p><a href="http://ftp.gnu.org/gnu/mit-scheme/stable.pkg/9.2/mit-scheme-9.2-x86-64.dmg">64-bit system</a></p>
+
+<p>在 Finder 中找到安装包，双击安装包就会在新窗口出现像下面的画面：</p>
+
+<p><img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2016_04_12_mit-scheme-dmg.png" title="/" ></p>
+
+<p>你只需要拖拽 MIT/GNU Scheme.app 到 Applications 文件夹中，然后就会自动安装到你的系统里面。如果你以为到此就大功告成了，那么你大错特错了。当你打开该应用时，是没有任何反应的，莫着急，还需一步步来。</p>
+
+<h4>2. 通过终端对 Scheme 来进行配置</h4>
+
+<p>打开终端，然后运行下面的命令：</p>
+
+<p><code>For 32-bit package:</code></p>
+
+<pre><code>sudo ln -s /Applications/MIT\:GNU\ Scheme.app/Contents/Resources /usr/local/lib/mit-scheme-i386
+</code></pre>
+
+<p><code>For 64-bit package:</code></p>
+
+<pre><code>sudo ln -s /Applications/MIT\:GNU\ Scheme.app/Contents/Resources /usr/local/lib/mit-scheme-x86-64
+</code></pre>
+
+<p>你需要输入你的管理员密码，然后再在终端输入下面命令：</p>
+
+<p><code>For 32-bit package:</code></p>
+
+<pre><code>sudo ln -s /usr/local/lib/mit-scheme-i386/mit-scheme /usr/bin/scheme
+</code></pre>
+
+<p><code>For 64-bit package:</code></p>
+
+<pre><code>sudo ln -s /usr/local/lib/mit-scheme-x86-64/mit-scheme /usr/bin/scheme
+</code></pre>
+
+<p><code>注意：</code>
+可能上面的命令执行不成功，不过没关系，还有替换方案，你可以将上面的 ‘/usr/bin/scheme' 修改为  ‘/usr/local/bin/scheme’，然后再试试。</p>
+
+<h4>3. 开始使用 Scheme</h4>
+
+<p>使用 Sublime Text 写了一个测试的Demo，然后跑一下：</p>
+
+<p><img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2016_04_12_use-mit-scheme.png" title="/" ></p>
+
+<h3>写在后面</h3>
+
+<p>生命在于折腾，喜欢折腾一些带给人美好的东西，无聊的时候虐一虐自己的大脑也是很有意思的，接下来要把 SICP 这本难啃的书啃完！祝福我自己。
+希望对你有帮助。</p>
+]]></content>
+    </entry>
     
     <entry>
         <title type="html"><![CDATA[iOS App 使用 Icon 区分不同渠道版本]]></title>
@@ -33,7 +105,7 @@
 
 <h4>一、通过添加不同的 <code>Build Configuration</code> 来实现</h4>
 
-<p>我们的目的是在测试机上可以同时安装不同版本且是同一个应用，所以现在要做的就是正式版使用一个 <code>Bundle Identifier</code>，OTA 版本/ Debug 版本使用另一个 <code>Bundle Identifier</code>，假设 <code>AppStore</code> 版的 <code>Bundle Identifier</code> 是 &ldquo;com.mycompany.myapp"，OTA版的是 "com.mycompany.myapp-beta"。同时为了直观的区分两个App，一般也会使用两套图标, 假设 <code>AppStore</code> 版的图标名称为Icon.png, Icon@2x.png, OTA版是Icon-beta.png, <a href="&#x6d;&#x61;&#x69;&#108;&#116;&#111;&#x3a;&#73;&#99;&#111;&#110;&#x2d;&#x62;&#101;&#x74;&#97;&#x40;&#x32;&#x78;&#46;&#x70;&#x6e;&#103;&#x2e;">&#73;&#99;&#x6f;&#110;&#x2d;&#x62;&#101;&#116;&#97;&#x40;&#50;&#120;&#x2e;&#x70;&#110;&#x67;&#x2e;</a> 那如果做到自动化的配置呢？答案在Build设置(Build Setting)里。</p>
+<p>我们的目的是在测试机上可以同时安装不同版本且是同一个应用，所以现在要做的就是正式版使用一个 <code>Bundle Identifier</code>，OTA 版本/ Debug 版本使用另一个 <code>Bundle Identifier</code>，假设 <code>AppStore</code> 版的 <code>Bundle Identifier</code> 是 &ldquo;com.mycompany.myapp"，OTA版的是 "com.mycompany.myapp-beta"。同时为了直观的区分两个App，一般也会使用两套图标, 假设 <code>AppStore</code> 版的图标名称为Icon.png, Icon@2x.png, OTA版是Icon-beta.png, <a href="&#109;&#x61;&#105;&#x6c;&#116;&#111;&#58;&#x49;&#99;&#111;&#110;&#x2d;&#98;&#101;&#x74;&#x61;&#x40;&#50;&#120;&#x2e;&#x70;&#110;&#x67;&#46;">&#73;&#99;&#x6f;&#x6e;&#45;&#x62;&#x65;&#116;&#97;&#64;&#x32;&#120;&#46;&#112;&#110;&#103;&#46;</a> 那如果做到自动化的配置呢？答案在Build设置(Build Setting)里。</p>
 
 <h5>1. 添加 Build 配置</h5>
 
@@ -5412,213 +5484,6 @@ Shadowsocks 是一个开源项目，同时提供多个平台使用，你也可<a
 <li>command + shift + control &ndash; 把截图 copy 到剪贴板</li>
 </ol>
 
-]]></content>
-    </entry>
-    
-    <entry>
-        <title type="html"><![CDATA[博客升级了]]></title>
-        <link href="http://swplzj.github.io/blog/2015/07/31/bo-ke-sheng-ji-liao/"/>
-        <updated>2015-07-31T19:17:56+08:00</updated>
-        <id>http://swplzj.github.io/blog/2015/07/31/bo-ke-sheng-ji-liao</id>
-        <content type="html"><![CDATA[<p>博客其实早就搭建了，中间发布过一些文章，可是博客一直没有升级，现在针对以下几个功能进行了添加及优化。</p>
-
-<ul>
-<li>更换主题</li>
-<li>添加站长统计</li>
-<li>添加多说评论</li>
-<li>添加七牛云图片存储服务</li>
-<li>自动为图片添加url前缀</li>
-<li>写在最后</li>
-</ul>
-
-
-<!--more-->
-
-
-<h3>更换主题</h3>
-
-<p>搭建完博客之后，接着就要更换为自己喜欢的主题了，选择的主题是 <a href="http://sofreshandsogreen.herokuapp.com">So Fresh and So Green</a>，喜欢这种带有活力的色调。具体设置步骤如下：</p>
-
-<p><code>Step 1</code></p>
-
-<p>使用命令安装主题；</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ git clone https://github.com/johnkeith/sofreshandsogreen.git .themes/sofreshandsogreen
-</span><span class='line'>  
-</span><span class='line'>$ bundle exec rake install['sofreshandsogreen']</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>Step 2</code></p>
-
-<p>更改博客配置文件  <code>_config.yml</code>，需要移除默认主题的侧边栏，</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>default_asides: []
-</span><span class='line'>sidebar: collapse</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>Step 3</code></p>
-
-<p>在首页显示显示圆形头像，首先到 <code>source/images</code>目录下面，使用你选择的头像替换掉 <code>portrait.jpg</code>, 然后再配置文件 <code>_config.yml</code> 中，添加下面一句代码：</p>
-
-<pre><code>portrait: true
-</code></pre>
-
-<p>（BTW：我选择的头像使我们几个朋友一起亲手绘画的梵高的向日葵，色调与博客主题色调完美搭配，赞一个~~）</p>
-
-<p>至此，博客主题安装完成。</p>
-
-<h3>添加站长统计</h3>
-
-<p>博客搭建完成之后，需要看自己博客被访问次数，访问页面，访问速度，页面停留时间&hellip;等等，都需要借助第三方的统计工具来完成的，类似于移动端 App 使用的友盟统计一样，这个还要简单只需要注册相应的账号，然后，在自己博客中添加官方提供的 JS 代码。我选择的是国内使用很广的 <a href="http://www.cnzz.com">CNZZ</a>，注册后，添加并验证你的网站就可以添加统计代码了，选好自己喜欢的样式，获得代码，可添加到 <code>source/_includes/custom/footer.html</code> 中。即可查看每天你的博客的流量，进行相应的优化了。</p>
-
-<pre><code>&lt;script type="text/javascript"&gt;var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255930196'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1255930196%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));&lt;/script&gt;
-</code></pre>
-
-<h3>添加多说评论</h3>
-
-<p>Octopress默认自带了 <code>DISQUS</code> ，但是对于国内不是很好用，于是选择了多说作为评论插件，这个还是很接地气的。多说官网账号无需注册，我是使用的百度账号来进行设置，添加站点，获取站点 <code>short_name</code>。这个</p>
-
-<p>在配置文件 <code>_config.yml</code> 中，添加以下代码：</p>
-
-<pre><code>duoshuo_comments: true
-duoshuo_short_name: yoursite (多说二级域名 yoursite.duoshuo.com)(yoursite是你在多说中添加的站点名称)
-</code></pre>
-
-<p>在 <code>source/_layouts/post.html</code> 中 <code>disqus</code> 代码下方添加<a href="https://github.com/swplzj/swplzj.github.io/blob/source/source/_layouts/post.html">多说代码本想粘贴出代码，但是一直显示不全只能留源文件地址了。</a></p>
-
-<p>然后，在路径 <code>source/_includes/post</code>下创建一个 <code>duoshuo.html</code>, <a href="https://github.com/swplzj/swplzj.github.io/blob/source/source/_includes/post/duoshuo.html">直接上文件地址</a></p>
-
-<p>到此为止，添加多说评论完成。</p>
-
-<h3>添加七牛云存储作为图床</h3>
-
-<p>博客其实已经可以正常发布博文，展示，数据统计，评论，归档等功能了，但是一直有个特殊情景，在困扰着我，假如我想发布一篇博文，博文中包含很多图片，大家都知道在 Markdown 语言中添加一张图片，是很简单的，直接使用语法，发一个图片地址就可以了。但是这个图片放到本地，然后随博客同步到 GitHub 上的话，就会造成两个主要问题，第一，在国内由于网络问题，加载图片特别缓慢；第二，GitHub 免费存储是固定的，用来当做图床，不是明智之举，鉴于此，就寻找国内比较稳定优秀的图床。最终选择了七牛云存储，优点：访问速度极快，支持日志、防盗链和水印。然后有了图床，就解决了图片存储的问题，流程就是，先把博文中所要使用的图片，先上传到七牛上，然后拿到获取此资源的链接，写到博文中，就可以了。</p>
-
-<h3>自动为图片添加url前缀</h3>
-
-<p>我把图片资源都放在了七牛云存储上，写博客时候就是用七牛的外链。但是这样有几个问题：
-每次写博客插入图片外链地址时候都很麻烦，需要给每张图片都添加七牛外链地址url前缀；
-如果以后更换了存储，那就麻烦了，需要依次编辑替换每个图片的url前缀
-现在我们就使用一种灵活的方式来配置并自动生成图片的url前缀：</p>
-
-<p>1.修改 <code>/plugins/image_tag.rb</code> 文件，在</p>
-
-<pre><code>@img['class'].gsub!(/"/, '') if @img['class']
-</code></pre>
-
-<p>后添加下面一行代码：</p>
-
-<pre><code>@img['src'] = Jekyll.configuration({})['static_file_prefix'] + @img['src'] if @img['src'][0] == '/'
-</code></pre>
-
-<p>2.再修改根目录下的 <code>_config.yml</code> 文件，添加如下配置：</p>
-
-<pre><code>static_file_prefix: http://7u2i08.com1.z0.glb.clouddn.com
-</code></pre>
-
-<p>这样在生成文章的时候，以 <code>/</code> 开头的图片会自动加上 <code>http://7u2i08.com1.z0.glb.clouddn.com</code> 前缀。</p>
-
-<p>3.我们在插入图片的时候要记住不能再使用 Markdown 语法来写了，要使用 Ocotpress 自定义的 <code>Image Tag</code> 来插入图片。</p>
-
-<p>4.使用 <a href="http://developer.qiniu.com/docs/v6/tools/qrsync.html"><code>qrsync</code></a> 同步图片资源。<code>qrsync</code> 是一个根据七牛云存储API实现的简易命令行辅助上传同步工具，支持断点续上传，增量同步，它可将用户本地的某目录的文件同步到七牛云存储中，同步或上传几百GB甚至上TB的文件毫无鸭梨。
-下载对应的命令行辅助同步工具，我使用的Mac，下载完成后，解压出命令执行文件，放到 <code>/usr/local/bin</code> 目录下。</p>
-
-<p>5.创建一个配置文件（<a href="http://json.org/json-zh.html">JSON格式</a>）,可以命名为 <code>qrsync.json</code>,输入以下配置</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>{
-</span><span class='line'>  "debug_level" : 1,
-</span><span class='line'>  "deletable" : 0,
-</span><span class='line'>  "dest" : "qiniu:access_key=yourAccessKey&secret_key=yourSecretKey&bucket=yourSpaceName",
-</span><span class='line'>  "src" : "/Users/yourname/octopress/source/images"
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<p>其中，<code>AccessKey</code> 和 <code>SecretKey</code> 就是之前咱们在七牛云存储平台上申请的。如图所示：</p>
-
-<p><img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2015_08_03_qi_niu_key.png"></p>
-
-<table>
-<thead>
-<tr>
-<th>参数              </th>
-<th> 备注</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>debug_level     </td>
-<td>  日志输出等级（通常设置1，只输出必要的日志）</td>
-</tr>
-<tr>
-<td>deletable       </td>
-<td> 是否同步删除七牛云上的文件（通常设置0，当本地文件删除时并不删除存储在七牛的对应文件）</td>
-</tr>
-<tr>
-<td>src             </td>
-<td> 本地源目录路径（本地需要同步上传目录的完整的绝对路径）</td>
-</tr>
-<tr>
-<td>bucket          </td>
-<td> 目标空间名称</td>
-</tr>
-</tbody>
-</table>
-
-
-<p>这样就可以使用七牛的资源同步辅助命令了。
-本地预览先 <code>rake generate</code> 后 <code>rake preview</code> ，这样插入图片就灵活方便多了。</p>
-
-<p><code>注意1</code></p>
-
-<p>在 <code>rake generate</code> 时，我这里遇到一个错误，报错如下：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Configuration file: /Users/lizhenjie/octopress/_config.yml
-</span><span class='line'>  Liquid Exception: undefined method `+' for nil:NilClass in _posts/2015-07-30-test.markdown/#excerpt
-</span><span class='line'>jekyll 2.5.3 | Error:  undefined method `+' for nil:NilClass</span></code></pre></td></tr></table></div></figure>
-
-
-<p>经过搜索，发现如果要把两个字符串连接在一起。如</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>a = “abc”
-</span><span class='line'>b = a + “de”</span></code></pre></td></tr></table></div></figure>
-
-
-<p>此时b的值为 <code>abcde</code>
-但如果 <code>a = nil</code> 时，就会抛出未定义“+”的异常，因为此时a为nil。仔细检查发现修改完 <code>/plugins/image_tag.rb</code> 文件后，没有做保存，没有关闭文件，造成的问题，还好我没有放弃，O(∩_∩)O哈哈~</p>
-
-<p><code>注意2</code></p>
-
-<p>我们在插入图片的时候要记住不能再使用 Markdown 语法来写了，要使用 Ocotpress 自定义的 <a href="http://octopress.org/docs/plugins/image-tag/">Image Tag</a> 来插入图片。
-然后在发布博文之前，先同步自己的图片，</p>
-
-<pre><code>qrsync qrsync.json 
-</code></pre>
-
-<p>然后，生成博文，发布博文</p>
-
-<pre><code>rake generate
-rake deploy
-</code></pre>
-
-<h3>写在最后</h3>
-
-<p>终于大功告成，通过设置博客，也看到了很多优秀的博客，也看到自己与优秀极客的差距，这也更加坚定了我写博客，记录自己学习的点点滴滴的决心。希望能帮助到你们。有什么问题可以反馈。 Have fun！</p>
 ]]></content>
     </entry>
     
