@@ -8,7 +8,7 @@
  <!-- 百度站长HTML标签验证 -->
   <meta name="baidu-site-verification" content="2UxriFj8TS" />
 
-  <title>iOS App 不同版本的不同设置 - Leo Lee</title>
+  <title>iOS App 使用 Icon 区分不同渠道版本 - Leo Lee</title>
   <meta name="author" content="Leo Lee">
 
   
@@ -53,7 +53,7 @@
   
   <header>
     
-      <h1 class="entry-title">iOS App 不同版本的不同设置</h1>
+      <h1 class="entry-title">iOS App 使用 Icon 区分不同渠道版本</h1>
     
     
       <p class="meta">
@@ -81,19 +81,92 @@
 <!--more-->
 
 
+<h3>啰嗦一下 Bundle Identifier</h3>
+
+<p>大家都知道 iOS 是根据 <code>Bundle Identifier</code>来区别 App 的，所以如果要在手机上同时安装同一款 App 看似不行的，但是你可以通过设置不同的 <code>Bundle Identifier</code> 来区分不同版本的，其实可以是同一个二进制文件。在安装一个程序时，系统是根据 <code>Bundle Identifier</code> 来判断是全新安装还是升级。</p>
+
 <h3>折腾方法</h3>
 
 <p>通过折腾，大概找到了两种方法来解决这个问题，原理还是不一样的，对象也是不一样的。</p>
 
 <h4>一、通过添加不同的 <code>Build Configuration</code> 来实现</h4>
 
-<p>我们都知道 Xcode 里面提供了两种配置&ndash; Debug 和 Release，我们想要实现编译出来的 App 不一样，就可以从这里入手。通过</p>
+<p>我们的目的是在测试机上可以同时安装不同版本且是同一个应用，所以现在要做的就是正式版使用一个 <code>Bundle Identifier</code>，OTA 版本/ Debug 版本使用另一个 <code>Bundle Identifier</code>，假设 <code>AppStore</code> 版的 <code>Bundle Identifier</code> 是 &ldquo;com.mycompany.myapp"，OTA版的是 "com.mycompany.myapp-beta"。同时为了直观的区分两个App，一般也会使用两套图标, 假设 <code>AppStore</code> 版的图标名称为Icon.png, Icon@2x.png, OTA版是Icon-beta.png, <a href="&#x6d;&#x61;&#x69;&#108;&#116;&#111;&#x3a;&#73;&#99;&#111;&#110;&#x2d;&#x62;&#101;&#x74;&#97;&#x40;&#x32;&#x78;&#46;&#x70;&#x6e;&#103;&#x2e;">&#73;&#99;&#x6f;&#110;&#x2d;&#x62;&#101;&#116;&#97;&#x40;&#50;&#120;&#x2e;&#x70;&#110;&#x67;&#x2e;</a> 那如果做到自动化的配置呢？答案在Build设置(Build Setting)里。</p>
 
-<h4>二、通过添加不同的 <code>Target</code> 来实现</h4>
+<h5>1. 添加 Build 配置</h5>
 
-<h3>Bundle Identifier</h3>
+<p>默认Xcode会提供2个Build配置(Build Configuration)：Debug和Release，我们再加一个AppStore,三种不同的配置的作用也是不一样的：</p>
 
-<p>首先 iOS 是根据 <code>Bundle Identifier</code>来区别 App 的，所以如果要在手机上同时安装同一款 App 看似不行的，但是你可以通过设置不同的 <code>Bundle Identifier</code> 来区分不同版本的，</p>
+<ul>
+<li>Debug： 用来直接连机调试</li>
+<li>Release：用于发布OTA的测试版</li>
+<li>AppStore：用户提交到AppStore</li>
+</ul>
+
+
+<p><img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2016_04_11_add_configuration_rename.png" title="/" ></p>
+
+<h5>2. 在添加 Build Setting 里添加自定义设置</h5>
+
+<p>我们添加两个自定义的设置，一个命名为 <code>APP_ICON_NAME</code>, 另一个命名为<code>BUNDLE_IDENTIFIER_SUFFIX</code>，如下图这样设置：</p>
+
+<p><img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2016_04_11_add_user_defined.png" title="/" ></p>
+
+<p><code>APP_ICON_NAME</code>用来定义图标的名称，<code>BUNDLE_IDENTIFIER_SUFFIX</code>用来定义 <code>Bundle Identifier</code>来区分不同的应用。</p>
+
+<h5>3. 在Info.plist添加自定义的参数</h5>
+
+<p>在Info.plist中修改 <code>Bundle Identifier</code> 和 <code>Icon</code> 图标名称，把 <code>Bundle identifier</code> 值设置为 <code>${BUNDLE_IDENTIFIER_SUFFIX}</code>。添加 <code>Icon file</code>将图标值设置为 <code>${APP_ICON_NAME}@2x.png</code>。</p>
+
+<p><img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2016_04_11_add_plist_defined.png" title="/" ></p>
+
+<h5>4. 选择不同的配置进行打包发布</h5>
+
+<p><img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2016_04_11_select_different_config.png" title="/" >
+现在我们就可以在Schema里选择使用不同的Build配置，比如选择Debug和Release配置来得到的安装包就可以用来上传到OTA进行测试；选择AppStore的自定义配置来打包，就可以用来提交到AppStore进行发布了。整个过程是自动化的，包括BundleId和图标文件的名称，当然，你也可以添加其他自定义的参数，比如 App 显示的名称之类的，添加与此类似。</p>
+
+<h4>二、通过添加不同的 <code>Target</code> 编译方案来实现</h4>
+
+<h5>0. 先简单介绍一下 Xcode 中 target 的概念</h5>
+
+<p>苹果在文档中写道：</p>
+
+<blockquote><p>Targets that define the products to build. A target organizes the files and instructions needed to build a product into a sequence of build actions that can be taken.”</p></blockquote>
+
+<p>在 Xcode 的一个项目中，可以允许建立多个编译的 target，每个 target 代表着
+最终编译出来的一个 App 文件，在每个 target 中，可以添加不同的编译源文件和资源文件。最终，通过我们在不同 target 之间，修改其 Copy Bundle Resources 和 Compile Sources 配置，使课程之间的差异性得到实现。</p>
+
+<h5>1. 创建新的 target</h5>
+
+<p>在Project Navigator面板中找到项目设置。在Targets区域，右键单击现有target，并选择Duplicate复制现有的target。</p>
+
+<p><img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2016_04_11_add_target.png" title="/" ></p>
+
+<h5>2. 根据 target 设置不同的 Icon</h5>
+
+<p>选择Assets.xcassets，并添加一个新的图标。右击icon> App Icons &amp; Launch Images > New iOS App Icon。将新图标重命名为“AppIcon-Debug”，然后添加自己的图片。</p>
+
+<p><img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2016_04_11_add_icon.png" title="/" ></p>
+
+<p>接着选择不同的 App Icon，用来区分不同版本。</p>
+
+<p><img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2016_04_11_select_different_target.png" title="/" ></p>
+
+<h5>3. 选择不同的 Scheme 进行编译打包</h5>
+
+<p>现在我们就可以选择不同的 Target 来进行打包了，得到的 App 也是不一样的。</p>
+
+<p><img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2016_04_11_select_target_build.png" title="/" ></p>
+
+<h3>总结</h3>
+
+<p>以上两种方法的使用场景还是有所不同，在这就不在赘述。但不管使用上面哪种方法，应用的生产和开发版本将具有相同的基础代码，但可以有不同的图标，bundle ID，并指向不同的数据库。发布和提交过程非常简单。最重要的是，测试人员可以在同一设备上，安装应用程序的两个版本，所以他们完全清楚正在测试的是哪个版本。这也是此次折腾的目的所在啊。</p>
+
+<p>Have fun！</p>
+
+<p>参考文章：</p>
+
+<p><a href="http://www.appcoda.com/using-xcode-targets/">How to Use Xcode Targets to Manage Development and Production Builds</a></p>
 </div>
 
 
