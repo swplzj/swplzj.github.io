@@ -1,0 +1,239 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+ <!-- 百度站长HTML标签验证 -->
+  <meta name="baidu-site-verification" content="2UxriFj8TS" />
+
+  <title>Git 代码库回滚记录 - Leo Lee</title>
+  <meta name="author" content="Leo Lee">
+
+  
+  <meta name="description" content="项目有了一些新需求，需要做代码更改了。Pull 下来代码，结果运行不了，最近项目更新不是很频繁，所以想到了使用 Git 代码库回滚，记录一下。代码库回滚可以包含本地带啊库回滚和远程代码库回滚，下面针对这两种情况做一下使用介绍。 git 代码库回滚指的是将代码库某分支退回到以前的某个 commit &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://swplzj.github.io/blog/2016/04/19/git-dai-ma-ku-hui-gun-ji-lu">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Leo Lee" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+ <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+<!--   
+
+ --></head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <nav id="main-nav" role="navigation">
+<ul class="main-navigation">
+  <li><a href="/" class="nav-link">首页 | Blog</a></li>
+  <li><a href="/blog/archives" class="nav-link">归档 | Archives</a></li>
+  <li><a href="/books" class="nav-link" target="_blank">图书 | Books</a></li>
+  <li><a href="/atom.xml" class="nav-link">订阅 | RSS</a></li>
+  <li><a href="/about" class="nav-link">关于我 | About</a></li>
+</ul>
+
+</nav>
+  
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Git 代码库回滚记录</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-04-19T16:32:03+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>项目有了一些新需求，需要做代码更改了。Pull 下来代码，结果运行不了，最近项目更新不是很频繁，所以想到了使用 Git 代码库回滚，记录一下。代码库回滚可以包含本地带啊库回滚和远程代码库回滚，下面针对这两种情况做一下使用介绍。</p>
+
+<!--more-->
+
+
+<p>git 代码库回滚指的是将代码库某分支退回到以前的某个 <code>commit id</code></p>
+
+<h3>本地代码库回滚</h3>
+
+<p>找到你要回复到的版本的 <code>commit-id</code>，然后使用下面命令进行恢复。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git reset --hard commit-id //回滚到commit-id，将commit-id之后提交的commit进行清除
+</span><span class='line'>
+</span><span class='line'>git reset --hard HEAD~3 //将最近3次的提交回滚</span></code></pre></td></tr></table></div></figure>
+
+
+<p>本地代码库回滚之后，做了新的更改，然后需要提交到远程分支，提交之前你需要 pull，这样问题就出来了，你又会把坏的、不想要的代码合并过来，这时候就需要使用远程代码库回滚了。</p>
+
+<h3>远程代码库回滚</h3>
+
+<p>过程代码库回滚要比本地代码库回滚要复杂，但是原理其实比较简单：先将本地分支退回到某个commit，然后删除远程分支，最后重新push本地分支。</p>
+
+<p>具体操作步骤：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>1、git checkout the_branch
+</span><span class='line'>
+</span><span class='line'>2、git pull
+</span><span class='line'>
+</span><span class='line'>3、git reset --hard the_commit_id //把the_branch本地回滚到the_commit_id
+</span><span class='line'>
+</span><span class='line'>4、git push origin :the_branch //删除远程 the_branch(冒号前面的空格不能少，原理是把一个空分支push到server上，相当于删除该分支。)
+</span><span class='line'>
+</span><span class='line'>5、git push origin the_branch //用回滚后的本地分支重新建立远程分支
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这样就算是解决了问题了，希望能帮助到你。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Leo Lee</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-04-19T16:32:03+08:00" pubdate data-updated="true"></time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2016/04/12/zai-mac-os-x-shang-an-zhuang-scheme-huan-jing/" title="Previous Post: 在 Mac OS X 上安装 Scheme 环境">&laquo; 在 Mac OS X 上安装 Scheme 环境</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+
+<!-- 添加多说 -->
+
+
+  <section>
+    <h1>Comments</h1>
+    <div id="comments" aria-live="polite">
+<!-- Duoshuo Comment BEGIN -->
+<div class="ds-thread"></div>
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"swplzj"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<!-- Duoshuo Comment END -->
+</div>
+  </section>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo">
+<!-- <p>
+	Copyright &copy; 2016 - Leo Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p> -->
+
+
+<p style="text-align:center">
+  <!-- Copyright &copy; 2015 - Leo Lee - -->
+  	Copyright &copy; 2016 - Leo Lee -
+
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255930196'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1255930196%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
+</p>
+
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
