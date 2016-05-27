@@ -1,0 +1,258 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+ <!-- 百度站长HTML标签验证 -->
+  <meta name="baidu-site-verification" content="2UxriFj8TS" />
+
+  <title>iOS Crash 文件解析汇总 - Leo Lee</title>
+  <meta name="author" content="Leo Lee">
+
+  
+  <meta name="description" content="所有程序都是无法避免有 Bug 的，有了 Bug 要通过有效的手段技术跟踪、定位、解析、解决，普通的 Bug 看过报崩溃报告就可以很容易解决，当然也会遇到很棘手的 Bug，这是时候就要使尽浑身解数来对付了，下面总结一下自己解决难缠 Bug 的一些方法，希望能够帮助到你。:) 方法汇总 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://swplzj.github.io/blog/2016/05/26/ios-crash-wen-jian-jie-xi-hui-zong">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Leo Lee" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+ <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+<!--   
+
+ --></head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <nav id="main-nav" role="navigation">
+<ul class="main-navigation">
+  <li><a href="/" class="nav-link">首页 | Blog</a></li>
+  <li><a href="/blog/archives" class="nav-link">归档 | Archives</a></li>
+  <li><a href="/books" class="nav-link" target="_blank">图书 | Books</a></li>
+  <li><a href="/atom.xml" class="nav-link">订阅 | RSS</a></li>
+  <li><a href="/about" class="nav-link">关于我 | About</a></li>
+</ul>
+
+</nav>
+  
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">iOS Crash 文件解析汇总</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-05-26T17:03:52+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2016_05_25_workplace.jpg" title="workplace" ></p>
+
+<p>所有程序都是无法避免有 Bug 的，有了 Bug 要通过有效的手段技术跟踪、定位、解析、解决，普通的 Bug 看过报崩溃报告就可以很容易解决，当然也会遇到很棘手的 Bug，这是时候就要使尽浑身解数来对付了，下面总结一下自己解决难缠 Bug 的一些方法，希望能够帮助到你。:)</p>
+
+<!--more-->
+
+
+<h2>方法汇总</h2>
+
+<ol>
+<li>友盟分析工具解析崩溃报告；</li>
+<li>使用命令行对单个十六进制地址进行解析；</li>
+<li>使用 Xcode 对崩溃报告进行解析；</li>
+</ol>
+
+
+<h3>友盟分析工具解析崩溃报告</h3>
+
+<p>我们在项目中加入了友盟统计，此服务中提供的有 Crash 收集和分析工具，这样能够帮助我们监测 App 在设备上的运行状况，还可以及时发现问题并解决问题。通过友盟我们收集 Bug 并准确定位错误所在的类以及行数，具体步骤如下：</p>
+
+<ol>
+<li>登录友盟后台，查看并导出崩溃报告，文件格式是<code>.csv</code>；</li>
+<li><a href="http://dev.umeng.com/files/download/umcrashtool.zip">下载错误分析工具</a>并解压 zip 得到 <code>umcrashtool</code>文件，可将 <code>umcrashtool</code> 与已下载的 xxx.csv 文件放入同一目录下；</li>
+<li><p>在 <code>Terminal</code> 中运行 <code>umcrashtool</code> 命令，参数为错误分析的.csv文件绝对路径，如下：</p>
+
+<pre><code> $ ./umcrashtool [absolutely_path_of_csv_file] 
+</code></pre></li>
+</ol>
+
+
+<p>也可以按照先后顺序拖拽 <code>umcrashtool</code>、xxx.csv 文件到<code>Terminal</code>，简单方便；
+4. 在 <code>Terminal</code> 中运行 <code>umcrashtool</code>，提示如下: Usage: umcrashtool [export-file-path]，定位后的代码及行数会写入错误分析-symbol.csv文件，与原文件在同一目录下。用工具打开新生成的xxx-symbol.csv文件，便可查看错误发生的源码文件及行数。</p>
+
+<p><code>注意</code>：如果错误分析没有成功，请先确保对应的 xxx.dSYM 文件在<code>~/Library/Developer/Xcode/</code> 或该路径的子目录下。（对于每一个产品发布时archive操作会将dsym文件存放到~/Library/Developer/Xcode/Archives路径下，因此建议保留该路径下的文件，以便后续用工具分析错误。）</p>
+
+<h3>使用命令行对单个十六进制地址进行解析</h3>
+
+<p>使用命令行进入到包含xxx.app.dSYM的路径，并执行下面命令:</p>
+
+<pre><code>dwarfdump --arch=arm64 --lookup 0x10051bc2c xxx.app.dSYM
+</code></pre>
+
+<p>其中，<code>arm64</code> 针对具体 <code>crash</code> 对应的机型来改变，<code>lookup</code> 后面的地址为具体的崩溃地址，xxx.app.dSYM为对应该崩溃信息的版本。</p>
+
+<p>还有一种命令：</p>
+
+<pre><code>atos -arch armv7 -o xxxApp 0x1153b9. 
+</code></pre>
+
+<p>也是可以分析出这处内存地址反编译回来的源码行。</p>
+
+<p>但是，还是有分析不出来的 Bug</p>
+
+<p><img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2016-05-25-crash-report.png" title="crash report" ></p>
+
+<h3>使用 Xcode 对崩溃报告进行解析</h3>
+
+<p>操作是打开 <code>Xcode &gt; Window &gt; Organizer</code>，上图：</p>
+
+<p><img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2016_05_25_xcode.png" title="Xcode View Crash Report" ></p>
+
+<p>可以选择相应的 Crash 来进行查看了。</p>
+
+<p>&lsquo;注意：'前提是在 <code>Xcode</code> 登录 Apple ID，才能看到线上 App 的崩溃报告。</p>
+
+<h2>总结</h2>
+
+<p>这就是几个具体追踪定位 Bug 的方法和技巧，当然，你也可以在 App 中自己加入抓去崩溃的功能，总之分析崩溃原因，越是把范围缩小，越容易发现问题，进而解决问题。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Leo Lee</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-05-26T17:03:52+08:00" pubdate data-updated="true"></time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2016/04/19/git-dai-ma-ku-hui-gun-ji-lu/" title="Previous Post: Git 代码库回滚记录">&laquo; Git 代码库回滚记录</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+
+<!-- 添加多说 -->
+
+
+  <section>
+    <h1>Comments</h1>
+    <div id="comments" aria-live="polite">
+<!-- Duoshuo Comment BEGIN -->
+<div class="ds-thread"></div>
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"swplzj"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<!-- Duoshuo Comment END -->
+</div>
+  </section>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo">
+<!-- <p>
+	Copyright &copy; 2016 - Leo Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p> -->
+
+
+<p style="text-align:center">
+  <!-- Copyright &copy; 2015 - Leo Lee - -->
+  	Copyright &copy; 2016 - Leo Lee -
+
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255930196'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1255930196%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
+</p>
+
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
