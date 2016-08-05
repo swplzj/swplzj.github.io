@@ -12,7 +12,7 @@
   <meta name="author" content="Leo Lee">
 
   
-  <meta name="description" content="好久没有发布博客了，现在用的 shell 是 oh-my-zsh，发现执行 rake new_post["newpost"]时提示zsh: no matches found: new_post[newpost]，不能新建文章。转到bash下再执行相同命令却能成功，想到可能是zsh的问题。 &hellip;">
+  <meta name="description" content="搭建 Jenkins 持续集成之后，总结一下搭建经验吧，写一篇 blog 记录一下，遇到了问题。。。。。。现在用的 shell 是 oh-my-zsh，发现执行 rake new_post["newpost"]时提示zsh: no matches found: new_post[newpost &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -90,18 +90,18 @@
   </header>
 
 
-  <div class="entry-content"><p>好久没有发布博客了，现在用的 shell 是 <code>oh-my-zsh</code>，发现执行 <code>rake new_post["newpost"]</code>时提示<code>zsh: no matches found: new_post[newpost]</code>，不能新建文章。转到<code>bash</code>下再执行相同命令却能成功，想到可能是<code>zsh</code>的问题。<code>Google</code>之，在<code>octpress</code>的<code>issues</code>里找到了答案：<code>zsh</code>会转义<code>[]</code>。</p>
+  <div class="entry-content"><p><img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2016_08_04_zsh_topic.png"></p>
+
+<p>搭建 Jenkins 持续集成之后，总结一下搭建经验吧，写一篇 blog 记录一下，遇到了问题。。。。。。现在用的 shell 是 <code>oh-my-zsh</code>，发现执行 <code>rake new_post["newpost"]</code>时提示<code>zsh: no matches found: new_post[newpost]</code>，不能新建文章。转到<code>bash</code>下再执行相同命令却能成功，想到可能是<code>zsh</code>的问题。<code>Google</code>之，在<code>octpress</code>的<code>issues</code>里找到了答案：<code>zsh</code>会转义<code>[]</code>。</p>
 
 <p>解决的方法有下面三种：</p>
 
-<ol>
-<li>alias rake=&ldquo;noglob rake"，noglob用来取消转义。</li>
-<li>rake &ldquo;new_post[title]"。</li>
-<li>rake new_post[title]。</li>
-</ol>
-
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2016/08/04/rake-he-zsh-chong-tu-de-jie-jue-fang-fa/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -112,7 +112,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2016/08/04/jenkins-gou-jian-ios-chi-xu-ji-cheng-(%5B%3F%5D-)/">Jenkins 构建 iOS 持续集成（一）</a></h1>
+      <h1 class="entry-title"><a href="/blog/2016/08/04/jenkins-gou-jian-ios-chi-xu-ji-cheng-(%5B%3F%5D-)/">Jenkins 构建 iOS 持续集成</a></h1>
     
     
       <p class="meta">
@@ -135,7 +135,8 @@
   </header>
 
 
-  <div class="entry-content"><p>做重复乏味的工作就是在浪费生命和犯罪，尤其是在软件工程中更为明显，生命应该浪费在美好的事物上的原则，就开始了接下来的折腾。项目的持续集成前期看似是浪费时间，但随着项目数量增多，渠道的增加，测试人员、产品经理、项目负责人、大老板等都向你伸手要测试包，也就经常会有：Leo，把最新测试包上传到 Confluence 上了吗？Leo，给我发个最新安装包。来，Leo，这是我们的销售，先给他们安装一下咱们的应用，体验一下。。。。。。我是一个重度 GTD 使用者，决不允许别人这么无休止的打扰我的工作。。。。。。噢，好像跑偏了，简单如题。</p>
+  <div class="entry-content"><p><img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2016_08_04_jenkins_topic.png">
+做重复乏味的工作就是在浪费生命和犯罪，尤其是在软件工程中更为明显，生命应该浪费在美好的事物上的原则，就开始了接下来的折腾。项目的持续集成前期看似是浪费时间，但随着项目数量增多，渠道的增加，测试人员、产品经理、项目负责人、大老板等都向你伸手要测试包，也就经常会有：Leo，把最新测试包上传到 Confluence 上了吗？Leo，给我发个最新安装包。来，Leo，这是我们的销售，先给他们安装一下咱们的应用，体验一下。。。。。。我是一个重度 GTD 使用者，决不允许别人这么无休止的打扰我的工作。。。。。。噢，好像跑偏了，简单如题。</p>
 
 </div>
   
