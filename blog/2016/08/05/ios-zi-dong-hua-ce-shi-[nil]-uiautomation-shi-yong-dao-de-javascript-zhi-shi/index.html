@@ -1,0 +1,630 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+ <!-- 百度站长HTML标签验证 -->
+  <meta name="baidu-site-verification" content="2UxriFj8TS" />
+
+  <title>iOS 自动化测试 － UIAutomation 使用到的 JavaScript 知识 - Leo Lee</title>
+  <meta name="author" content="Leo Lee">
+
+  
+  <meta name="description" content="介绍 - 为什么创建自动化测试用例？
+- 什么是 UI 自动化测试
+- 怎样对一个应用进行自动化测试
+- 自动化测试的优点及问题
+- 录制自动化测试脚本
+- 总结 为什么创建自动化测试用例？ 在你睡觉的时候就能找到 bug
+可重复的进行回归测试用例 什么是 UIAutomation 自动化测试 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://swplzj.github.io/blog/2016/08/05/ios-zi-dong-hua-ce-shi-%5Bnil%5D-uiautomation-shi-yong-dao-de-javascript-zhi-shi">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Leo Lee" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+ <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+<!--   
+
+ --></head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <nav id="main-nav" role="navigation">
+<ul class="main-navigation">
+  <li><a href="/" class="nav-link">首页 | Blog</a></li>
+  <li><a href="/blog/archives" class="nav-link">归档 | Archives</a></li>
+  <li><a href="/books" class="nav-link" target="_blank">图书 | Books</a></li>
+  <li><a href="/atom.xml" class="nav-link">订阅 | RSS</a></li>
+  <li><a href="/about" class="nav-link">关于我 | About</a></li>
+</ul>
+
+</nav>
+  
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">iOS 自动化测试 － UIAutomation 使用到的 JavaScript 知识</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-08-05T17:19:00+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h3>介绍</h3>
+
+<p><img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2016_08_05_uiautomation_topic.png">
+- 为什么创建自动化测试用例？
+- 什么是 UI 自动化测试
+- 怎样对一个应用进行自动化测试
+- 自动化测试的优点及问题
+- 录制自动化测试脚本
+- 总结</p>
+
+<!--more-->
+
+
+<h2>为什么创建自动化测试用例？</h2>
+
+<ul>
+<li>在你睡觉的时候就能找到 bug</li>
+<li>可重复的进行回归测试用例</li>
+</ul>
+
+
+<h2>什么是 UIAutomation 自动化测试</h2>
+
+<p>UIAutomation的功能测试代码是用Javascript编写的。UIAutomation和Accessibility有着直接的关系，你将用到通过标签和值的访问性来获得UI元素，同时完成相应的交互操作。</p>
+
+<p>自动化测试代码可以让你能够快速地跟踪你程序中的回归和性能方面的问题，这样你就不用担心你新增的功能会影响到你之前已经完成开发的程序了。</p>
+
+<h2>怎样对一个应用进行自动化测试</h2>
+
+<p>这里先看一下苹果官方给出的一些编写测试用例用到的脚本知识。</p>
+
+<h3>控制层级</h3>
+
+<ul>
+<li>Target application
+
+<ul>
+<li>Main window
+
+<ul>
+<li>View
+
+<ul>
+<li>Element
+
+<ul>
+<li>Child element</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+
+<p>这是整个的层级关系，必须根据这个层级才能准确地获取一个元素，进而对特定元素进行修改、触发事件等。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>// Target application
+</span><span class='line'>UIATarget.localTarget().frontMostApp()
+</span><span class='line'>
+</span><span class='line'>// Main window
+</span><span class='line'>UIATarget.localTarget().frontMostApp().mainWindow ()
+</span><span class='line'>
+</span><span class='line'>// View
+</span><span class='line'>UIATarget.localTarget().frontMostApp().mainWindow ().tableViews()[0]
+</span><span class='line'>
+</span><span class='line'>// Element
+</span><span class='line'>UIATarget.localTarget().frontMostApp().mainWindow ().tableViews()[0].cells()[0]
+</span><span class='line'>
+</span><span class='line'>// Child element
+</span><span class='line'>
+</span><span class='line'> UIATarget.localTarget().frontMostApp().mainWindow().tableViews()[0].cells()[0].elements()[“Chocolate Cake”]</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>按钮点击</h3>
+
+<pre><code> UIATarget.localTarget().frontMostApp().navigationBar().buttons()["Add"].tap();
+</code></pre>
+
+<h3>文本输入</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> var name = “Turtle Pie”;
+</span><span class='line'>
+</span><span class='line'> UIATarget.localTarget().frontMostApp().mainWindow().textFields()[0].setValue(name);</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>标签切换</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> var tabBar = UIATarget.localTarget().frontMostApp().tabBar();
+</span><span class='line'> var selectedTabName = tabBar.selectedButton().name();
+</span><span class='line'> if (selectedTabName != "Unit Conversion") {
+</span><span class='line'>
+</span><span class='line'>  tabBar.buttons()["Unit Conversion"].tap();
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>视图滚动</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> UIATarget.localTarget().frontMostApp().mainWindow().tableViews()[0].scrollToElementWithPredicate("name beginswith 'Turtle Pie'");</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>校验</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>var cell = UIATarget.localTarget().frontMostApp().mainWindow().tableViews()[0].cells().firstWithPredicate("name beginswith 'Turtle Pie'")
+</span><span class='line'>if (cell.isValid())
+</span><span class='line'>{
+</span><span class='line'>    UIALogger.logPass(testName);
+</span><span class='line'>} else {
+</span><span class='line'>    UIALogger.logFail(testName);
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>日志</h3>
+
+<h4>开始和结束测试</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>var testName = "My first test";
+</span><span class='line'>UIALogger.logStart(testName);
+</span><span class='line'>...
+</span><span class='line'>// test code
+</span><span class='line'>...
+</span><span class='line'>UIALogger.logPass(testName);</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>测试进行中输出日志</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>var testName = "My first test";
+</span><span class='line'>UIALogger.logStart(testName);
+</span><span class='line'>...
+</span><span class='line'>UIALogger.logMessage("Logging about my test");
+</span><span class='line'>...
+</span><span class='line'>UIALogger.logPass(testName);</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>截取屏幕</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>var testName = "My first test";
+</span><span class='line'>UIALogger.logStart(testName);
+</span><span class='line'>...
+</span><span class='line'>UIALogger.logMessage("Logging about my test");
+</span><span class='line'>UIATarget.localTarget().captureScreenWithName(“screenshot1”); // specify a name
+</span><span class='line'>for the screenshot
+</span><span class='line'>...
+</span><span class='line'>UIALogger.logPass(testName);</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>处理不期望出现的提示框</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>UIATarget.onAlert = function onAlert(alert) {  var title = alert.name();
+</span><span class='line'>  UIALogger.logWarning("Alert with title '" + title + "' encountered!");
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>    if (title == "Duplicate Recipe Name") {
+</span><span class='line'>        alert.buttons()["Continue"].tap();
+</span><span class='line'>
+</span><span class='line'>        return true; // bypass default handler
+</span><span class='line'>    }
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>  return false; // use default handler }</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>多任务</h3>
+
+<ul>
+<li>设置特定时间来禁用应用</li>
+<li>自动恢复应用</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>UIALogger.logMessage("Deactivating app");
+</span><span class='line'>UIATarget.localTarget().deactivateAppForDuration(10);
+</span><span class='line'>UIALogger.logMessage("Resuming test after deactivation");</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>设备方向</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>var target = UIATarget.localTarget();
+</span><span class='line'>var app = target.frontMostApp();
+</span><span class='line'>// set landscape left
+</span><span class='line'>target.setDeviceOrientation(UIA_DEVICE_ORIENTATION_LANDSCAPELEFT);
+</span><span class='line'>UIALogger.logMessage("Current orientation is " + app.interfaceOrientation());
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>// portrait
+</span><span class='line'>target.setDeviceOrientation(UIA_DEVICE_ORIENTATION_PORTRAIT);
+</span><span class='line'>UIALogger.logMessage("Current orientation is " + app.interfaceOrientation());</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>点击交互高级用法</h3>
+
+<ul>
+<li>单点</li>
+<li>捏合</li>
+<li>拖拽和滑动</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>// Taps
+</span><span class='line'>UIATarget.localTarget().tap({x:100, y:200});
+</span><span class='line'>UIATarget.localTarget().doubleTap({x:100, y:200});
+</span><span class='line'>UIATarget.localTarget().twoFingerTap({x:100, y:200});
+</span><span class='line'>
+</span><span class='line'>// Pinches
+</span><span class='line'>UIATarget.localTarget().pinchOpenFromToForDuration({x:20, y:200}, {x:300, y:200},
+</span><span class='line'>2);
+</span><span class='line'>UIATarget.localTarget().pinchCloseFromToForDuration({x:20, y:200}, {x:300, y:
+</span><span class='line'>200}, 2);
+</span><span class='line'>
+</span><span class='line'>// Drag and Flick
+</span><span class='line'>UIATarget.localTarget().dragFromToForDuration({x:160, y:200}, {x:160, y:400}, 1);
+</span><span class='line'>UIATarget.localTarget().flickFromTo({x:160, y:200}, {x:160, y:400});</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>超时处理</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>// Wait for elements to appear
+</span><span class='line'>UIATarget.localTarget().frontMostApp().navigationBar().buttons()["Add"];
+</span><span class='line'>
+</span><span class='line'>// Five second default timeout
+</span><span class='line'>// Custom timeouts
+</span><span class='line'>UIATarget.localTarget().pushTimeout(2);
+</span><span class='line'>...
+</span><span class='line'>
+</span><span class='line'>UIATarget.localTarget().popTimeout(); </span></code></pre></td></tr></table></div></figure>
+
+
+<h3>运行 UIAutomation 测试用例</h3>
+
+<h4>使用iOS模拟器测试</h4>
+
+<ol>
+<li>打开项目工程；</li>
+<li>确保你的项目可以使用模拟器来运行项目；</li>
+<li><p>启动Instruments(Product > Profile)或从 Xcode 菜单中打开；</p>
+
+<p> <img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2016_08_05_uiautomation_open.png" title="从菜单中打开" ></p></li>
+<li><p>选择左边的 iniOS Simulator，然后再选择Automation模板，然后点击“Choose”；</p>
+
+<p> <img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2016_08_05_uiautomation_create.png" title="选择模版" ></p></li>
+<li><p>Instruments就已经启动好后，然后直接开始录制了。这里先停止录制；</p></li>
+<li><p>在左边的Scripts窗口，点击“Add > Create”创建新的脚本；</p></li>
+<li><p>在脚本编辑器里，输入下面的代码：</p>
+
+<pre><code class="`"> var target = UIATarget.localTarget();
+ var app = target.frontMostApp(); 
+ var window = app.mainWindow(); 
+ target.logElementTree();
+</code></pre></li>
+<li>重新运行这段脚本，脚本跑起来后，你可以在日志打完后停止它。</li>
+</ol>
+
+
+<h4>使用iOS设备测试</h4>
+
+<p>这里说的是使用开发证书编译打包，直接在 iOS 设备上运行好了程序，然后使用 Instruments 进行测试。</p>
+
+<ol>
+<li>通过USB接口连接上你的iPhone；</li>
+<li><p>选择设备及目标测试应用；</p>
+
+<p> <img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2016_08_05_device_select.png" title="选择设备及目标测试应用" ></p></li>
+<li><p>编写测试用例，并运行；</p>
+
+<p> <img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2016_08_05_run_script.png" title="编写脚本并运行" ></p></li>
+</ol>
+
+
+<h4>对 iOS 项目进行 Monkey 测试</h4>
+
+<ol>
+<li><a href="http://7xkrxl.com1.z0.glb.clouddn.com/iOSMonkeyTest.rtf">下载 Monkey测试脚本</a></li>
+<li><p>在左边的Scripts窗口，点击“Add > Import”导入 Monkey 测试脚本；</p>
+
+<p> <img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2016_08_05_run_monkey_script.png" title="Monkey 测试脚本" ></p></li>
+<li>运行脚本。</li>
+</ol>
+
+
+<p>你就可以休息了，看着各种页面之间的跳转测试，而且每个测试环节还有截屏图片。</p>
+
+<h2>自动化测试的优点及问题</h2>
+
+<p>通过编写自动化测试，了解到自动化测试的优点和存在的问题。</p>
+
+<p> 优点：</p>
+
+<ul>
+<li>可以节省测试人力成本；</li>
+<li>减少人为操作失误；</li>
+</ul>
+
+
+<p> 缺点：</p>
+
+<ul>
+<li>编写测试脚本耗费时间和精力；</li>
+<li>编写脚本获取元素之前必须清楚层级关系；</li>
+<li>出现对话框或对于网络请求相关页面不好处理，需要人工处理；</li>
+</ul>
+
+
+<h2>录制自动化测试脚本</h2>
+
+<p>除了刚才说到的手动编写测试脚本，你还可以直接在设备上或者模拟器上录制脚本，然后替换掉原来的。
+操作步骤：</p>
+
+<ol>
+<li><p>启动Instruments；</p></li>
+<li><p>创建一个新的脚本；</p></li>
+<li><p>选择脚本编辑器；</p></li>
+<li><p>在脚本编辑器的底端，你是否看到了一个红色的按钮？点击它！</p></li>
+<li><p>现在，你可以操作你的应用程序；你将看到录制的交互操作出现在脚本窗口（甚至旋转事件）。点击方形按钮来停止录制。</p></li>
+</ol>
+
+
+<p><code>注意:</code></p>
+
+<p>当遇到问题时，加上“UIATarget.delay(1);”</p>
+
+<p>当你在编写脚本的时候，你总是在与时间，动画打交道。UIAutomation有很多方式去获取控件元素，然后等待它们变为可用状态，即使有时候它们还没有显示出来，但根据这篇文档里提到的，最好的建议是：</p>
+
+<p>当遇到问题时，加上UIATarget.delay(1);!</p>
+
+<h2>总结</h2>
+
+<p>自动化测试还是值得尝试的，毕竟避免重复的工作是我们的追求，做自动化测试前期要投入大量的时间成本，但一旦这个流程搭建好只好，也许你会发现，这种工作方式为你节省不少时间。</p>
+
+<p>参考文献：</p>
+
+<p> <a href="http://developer.apple.com/devcenter/download.action?path=/wwdc_2010/wwdc_2010_video_assets__pdfs/306__automating_user_interface_testing_with_instruments.pdf">WWDC 2010 - Session 306 - Automating User Interface Testing with Instruments</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Leo Lee</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-08-05T17:19:00+08:00" pubdate data-updated="true"></time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2016/08/04/rake-he-zsh-chong-tu-de-jie-jue-fang-fa/" title="Previous Post: rake 和 zsh 冲突的解决方法">&laquo; rake 和 zsh 冲突的解决方法</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+
+<!-- 添加多说 -->
+
+
+  <section>
+    <h1>Comments</h1>
+    <div id="comments" aria-live="polite">
+<!-- Duoshuo Comment BEGIN -->
+<div class="ds-thread"></div>
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"swplzj"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<!-- Duoshuo Comment END -->
+</div>
+  </section>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo">
+<!-- <p>
+	Copyright &copy; 2016 - Leo Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p> -->
+
+
+<p style="text-align:center">
+  <!-- Copyright &copy; 2015 - Leo Lee - -->
+  	Copyright &copy; 2016 - Leo Lee -
+
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255930196'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1255930196%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
+</p>
+
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

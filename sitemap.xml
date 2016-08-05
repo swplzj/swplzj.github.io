@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://swplzj.github.io/blog/2016/08/05/ios-zi-dong-hua-ce-shi-%5Bnil%5D-uiautomation-shi-yong-dao-de-javascript-zhi-shi/</loc>
+    <lastmod>2016-08-05T17:19:00+08:00</lastmod>
+  </url>
+  <url>
     <loc>http://swplzj.github.io/blog/2016/08/04/rake-he-zsh-chong-tu-de-jie-jue-fang-fa/</loc>
     <lastmod>2016-08-04T14:40:14+08:00</lastmod>
   </url>
@@ -289,6 +293,27 @@
   </url>
   <url>
     <loc>http://swplzj.github.io/</loc>
+  </url>
+  <url>
+    <loc>http://swplzj.github.io/posts/2/</loc>
+  </url>
+  <url>
+    <loc>http://swplzj.github.io/posts/3/</loc>
+  </url>
+  <url>
+    <loc>http://swplzj.github.io/posts/4/</loc>
+  </url>
+  <url>
+    <loc>http://swplzj.github.io/posts/5/</loc>
+  </url>
+  <url>
+    <loc>http://swplzj.github.io/posts/6/</loc>
+  </url>
+  <url>
+    <loc>http://swplzj.github.io/posts/7/</loc>
+  </url>
+  <url>
+    <loc>http://swplzj.github.io/posts/8/</loc>
   </url>
   <url>
     <loc>http://swplzj.github.io/about/index.html</loc>
