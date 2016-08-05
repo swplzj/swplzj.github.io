@@ -4,7 +4,7 @@
     <title><![CDATA[Leo Lee]]></title>
     <link href="http://swplzj.github.io/atom.xml" rel="self"/>
     <link href="http://swplzj.github.io/"/>
-    <updated>2016-08-05T18:46:12+08:00</updated>
+    <updated>2016-08-05T18:48:26+08:00</updated>
     <id>http://swplzj.github.io/</id>
     <author>
         <name><![CDATA[Leo Lee]]></name>
@@ -14,19 +14,23 @@
     
     
     <entry>
-        <title type="html"><![CDATA[iOS 自动化测试 － UIAutomation 使用到的 JavaScript 知识]]></title>
+        <title type="html"><![CDATA[iOS UIAutomation 自动化测试]]></title>
         <link href="http://swplzj.github.io/blog/2016/08/05/ios-zi-dong-hua-ce-shi-%5Bnil%5D-uiautomation-shi-yong-dao-de-javascript-zhi-shi/"/>
         <updated>2016-08-05T17:19:00+08:00</updated>
         <id>http://swplzj.github.io/blog/2016/08/05/ios-zi-dong-hua-ce-shi-[nil]-uiautomation-shi-yong-dao-de-javascript-zhi-shi</id>
-        <content type="html"><![CDATA[<h3>介绍</h3>
+        <content type="html"><![CDATA[<p><img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2016_08_05_uiautomation_topic.png"></p>
 
-<p><img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2016_08_05_uiautomation_topic.png">
-- 为什么创建自动化测试用例？
-- 什么是 UI 自动化测试
-- 怎样对一个应用进行自动化测试
-- 自动化测试的优点及问题
-- 录制自动化测试脚本
-- 总结</p>
+<h3>介绍</h3>
+
+<ul>
+<li>为什么创建自动化测试用例？</li>
+<li>什么是 UI 自动化测试</li>
+<li>怎样对一个应用进行自动化测试</li>
+<li>自动化测试的优点及问题</li>
+<li>录制自动化测试脚本</li>
+<li>总结</li>
+</ul>
+
 
 <!--more-->
 
@@ -966,7 +970,7 @@
 
 <h4>一、通过添加不同的 <code>Build Configuration</code> 来实现</h4>
 
-<p>我们的目的是在测试机上可以同时安装不同版本且是同一个应用，所以现在要做的就是正式版使用一个 <code>Bundle Identifier</code>，OTA 版本/ Debug 版本使用另一个 <code>Bundle Identifier</code>，假设 <code>AppStore</code> 版的 <code>Bundle Identifier</code> 是 &ldquo;com.mycompany.myapp"，OTA版的是 "com.mycompany.myapp-beta"。同时为了直观的区分两个App，一般也会使用两套图标, 假设 <code>AppStore</code> 版的图标名称为Icon.png, Icon@2x.png, OTA版是Icon-beta.png, <a href="&#109;&#x61;&#105;&#108;&#x74;&#x6f;&#x3a;&#x49;&#x63;&#x6f;&#x6e;&#45;&#98;&#x65;&#116;&#97;&#x40;&#50;&#x78;&#46;&#112;&#110;&#103;&#x2e;">&#x49;&#x63;&#x6f;&#110;&#45;&#x62;&#101;&#x74;&#97;&#64;&#x32;&#120;&#46;&#112;&#x6e;&#x67;&#x2e;</a> 那如果做到自动化的配置呢？答案在Build设置(Build Setting)里。</p>
+<p>我们的目的是在测试机上可以同时安装不同版本且是同一个应用，所以现在要做的就是正式版使用一个 <code>Bundle Identifier</code>，OTA 版本/ Debug 版本使用另一个 <code>Bundle Identifier</code>，假设 <code>AppStore</code> 版的 <code>Bundle Identifier</code> 是 &ldquo;com.mycompany.myapp"，OTA版的是 "com.mycompany.myapp-beta"。同时为了直观的区分两个App，一般也会使用两套图标, 假设 <code>AppStore</code> 版的图标名称为Icon.png, Icon@2x.png, OTA版是Icon-beta.png, <a href="&#x6d;&#x61;&#105;&#108;&#116;&#x6f;&#58;&#73;&#x63;&#111;&#x6e;&#x2d;&#98;&#x65;&#x74;&#97;&#x40;&#50;&#120;&#46;&#112;&#x6e;&#x67;&#46;">&#x49;&#99;&#111;&#110;&#45;&#x62;&#101;&#x74;&#97;&#x40;&#50;&#x78;&#46;&#112;&#x6e;&#x67;&#46;</a> 那如果做到自动化的配置呢？答案在Build设置(Build Setting)里。</p>
 
 <h5>1. 添加 Build 配置</h5>
 
