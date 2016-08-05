@@ -1,0 +1,446 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+ <!-- 百度站长HTML标签验证 -->
+  <meta name="baidu-site-verification" content="2UxriFj8TS" />
+
+  <title>Jenkins 构建 iOS 持续集成（一） - Leo Lee</title>
+  <meta name="author" content="Leo Lee">
+
+  
+  <meta name="description" content="做重复乏味的工作就是在浪费生命和犯罪，尤其是在软件工程中更为明显，生命应该浪费在美好的事物上的原则，就开始了接下来的折腾。项目的持续集成前期看似是浪费时间，但随着项目数量增多，渠道的增加，测试人员、产品经理、项目负责人、大老板等都向你伸手要测试包，也就经常会有：Leo，把最新测试包上传到 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://swplzj.github.io/blog/2016/08/04/jenkins-gou-jian-ios-chi-xu-ji-cheng-(%5B%3F%5D-)">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Leo Lee" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+ <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+<!--   
+
+ --></head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <nav id="main-nav" role="navigation">
+<ul class="main-navigation">
+  <li><a href="/" class="nav-link">首页 | Blog</a></li>
+  <li><a href="/blog/archives" class="nav-link">归档 | Archives</a></li>
+  <li><a href="/books" class="nav-link" target="_blank">图书 | Books</a></li>
+  <li><a href="/atom.xml" class="nav-link">订阅 | RSS</a></li>
+  <li><a href="/about" class="nav-link">关于我 | About</a></li>
+</ul>
+
+</nav>
+  
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Jenkins 构建 iOS 持续集成（一）</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-08-04T14:35:31+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>做重复乏味的工作就是在浪费生命和犯罪，尤其是在软件工程中更为明显，生命应该浪费在美好的事物上的原则，就开始了接下来的折腾。项目的持续集成前期看似是浪费时间，但随着项目数量增多，渠道的增加，测试人员、产品经理、项目负责人、大老板等都向你伸手要测试包，也就经常会有：Leo，把最新测试包上传到 Confluence 上了吗？Leo，给我发个最新安装包。来，Leo，这是我们的销售，先给他们安装一下咱们的应用，体验一下。。。。。。我是一个重度 GTD 使用者，决不允许别人这么无休止的打扰我的工作。。。。。。噢，好像跑偏了，简单如题。</p>
+
+<!--more-->
+
+
+<h3>摘要：</h3>
+
+<p><a href="#01">1. 什么是持续集成</a></br>
+<a href="#02">2. 为什么要做持续集成</a></br>
+<a href="#03">3. Jenkins 安装及配置</a></br>
+<a href="#04">4. 问题总结</a></br></p>
+
+<p><a id="01"></a></p>
+
+<h2>什么是持续集成</h2>
+
+<ul>
+<li>持续集成, 简称CI（continuous integration）。</li>
+<li>CI作为敏捷开发重要的一步，其目的在于让产品快速迭代的同时，尽可能保持高质量。</li>
+<li>CI一种可以增加项目可见性，降低项目失败风险的开发实践。其每一次代码更新，都要通过自动化测试来检测代码和功能的正确性，只有通过自动测试的代码才能进行后续的交付和部署。</li>
+<li>CI 是团队成员间（产研测）更好地协调工作，更好的适应敏捷迭代开发，自动完成减少人工干预，保证每个时间点上团队成员提交的代码都能成功集成的，可以很好的用于对Android/iOS项目的打包。</li>
+</ul>
+
+
+<p><a id="02"></a></p>
+
+<h2>为什么要做持续集成</h2>
+
+<p>从我理解的角度和我遇到的问题来看，有三点促使我做 iOS 的持续化集成：</p>
+
+<ol>
+<li><p>避免工作时间碎片化。</p>
+
+<p> 学过面向对象的同学都知道，想要创建某个类都是首先申请内存环境进行init初始化，其实，我们的工作也是这样的，当你深入做某项工作的时候，其他人来打断你的思考，这就会破坏那种精深学习研究的氛围，你的大脑就会切换到另外一件事情上来，这种频繁切换造成了时间碎片化，造成了很多时间到浪费。</p></li>
+<li><p>不做重复乏味的体力活。</p>
+
+<p> 我们的应用分为 In－House 版本和 AppStore 版本，同时维护两个项目，然后在上线前期测试环节会有比较频繁的编译、打包、分发、安装的体力活，手动打包是一件很不美好的事情，所要是机器为我们来做这些无聊的事情。我们值得研究更好的技术。</p></li>
+<li><p>避免手动打包造成的不必要的错误。</p>
+
+<p> 同时维护多个项目，一个项目中又有多个 Schemes，多个 Targets，电脑中安装了很多证书和描述文件，在每次打包的时候就会面对选择证书，选择描述文件的问题，稍不留神选错证书或选错 Scheme 或选错 Target，轻则编译失败浪费点时间，增加点烦躁，更严重的是造成线上事故，丝毫没有夸张，线上无小事。所以，使用持续集成，可以精确的对项目进行配置，避免人工手动操作的失误。</p></li>
+</ol>
+
+
+<p><a id="03"></a></p>
+
+<h2>Jenkins 安装及配置</h2>
+
+<p>搭建构建平台之前，先要对整个流程有个清楚的理解，这里我画了一个简单的流程图方便我们理解其中要做的关键的事情。</p>
+
+<p><img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2016_08_04_jenkins_workflow_chart.png" title="Jenkins集成流程图" ></p>
+
+<p>由于 Jenkins 经过多年的发展，其活跃的社区和丰富的插件让其成为了业界最受欢迎的CI服务器。通过使用Xcode插件，可以非常方便在Jenkins中运行iOS项目的构建脚本，所以我们选择 Jenkins 作为 CI 工具。</p>
+
+<h3>一、Jenkins的安装与启动</h3>
+
+<h4>安装</h4>
+
+<p>1.使用命令行安装</p>
+
+<pre><code>    $ brew install jenkins
+</code></pre>
+
+<p>如果没有安装java环境的话会出现以下错误，需要先安装jenkins需要安装java环境， <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">JDK下载地址</a></p>
+
+<pre><code>jenkins: Java 1.7+ is required to install this formula. You can install with Homebrew Cask: brew install Caskroom/cask/java You can download from: http://www.oracle.com/technetwork/java/javase/downloads/index.html Error: An unsatisfied requirement failed this build.
+</code></pre>
+
+<p>2.直接从 Jenkins 的<a href="https://jenkins-ci.org">官网</a>下载最新安装包。</p>
+
+<h4>启动</h4>
+
+<p>安装完成后，启动jenkins，命令：</p>
+
+<pre><code>$ jenkins
+</code></pre>
+
+<p>在浏览器中输入以下地址访问：</p>
+
+<pre><code>http://localhost:8080/
+</code></pre>
+
+<h3>二、插件的安装</h3>
+
+<p>我们需要安装相关的插件才能顺利对项目进行编译，需要安装以下插件：</p>
+
+<ul>
+<li><p>安装GitLab插件</p>
+
+<p>  因为我们用的是GitLab来管理源代码，Jenkins本身并没有自带GitLab插件，所以我们需要依次选择 系统管理->管理插件，在“可选插件”中选中“GitLab Plugin”和“Gitlab Hook Plugin”这两项，然后安装。</p></li>
+<li><p>安装Xcode插件</p>
+
+<p>  同安装GitLab插件的步骤一样，我们依次选择系统管理->管理插件，在“可选插件”中选中“Xcode integration”安装。</p></li>
+<li><p>安装签名证书管理插件</p>
+
+<p>  iOS打包内测版时，需要发布证书及相关签名文件，因此这两个插件对于管理iOS证书非常方便。还是在系统管理->管理插件，在“可选插件”中选中“Credentials Plugin”和“Keychains and Provisioning Profiles Management”安装。</p></li>
+<li><p>安装FTP插件</p>
+
+<p>  在系统管理->管理插件，在“可选插件”中选中“Publish over FTP”安装。</p></li>
+<li><p>安装脚本插件</p>
+
+<p>  这个插件的功能主要是用于在build后执行相关脚本。在系统管理->管理插件，在“可选插件”中选中“Post-Build Script Plug-in”安装。</p></li>
+</ul>
+
+
+<p>以上插件安装完成后，重启 Jenkins!</p>
+
+<h3>三、Jenkins 全局配置</h3>
+
+<ul>
+<li><p>源码管理：</p>
+
+<p>  我们代码管理使用的是GitLab，先需要配置SSH，我们可以在Jenkins的证书管理中添加SSH。在Jenkins管理页面，选择“Credentials”，然后选择“Global credentials (unrestricted)”，点击“Add Credentials”，如下图所示，我们填写自己的SSH信息，然后点击“Save”，这样就把SSH添加到Jenkins的全局域中去了。</p></li>
+</ul>
+
+
+<p><img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2016_08_05_ssh_public_key.png" title="SSH Private Key Setup" ></p>
+
+<ul>
+<li><p>上传配置编译打包证书及描述文件</p>
+
+<p>  iOS 项目编译打包需要证书和签名文件，这里我们又需要用到Jenkins的插件，在系统管理页面，选择“Keychains and Provisioning Profiles Management”。</p>
+
+<p>  <img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2016_08_05_profiles_management.png" title="Keychains and Provisioning Profiles Management" ></p>
+
+<p>  进入插件设置里面</p>
+
+<p>  <img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2016_08_05_keychain_sign_cer_upload.png" title="上传登录钥匙串及签名证书文件" ></p>
+
+<p>  <img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2016_08_05_profile_upload.png" title="上传描述文件" ></p>
+
+<p>  点击保存就可以了。</p></li>
+<li><p>自动化构建</p>
+
+<p>  接下来就是重头戏了，包括Xcode编译、打包、上传测试分发平台、发送通知邮件等。</p>
+
+<ul>
+<li><p> 创建项目</p>
+
+<p>   在Jenkins中，所有的任务都是以“item”为单位的。接下来我们就新建一个iOS的项目来开始自动化构建。点击“新建”，输入item的名称，选择“构建一个自由风格的软件项目”，然后点击“OK”。</p></li>
+</ul>
+
+
+<p>   <img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2016_08_05_create_item.png" title="创建项目" ></p>
+
+<p>  <img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2016_08_05_general.png" title="编辑项目" ></p>
+
+<ul>
+<li><p> 源码管理</p>
+
+<p>  在源码管理中，选择Git，按下图进行配置：</p>
+
+<p>  <img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2016_08_05_source_code_management.png" title="源码管理配置" ></p></li>
+<li><p>构建触发器</p>
+
+<p>  <img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2016_08_05_build_trigger.png" title="构建触发器" ></p></li>
+<li><p>编译环境</p>
+
+<p>  在编译环境中，勾选“Keychains and Code Signing Identities”和“Mobile Provisioning Profiles”。按照下图进行配置：</p>
+
+<p>  <img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2016_08_05_build_environment_setup.png" title="编译环境配置" ></p></li>
+<li><p>编译</p>
+
+<p>  <img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2016_08_05_build_general.png" title="编译设置" ></p>
+
+<p>  <img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2016_08_05_build_keychain.png" title="编辑设置" ></p>
+
+<p>  <img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2016_08_05_build_cocoapods.png" title="CocoaPods 项目设置" ></p>
+
+<p>  <img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2016_08_05_post_build_action.png" title="设置执行脚本" ></p>
+
+<p>  到目前为止所有的构建设置完了，保存，可以构建项目了。</p></li>
+</ul>
+</li>
+</ul>
+
+
+<p><a id="04"></a></p>
+
+<h2>问题总结</h2>
+
+<ol>
+<li><p>Jenkins 编译 cocoapods 项目遇到的问题: &ldquo;Jenkins xcodebuild There are no schemes in workspace &rdquo;</p>
+
+<p> 出现原因：</p>
+
+<p> 使用cocoapods管理项目时，会出现，多个 Schemes，然而这些 Schemes 都是私有的而不是共享的。</p>
+
+<p> 解决方法：</p>
+
+<ol type="a">
+<li>打开项目的 workspace 文件；</li>
+<li>从项目菜单中选择 Scheme > Manage Schemes；</li>
+<li>修改项目后边的"Shared"为勾选状态，“Container”设置为 <code>Workspace</code> 而不是 <code>project</code>；</li>
+<li>这时你项目中的＊.xcworkspace/xcshareddata/xcschemes目录下就会出现.xcscheme文件；</li>
+<li>打开项目下Git .gitignore文件，确保没有过滤相关文件；</li>
+<li>提交项目修改到Git仓库，重新拉取代码就好了。</li>
+</ol>
+
+
+<p> </br>
+ 参考图如下：</p>
+
+<p> <img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2016_08_05_schemes_management.png" title="Git ignore 文件设置" >
+ </br> <br/>
+ <img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2016_08_05_git_ignore.png" title="Git ignore 文件设置" >
+ </br></p></li>
+<li><p>构建触发器相关知识</p>
+
+<pre><code class="`"> This field follows the syntax of cron (with minor differences). Specifically, each line consists of 5 fields separated by TAB or whitespace: MINUTE HOUR DOM MONTH DOW MINUTE Minutes within the hour (0-59) HOUR The hour of the day (0-23) DOM The day of the month (1-31) MONTH The month (1-12) DOW The day of the week (0-7) where 0 and 7 are Sunday. To specify multiple values for one field, the following operators are available. In the order of precedence, * '*' can be used to specify all valid values. * 'M-N' can be used to specify a range, such as "1-5" * 'M-N/X' or '*/X' can be used to specify skips of X''s value through the range, such as "*/15" in the MINUTE field for "0,15,30,45" and "1-6/2" for "1,3,5" * 'A,B,...,Z' can be used to specify multiple values, such as "0,30" or "1,3,5" Empty lines and lines that start with '#' will be ignored as comments. In addition, @yearly, @annually, @monthly, @weekly, @daily, @midnight, @hourly are supported.
+</code></pre></li>
+<li><p>发送邮件失败</p>
+
+<p> <code>我使用的是163邮箱进行发件</code></p>
+
+<p> 编译打包完成后，执行 python 脚本时，报错：(550, &lsquo;User has no permission’)。</p>
+
+<p> 错误可能原因：</p>
+
+<ol type="a">
+<li>滥发邮件被锁了；</li>
+<li>邮箱刚注册；</li>
+<li>发送的邮件里面有HTML文本；</li>
+<li>邮箱申请时间不够长；</li>
+</ol>
+
+
+<p> </br></p>
+
+<p> 解决方法：</p>
+
+<ol type="a">
+<li>进入你的163邮箱；</li>
+<li>设置里选择POP3/SMTP/IMAP；</li>
+<li>开启POP3/SMTP/IMAP 这三个服务；</li>
+</ol>
+
+
+<p> </br></p>
+
+<p> 新问题（自己的疏忽）：</p>
+
+<p> 开启之后构建又返回新的错误：163邮箱报错WARN: 535 Error: authentication failed.</p>
+
+<p> 解决：</p>
+
+<p> 开启服务之后，需要使用授权码代替邮箱的密码进行发邮件。 <br/>
+ 后来测试了几次，163邮箱又报错，索性直接注册了新浪邮箱，再没出现过问题。</p></li>
+<li><p>安装包上传至测试分发平台及发送邮件 Python 脚本</p>
+
+<p>  <a href="http://7xkrxl.com1.z0.glb.clouddn.com/auto.python">下载脚本文件</a></p></li>
+</ol>
+
+
+<p><a id="05"></a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Leo Lee</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-08-04T14:35:31+08:00" pubdate data-updated="true"></time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2016/05/26/ios-crash-wen-jian-jie-xi-hui-zong/" title="Previous Post: iOS Crash 文件解析汇总">&laquo; iOS Crash 文件解析汇总</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2016/08/04/rake-he-zsh-chong-tu-de-jie-jue-fang-fa/" title="Next Post: rake 和 zsh 冲突的解决方法">rake 和 zsh 冲突的解决方法 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+
+<!-- 添加多说 -->
+
+
+  <section>
+    <h1>Comments</h1>
+    <div id="comments" aria-live="polite">
+<!-- Duoshuo Comment BEGIN -->
+<div class="ds-thread"></div>
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"swplzj"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<!-- Duoshuo Comment END -->
+</div>
+  </section>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo">
+<!-- <p>
+	Copyright &copy; 2016 - Leo Lee -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p> -->
+
+
+<p style="text-align:center">
+  <!-- Copyright &copy; 2015 - Leo Lee - -->
+  	Copyright &copy; 2016 - Leo Lee -
+
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255930196'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1255930196%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
+</p>
+
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

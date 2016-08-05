@@ -12,7 +12,7 @@
   <meta name="author" content="Leo Lee">
 
   
-  <meta name="description" content=" 所有程序都是无法避免有 Bug 的，有了 Bug 要通过有效的手段技术跟踪、定位、解析、解决，普通的 Bug 看过报崩溃报告就可以很容易解决，当然也会遇到很棘手的 Bug，这是时候就要使尽浑身解数来对付了，下面总结一下自己解决难缠 Bug 的一些方法，希望能够帮助到你。:) ">
+  <meta name="description" content="好久没有发布博客了，现在用的 shell 是 oh-my-zsh，发现执行 rake new_post["newpost"]时提示zsh: no matches found: new_post[newpost]，不能新建文章。转到bash下再执行相同命令却能成功，想到可能是zsh的问题。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -61,6 +61,92 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/08/04/rake-he-zsh-chong-tu-de-jie-jue-fang-fa/">Rake 和 Zsh 冲突的解决方法</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-08-04T14:40:14+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>好久没有发布博客了，现在用的 shell 是 <code>oh-my-zsh</code>，发现执行 <code>rake new_post["newpost"]</code>时提示<code>zsh: no matches found: new_post[newpost]</code>，不能新建文章。转到<code>bash</code>下再执行相同命令却能成功，想到可能是<code>zsh</code>的问题。<code>Google</code>之，在<code>octpress</code>的<code>issues</code>里找到了答案：<code>zsh</code>会转义<code>[]</code>。</p>
+
+<p>解决的方法有下面三种：</p>
+
+<ol>
+<li>alias rake=&ldquo;noglob rake"，noglob用来取消转义。</li>
+<li>rake &ldquo;new_post[title]"。</li>
+<li>rake new_post[title]。</li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/08/04/jenkins-gou-jian-ios-chi-xu-ji-cheng-(%5B%3F%5D-)/">Jenkins 构建 iOS 持续集成（一）</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-08-04T14:35:31+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>做重复乏味的工作就是在浪费生命和犯罪，尤其是在软件工程中更为明显，生命应该浪费在美好的事物上的原则，就开始了接下来的折腾。项目的持续集成前期看似是浪费时间，但随着项目数量增多，渠道的增加，测试人员、产品经理、项目负责人、大老板等都向你伸手要测试包，也就经常会有：Leo，把最新测试包上传到 Confluence 上了吗？Leo，给我发个最新安装包。来，Leo，这是我们的销售，先给他们安装一下咱们的应用，体验一下。。。。。。我是一个重度 GTD 使用者，决不允许别人这么无休止的打扰我的工作。。。。。。噢，好像跑偏了，简单如题。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2016/08/04/jenkins-gou-jian-ios-chi-xu-ji-cheng-(%5B%3F%5D-)/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -396,89 +482,6 @@
   
     <footer>
       <a rel="full-article" href="/blog/2015/12/24/2015nian-ge-ren-zong-jie/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/11/18/ios-she-bei-he-mac-wen-jian-gong-xiang-chuan-shu-de-ji-chong-fang-shi/">iOS 设备和 Mac 文件共享传输的几种方式</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-11-18T11:15:18+08:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>相信大家都有过这样的经历：想实现共享 Mac 和 iPhone 上的文件，下面我粗略的总结了集中方式，和大家一起分享。
-通过共享介质的不同可以分为：网络共享、蓝牙无线方式文件传输、数据线连接同步。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2015/11/18/ios-she-bei-he-mac-wen-jian-gong-xiang-chuan-shu-de-ji-chong-fang-shi/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/11/09/ios-gong-zuo-zhong-yu-dao-de-wen-ti/">iOS - 工作中遇到的问题</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-11-09T16:44:05+08:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>在做iOS项目的过程中，到了了一些值得记录下来的问题，以便回顾和帮助他人，跳过他人跌过的坑。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2015/11/09/ios-gong-zuo-zhong-yu-dao-de-wen-ti/">Read on &rarr;</a>
     </footer>
   
 
