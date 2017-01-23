@@ -91,7 +91,7 @@
 
 <h4>一、通过添加不同的 <code>Build Configuration</code> 来实现</h4>
 
-<p>我们的目的是在测试机上可以同时安装不同版本且是同一个应用，所以现在要做的就是正式版使用一个 <code>Bundle Identifier</code>，OTA 版本/ Debug 版本使用另一个 <code>Bundle Identifier</code>，假设 <code>AppStore</code> 版的 <code>Bundle Identifier</code> 是 &ldquo;com.mycompany.myapp"，OTA版的是 "com.mycompany.myapp-beta"。同时为了直观的区分两个App，一般也会使用两套图标, 假设 <code>AppStore</code> 版的图标名称为Icon.png, Icon@2x.png, OTA版是Icon-beta.png, <a href="&#x6d;&#97;&#x69;&#x6c;&#x74;&#111;&#x3a;&#x49;&#99;&#111;&#110;&#45;&#x62;&#x65;&#x74;&#97;&#64;&#50;&#x78;&#x2e;&#112;&#x6e;&#103;&#x2e;">&#x49;&#x63;&#111;&#x6e;&#45;&#x62;&#x65;&#x74;&#97;&#x40;&#50;&#x78;&#x2e;&#112;&#x6e;&#x67;&#46;</a> 那如果做到自动化的配置呢？答案在Build设置(Build Setting)里。</p>
+<p>我们的目的是在测试机上可以同时安装不同版本且是同一个应用，所以现在要做的就是正式版使用一个 <code>Bundle Identifier</code>，OTA 版本/ Debug 版本使用另一个 <code>Bundle Identifier</code>，假设 <code>AppStore</code> 版的 <code>Bundle Identifier</code> 是 &ldquo;com.mycompany.myapp"，OTA版的是 "com.mycompany.myapp-beta"。同时为了直观的区分两个App，一般也会使用两套图标, 假设 <code>AppStore</code> 版的图标名称为Icon.png, Icon@2x.png, OTA版是Icon-beta.png, <a href="&#109;&#97;&#x69;&#108;&#116;&#111;&#58;&#x49;&#x63;&#x6f;&#110;&#x2d;&#x62;&#x65;&#116;&#97;&#64;&#50;&#120;&#46;&#112;&#x6e;&#103;&#x2e;">&#73;&#x63;&#111;&#x6e;&#x2d;&#x62;&#x65;&#x74;&#97;&#x40;&#x32;&#120;&#x2e;&#x70;&#110;&#103;&#46;</a> 那如果做到自动化的配置呢？答案在Build设置(Build Setting)里。</p>
 
 <h5>1. 添加 Build 配置</h5>
 
