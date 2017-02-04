@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     
     <title><![CDATA[Leo Lee]]></title>
-    <link href="http://limite.me/atom.xml" rel="self"/>
-    <link href="http://limite.me/"/>
-    <updated>2017-01-23T17:25:34+08:00</updated>
-    <id>http://limite.me/</id>
+    <link href="http://swplzj.github.io/atom.xml" rel="self"/>
+    <link href="http://swplzj.github.io/"/>
+    <updated>2017-02-04T18:04:44+08:00</updated>
+    <id>http://swplzj.github.io/</id>
     <author>
         <name><![CDATA[Leo Lee]]></name>
         <email><![CDATA[swplzj@126.com]]></email>
@@ -15,18 +15,14 @@
     
     <entry>
         <title type="html"><![CDATA[2016年个人总结]]></title>
-        <link href="http://limite.me/blog/2017/01/23/2016nian-ge-ren-zong-jie/"/>
+        <link href="http://swplzj.github.io/blog/2017/01/23/2016nian-ge-ren-zong-jie/"/>
         <updated>2017-01-23T16:08:58+08:00</updated>
-        <id>http://limite.me/blog/2017/01/23/2016nian-ge-ren-zong-jie</id>
-        <content type="html"><![CDATA[<h1>收获2016</h1>
-
-<hr />
-
-<h2>1月，希望</h2>
+        <id>http://swplzj.github.io/blog/2017/01/23/2016nian-ge-ren-zong-jie</id>
+        <content type="html"><![CDATA[<h2>1月，希望</h2>
 
 <ul>
 <li>总结2015，制定了2016年的计划，希望满满。
-  ##  2月，喜悦
+  ## 2月，喜悦
 
 <ul>
 <li>第一次和老婆在家过年，感觉到过年的喜悦。
@@ -138,9 +134,9 @@
     
     <entry>
         <title type="html"><![CDATA[iOS UIAutomation 自动化测试]]></title>
-        <link href="http://limite.me/blog/2016/08/05/ios-zi-dong-hua-ce-shi-%5Bnil%5D-uiautomation-shi-yong-dao-de-javascript-zhi-shi/"/>
+        <link href="http://swplzj.github.io/blog/2016/08/05/ios-zi-dong-hua-ce-shi-%5Bnil%5D-uiautomation-shi-yong-dao-de-javascript-zhi-shi/"/>
         <updated>2016-08-05T17:19:00+08:00</updated>
-        <id>http://limite.me/blog/2016/08/05/ios-zi-dong-hua-ce-shi-[nil]-uiautomation-shi-yong-dao-de-javascript-zhi-shi</id>
+        <id>http://swplzj.github.io/blog/2016/08/05/ios-zi-dong-hua-ce-shi-[nil]-uiautomation-shi-yong-dao-de-javascript-zhi-shi</id>
         <content type="html"><![CDATA[<p><img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2016_08_05_uiautomation_topic.png"></p>
 
 <h3>介绍</h3>
@@ -584,9 +580,9 @@
     
     <entry>
         <title type="html"><![CDATA[Rake 和 Zsh 冲突的解决方法]]></title>
-        <link href="http://limite.me/blog/2016/08/04/rake-he-zsh-chong-tu-de-jie-jue-fang-fa/"/>
+        <link href="http://swplzj.github.io/blog/2016/08/04/rake-he-zsh-chong-tu-de-jie-jue-fang-fa/"/>
         <updated>2016-08-04T14:40:14+08:00</updated>
-        <id>http://limite.me/blog/2016/08/04/rake-he-zsh-chong-tu-de-jie-jue-fang-fa</id>
+        <id>http://swplzj.github.io/blog/2016/08/04/rake-he-zsh-chong-tu-de-jie-jue-fang-fa</id>
         <content type="html"><![CDATA[<p><img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2016_08_04_zsh_topic.png"></p>
 
 <p>搭建 Jenkins 持续集成之后，总结一下搭建经验吧，写一篇 blog 记录一下，遇到了问题。。。。。。现在用的 shell 是 <code>oh-my-zsh</code>，发现执行 <code>rake new_post["newpost"]</code>时提示<code>zsh: no matches found: new_post[newpost]</code>，不能新建文章。转到<code>bash</code>下再执行相同命令却能成功，想到可能是<code>zsh</code>的问题。<code>Google</code>之，在<code>octpress</code>的<code>issues</code>里找到了答案：<code>zsh</code>会转义<code>[]</code>。</p>
@@ -607,9 +603,9 @@
     
     <entry>
         <title type="html"><![CDATA[Jenkins 构建 iOS 持续集成]]></title>
-        <link href="http://limite.me/blog/2016/08/04/jenkins-gou-jian-ios-chi-xu-ji-cheng-(%5B%3F%5D-)/"/>
+        <link href="http://swplzj.github.io/blog/2016/08/04/jenkins-gou-jian-ios-chi-xu-ji-cheng-(%5B%3F%5D-)/"/>
         <updated>2016-08-04T14:35:31+08:00</updated>
-        <id>http://limite.me/blog/2016/08/04/jenkins-gou-jian-ios-chi-xu-ji-cheng-([?]-)</id>
+        <id>http://swplzj.github.io/blog/2016/08/04/jenkins-gou-jian-ios-chi-xu-ji-cheng-([?]-)</id>
         <content type="html"><![CDATA[<p><img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2016_08_04_jenkins_topic.png">
 做重复乏味的工作就是在浪费生命和犯罪，尤其是在软件工程中更为明显，生命应该浪费在美好的事物上的原则，就开始了接下来的折腾。项目的持续集成前期看似是浪费时间，但随着项目数量增多，渠道的增加，测试人员、产品经理、项目负责人、大老板等都向你伸手要测试包，也就经常会有：Leo，把最新测试包上传到 Confluence 上了吗？Leo，给我发个最新安装包。来，Leo，这是我们的销售，先给他们安装一下咱们的应用，体验一下。。。。。。我是一个重度 GTD 使用者，决不允许别人这么无休止的打扰我的工作。。。。。。噢，好像跑偏了，简单如题。</p>
 
@@ -870,9 +866,9 @@
     
     <entry>
         <title type="html"><![CDATA[iOS Crash 文件解析汇总]]></title>
-        <link href="http://limite.me/blog/2016/05/26/ios-crash-wen-jian-jie-xi-hui-zong/"/>
+        <link href="http://swplzj.github.io/blog/2016/05/26/ios-crash-wen-jian-jie-xi-hui-zong/"/>
         <updated>2016-05-26T17:03:52+08:00</updated>
-        <id>http://limite.me/blog/2016/05/26/ios-crash-wen-jian-jie-xi-hui-zong</id>
+        <id>http://swplzj.github.io/blog/2016/05/26/ios-crash-wen-jian-jie-xi-hui-zong</id>
         <content type="html"><![CDATA[<p><img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2016_05_25_workplace.jpg" title="workplace" ></p>
 
 <p>所有程序都是无法避免有 Bug 的，有了 Bug 要通过有效的手段技术跟踪、定位、解析、解决，普通的 Bug 看过报崩溃报告就可以很容易解决，当然也会遇到很棘手的 Bug，这是时候就要使尽浑身解数来对付了，下面总结一下自己解决难缠 Bug 的一些方法，希望能够帮助到你。:)</p>
@@ -946,9 +942,9 @@
     
     <entry>
         <title type="html"><![CDATA[Git 代码库回滚记录]]></title>
-        <link href="http://limite.me/blog/2016/04/19/git-dai-ma-ku-hui-gun-ji-lu/"/>
+        <link href="http://swplzj.github.io/blog/2016/04/19/git-dai-ma-ku-hui-gun-ji-lu/"/>
         <updated>2016-04-19T16:32:03+08:00</updated>
-        <id>http://limite.me/blog/2016/04/19/git-dai-ma-ku-hui-gun-ji-lu</id>
+        <id>http://swplzj.github.io/blog/2016/04/19/git-dai-ma-ku-hui-gun-ji-lu</id>
         <content type="html"><![CDATA[<p>项目有了一些新需求，需要做代码更改了。Pull 下来代码，结果运行不了，最近项目更新不是很频繁，所以想到了使用 Git 代码库回滚，记录一下。代码库回滚可以包含本地带啊库回滚和远程代码库回滚，下面针对这两种情况做一下使用介绍。</p>
 
 <!--more-->
@@ -1003,9 +999,9 @@
     
     <entry>
         <title type="html"><![CDATA[在 Mac OS X 上安装 Scheme 环境]]></title>
-        <link href="http://limite.me/blog/2016/04/12/zai-mac-os-x-shang-an-zhuang-scheme-huan-jing/"/>
+        <link href="http://swplzj.github.io/blog/2016/04/12/zai-mac-os-x-shang-an-zhuang-scheme-huan-jing/"/>
         <updated>2016-04-12T15:24:43+08:00</updated>
-        <id>http://limite.me/blog/2016/04/12/zai-mac-os-x-shang-an-zhuang-scheme-huan-jing</id>
+        <id>http://swplzj.github.io/blog/2016/04/12/zai-mac-os-x-shang-an-zhuang-scheme-huan-jing</id>
         <content type="html"><![CDATA[<p>关于 SICP 这本书的讨论很多，该不该学就看自己决定，今天闲着无聊，就想学一下这本书，当然，首先还是配置运行环境，在折腾的过程中遇到一些问题，记录一下在 Mac OS X 上面安装 Scheme 的过程，或许其他人也会面临这样的问题，所以和大家分享一下学到的知识。</p>
 
 <!--more-->
@@ -1075,9 +1071,9 @@
     
     <entry>
         <title type="html"><![CDATA[iOS App 使用 Icon 区分不同渠道版本]]></title>
-        <link href="http://limite.me/blog/2016/03/24/ios-app-bu-tong-ban-ben-de-bu-tong-she-zhi/"/>
+        <link href="http://swplzj.github.io/blog/2016/03/24/ios-app-bu-tong-ban-ben-de-bu-tong-she-zhi/"/>
         <updated>2016-03-24T18:30:56+08:00</updated>
-        <id>http://limite.me/blog/2016/03/24/ios-app-bu-tong-ban-ben-de-bu-tong-she-zhi</id>
+        <id>http://swplzj.github.io/blog/2016/03/24/ios-app-bu-tong-ban-ben-de-bu-tong-she-zhi</id>
         <content type="html"><![CDATA[<p>Hey, 今天有空就针对之前测试人员提出的一些建议进行了汇总，评估了哪些建议是有助于提高产品的体验的，所以就挑出其中一条进行了优化。原因：我们的应用有 OTA 内部测试版和 AppStore 正式发布版，但是是同一套图标和同一个名字，所以，只要测过我们应用的人，装过两个不同环境的应用之后，就对我们的 App 傻傻分不清楚了，对测试人员造成一定的困惑，所以，也就有了这篇文章，和这边文章背后的折腾&hellip;&hellip;</p>
 
 <!--more-->
@@ -1093,7 +1089,7 @@
 
 <h4>一、通过添加不同的 <code>Build Configuration</code> 来实现</h4>
 
-<p>我们的目的是在测试机上可以同时安装不同版本且是同一个应用，所以现在要做的就是正式版使用一个 <code>Bundle Identifier</code>，OTA 版本/ Debug 版本使用另一个 <code>Bundle Identifier</code>，假设 <code>AppStore</code> 版的 <code>Bundle Identifier</code> 是 &ldquo;com.mycompany.myapp"，OTA版的是 "com.mycompany.myapp-beta"。同时为了直观的区分两个App，一般也会使用两套图标, 假设 <code>AppStore</code> 版的图标名称为Icon.png, Icon@2x.png, OTA版是Icon-beta.png, <a href="&#109;&#97;&#x69;&#108;&#116;&#111;&#58;&#x49;&#x63;&#x6f;&#110;&#x2d;&#x62;&#x65;&#116;&#97;&#64;&#50;&#120;&#46;&#112;&#x6e;&#103;&#x2e;">&#73;&#x63;&#111;&#x6e;&#x2d;&#x62;&#x65;&#x74;&#97;&#x40;&#x32;&#120;&#x2e;&#x70;&#110;&#103;&#46;</a> 那如果做到自动化的配置呢？答案在Build设置(Build Setting)里。</p>
+<p>我们的目的是在测试机上可以同时安装不同版本且是同一个应用，所以现在要做的就是正式版使用一个 <code>Bundle Identifier</code>，OTA 版本/ Debug 版本使用另一个 <code>Bundle Identifier</code>，假设 <code>AppStore</code> 版的 <code>Bundle Identifier</code> 是 &ldquo;com.mycompany.myapp"，OTA版的是 "com.mycompany.myapp-beta"。同时为了直观的区分两个App，一般也会使用两套图标, 假设 <code>AppStore</code> 版的图标名称为Icon.png, Icon@2x.png, OTA版是Icon-beta.png, <a href="&#x6d;&#x61;&#x69;&#x6c;&#x74;&#111;&#58;&#73;&#x63;&#111;&#110;&#45;&#x62;&#101;&#x74;&#x61;&#x40;&#x32;&#120;&#x2e;&#x70;&#x6e;&#103;&#46;">&#x49;&#x63;&#111;&#x6e;&#45;&#98;&#101;&#x74;&#97;&#x40;&#50;&#x78;&#x2e;&#x70;&#x6e;&#103;&#x2e;</a> 那如果做到自动化的配置呢？答案在Build设置(Build Setting)里。</p>
 
 <h5>1. 添加 Build 配置</h5>
 
@@ -1174,9 +1170,9 @@
     
     <entry>
         <title type="html"><![CDATA[iPhone 上同步图书遇到的问题]]></title>
-        <link href="http://limite.me/blog/2016/03/18/iphone-shang-tong-bu-tu-shu-yu-dao-de-wen-ti/"/>
+        <link href="http://swplzj.github.io/blog/2016/03/18/iphone-shang-tong-bu-tu-shu-yu-dao-de-wen-ti/"/>
         <updated>2016-03-18T15:59:40+08:00</updated>
-        <id>http://limite.me/blog/2016/03/18/iphone-shang-tong-bu-tu-shu-yu-dao-de-wen-ti</id>
+        <id>http://swplzj.github.io/blog/2016/03/18/iphone-shang-tong-bu-tu-shu-yu-dao-de-wen-ti</id>
         <content type="html"><![CDATA[<p>前一段时间通过 iTunes 同步图书的时候，同步不成功，当时也没有在意，今天想把一些好的资料放到手机上看时，又遇到了这个问题，看来该解决了。。。</p>
 
 <!--more-->
@@ -1210,9 +1206,9 @@
     
     <entry>
         <title type="html"><![CDATA[CSS 学习笔记]]></title>
-        <link href="http://limite.me/blog/2016/03/11/css-xue-xi-bi-ji/"/>
+        <link href="http://swplzj.github.io/blog/2016/03/11/css-xue-xi-bi-ji/"/>
         <updated>2016-03-11T11:29:14+08:00</updated>
-        <id>http://limite.me/blog/2016/03/11/css-xue-xi-bi-ji</id>
+        <id>http://swplzj.github.io/blog/2016/03/11/css-xue-xi-bi-ji</id>
         <content type="html"><![CDATA[<h3>CSS 简介</h3>
 
 <p>CSS 指层叠样式表 (Cascading Style Sheets)</p>
@@ -2006,9 +2002,9 @@ div{
     
     <entry>
         <title type="html"><![CDATA[HTML 学习笔记]]></title>
-        <link href="http://limite.me/blog/2016/03/09/html-xue-xi-bi-ji/"/>
+        <link href="http://swplzj.github.io/blog/2016/03/09/html-xue-xi-bi-ji/"/>
         <updated>2016-03-09T13:54:31+08:00</updated>
-        <id>http://limite.me/blog/2016/03/09/html-xue-xi-bi-ji</id>
+        <id>http://swplzj.github.io/blog/2016/03/09/html-xue-xi-bi-ji</id>
         <content type="html"><![CDATA[<p>最新项目提交到 AppStore，等待审核过程中，有空学习点 HTML 知识，顺便做了一下笔记，其实之前也学习过网页设计，但是没有系统的学习，现在，我只想说：I am back&hellip; 要重新系统的学习一遍，学以致用，再对自己的 Blog 完美升级，期待中&hellip;</p>
 
 <!--more-->
@@ -2755,9 +2751,9 @@ caption 标签必须紧随 table 标签之后。您只能对每个表格定义�
 </span><span class='line'>
 </span><span class='line'>&lt;frameset cols="25%,50%,25%"&gt;
 </span><span class='line'>
-</span><span class='line'>  &lt;frame src="http://limite.me/example/html/frame_a.html"&gt;
-</span><span class='line'>  &lt;frame src="http://limite.me/example/html/frame_b.html"&gt;
-</span><span class='line'>  &lt;frame src="http://limite.me/example/html/frame_c.html"&gt;
+</span><span class='line'>  &lt;frame src="http://swplzj.github.io/example/html/frame_a.html"&gt;
+</span><span class='line'>  &lt;frame src="http://swplzj.github.io/example/html/frame_b.html"&gt;
+</span><span class='line'>  &lt;frame src="http://swplzj.github.io/example/html/frame_c.html"&gt;
 </span><span class='line'>
 </span><span class='line'>&lt;/frameset&gt;
 </span><span class='line'>
@@ -2784,9 +2780,9 @@ caption 标签必须紧随 table 标签之后。您只能对每个表格定义�
 </span><span class='line'>
 </span><span class='line'>&lt;frameset rows="25%,50%,25%"&gt;
 </span><span class='line'>
-</span><span class='line'>  &lt;frame src="http://limite.me/example/html/frame_a.html"&gt;
-</span><span class='line'>  &lt;frame src="http://limite.me/example/html/frame_b.html"&gt;
-</span><span class='line'>  &lt;frame src="http://limite.me/example/html/frame_c.html"&gt;
+</span><span class='line'>  &lt;frame src="http://swplzj.github.io/example/html/frame_a.html"&gt;
+</span><span class='line'>  &lt;frame src="http://swplzj.github.io/example/html/frame_b.html"&gt;
+</span><span class='line'>  &lt;frame src="http://swplzj.github.io/example/html/frame_c.html"&gt;
 </span><span class='line'>
 </span><span class='line'>&lt;noframes&gt;
 </span><span class='line'>&lt;body&gt;您的浏览器无法处理框架！&lt;/body&gt;
@@ -2825,11 +2821,11 @@ rows/columns 的值规定了每行或每列占据屏幕的面积</p>
 </span><span class='line'>
 </span><span class='line'>&lt;frameset rows="50%,50%"&gt;
 </span><span class='line'>
-</span><span class='line'>&lt;frame src="http://limite.me/example/html/frame_a.html"&gt;
+</span><span class='line'>&lt;frame src="http://swplzj.github.io/example/html/frame_a.html"&gt;
 </span><span class='line'>
 </span><span class='line'>&lt;frameset cols="25%,75%"&gt;
-</span><span class='line'>&lt;frame src="http://limite.me/example/html/frame_b.html"&gt;
-</span><span class='line'>&lt;frame src="http://limite.me/example/html/frame_c.html"&gt;
+</span><span class='line'>&lt;frame src="http://swplzj.github.io/example/html/frame_b.html"&gt;
+</span><span class='line'>&lt;frame src="http://swplzj.github.io/example/html/frame_c.html"&gt;
 </span><span class='line'>&lt;/frameset&gt;
 </span><span class='line'>
 </span><span class='line'>&lt;/frameset&gt;
@@ -3040,9 +3036,9 @@ document.write("Hello World!")
     
     <entry>
         <title type="html"><![CDATA[2015年个人总结]]></title>
-        <link href="http://limite.me/blog/2015/12/24/2015nian-ge-ren-zong-jie/"/>
+        <link href="http://swplzj.github.io/blog/2015/12/24/2015nian-ge-ren-zong-jie/"/>
         <updated>2015-12-24T16:44:16+08:00</updated>
-        <id>http://limite.me/blog/2015/12/24/2015nian-ge-ren-zong-jie</id>
+        <id>http://swplzj.github.io/blog/2015/12/24/2015nian-ge-ren-zong-jie</id>
         <content type="html"><![CDATA[<p>2015年对我来说意义重大，人生中的几件大事都在今年发生了，顺其自然的发生了。。。</p>
 
 <ul>
@@ -3094,9 +3090,9 @@ document.write("Hello World!")
     
     <entry>
         <title type="html"><![CDATA[iOS 设备和 Mac 文件共享传输的几种方式]]></title>
-        <link href="http://limite.me/blog/2015/11/18/ios-she-bei-he-mac-wen-jian-gong-xiang-chuan-shu-de-ji-chong-fang-shi/"/>
+        <link href="http://swplzj.github.io/blog/2015/11/18/ios-she-bei-he-mac-wen-jian-gong-xiang-chuan-shu-de-ji-chong-fang-shi/"/>
         <updated>2015-11-18T11:15:18+08:00</updated>
-        <id>http://limite.me/blog/2015/11/18/ios-she-bei-he-mac-wen-jian-gong-xiang-chuan-shu-de-ji-chong-fang-shi</id>
+        <id>http://swplzj.github.io/blog/2015/11/18/ios-she-bei-he-mac-wen-jian-gong-xiang-chuan-shu-de-ji-chong-fang-shi</id>
         <content type="html"><![CDATA[<p>相信大家都有过这样的经历：想实现共享 Mac 和 iPhone 上的文件，下面我粗略的总结了集中方式，和大家一起分享。
 通过共享介质的不同可以分为：网络共享、蓝牙无线方式文件传输、数据线连接同步。</p>
 
@@ -3164,9 +3160,9 @@ document.write("Hello World!")
     
     <entry>
         <title type="html"><![CDATA[iOS - 工作中遇到的问题]]></title>
-        <link href="http://limite.me/blog/2015/11/09/ios-gong-zuo-zhong-yu-dao-de-wen-ti/"/>
+        <link href="http://swplzj.github.io/blog/2015/11/09/ios-gong-zuo-zhong-yu-dao-de-wen-ti/"/>
         <updated>2015-11-09T16:44:05+08:00</updated>
-        <id>http://limite.me/blog/2015/11/09/ios-gong-zuo-zhong-yu-dao-de-wen-ti</id>
+        <id>http://swplzj.github.io/blog/2015/11/09/ios-gong-zuo-zhong-yu-dao-de-wen-ti</id>
         <content type="html"><![CDATA[<p>在做iOS项目的过程中，到了了一些值得记录下来的问题，以便回顾和帮助他人，跳过他人跌过的坑。</p>
 
 <!--more-->
@@ -3241,9 +3237,9 @@ document.write("Hello World!")
     
     <entry>
         <title type="html"><![CDATA[Git-问题记录]]></title>
-        <link href="http://limite.me/blog/2015/11/09/git-wen-ti-ji-lu/"/>
+        <link href="http://swplzj.github.io/blog/2015/11/09/git-wen-ti-ji-lu/"/>
         <updated>2015-11-09T15:39:22+08:00</updated>
-        <id>http://limite.me/blog/2015/11/09/git-wen-ti-ji-lu</id>
+        <id>http://swplzj.github.io/blog/2015/11/09/git-wen-ti-ji-lu</id>
         <content type="html"><![CDATA[<p>在做项目的过程中，遇到很多关于Git相关的问题，记录下来与大家分享，也便于自己回顾。</p>
 
 <h4>介绍一个成功的 Git 分支模型</h4>
@@ -3412,9 +3408,9 @@ git commit --amend --author='Your Name &lt;you@example.com&gt;'
     
     <entry>
         <title type="html"><![CDATA[Git 在项目中的基本使用]]></title>
-        <link href="http://limite.me/blog/2015/11/09/git-zai-xiang-mu-zhong-de-ji-ben-shi-yong/"/>
+        <link href="http://swplzj.github.io/blog/2015/11/09/git-zai-xiang-mu-zhong-de-ji-ben-shi-yong/"/>
         <updated>2015-11-09T11:36:49+08:00</updated>
-        <id>http://limite.me/blog/2015/11/09/git-zai-xiang-mu-zhong-de-ji-ben-shi-yong</id>
+        <id>http://swplzj.github.io/blog/2015/11/09/git-zai-xiang-mu-zhong-de-ji-ben-shi-yong</id>
         <content type="html"><![CDATA[<h3>Git 基础</h3>
 
 <hr />
@@ -4542,9 +4538,9 @@ $ git clone https://github.com/libgit2/libgit2 mylibgit
     
     <entry>
         <title type="html"><![CDATA[最近情况]]></title>
-        <link href="http://limite.me/blog/2015/11/05/zui-jin-qing-kuang/"/>
+        <link href="http://swplzj.github.io/blog/2015/11/05/zui-jin-qing-kuang/"/>
         <updated>2015-11-05T18:44:27+08:00</updated>
-        <id>http://limite.me/blog/2015/11/05/zui-jin-qing-kuang</id>
+        <id>http://swplzj.github.io/blog/2015/11/05/zui-jin-qing-kuang</id>
         <content type="html"><![CDATA[<p>最近的情况是：忙 - 盲 - 茫，一言难尽啊，这些经历都是有必要记录下来，以便回顾自己走过的路，方便总结自己的成长得失。</p>
 
 <!--more-->
@@ -4580,9 +4576,9 @@ $ git clone https://github.com/libgit2/libgit2 mylibgit
     
     <entry>
         <title type="html"><![CDATA[如何下载和安装CocoaPods]]></title>
-        <link href="http://limite.me/blog/2015/09/04/ru-he-xia-zai-he-an-zhuang-cocoapods/"/>
+        <link href="http://swplzj.github.io/blog/2015/09/04/ru-he-xia-zai-he-an-zhuang-cocoapods/"/>
         <updated>2015-09-04T14:16:46+08:00</updated>
-        <id>http://limite.me/blog/2015/09/04/ru-he-xia-zai-he-an-zhuang-cocoapods</id>
+        <id>http://swplzj.github.io/blog/2015/09/04/ru-he-xia-zai-he-an-zhuang-cocoapods</id>
         <content type="html"><![CDATA[<h3>CocoaPods安装和使用教程</h3>
 
 <hr />
@@ -4683,9 +4679,9 @@ $ git clone https://github.com/libgit2/libgit2 mylibgit
     
     <entry>
         <title type="html"><![CDATA[iOS - VPN强烈推荐]]></title>
-        <link href="http://limite.me/blog/2015/08/19/ios-vpnqiang-lie-tui-jian/"/>
+        <link href="http://swplzj.github.io/blog/2015/08/19/ios-vpnqiang-lie-tui-jian/"/>
         <updated>2015-08-19T18:58:02+08:00</updated>
-        <id>http://limite.me/blog/2015/08/19/ios-vpnqiang-lie-tui-jian</id>
+        <id>http://swplzj.github.io/blog/2015/08/19/ios-vpnqiang-lie-tui-jian</id>
         <content type="html"><![CDATA[<p>之前推荐过 Mac 上的 VPN 使用，今天推荐两款 iOS 端比价好用的 VPN 应用，真的用起来很方便。无需注册，轻松翻墙。</p>
 
 <ol>
@@ -4748,9 +4744,9 @@ Shadowsocks 是一个开源项目，同时提供多个平台使用，你也可<a
     
     <entry>
         <title type="html"><![CDATA[正则表达式学习]]></title>
-        <link href="http://limite.me/blog/2015/08/19/zheng-ze-biao-da-shi-xue-xi/"/>
+        <link href="http://swplzj.github.io/blog/2015/08/19/zheng-ze-biao-da-shi-xue-xi/"/>
         <updated>2015-08-19T11:45:54+08:00</updated>
-        <id>http://limite.me/blog/2015/08/19/zheng-ze-biao-da-shi-xue-xi</id>
+        <id>http://swplzj.github.io/blog/2015/08/19/zheng-ze-biao-da-shi-xue-xi</id>
         <content type="html"><![CDATA[<p>项目中经常使用到一些校验，比如有效手机号，身份证号码，邮箱，银行卡号码&hellip;假如说都是简单的使用位数来做校验，容易造成特殊字符输入乱码，还有可能在数据库中写入脏数据，所以使用正则表达式来进行校验匹配是很有必要的，当然，我们学习它就要知道它有哪些作用，正则表达式的用途基本有以下三种：</p>
 
 <ul>

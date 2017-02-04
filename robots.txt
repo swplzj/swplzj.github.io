@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://limite.me/sitemap.xml 
+Sitemap: http://swplzj.github.io/sitemap.xml 
