@@ -4,7 +4,7 @@
     <title><![CDATA[Leo Lee]]></title>
     <link href="http://swplzj.github.io/atom.xml" rel="self"/>
     <link href="http://swplzj.github.io/"/>
-    <updated>2017-02-04T18:26:30+08:00</updated>
+    <updated>2017-02-04T18:38:45+08:00</updated>
     <id>http://swplzj.github.io/</id>
     <author>
         <name><![CDATA[Leo Lee]]></name>
@@ -15,10 +15,12 @@
     
     <entry>
         <title type="html"><![CDATA[2016年个人总结]]></title>
-        <link href="http://swplzj.github.io/blog/2017/01/23/2016nian-ge-ren-zong-jie/"/>
-        <updated>2017-01-23T16:08:58+08:00</updated>
-        <id>http://swplzj.github.io/blog/2017/01/23/2016nian-ge-ren-zong-jie</id>
-        <content type="html"><![CDATA[<p>16年马上就要结束了，这一年发生了很多的故事，无论是我，还是刚刚成立的家庭，都是值得总结一年来的种种收获的。这次的总结是按照时间顺序纪录的，没有太多其他的意义，只是便于纪录，回忆。</p>
+        <link href="http://swplzj.github.io/blog/2016/12/27/2016nian-ge-ren-zong-jie/"/>
+        <updated>2016-12-27T16:08:58+08:00</updated>
+        <id>http://swplzj.github.io/blog/2016/12/27/2016nian-ge-ren-zong-jie</id>
+        <content type="html"><![CDATA[<p><img class="center" src="http://7xkrxl.com1.z0.glb.clouddn.com/2016\_12\_27\_summary.jpg"></p>
+
+<p>16年马上就要结束了，这一年发生了很多的故事，无论是我，还是刚刚成立的家庭，都是值得总结一年来的种种收获的。这次的总结是按照时间顺序纪录的，没有太多其他的意义，只是便于纪录，回忆。</p>
 
 <!--more-->
 
@@ -1091,7 +1093,7 @@
 
 <h4>一、通过添加不同的 <code>Build Configuration</code> 来实现</h4>
 
-<p>我们的目的是在测试机上可以同时安装不同版本且是同一个应用，所以现在要做的就是正式版使用一个 <code>Bundle Identifier</code>，OTA 版本/ Debug 版本使用另一个 <code>Bundle Identifier</code>，假设 <code>AppStore</code> 版的 <code>Bundle Identifier</code> 是 &ldquo;com.mycompany.myapp"，OTA版的是 "com.mycompany.myapp-beta"。同时为了直观的区分两个App，一般也会使用两套图标, 假设 <code>AppStore</code> 版的图标名称为Icon.png, Icon@2x.png, OTA版是Icon-beta.png, <a href="&#x6d;&#97;&#x69;&#108;&#x74;&#x6f;&#58;&#73;&#99;&#x6f;&#x6e;&#45;&#98;&#101;&#x74;&#97;&#x40;&#50;&#120;&#x2e;&#112;&#110;&#103;&#x2e;">&#73;&#99;&#111;&#x6e;&#x2d;&#98;&#x65;&#116;&#97;&#64;&#50;&#x78;&#x2e;&#x70;&#x6e;&#103;&#46;</a> 那如果做到自动化的配置呢？答案在Build设置(Build Setting)里。</p>
+<p>我们的目的是在测试机上可以同时安装不同版本且是同一个应用，所以现在要做的就是正式版使用一个 <code>Bundle Identifier</code>，OTA 版本/ Debug 版本使用另一个 <code>Bundle Identifier</code>，假设 <code>AppStore</code> 版的 <code>Bundle Identifier</code> 是 &ldquo;com.mycompany.myapp"，OTA版的是 "com.mycompany.myapp-beta"。同时为了直观的区分两个App，一般也会使用两套图标, 假设 <code>AppStore</code> 版的图标名称为Icon.png, Icon@2x.png, OTA版是Icon-beta.png, <a href="&#x6d;&#x61;&#105;&#x6c;&#x74;&#111;&#x3a;&#73;&#x63;&#x6f;&#x6e;&#x2d;&#x62;&#x65;&#x74;&#97;&#64;&#x32;&#120;&#46;&#112;&#110;&#103;&#x2e;">&#73;&#99;&#x6f;&#110;&#45;&#98;&#x65;&#x74;&#x61;&#x40;&#50;&#120;&#x2e;&#112;&#110;&#103;&#x2e;</a> 那如果做到自动化的配置呢？答案在Build设置(Build Setting)里。</p>
 
 <h5>1. 添加 Build 配置</h5>
 
