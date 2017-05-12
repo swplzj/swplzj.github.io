@@ -2,8 +2,8 @@
 #      Main Configs       #
 # ----------------------- #
 
-#url: http://swplzj.github.io
-url: http://limite.me
+url: http://swplzj.github.io
+# url: http://limite.me
 title: Leo Lee
 subtitle: An iOS developer's blog about programming and growing.
 author: Leo Lee
